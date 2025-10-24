@@ -4,81 +4,68 @@
   <meta charset="UTF-8">
   <title>Encuentra la Palabra</title>
   <style>
-    /* 🟣 Estilos generales */
+    /* 🎨 Fondo degradado animado */
     body {
       font-family: Arial, sans-serif;
+      text-align: center;
       margin: 0;
       height: 100vh;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5, #fcb045, #fd1d1d, #833ab4);
+      background-size: 400% 400%;
+      animation: gradient 12s ease infinite;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      background: linear-gradient(135deg, #74ebd5 0%, #9face6 50%, #a1ffce 100%);
-      background-attachment: fixed;
-      animation: fondoAnimado 8s ease-in-out infinite alternate;
     }
 
-    /* 🌈 Animación del fondo */
-    @keyframes fondoAnimado {
+    @keyframes gradient {
       0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* 🔝 Encabezado con logo */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 8px 20px;
-    }
-
+    /* 🖼️ Logo arriba a la izquierda */
     #logo {
-      width: 55px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 120px;
       height: auto;
+      z-index: 1000;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 5px;
     }
 
-    header h1 {
-      font-size: 22px;
-      color: #222;
-      margin: 0;
-      font-weight: bold;
-    }
-
-    /* 📦 Contenedor principal */
-    main {
+    h1 {
+      color: #fff;
       margin-top: 100px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
     }
 
     .container {
       background: rgba(255, 255, 255, 0.95);
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      display: inline-block;
       width: 320px;
-      margin: 0 auto;
-      transition: transform 0.3s ease;
+      animation: aparecer 1s ease;
     }
 
-    .container:hover {
-      transform: scale(1.03);
+    @keyframes aparecer {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     input, button {
       padding: 10px;
-      margin: 10px auto;
+      margin: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 16px;
       width: 80%;
-      display: block;
     }
 
     button {
@@ -90,6 +77,7 @@
 
     button:hover {
       background-color: #45a049;
+      transform: scale(1.05);
     }
 
     #resultado {
@@ -102,58 +90,51 @@
       margin-top: 15px;
       color: #333;
     }
-
-    #game-container button:last-of-type {
-      background-color: #d9534f;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- 🔝 Encabezado con logo -->
-  <header>
-    <img id="logo" src="logo.png" alt="Logo del juego">
-    <h1>Encuentra la Palabra</h1>
-  </header>
+  <!-- 🖼️ Logo -->
+  <img id="logo" src="img/logo.png" alt="Logo del juego">
 
-  <!-- 🎮 Contenido principal -->
-  <main>
-    <!-- Pantalla de autenticación -->
-    <div id="login-container" class="container">
-      <h2>Iniciar sesión</h2>
-      <input type="email" id="email" placeholder="Correo electrónico">
-      <input type="password" id="password" placeholder="Contraseña">
-      <button onclick="login()">Iniciar sesión</button>
-      <button onclick="register()">Registrarse</button>
-      <p id="auth-message" style="color:red;"></p>
-    </div>
+  <h1>Juego: Encuentra la Palabra</h1>
 
-    <!-- Pantalla del juego -->
-    <div id="game-container" class="container" style="display:none;">
-      <p id="pista"><b>Pista:</b></p>
-      <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
-      <button onclick="verificar()">Verificar</button>
-      <p id="resultado"></p>
-      <p id="puntaje">Puntaje: 0</p>
-      <button onclick="cerrarSesion()">Cerrar sesión</button>
-    </div>
-  </main>
+  <!-- Pantalla de autenticación -->
+  <div id="login-container" class="container">
+    <h2>Iniciar sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Iniciar sesión</button>
+    <button onclick="register()">Registrarse</button>
+    <p id="auth-message" style="color:red;"></p>
+  </div>
+
+  <!-- Pantalla del juego -->
+  <div id="game-container" class="container" style="display:none;">
+    <p id="pista"><b>Pista:</b></p>
+    <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
+    <button onclick="verificar()">Verificar</button>
+    <p id="resultado"></p>
+    <p id="puntaje">Puntaje: 0</p>
+    <button onclick="cerrarSesion()" style="background-color:#d9534f;">Cerrar sesión</button>
+  </div>
 
   <script>
-    // 🔑 Firebase Auth + Lógica del juego
     const API_KEY = "AIzaSyAkb7BsSW6ROnIfM01djn4ZbiX7PKpi-f8";
     const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
     const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+
     let userToken = null;
 
     function traducirError(errorCode) {
       const errores = {
         "EMAIL_EXISTS": "El correo ya está registrado.",
+        "EMAIL_NOT_FOUND": "No existe una cuenta con ese correo.",
         "INVALID_PASSWORD": "La contraseña es incorrecta.",
-        "EMAIL_NOT_FOUND": "No existe una cuenta con ese correo."
+        "INVALID_EMAIL": "El correo no es válido.",
+        "WEAK_PASSWORD : Password should be at least 6 characters": "La contraseña debe tener al menos 6 caracteres."
       };
-      return errores[errorCode] || "Error inesperado.";
+      return errores[errorCode] || "Ha ocurrido un error inesperado.";
     }
 
     async function register() {
@@ -241,8 +222,13 @@
         puntaje++;
         document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
         indice++;
-        if (indice < palabras.length) setTimeout(mostrarPalabra, 1000);
-        else setTimeout(() => resultado.innerHTML = "🎉 ¡Felicidades! Has completado todas las palabras.", 1000);
+        if (indice < palabras.length) {
+          setTimeout(mostrarPalabra, 1000);
+        } else {
+          setTimeout(() => {
+            resultado.innerHTML = "🎉 ¡Felicidades! Has completado todas las palabras.";
+          }, 1000);
+        }
       } else {
         resultado.innerHTML = "❌ Incorrecto, intenta de nuevo.";
         resultado.style.color = "red";
