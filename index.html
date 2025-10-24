@@ -188,7 +188,7 @@
     }
 
     const palabras = [
-      { pista: "C_MPU_", respuesta: ["COMPUTADOR", "COMPUTADORA"] },
+      { pista: "C_MPU_____", respuesta: ["COMPUTADOR", "COMPUTADORA"] },
       { pista: "PR_GR_MA", respuesta: ["PROGRAMA"] },
       { pista: "INT_RN_T", respuesta: ["INTERNET"] },
       { pista: "J_V_SCR_PT", respuesta: ["JAVASCRIPT"] },
@@ -214,24 +214,27 @@
     }
 
     function verificar() {
-      let respuesta = document.getElementById("respuesta").value.toUpperCase();
-      let resultado = document.getElementById("resultado");
+      const respuesta = document.getElementById("respuesta").value.toUpperCase();
+      const resultado = document.getElementById("resultado");
+
       if (palabras[indice].respuesta.includes(respuesta)) {
         resultado.innerHTML = "✅ ¡Correcto!";
         resultado.style.color = "green";
         puntaje++;
-        document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
-        indice++;
-        if (indice < palabras.length) {
-          setTimeout(mostrarPalabra, 1000);
-        } else {
-          setTimeout(() => {
-            resultado.innerHTML = "🎉 ¡Felicidades! Has completado todas las palabras.";
-          }, 1000);
-        }
       } else {
-        resultado.innerHTML = "❌ Incorrecto, intenta de nuevo.";
+        resultado.innerHTML = "❌ Incorrecto.";
         resultado.style.color = "red";
+      }
+
+      document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
+      indice++;
+
+      if (indice < palabras.length) {
+        setTimeout(mostrarPalabra, 1000);
+      } else {
+        setTimeout(() => {
+          resultado.innerHTML = `🎉 Juego terminado. Puntaje final: ${puntaje} / ${palabras.length}`;
+        }, 1000);
       }
     }
 
