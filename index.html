@@ -227,8 +227,8 @@
     }
 
     function cerrarSesion() {
-      localStorage.removeItem("userToken");
       userToken = null;
+      localStorage.removeItem("userToken");
       document.getElementById("login-container").style.display = "block";
       document.getElementById("lobby-container").style.display = "none";
       document.getElementById("game-container").style.display = "none";
@@ -241,12 +241,17 @@
     }
 
     function seleccionarTema(tema) {
-      if (temaActual !== tema || palabras.length === 0) {
-        palabras = [...temas[tema]];
+      temaActual = tema;
+      palabras = [...temas[tema]];
+      const progresoGuardado = JSON.parse(localStorage.getItem("progreso_" + tema));
+      if (progresoGuardado) {
+        indice = progresoGuardado.indice;
+        puntaje = progresoGuardado.puntaje;
+      } else {
         indice = 0;
         puntaje = 0;
-        temaActual = tema;
       }
+
       document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
       document.getElementById("tema-actual").innerHTML = "Tema actual: <b>" + (tema === "tecnologia" ? "💻 Tecnología" : "🌎 Países y Ciudades") + "</b>";
       document.getElementById("lobby-container").style.display = "none";
@@ -262,6 +267,7 @@
     function reiniciarNivel() {
       indice = 0;
       puntaje = 0;
+      guardarProgreso();
       document.getElementById("puntaje").innerHTML = "Puntaje: 0";
       mostrarPalabra();
       document.getElementById("resultado").innerHTML = "🔁 Nivel reiniciado.";
@@ -302,6 +308,8 @@
       }
 
       indice++;
+      guardarProgreso();
+
       if (indice < palabras.length) {
         setTimeout(mostrarPalabra, 1200);
       } else {
@@ -311,11 +319,19 @@
       }
     }
 
+    function guardarProgreso() {
+      if (!temaActual) return;
+      const progreso = { indice, puntaje };
+      localStorage.setItem("progreso_" + temaActual, JSON.stringify(progreso));
+    }
+
     window.onload = () => {
       const token = localStorage.getItem("userToken");
       if (token) {
         userToken = token;
         mostrarLobby();
+      } else {
+        document.getElementById("login-container").style.display = "block";
       }
     };
   </script>
