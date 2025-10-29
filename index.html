@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Encuentra la Palabra</title>
   <style>
-
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -25,13 +24,11 @@
       100% { background-position: 0% 50%; }
     }
 
-
     #logo {
       position: absolute;
       top: 20px;
       left: 20px;
       width: 120px;
-      height: auto;
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.3);
       padding: 5px;
@@ -89,7 +86,6 @@
       color: #333;
     }
 
-
     #estrella {
       font-size: 45px;
       color: gold;
@@ -101,22 +97,10 @@
     }
 
     @keyframes brillarGirar {
-      0% {
-        transform: scale(0.5) rotate(0deg);
-        opacity: 0;
-      }
-      30% {
-        transform: scale(1.3) rotate(180deg);
-        opacity: 1;
-      }
-      70% {
-        transform: scale(1.1) rotate(360deg);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(0.8) rotate(720deg);
-        opacity: 0;
-      }
+      0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
+      30% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+      70% { transform: scale(1.1) rotate(360deg); opacity: 1; }
+      100% { transform: scale(0.8) rotate(720deg); opacity: 0; }
     }
   </style>
 </head>
@@ -125,7 +109,7 @@
   <img id="logo" src="img/logo.png" alt="Logo del juego">
   <h1>Juego: Encuentra la Palabra</h1>
 
-
+  <!-- LOGIN -->
   <div id="login-container" class="container">
     <h2>Iniciar sesión</h2>
     <input type="email" id="email" placeholder="Correo electrónico">
@@ -135,7 +119,15 @@
     <p id="auth-message" style="color:red;"></p>
   </div>
 
+  <!-- LOBBY -->
+  <div id="lobby-container" class="container" style="display:none;">
+    <h2>Selecciona un tema</h2>
+    <button onclick="seleccionarTema('tecnologia')">💻 Tecnología</button>
+    <button onclick="seleccionarTema('paises')">🌎 Países y Ciudades</button>
+    <button onclick="cerrarSesion()" style="background-color:#d9534f;">Cerrar sesión</button>
+  </div>
 
+  <!-- JUEGO -->
   <div id="game-container" class="container" style="display:none;">
     <p id="pista"><b>Pista:</b></p>
     <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
@@ -143,7 +135,7 @@
     <p id="resultado"></p>
     <p id="puntaje">Puntaje: 0</p>
     <div id="estrella">🌟 ¡Felicitaciones!</div>
-    <button onclick="cerrarSesion()" style="background-color:#d9534f;">Cerrar sesión</button>
+    <button onclick="volverLobby()" style="background-color:#0275d8;">Volver al lobby</button>
   </div>
 
   <script>
@@ -152,6 +144,30 @@
     const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
     let userToken = null;
+    let palabras = [];
+    let indice = 0;
+    let puntaje = 0;
+
+    const temas = {
+      tecnologia: [
+        { pista: "C_MPU_____ / C_MPU______", respuesta: ["COMPUTADOR", "COMPUTADORA", "COMPUTADOR ", "COMPUTADORA "] },
+        { pista: "PR_GR_MA", respuesta: ["PROGRAMA", "PROGRAMA "] },
+        { pista: "INT_RN_T", respuesta: ["INTERNET", "INTERNET "] },
+        { pista: "J_V_SCR_PT", respuesta: ["JAVASCRIPT", "JAVASCRIPT "] },
+        { pista: "HT_L", respuesta: ["HTML", "HTML "] },
+        { pista: "CI_NCI_", respuesta: ["CIENCIA", "CIENCIA "] },
+        { pista: "M_T_M_TIC_S", respuesta: ["MATEMÁTICAS", "MATEMÁTICAS "] }
+      ],
+      paises: [
+        { pista: "C_L_MB__", respuesta: ["COLOMBIA", "COLOMBIA "] },
+        { pista: "M_X_C__", respuesta: ["MÉXICO", "MÉXICO "] },
+        { pista: "E_SP_N__", respuesta: ["ESPAÑA", "ESPAÑA "] },
+        { pista: "A_RG_NT_N__", respuesta: ["ARGENTINA", "ARGENTINA "] },
+        { pista: "P_R__", respuesta: ["PERÚ", "PERÚ "] },
+        { pista: "B_G_T__", respuesta: ["BOGOTÁ", "BOGOTÁ "] },
+        { pista: "M_DR_D", respuesta: ["MADRID", "MADRID "] }
+      ]
+    };
 
     function traducirError(errorCode) {
       const errores = {
@@ -200,7 +216,7 @@
         if (data.error) throw new Error(data.error.message);
         userToken = data.idToken;
         localStorage.setItem("userToken", userToken);
-        mostrarJuego();
+        mostrarLobby();
       } catch (err) {
         msg.style.color = "red";
         msg.textContent = traducirError(err.message);
@@ -210,28 +226,30 @@
     function cerrarSesion() {
       localStorage.removeItem("userToken");
       userToken = null;
-      document.getElementById("game-container").style.display = "none";
       document.getElementById("login-container").style.display = "block";
+      document.getElementById("lobby-container").style.display = "none";
+      document.getElementById("game-container").style.display = "none";
     }
 
-    const palabras = [
-      { pista: "C_MPU_____ / C_MPU______", respuesta: ["COMPUTADOR", "COMPUTADOR ", "COMPUTADORA", "COMPUTADORA "] },
-      { pista: "PR_GR_MA", respuesta: ["PROGRAMA", "PROGRAMA "] },
-      { pista: "INT_RN_T", respuesta: ["INTERNET", "INTERNET "] },
-      { pista: "J_V_SCR_PT", respuesta: ["JAVASCRIPT", "JAVASCRIPT "] },
-      { pista: "HT_L", respuesta: ["HTML", "HTML "] },
-      { pista: "CI_NCI_", respuesta: ["CIENCIA", "CIENCIA "] },
-      { pista: "M_T_M_TIC_S", respuesta: ["MATEMATICAS", "MATEMATICAS ", "MATEMÁTICAS", "MATEMÁTICAS "] },
-      { pista: ""}
-    ];
-
-    let indice = 0;
-    let puntaje = 0;
-
-    function mostrarJuego() {
+    function mostrarLobby() {
       document.getElementById("login-container").style.display = "none";
+      document.getElementById("game-container").style.display = "none";
+      document.getElementById("lobby-container").style.display = "block";
+    }
+
+    function seleccionarTema(tema) {
+      palabras = temas[tema];
+      indice = 0;
+      puntaje = 0;
+      document.getElementById("puntaje").innerHTML = "Puntaje: 0";
+      document.getElementById("lobby-container").style.display = "none";
       document.getElementById("game-container").style.display = "block";
       mostrarPalabra();
+    }
+
+    function volverLobby() {
+      document.getElementById("game-container").style.display = "none";
+      document.getElementById("lobby-container").style.display = "block";
     }
 
     function mostrarPalabra() {
@@ -242,15 +260,14 @@
     }
 
     function verificar() {
-      let respuesta = document.getElementById("respuesta").value.toUpperCase();
-      let resultado = document.getElementById("resultado");
+      const respuesta = document.getElementById("respuesta").value.toUpperCase().trim();
+      const resultado = document.getElementById("resultado");
 
       if (palabras[indice].respuesta.includes(respuesta)) {
         resultado.innerHTML = "✅ ¡Correcto!";
         resultado.style.color = "green";
         puntaje++;
         document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
-
 
         const estrella = document.getElementById("estrella");
         estrella.style.display = "block";
@@ -262,7 +279,6 @@
         resultado.innerHTML = "❌ Incorrecto.";
         resultado.style.color = "red";
       }
-
 
       indice++;
       if (indice < palabras.length) {
@@ -278,7 +294,7 @@
       const token = localStorage.getItem("userToken");
       if (token) {
         userToken = token;
-        mostrarJuego();
+        mostrarLobby();
       }
     };
   </script>
