@@ -129,6 +129,7 @@
 
   <!-- JUEGO -->
   <div id="game-container" class="container" style="display:none;">
+    <p id="tema-actual"></p>
     <p id="pista"><b>Pista:</b></p>
     <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
     <button onclick="verificar()">Verificar</button>
@@ -136,6 +137,7 @@
     <p id="puntaje">Puntaje: 0</p>
     <div id="estrella">🌟 ¡Felicitaciones!</div>
     <button onclick="volverLobby()" style="background-color:#0275d8;">Volver al lobby</button>
+    <button onclick="reiniciarNivel()" style="background-color:#f0ad4e;">🔄 Reiniciar nivel</button>
   </div>
 
   <script>
@@ -147,6 +149,7 @@
     let palabras = [];
     let indice = 0;
     let puntaje = 0;
+    let temaActual = "";
 
     const temas = {
       tecnologia: [
@@ -160,11 +163,11 @@
       ],
       paises: [
         { pista: "C_L_MB__", respuesta: ["COLOMBIA", "COLOMBIA "] },
-        { pista: "M_X_C__", respuesta: ["MÉXICO", "MÉXICO "] },
-        { pista: "E_SP_N__", respuesta: ["ESPAÑA", "ESPAÑA "] },
-        { pista: "A_RG_NT_N__", respuesta: ["ARGENTINA", "ARGENTINA "] },
-        { pista: "P_R__", respuesta: ["PERÚ", "PERÚ "] },
-        { pista: "B_G_T__", respuesta: ["BOGOTÁ", "BOGOTÁ "] },
+        { pista: "M_X_C_", respuesta: ["MÉXICO", "MÉXICO "] },
+        { pista: "ESP_Ñ_", respuesta: ["ESPAÑA", "ESPAÑA "] },
+        { pista: "ARG_NT_N_", respuesta: ["ARGENTINA", "ARGENTINA "] },
+        { pista: "P_R_", respuesta: ["PERÚ", "PERÚ "] },
+        { pista: "B_G_T_", respuesta: ["BOGOTÁ", "BOGOTÁ "] },
         { pista: "M_DR_D", respuesta: ["MADRID", "MADRID "] }
       ]
     };
@@ -238,10 +241,14 @@
     }
 
     function seleccionarTema(tema) {
-      palabras = temas[tema];
-      indice = 0;
-      puntaje = 0;
-      document.getElementById("puntaje").innerHTML = "Puntaje: 0";
+      if (temaActual !== tema || palabras.length === 0) {
+        palabras = [...temas[tema]];
+        indice = 0;
+        puntaje = 0;
+        temaActual = tema;
+      }
+      document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
+      document.getElementById("tema-actual").innerHTML = "Tema actual: <b>" + (tema === "tecnologia" ? "💻 Tecnología" : "🌎 Países y Ciudades") + "</b>";
       document.getElementById("lobby-container").style.display = "none";
       document.getElementById("game-container").style.display = "block";
       mostrarPalabra();
@@ -252,7 +259,21 @@
       document.getElementById("lobby-container").style.display = "block";
     }
 
+    function reiniciarNivel() {
+      indice = 0;
+      puntaje = 0;
+      document.getElementById("puntaje").innerHTML = "Puntaje: 0";
+      mostrarPalabra();
+      document.getElementById("resultado").innerHTML = "🔁 Nivel reiniciado.";
+      document.getElementById("resultado").style.color = "blue";
+    }
+
     function mostrarPalabra() {
+      if (indice >= palabras.length) {
+        document.getElementById("resultado").innerHTML = "🎉 ¡Juego terminado! Puntaje final: " + puntaje;
+        document.getElementById("pista").innerHTML = "";
+        return;
+      }
       document.getElementById("pista").innerHTML =
         "<b>Pista:</b> " + palabras[indice].pista + " → ¿Cuál es la palabra?";
       document.getElementById("respuesta").value = "";
