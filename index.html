@@ -109,7 +109,7 @@
   <img id="logo" src="img/logo.png" alt="Logo del juego">
   <h1>Juego: Encuentra la Palabra</h1>
 
-
+  <!-- LOGIN -->
   <div id="login-container" class="container">
     <h2>Iniciar sesión</h2>
     <input type="email" id="email" placeholder="Correo electrónico">
@@ -124,10 +124,14 @@
     <h2>Selecciona un tema</h2>
     <button onclick="seleccionarTema('tecnologia')">💻 Tecnología</button>
     <button onclick="seleccionarTema('paises')">🌎 Países y Ciudades</button>
+    <button onclick="seleccionarTema('animales')">🐶 Animales</button>
+    <button onclick="seleccionarTema('frutas')">🍎 Frutas</button>
+    <button onclick="seleccionarTema('deportes')">⚽ Deportes</button>
+    <button onclick="seleccionarTema('comida')">🍔 Comida</button>
     <button onclick="cerrarSesion()" style="background-color:#d9534f;">Cerrar sesión</button>
   </div>
 
-
+  <!-- JUEGO -->
   <div id="game-container" class="container" style="display:none;">
     <p id="tema-actual"></p>
     <p id="pista"><b>Pista:</b></p>
@@ -169,6 +173,42 @@
         { pista: "P_R_", respuesta: ["PERÚ", "PERÚ "] },
         { pista: "B_G_T_", respuesta: ["BOGOTÁ", "BOGOTÁ "] },
         { pista: "M_DR_D", respuesta: ["MADRID", "MADRID "] }
+      ],
+      animales: [
+        { pista: "P_RR_", respuesta: ["PERRO", "PERRO "] },
+        { pista: "G_T_", respuesta: ["GATO", "GATO "] },
+        { pista: "L_ON", respuesta: ["LEÓN", "LEÓN "] },
+        { pista: "T_GR_", respuesta: ["TIGRE", "TIGRE "] },
+        { pista: "E_F_NT_", respuesta: ["ELEFANTE", "ELEFANTE "] },
+        { pista: "D_LF_N", respuesta: ["DELFIN", "DELFIN "] },
+        { pista: "P_G_S_", respuesta: ["PEGASO", "PEGASO "] }
+      ],
+      frutas: [
+        { pista: "M_NZ_N_", respuesta: ["MANZANA", "MANZANA "] },
+        { pista: "P_R_", respuesta: ["PERA", "PERA "] },
+        { pista: "PL_T_NO", respuesta: ["PLÁTANO", "PLÁTANO "] },
+        { pista: "S_ND_A", respuesta: ["SANDÍA", "SANDÍA "] },
+        { pista: "FR_S_", respuesta: ["FRESA", "FRESA "] },
+        { pista: "M_L_N", respuesta: ["MELÓN", "MELÓN "] },
+        { pista: "N_R_NJ_", respuesta: ["NARANJA", "NARANJA "] }
+      ],
+      deportes: [
+        { pista: "F_TB_L", respuesta: ["FÚTBOL", "FÚTBOL "] },
+        { pista: "B_LON_ES_O", respuesta: ["BALONCESTO", "BALONCESTO "] },
+        { pista: "T_N_S", respuesta: ["TENIS", "TENIS "] },
+        { pista: "V_L_IB_L", respuesta: ["VOLEIBOL", "VOLEIBOL "] },
+        { pista: "N_T_CI_N", respuesta: ["NATACIÓN", "NATACIÓN "] },
+        { pista: "C_RR_R_", respuesta: ["CARRERA", "CARRERA "] },
+        { pista: "B_X__", respuesta: ["BOXEO", "BOXEO "] }
+      ],
+      comida: [
+        { pista: "P_ZZ_", respuesta: ["PIZZA", "PIZZA "] },
+        { pista: "H_MB_RG_S_", respuesta: ["HAMBURGUESA", "HAMBURGUESA "] },
+        { pista: "P_ST_", respuesta: ["PASTA", "PASTA "] },
+        { pista: "S_P_", respuesta: ["SOPA", "SOPA "] },
+        { pista: "A_R__Z", respuesta: ["ARROZ", "ARROZ "] },
+        { pista: "P_LL_", respuesta: ["POLLO", "POLLO "] },
+        { pista: "H__V_", respuesta: ["HUEVO", "HUEVO "] }
       ]
     };
 
@@ -253,7 +293,7 @@
       }
 
       document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
-      document.getElementById("tema-actual").innerHTML = "Tema actual: <b>" + (tema === "tecnologia" ? "💻 Tecnología" : "🌎 Países y Ciudades") + "</b>";
+      document.getElementById("tema-actual").innerHTML = "Tema actual: <b>" + tema.charAt(0).toUpperCase() + tema.slice(1) + "</b>";
       document.getElementById("lobby-container").style.display = "none";
       document.getElementById("game-container").style.display = "block";
       mostrarPalabra();
