@@ -1,0 +1,3301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#10172f">
+
+<title>Encuentra la Palabra</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --blue:#00c6ff;
+    --blue2:#2563eb;
+    --purple:#7c3aed;
+    --pink:#ec4899;
+    --cyan:#22d3ee;
+
+    --green:#22c55e;
+    --yellow:#facc15;
+    --orange:#f97316;
+    --red:#ef4444;
+
+    --bg:#080d20;
+    --card:rgba(255,255,255,.075);
+    --card-hover:rgba(255,255,255,.11);
+
+    --text:#ffffff;
+    --muted:#9aa8c2;
+
+    --radius:26px;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:"Poppins",sans-serif;
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(0,198,255,.20),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(236,72,153,.15),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(124,58,237,.20),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #070b18,
+            #10172f 50%,
+            #080d20
+        );
+
+    overflow-x:hidden;
+}
+
+/* Fondo decorativo */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.18;
+    pointer-events:none;
+    z-index:-1;
+}
+
+body::before{
+    background:#00c6ff;
+    top:-120px;
+    left:-100px;
+}
+
+body::after{
+    background:#ec4899;
+    right:-120px;
+    bottom:-120px;
+}
+
+/* Barra superior */
+
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:78px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:50;
+
+    background:rgba(8,13,32,.55);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:16px;
+    font-weight:800;
+}
+
+.brand-logo{
+    width:38px;
+    height:38px;
+    object-fit:contain;
+    border-radius:12px;
+
+    filter:
+        drop-shadow(
+            0 5px 15px
+            rgba(0,198,255,.35)
+        );
+}
+
+.brand-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 12px
+        rgba(34,211,238,.8);
+}
+
+/* Contenedores */
+
+.container{
+    width:calc(100% - 28px);
+    max-width:470px;
+
+    margin:108px auto 30px;
+    padding:30px 25px;
+
+    border-radius:var(--radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.045)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+    animation:appear .45s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* Bienvenida */
+
+.welcome{
+    max-width:540px;
+    text-align:center;
+}
+
+.hero-icon{
+    width:100px;
+    height:100px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:30px;
+
+    font-size:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00c6ff,
+            #2563eb 45%,
+            #7c3aed 75%,
+            #ec4899
+        );
+
+    box-shadow:
+        0 18px 45px
+        rgba(37,99,235,.30);
+
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-8px) rotate(2deg);
+    }
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    padding:7px 12px;
+    margin-bottom:12px;
+
+    border-radius:50px;
+
+    font-size:9px;
+    font-weight:700;
+
+    color:#b9efff;
+
+    background:rgba(0,198,255,.09);
+    border:1px solid rgba(0,198,255,.15);
+}
+
+h1{
+    font-size:34px;
+    line-height:1.15;
+    font-weight:800;
+    margin-bottom:12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #bdefff,
+            #d7c4ff
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.welcome-description{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    max-width:430px;
+    margin:auto;
+}
+
+/* Características */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:25px 0;
+}
+
+.feature{
+    min-width:0;
+
+    padding:15px 8px;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    transition:.25s;
+}
+
+.feature:hover{
+    transform:translateY(-4px);
+    background:var(--card-hover);
+}
+
+.feature-icon{
+    display:block;
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.feature-title{
+    display:block;
+    font-size:9px;
+    font-weight:700;
+}
+
+.feature-text{
+    display:block;
+    margin-top:2px;
+
+    color:#7f8ca5;
+    font-size:8px;
+}
+
+/* Títulos */
+
+h2{
+    font-size:25px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+    margin-bottom:24px;
+}
+
+/* Botones */
+
+button{
+    width:100%;
+    border:0;
+    outline:0;
+
+    padding:14px 17px;
+    margin-top:10px;
+
+    border-radius:15px;
+
+    color:white;
+
+    font-family:"Poppins",sans-serif;
+    font-size:11px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        opacity .2s,
+        background .2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+button:disabled{
+    cursor:not-allowed;
+    opacity:.45;
+    transform:none;
+}
+
+.btn-primary{
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #00aef0,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(37,99,235,.22);
+}
+
+.btn-primary:hover{
+    box-shadow:
+        0 16px 38px
+        rgba(37,99,235,.32);
+}
+
+.btn-secondary{
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.09);
+}
+
+.btn-secondary:hover{
+    background:
+        rgba(255,255,255,.12);
+}
+
+.btn-danger{
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #f43f5e
+        );
+}
+
+.btn-warning{
+    background:
+        linear-gradient(
+            135deg,
+            #ea580c,
+            #f97316
+        );
+}
+
+/* Login */
+
+.login-icon{
+    width:78px;
+    height:78px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:23px;
+
+    font-size:36px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(124,58,237,.25);
+}
+
+.input-group{
+    text-align:left;
+    margin-bottom:13px;
+}
+
+.input-group label{
+    display:block;
+    margin:0 0 6px 2px;
+
+    color:#aebbd0;
+    font-size:9px;
+    font-weight:600;
+}
+
+input{
+    width:100%;
+    min-height:48px;
+
+    border:1px solid rgba(255,255,255,.09);
+    outline:none;
+
+    border-radius:15px;
+
+    padding:13px 15px;
+
+    color:white;
+
+    background:
+        rgba(0,0,0,.18);
+
+    font-family:"Poppins",sans-serif;
+    font-size:12px;
+
+    transition:.25s;
+}
+
+input::placeholder{
+    color:#69778f;
+}
+
+input:focus{
+    border-color:rgba(0,198,255,.7);
+
+    background:
+        rgba(0,198,255,.035);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(0,198,255,.07);
+}
+
+#auth-message{
+    min-height:18px;
+
+    margin:12px 0 2px;
+
+    font-size:10px;
+    color:#93c5fd;
+}
+
+/* Lobby */
+
+.lobby-header{
+    margin-bottom:22px;
+}
+
+.lobby-header h2{
+    margin-bottom:6px;
+}
+
+.themes{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.theme{
+    position:relative;
+
+    min-height:125px;
+
+    padding:19px 12px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.035)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+    transition:
+        transform .25s,
+        border .25s,
+        background .25s,
+        box-shadow .25s;
+}
+
+.theme::before{
+    content:"";
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    top:-35px;
+    right:-35px;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,198,255,.15);
+
+    filter:blur(10px);
+}
+
+.theme:hover{
+    transform:translateY(-5px);
+
+    background:
+        rgba(255,255,255,.11);
+
+    border-color:
+        rgba(0,198,255,.25);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.18);
+}
+
+.theme-icon{
+    position:relative;
+    z-index:1;
+
+    width:54px;
+    height:54px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:9px;
+
+    border-radius:17px;
+
+    font-size:27px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+}
+
+.theme-name{
+    position:relative;
+    z-index:1;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+/* Juego */
+
+.game-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    margin-bottom:22px;
+}
+
+.game-theme{
+    min-width:0;
+    text-align:left;
+}
+
+.game-theme small{
+    display:block;
+
+    color:#6f7d96;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.game-theme h2{
+    margin-top:3px;
+
+    font-size:19px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.timer{
+    flex:0 0 auto;
+
+    width:72px;
+    height:72px;
+
+    padding:5px;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            var(--blue)
+            var(--progreso,100%),
+            rgba(255,255,255,.08) 0
+        );
+
+    transition:.3s;
+}
+
+.timer-inner{
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#10182f;
+
+    font-size:17px;
+    font-weight:800;
+}
+
+.timer.warning{
+    background:
+        conic-gradient(
+            var(--yellow)
+            var(--progreso,100%),
+            rgba(255,255,255,.08) 0
+        );
+}
+
+.timer.danger{
+    background:
+        conic-gradient(
+            var(--red)
+            var(--progreso,100%),
+            rgba(255,255,255,.08) 0
+        );
+
+    animation:pulse .75s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.06);
+    }
+}
+
+/* Progreso */
+
+.question-info{
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:7px;
+
+    color:#8391aa;
+    font-size:9px;
+    font-weight:600;
+}
+
+.progress-bar{
+    width:100%;
+    height:8px;
+
+    overflow:hidden;
+
+    margin-bottom:22px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+#progress-fill{
+    width:0;
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00c6ff,
+            #2563eb,
+            #8b5cf6,
+            #ec4899
+        );
+
+    transition:width .4s ease;
+}
+
+/* Pista */
+
+.clue-card{
+    position:relative;
+
+    padding:27px 16px;
+
+    margin-bottom:14px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 0,
+            rgba(0,198,255,.12),
+            transparent 60%
+        ),
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.clue-label{
+    margin-bottom:11px;
+
+    color:#71809a;
+
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:1.3px;
+}
+
+#pista{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:4px;
+
+    word-break:break-word;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #9eeeff,
+            #c9b7ff
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Resultado */
+
+#resultado{
+    min-height:25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:12px 0;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+.correcto{
+    color:#4ade80;
+}
+
+.incorrecto{
+    color:#fb7185;
+}
+
+/* Puntuación */
+
+.score-panel{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+
+    margin-top:15px;
+}
+
+.score-item{
+    padding:12px 7px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+}
+
+.score-label{
+    display:block;
+
+    color:#7d8ba3;
+    font-size:8px;
+    margin-bottom:3px;
+}
+
+.score-value{
+    font-size:17px;
+    font-weight:800;
+}
+
+/* Pantalla de resultado */
+
+.result-screen{
+    text-align:center;
+}
+
+.result-icon{
+    width:100px;
+    height:100px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:30px;
+
+    font-size:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #facc15,
+            #f97316,
+            #ec4899
+        );
+
+    box-shadow:
+        0 18px 45px
+        rgba(249,115,22,.25);
+
+    animation:resultPop .5s ease;
+}
+
+@keyframes resultPop{
+    from{
+        transform:scale(.6);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.result-screen h2{
+    font-size:27px;
+}
+
+.result-description{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.result-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-bottom:18px;
+}
+
+.result-stat{
+    padding:14px 6px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+}
+
+.result-stat strong{
+    display:block;
+    font-size:20px;
+}
+
+.result-stat span{
+    display:block;
+    color:#7e8ba2;
+    font-size:8px;
+    margin-top:2px;
+}
+
+/* Progreso */
+
+.progress-screen-title{
+    font-size:26px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.progress-screen-subtitle{
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    position:relative;
+
+    padding:16px;
+
+    text-align:left;
+
+    border-radius:19px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.stat-card:hover{
+    transform:translateY(-3px);
+    background:rgba(255,255,255,.085);
+}
+
+.stat-icon{
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.stat-label{
+    display:block;
+
+    color:#8998b0;
+    font-size:8px;
+    margin-bottom:3px;
+}
+
+.stat-value{
+    font-size:21px;
+    font-weight:800;
+}
+
+/* Tabla */
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+
+    border-radius:18px;
+}
+
+.progress-table{
+    width:100%;
+    min-width:350px;
+
+    border-collapse:collapse;
+
+    background:
+        rgba(255,255,255,.035);
+
+    overflow:hidden;
+}
+
+.progress-table th{
+    padding:12px 8px;
+
+    color:#77869f;
+
+    font-size:8px;
+    font-weight:700;
+
+    text-align:left;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+}
+
+.progress-table td{
+    padding:12px 8px;
+
+    font-size:9px;
+
+    text-align:left;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.055);
+}
+
+.progress-table tr:last-child td{
+    border-bottom:0;
+}
+
+.theme-progress-name{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    font-weight:600;
+}
+
+.theme-progress-icon{
+    font-size:17px;
+}
+
+.progress-number{
+    color:var(--blue);
+    font-weight:800;
+}
+
+.progress-status{
+    display:inline-block;
+
+    padding:4px 7px;
+
+    border-radius:8px;
+
+    font-size:7px;
+    white-space:nowrap;
+}
+
+.status-complete{
+    color:#4ade80;
+    background:rgba(34,197,94,.12);
+}
+
+.status-progress{
+    color:#60a5fa;
+    background:rgba(37,99,235,.12);
+}
+
+.status-start{
+    color:#94a3b8;
+    background:rgba(148,163,184,.10);
+}
+
+/* Consejo */
+
+.tip{
+    margin-top:17px;
+    padding:15px;
+
+    text-align:left;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,198,255,.07),
+            rgba(124,58,237,.07)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.07);
+}
+
+.tip-title{
+    display:block;
+
+    margin-bottom:5px;
+
+    font-size:10px;
+    font-weight:700;
+}
+
+.tip-text{
+    color:#93a1b8;
+
+    font-size:8px;
+    line-height:1.7;
+}
+
+/* Premio */
+
+#estrella{
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:100;
+
+    pointer-events:none;
+
+    background:
+        rgba(4,8,20,.18);
+
+    backdrop-filter:blur(3px);
+}
+
+.estrella-contenido{
+    text-align:center;
+}
+
+.estrella-icon{
+    display:block;
+    font-size:85px;
+}
+
+.estrella-texto{
+    margin-top:8px;
+
+    font-size:25px;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #facc15,
+            #fb923c,
+            #f472b6
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.estrella-animar{
+    animation:starAnimation 1.35s ease forwards;
+}
+
+@keyframes starAnimation{
+    0%{
+        opacity:0;
+        transform:scale(.25) rotate(-180deg);
+    }
+
+    45%{
+        opacity:1;
+        transform:scale(1.1) rotate(15deg);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(.75) rotate(180deg);
+    }
+}
+
+/* Responsive */
+
+@media(max-width:600px){
+
+    .topbar{
+        height:68px;
+    }
+
+    .brand{
+        font-size:14px;
+    }
+
+    .brand-logo{
+        width:34px;
+        height:34px;
+    }
+
+    .container{
+        width:calc(100% - 20px);
+        margin-top:88px;
+        padding:23px 17px;
+        border-radius:23px;
+    }
+
+    .hero-icon{
+        width:82px;
+        height:82px;
+        border-radius:25px;
+        font-size:42px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .welcome-description{
+        font-size:11px;
+    }
+
+    .features{
+        gap:7px;
+    }
+
+    .feature{
+        padding:12px 5px;
+    }
+
+    .feature-icon{
+        font-size:19px;
+    }
+
+    .feature-title{
+        font-size:8px;
+    }
+
+    .feature-text{
+        font-size:7px;
+    }
+
+    .themes{
+        gap:9px;
+    }
+
+    .theme{
+        min-height:115px;
+        padding:15px 8px;
+    }
+
+    .theme-icon{
+        width:48px;
+        height:48px;
+        font-size:24px;
+    }
+
+    .game-header{
+        gap:8px;
+    }
+
+    .game-theme h2{
+        font-size:17px;
+    }
+
+    .timer{
+        width:65px;
+        height:65px;
+    }
+
+    #pista{
+        font-size:23px;
+        letter-spacing:3px;
+    }
+
+    .progress-table th,
+    .progress-table td{
+        padding:10px 6px;
+    }
+}
+
+@media(max-width:380px){
+
+    .container{
+        padding:20px 14px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .feature{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+    }
+
+    .feature-icon{
+        margin:0;
+    }
+
+    .themes{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .theme{
+        min-height:105px;
+    }
+
+    .theme-name{
+        font-size:9px;
+    }
+
+    #pista{
+        font-size:20px;
+        letter-spacing:2px;
+    }
+
+    .result-stats{
+        gap:6px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <img
+            src="img/logo.png"
+            class="brand-logo"
+            alt="Logo"
+        >
+
+        <span>Encuentra la Palabra</span>
+
+        <span class="brand-dot"></span>
+
+    </div>
+
+</header>
+
+
+<!-- BIENVENIDA -->
+
+<div
+    id="welcome-container"
+    class="container welcome"
+>
+
+    <div class="hero-icon">
+        🎯
+    </div>
+
+    <div class="badge">
+        ⚡ DESAFÍO DE PALABRAS
+    </div>
+
+    <h1>
+        Encuentra la Palabra
+    </h1>
+
+    <p class="welcome-description">
+        Pon a prueba tu rapidez mental, completa las palabras
+        y demuestra cuánto sabes.
+    </p>
+
+    <div class="features">
+
+        <div class="feature">
+
+            <span class="feature-icon">⏱️</span>
+
+            <span class="feature-title">
+                30 segundos
+            </span>
+
+            <span class="feature-text">
+                por palabra
+            </span>
+
+        </div>
+
+        <div class="feature">
+
+            <span class="feature-icon">🧠</span>
+
+            <span class="feature-title">
+                Entrena
+            </span>
+
+            <span class="feature-text">
+                tu mente
+            </span>
+
+        </div>
+
+        <div class="feature">
+
+            <span class="feature-icon">🏆</span>
+
+            <span class="feature-title">
+                Consigue
+            </span>
+
+            <span class="feature-text">
+                puntos
+            </span>
+
+        </div>
+
+    </div>
+
+    <button
+        class="btn-primary"
+        onclick="irLogin()"
+    >
+        🚀 Comenzar juego
+    </button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div
+    id="login-container"
+    class="container"
+    style="display:none;"
+>
+
+    <div class="login-icon">
+        🔐
+    </div>
+
+    <h2>
+        Bienvenido
+    </h2>
+
+    <p class="subtitle">
+        Inicia sesión para guardar tu progreso.
+    </p>
+
+    <div class="input-group">
+
+        <label>
+            CORREO ELECTRÓNICO
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="correo@ejemplo.com"
+            autocomplete="email"
+        >
+
+    </div>
+
+    <div class="input-group">
+
+        <label>
+            CONTRASEÑA
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Tu contraseña"
+            autocomplete="current-password"
+        >
+
+    </div>
+
+    <button
+        class="btn-primary"
+        onclick="login()"
+    >
+        🔑 Iniciar sesión
+    </button>
+
+    <button
+        class="btn-secondary"
+        onclick="register()"
+    >
+        📝 Crear cuenta
+    </button>
+
+    <p id="auth-message"></p>
+
+    <button
+        class="btn-secondary"
+        onclick="irBienvenida()"
+    >
+        ← Volver
+    </button>
+
+</div>
+
+
+<!-- LOBBY -->
+
+<div
+    id="lobby-container"
+    class="container"
+    style="display:none;"
+>
+
+    <div class="lobby-header">
+
+        <h2>
+            Elige tu desafío
+        </h2>
+
+        <p class="subtitle">
+            Selecciona una categoría y comienza a jugar.
+        </p>
+
+    </div>
+
+    <div class="themes">
+
+        <div
+            class="theme"
+            onclick="seleccionarTema('tecnologia')"
+        >
+            <span class="theme-icon">💻</span>
+            <span class="theme-name">Tecnología</span>
+        </div>
+
+        <div
+            class="theme"
+            onclick="seleccionarTema('paises')"
+        >
+            <span class="theme-icon">🌎</span>
+            <span class="theme-name">Países y ciudades</span>
+        </div>
+
+        <div
+            class="theme"
+            onclick="seleccionarTema('animales')"
+        >
+            <span class="theme-icon">🐶</span>
+            <span class="theme-name">Animales</span>
+        </div>
+
+        <div
+            class="theme"
+            onclick="seleccionarTema('frutas')"
+        >
+            <span class="theme-icon">🍎</span>
+            <span class="theme-name">Frutas</span>
+        </div>
+
+        <div
+            class="theme"
+            onclick="seleccionarTema('deportes')"
+        >
+            <span class="theme-icon">⚽</span>
+            <span class="theme-name">Deportes</span>
+        </div>
+
+        <div
+            class="theme"
+            onclick="seleccionarTema('comida')"
+        >
+            <span class="theme-icon">🍔</span>
+            <span class="theme-name">Comida</span>
+        </div>
+
+    </div>
+
+    <button
+        class="btn-secondary"
+        onclick="mostrarProgreso()"
+    >
+        📊 Mi progreso
+    </button>
+
+    <button
+        class="btn-danger"
+        onclick="cerrarSesion()"
+    >
+        🚪 Cerrar sesión
+    </button>
+
+</div>
+
+
+<!-- PROGRESO -->
+
+<div
+    id="progress-container"
+    class="container"
+    style="display:none;"
+>
+
+    <div class="progress-screen-title">
+        📊 Mi progreso
+    </div>
+
+    <p class="progress-screen-subtitle">
+        Revisa tus resultados y mira cuánto has avanzado.
+    </p>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🏆</div>
+
+            <span class="stat-label">
+                Puntos totales
+            </span>
+
+            <span
+                class="stat-value"
+                id="total-puntos"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📝</div>
+
+            <span class="stat-label">
+                Palabras respondidas
+            </span>
+
+            <span
+                class="stat-value"
+                id="total-palabras"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🎯</div>
+
+            <span class="stat-label">
+                Precisión
+            </span>
+
+            <span
+                class="stat-value"
+                id="precision"
+            >
+                0%
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📚</div>
+
+            <span class="stat-label">
+                Categorías terminadas
+            </span>
+
+            <span
+                class="stat-value"
+                id="categorias-completadas"
+            >
+                0/6
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="table-wrapper">
+
+        <table class="progress-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Categoría</th>
+                    <th>Progreso</th>
+                    <th>Estado</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tabla-progreso"></tbody>
+
+        </table>
+
+    </div>
+
+    <div class="tip">
+
+        <span class="tip-title">
+            💡 Consejo
+        </span>
+
+        <p class="tip-text">
+            Intenta recordar las palabras que falles.
+            La idea no es solamente conseguir puntos,
+            sino mejorar mientras juegas.
+        </p>
+
+    </div>
+
+    <button
+        class="btn-secondary"
+        onclick="mostrarLobby()"
+    >
+        ← Volver al lobby
+    </button>
+
+</div>
+
+
+<!-- JUEGO -->
+
+<div
+    id="game-container"
+    class="container"
+    style="display:none;"
+>
+
+    <div class="game-header">
+
+        <div class="game-theme">
+
+            <small>
+                CATEGORÍA
+            </small>
+
+            <h2 id="tema-actual">
+                Tecnología
+            </h2>
+
+        </div>
+
+        <div
+            class="timer"
+            id="timer"
+        >
+
+            <div class="timer-inner">
+
+                <span id="timer-text">
+                    30
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="question-info">
+
+        <span id="pregunta-numero">
+            Palabra 1 de 7
+        </span>
+
+        <span id="porcentaje">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+        <div id="progress-fill"></div>
+
+    </div>
+
+    <div class="clue-card">
+
+        <div class="clue-label">
+            COMPLETA LA PALABRA
+        </div>
+
+        <p id="pista">
+            C_MPU_____ 
+        </p>
+
+    </div>
+
+    <input
+        type="text"
+        id="respuesta"
+        placeholder="Escribe la palabra..."
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+    >
+
+    <button
+        id="btn-verificar"
+        class="btn-primary"
+        onclick="verificar()"
+    >
+        ✓ Verificar respuesta
+    </button>
+
+    <div id="resultado"></div>
+
+    <div class="score-panel">
+
+        <div class="score-item">
+
+            <span class="score-label">
+                PUNTOS
+            </span>
+
+            <span
+                class="score-value"
+                id="puntaje"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div class="score-item">
+
+            <span class="score-label">
+                ACIERTOS
+            </span>
+
+            <span
+                class="score-value"
+                id="aciertos"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div class="score-item">
+
+            <span class="score-label">
+                ERRORES
+            </span>
+
+            <span
+                class="score-value"
+                id="errores"
+            >
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+    <button
+        class="btn-secondary"
+        onclick="volverLobby()"
+    >
+        ← Volver al lobby
+    </button>
+
+    <button
+        class="btn-warning"
+        onclick="reiniciarNivel()"
+    >
+        🔄 Reiniciar nivel
+    </button>
+
+</div>
+
+
+<!-- RESULTADO FINAL -->
+
+<div
+    id="result-container"
+    class="container result-screen"
+    style="display:none;"
+>
+
+    <div class="result-icon">
+        🏆
+    </div>
+
+    <h2>
+        ¡Nivel completado!
+    </h2>
+
+    <p
+        class="result-description"
+        id="result-description"
+    >
+        Has terminado esta categoría.
+    </p>
+
+    <div class="result-stats">
+
+        <div class="result-stat">
+
+            <strong id="result-points">
+                0
+            </strong>
+
+            <span>
+                Puntos
+            </span>
+
+        </div>
+
+        <div class="result-stat">
+
+            <strong id="result-correct">
+                0
+            </strong>
+
+            <span>
+                Aciertos
+            </span>
+
+        </div>
+
+        <div class="result-stat">
+
+            <strong id="result-accuracy">
+                0%
+            </strong>
+
+            <span>
+                Precisión
+            </span>
+
+        </div>
+
+    </div>
+
+    <button
+        class="btn-primary"
+        onclick="jugarDeNuevo()"
+    >
+        🔄 Jugar otra vez
+    </button>
+
+    <button
+        class="btn-secondary"
+        onclick="mostrarLobby()"
+    >
+        📚 Elegir otra categoría
+    </button>
+
+    <button
+        class="btn-secondary"
+        onclick="mostrarProgreso()"
+    >
+        📊 Ver mi progreso
+    </button>
+
+</div>
+
+
+<!-- PREMIO -->
+
+<div id="estrella">
+
+    <div class="estrella-contenido">
+
+        <span class="estrella-icon">
+            🌟
+        </span>
+
+        <div class="estrella-texto">
+            ¡Correcto!
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* Firebase */
+
+const API_KEY =
+    "AIzaSyAkb7BsSW6ROnIfM01djn4ZbiX7PKpi-f8";
+
+const SIGNUP_URL =
+    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+
+const SIGNIN_URL =
+    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+
+
+/* Estado */
+
+let userToken = null;
+let palabras = [];
+let indice = 0;
+let puntaje = 0;
+let aciertos = 0;
+let errores = 0;
+let temaActual = "";
+let bloqueado = false;
+let tiempo = 30;
+let intervalo = null;
+
+
+/* Palabras */
+
+const temas = {
+
+    tecnologia:[
+        {pista:"C_MPU_____",respuesta:"COMPUTADOR"},
+        {pista:"PR_GR_MA",respuesta:"PROGRAMA"},
+        {pista:"INT_RN_T",respuesta:"INTERNET"},
+        {pista:"J_V_SCR_PT",respuesta:"JAVASCRIPT"},
+        {pista:"HT_L",respuesta:"HTML"},
+        {pista:"CI_NCI_",respuesta:"CIENCIA"},
+        {pista:"M_T_M_TIC_S",respuesta:"MATEMÁTICAS"}
+    ],
+
+    paises:[
+        {pista:"C_L_MB__",respuesta:"COLOMBIA"},
+        {pista:"M_X_C_",respuesta:"MÉXICO"},
+        {pista:"ESP_Ñ_",respuesta:"ESPAÑA"},
+        {pista:"ARG_NT_N_",respuesta:"ARGENTINA"},
+        {pista:"P_R_",respuesta:"PERÚ"},
+        {pista:"B_G_T_",respuesta:"BOGOTÁ"},
+        {pista:"M_DR_D",respuesta:"MADRID"}
+    ],
+
+    animales:[
+        {pista:"P_RR_",respuesta:"PERRO"},
+        {pista:"G_T_",respuesta:"GATO"},
+        {pista:"L_ON",respuesta:"LEÓN"},
+        {pista:"T_GR_",respuesta:"TIGRE"},
+        {pista:"E_F_NT_",respuesta:"ELEFANTE"},
+        {pista:"D_LF_N",respuesta:"DELFÍN"},
+        {pista:"P_G_S_",respuesta:"PEGASO"}
+    ],
+
+    frutas:[
+        {pista:"M_NZ_N_",respuesta:"MANZANA"},
+        {pista:"P_R_",respuesta:"PERA"},
+        {pista:"PL_T_NO",respuesta:"PLÁTANO"},
+        {pista:"S_ND_A",respuesta:"SANDÍA"},
+        {pista:"FR_S_",respuesta:"FRESA"},
+        {pista:"M_L_N",respuesta:"MELÓN"},
+        {pista:"N_R_NJ_",respuesta:"NARANJA"}
+    ],
+
+    deportes:[
+        {pista:"F_TB_L",respuesta:"FÚTBOL"},
+        {pista:"B_LON_ES_O",respuesta:"BALONCESTO"},
+        {pista:"T_N_S",respuesta:"TENIS"},
+        {pista:"V_L_IB_L",respuesta:"VOLEIBOL"},
+        {pista:"N_T_CI_N",respuesta:"NATACIÓN"},
+        {pista:"C_RR_R_",respuesta:"CARRERA"},
+        {pista:"B_X__",respuesta:"BOXEO"}
+    ],
+
+    comida:[
+        {pista:"P_ZZ_",respuesta:"PIZZA"},
+        {pista:"H_MB_RG_S_",respuesta:"HAMBURGUESA"},
+        {pista:"P_ST_",respuesta:"PASTA"},
+        {pista:"S_P_",respuesta:"SOPA"},
+        {pista:"A_R__Z",respuesta:"ARROZ"},
+        {pista:"P_LL_",respuesta:"POLLO"},
+        {pista:"H__V_",respuesta:"HUEVO"}
+    ]
+
+};
+
+
+/* Nombres */
+
+const nombresTemas = {
+
+    tecnologia:"Tecnología",
+    paises:"Países y ciudades",
+    animales:"Animales",
+    frutas:"Frutas",
+    deportes:"Deportes",
+    comida:"Comida"
+
+};
+
+
+/* Categorías */
+
+const categorias = [
+
+    {
+        id:"tecnologia",
+        nombre:"Tecnología",
+        icono:"💻"
+    },
+
+    {
+        id:"paises",
+        nombre:"Países y ciudades",
+        icono:"🌎"
+    },
+
+    {
+        id:"animales",
+        nombre:"Animales",
+        icono:"🐶"
+    },
+
+    {
+        id:"frutas",
+        nombre:"Frutas",
+        icono:"🍎"
+    },
+
+    {
+        id:"deportes",
+        nombre:"Deportes",
+        icono:"⚽"
+    },
+
+    {
+        id:"comida",
+        nombre:"Comida",
+        icono:"🍔"
+    }
+
+];
+
+
+/* Pantallas */
+
+function mostrarSolo(id){
+
+    document
+        .querySelectorAll(".container")
+        .forEach(container => {
+
+            container.style.display =
+                container.id === id
+                ? "block"
+                : "none";
+
+        });
+
+}
+
+
+/* Bienvenida */
+
+function irBienvenida(){
+
+    detenerCronometro();
+
+    mostrarSolo("welcome-container");
+
+}
+
+
+/* Login */
+
+function irLogin(){
+
+    mostrarSolo("login-container");
+
+    document
+        .getElementById("auth-message")
+        .textContent="";
+
+}
+
+
+/* Errores Firebase */
+
+function traducirError(error){
+
+    const erroresFirebase = {
+
+        EMAIL_EXISTS:
+            "Este correo ya está registrado.",
+
+        EMAIL_NOT_FOUND:
+            "No existe una cuenta con este correo.",
+
+        INVALID_PASSWORD:
+            "La contraseña es incorrecta.",
+
+        INVALID_LOGIN_CREDENTIALS:
+            "El correo o la contraseña son incorrectos.",
+
+        INVALID_EMAIL:
+            "El correo electrónico no es válido.",
+
+        WEAK_PASSWORD:
+            "La contraseña es demasiado débil.",
+
+        OPERATION_NOT_ALLOWED:
+            "El inicio de sesión con correo está desactivado.",
+
+        TOO_MANY_ATTEMPTS_TRY_LATER:
+            "Demasiados intentos. Inténtalo más tarde.",
+
+        PASSWORD_LOGIN_DISABLED:
+            "El inicio de sesión con contraseña está desactivado.",
+
+        INVALID_API_KEY:
+            "La configuración de Firebase no es válida.",
+
+        API_KEY_INVALID:
+            "La API Key de Firebase no es válida."
+
+    };
+
+    return erroresFirebase[error]
+        || "Ha ocurrido un error inesperado.";
+
+}
+
+
+/* Registro */
+
+async function register(){
+
+    const email =
+        document
+            .getElementById("email")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+    const message =
+        document.getElementById("auth-message");
+
+    if(!email || !password){
+
+        message.textContent =
+            "Completa todos los campos.";
+
+        return;
+
+    }
+
+    message.textContent =
+        "Creando cuenta...";
+
+    try{
+
+        const res =
+            await fetch(
+                SIGNUP_URL,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+                        email,
+                        password,
+                        returnSecureToken:true
+                    })
+                }
+            );
+
+        const data =
+            await res.json();
+
+        if(!res.ok || data.error){
+
+            throw new Error(
+                data.error?.message || "ERROR"
+            );
+
+        }
+
+        message.textContent =
+            "✓ Cuenta creada correctamente.";
+
+    }
+
+    catch(error){
+
+        message.textContent =
+            traducirError(error.message);
+
+    }
+
+}
+
+
+/* Login */
+
+async function login(){
+
+    const email =
+        document
+            .getElementById("email")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+    const message =
+        document.getElementById("auth-message");
+
+    if(!email || !password){
+
+        message.textContent =
+            "Completa todos los campos.";
+
+        return;
+
+    }
+
+    message.textContent =
+        "Iniciando sesión...";
+
+    try{
+
+        const res =
+            await fetch(
+                SIGNIN_URL,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+                        email,
+                        password,
+                        returnSecureToken:true
+                    })
+                }
+            );
+
+        const data =
+            await res.json();
+
+        if(!res.ok || data.error){
+
+            throw new Error(
+                data.error?.message || "ERROR"
+            );
+
+        }
+
+        userToken =
+            data.idToken;
+
+        localStorage.setItem(
+            "userToken",
+            userToken
+        );
+
+        mostrarLobby();
+
+    }
+
+    catch(error){
+
+        message.textContent =
+            traducirError(error.message);
+
+    }
+
+}
+
+
+/* Cerrar sesión */
+
+function cerrarSesion(){
+
+    userToken=null;
+
+    localStorage.removeItem("userToken");
+
+    detenerCronometro();
+
+    irBienvenida();
+
+}
+
+
+/* Lobby */
+
+function mostrarLobby(){
+
+    detenerCronometro();
+
+    mostrarSolo("lobby-container");
+
+}
+
+
+/* Seleccionar tema */
+
+function seleccionarTema(tema){
+
+    detenerCronometro();
+
+    temaActual=tema;
+
+    palabras=[...temas[tema]];
+
+    const guardado =
+        localStorage.getItem(
+            "progreso_"+tema
+        );
+
+    if(guardado){
+
+        try{
+
+            const progreso =
+                JSON.parse(guardado);
+
+            indice =
+                Number(progreso.indice) || 0;
+
+            puntaje =
+                Number(progreso.puntaje) || 0;
+
+            aciertos =
+                Number(progreso.aciertos) || 0;
+
+            errores =
+                Number(progreso.errores) || 0;
+
+        }
+
+        catch{
+
+            indice=0;
+            puntaje=0;
+            aciertos=0;
+            errores=0;
+
+        }
+
+    }
+
+    else{
+
+        indice=0;
+        puntaje=0;
+        aciertos=0;
+        errores=0;
+
+    }
+
+    /* Si ya terminó, empieza de nuevo */
+
+    if(indice >= palabras.length){
+
+        indice=0;
+        puntaje=0;
+        aciertos=0;
+        errores=0;
+
+    }
+
+    document
+        .getElementById("tema-actual")
+        .textContent =
+        nombresTemas[tema];
+
+    actualizarEstadisticasJuego();
+
+    document
+        .getElementById("respuesta")
+        .disabled=false;
+
+    document
+        .getElementById("btn-verificar")
+        .disabled=false;
+
+    mostrarSolo("game-container");
+
+    mostrarPalabra();
+
+}
+
+
+/* Volver */
+
+function volverLobby(){
+
+    detenerCronometro();
+
+    guardarProgreso();
+
+    mostrarLobby();
+
+}
+
+
+/* Reiniciar */
+
+function reiniciarNivel(){
+
+    detenerCronometro();
+
+    indice=0;
+    puntaje=0;
+    aciertos=0;
+    errores=0;
+
+    guardarProgreso();
+
+    document
+        .getElementById("respuesta")
+        .disabled=false;
+
+    document
+        .getElementById("btn-verificar")
+        .disabled=false;
+
+    actualizarEstadisticasJuego();
+
+    mostrarPalabra();
+
+}
+
+
+/* Mostrar palabra */
+
+function mostrarPalabra(){
+
+    if(indice >= palabras.length){
+
+        finalizarJuego();
+
+        return;
+
+    }
+
+    bloqueado=false;
+
+    const porcentaje =
+        Math.round(
+            (indice / palabras.length) * 100
+        );
+
+    document
+        .getElementById("pregunta-numero")
+        .textContent =
+        `Palabra ${indice+1} de ${palabras.length}`;
+
+    document
+        .getElementById("porcentaje")
+        .textContent =
+        porcentaje+"%";
+
+    document
+        .getElementById("progress-fill")
+        .style.width =
+        porcentaje+"%";
+
+    document
+        .getElementById("pista")
+        .textContent =
+        palabras[indice].pista;
+
+    const input =
+        document.getElementById("respuesta");
+
+    input.value="";
+
+    document
+        .getElementById("resultado")
+        .textContent="";
+
+    input.disabled=false;
+
+    document
+        .getElementById("btn-verificar")
+        .disabled=false;
+
+    iniciarCronometro();
+
+    setTimeout(() => {
+
+        input.focus();
+
+    },100);
+
+}
+
+
+/* Normalizar */
+
+function normalizar(texto){
+
+    return texto
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toUpperCase()
+        .trim();
+
+}
+
+
+/* Cronómetro */
+
+function iniciarCronometro(){
+
+    detenerCronometro();
+
+    tiempo=30;
+
+    actualizarCronometro();
+
+    intervalo =
+        setInterval(() => {
+
+            tiempo--;
+
+            actualizarCronometro();
+
+            if(tiempo<=0){
+
+                tiempoAgotado();
+
+            }
+
+        },1000);
+
+}
+
+
+function actualizarCronometro(){
+
+    const timer =
+        document.getElementById("timer");
+
+    document
+        .getElementById("timer-text")
+        .textContent =
+        tiempo;
+
+    const porcentaje =
+        (tiempo/30)*100;
+
+    timer.style.setProperty(
+        "--progreso",
+        porcentaje+"%"
+    );
+
+    timer.classList.remove(
+        "warning",
+        "danger"
+    );
+
+    if(tiempo<=10){
+
+        timer.classList.add("warning");
+
+    }
+
+    if(tiempo<=5){
+
+        timer.classList.remove("warning");
+
+        timer.classList.add("danger");
+
+    }
+
+}
+
+
+function detenerCronometro(){
+
+    if(intervalo){
+
+        clearInterval(intervalo);
+
+        intervalo=null;
+
+    }
+
+}
+
+
+/* Tiempo agotado */
+
+function tiempoAgotado(){
+
+    if(bloqueado){
+        return;
+    }
+
+    bloqueado=true;
+
+    detenerCronometro();
+
+    errores++;
+
+    const resultado =
+        document.getElementById("resultado");
+
+    resultado.textContent =
+        "⏰ Se acabó el tiempo";
+
+    resultado.className="incorrecto";
+
+    document
+        .getElementById("respuesta")
+        .disabled=true;
+
+    document
+        .getElementById("btn-verificar")
+        .disabled=true;
+
+    actualizarEstadisticasJuego();
+
+    indice++;
+
+    guardarProgreso();
+
+    setTimeout(() => {
+
+        if(indice>=palabras.length){
+
+            finalizarJuego();
+
+        }
+
+        else{
+
+            mostrarPalabra();
+
+        }
+
+    },1100);
+
+}
+
+
+/* Verificar */
+
+function verificar(){
+
+    if(bloqueado){
+        return;
+    }
+
+    const input =
+        document.getElementById("respuesta");
+
+    const respuesta =
+        normalizar(input.value);
+
+    const resultado =
+        document.getElementById("resultado");
+
+    if(!respuesta){
+
+        resultado.textContent =
+            "Escribe una respuesta.";
+
+        resultado.className="incorrecto";
+
+        input.focus();
+
+        return;
+
+    }
+
+    bloqueado=true;
+
+    detenerCronometro();
+
+    const correcta =
+        normalizar(
+            palabras[indice].respuesta
+        );
+
+    input.disabled=true;
+
+    document
+        .getElementById("btn-verificar")
+        .disabled=true;
+
+    if(respuesta===correcta){
+
+        aciertos++;
+
+        puntaje++;
+
+        resultado.textContent =
+            "✓ ¡Respuesta correcta!";
+
+        resultado.className="correcto";
+
+        actualizarEstadisticasJuego();
+
+        mostrarPremio();
+
+    }
+
+    else{
+
+        errores++;
+
+        resultado.textContent =
+            `✕ Era: ${palabras[indice].respuesta}`;
+
+        resultado.className="incorrecto";
+
+        actualizarEstadisticasJuego();
+
+    }
+
+    indice++;
+
+    guardarProgreso();
+
+    setTimeout(() => {
+
+        if(indice>=palabras.length){
+
+            finalizarJuego();
+
+        }
+
+        else{
+
+            mostrarPalabra();
+
+        }
+
+    },1100);
+
+}
+
+
+/* Estadísticas del juego */
+
+function actualizarEstadisticasJuego(){
+
+    document
+        .getElementById("puntaje")
+        .textContent =
+        puntaje;
+
+    document
+        .getElementById("aciertos")
+        .textContent =
+        aciertos;
+
+    document
+        .getElementById("errores")
+        .textContent =
+        errores;
+
+}
+
+
+/* Premio */
+
+function mostrarPremio(){
+
+    const estrella =
+        document.getElementById("estrella");
+
+    estrella.style.display="flex";
+
+    estrella.classList.remove(
+        "estrella-animar"
+    );
+
+    void estrella.offsetWidth;
+
+    estrella.classList.add(
+        "estrella-animar"
+    );
+
+    setTimeout(() => {
+
+        estrella.style.display="none";
+
+        estrella.classList.remove(
+            "estrella-animar"
+        );
+
+    },1350);
+
+}
+
+
+/* Finalizar */
+
+function finalizarJuego(){
+
+    detenerCronometro();
+
+    guardarProgreso();
+
+    document
+        .getElementById("progress-fill")
+        .style.width="100%";
+
+    const precision =
+        palabras.length > 0
+        ? Math.round(
+            (aciertos / palabras.length)*100
+        )
+        : 0;
+
+    document
+        .getElementById("result-points")
+        .textContent =
+        puntaje;
+
+    document
+        .getElementById("result-correct")
+        .textContent =
+        aciertos;
+
+    document
+        .getElementById("result-accuracy")
+        .textContent =
+        precision+"%";
+
+    document
+        .getElementById("result-description")
+        .textContent =
+        `Terminaste ${nombresTemas[temaActual]} con ${aciertos} aciertos de ${palabras.length} palabras.`;
+
+    mostrarSolo("result-container");
+
+}
+
+
+/* Jugar de nuevo */
+
+function jugarDeNuevo(){
+
+    indice=0;
+    puntaje=0;
+    aciertos=0;
+    errores=0;
+
+    guardarProgreso();
+
+    mostrarSolo("game-container");
+
+    actualizarEstadisticasJuego();
+
+    mostrarPalabra();
+
+}
+
+
+/* Guardar */
+
+function guardarProgreso(){
+
+    if(!temaActual){
+        return;
+    }
+
+    localStorage.setItem(
+        "progreso_"+temaActual,
+        JSON.stringify({
+
+            indice,
+            puntaje,
+            aciertos,
+            errores
+
+        })
+    );
+
+}
+
+
+/* Mi progreso */
+
+function mostrarProgreso(){
+
+    detenerCronometro();
+
+    mostrarSolo("progress-container");
+
+    let puntosTotales=0;
+    let palabrasRespondidas=0;
+    let respuestasCorrectas=0;
+    let categoriasCompletadas=0;
+
+    const tabla =
+        document.getElementById(
+            "tabla-progreso"
+        );
+
+    tabla.innerHTML="";
+
+    categorias.forEach(categoria => {
+
+        const guardado =
+            localStorage.getItem(
+                "progreso_"+categoria.id
+            );
+
+        let respondidas=0;
+        let puntos=0;
+        let aciertosCategoria=0;
+
+        if(guardado){
+
+            try{
+
+                const progreso =
+                    JSON.parse(guardado);
+
+                respondidas =
+                    Math.min(
+                        Number(progreso.indice)||0,
+                        temas[categoria.id].length
+                    );
+
+                puntos =
+                    Number(progreso.puntaje)||0;
+
+                aciertosCategoria =
+                    Math.min(
+                        Number(progreso.aciertos)||0,
+                        respondidas
+                    );
+
+            }
+
+            catch{
+
+                respondidas=0;
+                puntos=0;
+                aciertosCategoria=0;
+
+            }
+
+        }
+
+        const total =
+            temas[categoria.id].length;
+
+        const porcentaje =
+            total>0
+            ? Math.round(
+                (respondidas/total)*100
+            )
+            : 0;
+
+        puntosTotales+=puntos;
+
+        palabrasRespondidas+=respondidas;
+
+        respuestasCorrectas+=
+            aciertosCategoria;
+
+        let estado="Sin comenzar";
+        let claseEstado="status-start";
+
+        if(respondidas>=total){
+
+            estado="Completado";
+            claseEstado="status-complete";
+
+            categoriasCompletadas++;
+
+        }
+
+        else if(respondidas>0){
+
+            estado="En progreso";
+            claseEstado="status-progress";
+
+        }
+
+        const fila =
+            document.createElement("tr");
+
+        fila.innerHTML=`
+
+            <td>
+
+                <div class="theme-progress-name">
+
+                    <span class="theme-progress-icon">
+                        ${categoria.icono}
+                    </span>
+
+                    ${categoria.nombre}
+
+                </div>
+
+            </td>
+
+            <td>
+
+                <span class="progress-number">
+                    ${respondidas}/${total}
+                </span>
+
+            </td>
+
+            <td>
+
+                <span class="progress-status ${claseEstado}">
+                    ${estado}
+                </span>
+
+            </td>
+
+        `;
+
+        tabla.appendChild(fila);
+
+    });
+
+    const precision =
+        palabrasRespondidas>0
+        ? Math.round(
+            (respuestasCorrectas /
+            palabrasRespondidas)*100
+        )
+        : 0;
+
+    document
+        .getElementById("total-puntos")
+        .textContent =
+        puntosTotales;
+
+    document
+        .getElementById("total-palabras")
+        .textContent =
+        palabrasRespondidas;
+
+    document
+        .getElementById("precision")
+        .textContent =
+        precision+"%";
+
+    document
+        .getElementById("categorias-completadas")
+        .textContent =
+        categoriasCompletadas+"/6";
+
+}
+
+
+/* Enter */
+
+document
+    .getElementById("respuesta")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if(event.key==="Enter"){
+
+                event.preventDefault();
+
+                verificar();
+
+            }
+
+        }
+    );
+
+
+/* Inicio */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        mostrarSolo("welcome-container");
+
+        detenerCronometro();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
