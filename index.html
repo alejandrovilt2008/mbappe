@@ -2909,7 +2909,7 @@ const temas={
             respuesta:"CIENCIA"
         },
         {
-            pista:"M_T_M_TIC_S",
+            pista:"M_T_MÁTIC_S",
             respuesta:"MATEMÁTICAS"
         }
     ],
@@ -2955,7 +2955,7 @@ const temas={
             respuesta:"GATO"
         },
         {
-            pista:"L_ON",
+            pista:"L_ÓN",
             respuesta:"LEÓN"
         },
         {
@@ -2967,8 +2967,8 @@ const temas={
             respuesta:"ELEFANTE"
         },
         {
-            pista:"D_LF_N",
-            respuesta:"DELFIN"
+            pista:"D_LFÍN",
+            respuesta:"DELFÍN"
         },
         {
             pista:"P_G_S_",
@@ -3611,9 +3611,30 @@ function normalizar(texto){
     return texto
         .toUpperCase()
         .trim()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
+        .normalize("NFC")
         .replace(/\s+/g," ");
+
+}
+
+/*
+    Esta función SOLO se utiliza para comprobar
+    si la palabra es la misma pero tiene una tilde faltante.
+
+    NO se utiliza para aceptar respuestas.
+
+    Ejemplo:
+
+    MATEMÁTICAS → MATEMATICAS
+    DELFÍN      → DELFIN
+    MÉXICO      → MEXICO
+    PERÚ        → PERU
+*/
+
+function quitarTildes(texto){
+
+    return texto
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"");
 
 }
 
@@ -3715,7 +3736,7 @@ function tiempoAgotado(){
         document.getElementById("resultado");
 
     resultado.textContent =
-        "⏰ Se acabó el tiempo";
+        `⏰ Se acabó el tiempo. Era: ${palabras[indice].respuesta}`;
 
     resultado.className =
         "incorrecto";
@@ -3748,9 +3769,25 @@ function tiempoAgotado(){
 
         }
 
-    },1000);
+    },1500);
 
 }
+
+/*
+    VERIFICACIÓN DE RESPUESTAS
+
+    1. Si la palabra coincide exactamente:
+       → CORRECTA.
+
+    2. Si solamente faltan tildes:
+       → INCORRECTA y se indica la tilde.
+
+    3. Si es otra palabra:
+       → INCORRECTA y se muestra la respuesta.
+
+    IMPORTANTE:
+    Las tildes sí cuentan.
+*/
 
 function verificar(){
 
@@ -3800,6 +3837,17 @@ function verificar(){
         .classList
         .remove("keyboard-open");
 
+    /*
+        CASO 1:
+        RESPUESTA EXACTAMENTE CORRECTA
+
+        Ejemplo:
+        MATEMÁTICAS
+        DELFÍN
+        MÉXICO
+        PERÚ
+    */
+
     if(respuesta === correcta){
 
         aciertos++;
@@ -3816,6 +3864,42 @@ function verificar(){
         mostrarPremio();
 
     }
+
+    /*
+        CASO 2:
+        MISMA PALABRA PERO FALTA UNA TILDE
+
+        Ejemplos:
+
+        MATEMATICAS → MATEMÁTICAS
+        DELFIN      → DELFÍN
+        MEXICO      → MÉXICO
+        PERU        → PERÚ
+        FUTBOL      → FÚTBOL
+        SANDIA      → SANDÍA
+    */
+
+    else if(
+        quitarTildes(respuesta) ===
+        quitarTildes(correcta)
+    ){
+
+        errores++;
+
+        resultado.textContent =
+            `✕ Falta una tilde. Es: ${palabras[indice].respuesta}`;
+
+        resultado.className =
+            "incorrecto";
+
+        actualizarEstadisticasJuego();
+
+    }
+
+    /*
+        CASO 3:
+        RESPUESTA COMPLETAMENTE INCORRECTA
+    */
 
     else{
 
