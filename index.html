@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#10172f">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<meta name="theme-color" content="#080d20">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <title>Encuentra la Palabra</title>
 
@@ -21,12 +23,14 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 :root{
     --blue:#00c6ff;
     --blue2:#2563eb;
     --purple:#7c3aed;
+    --purple2:#8b5cf6;
     --pink:#ec4899;
     --cyan:#22d3ee;
 
@@ -36,6 +40,8 @@
     --red:#ef4444;
 
     --bg:#080d20;
+    --bg2:#10172f;
+
     --card:rgba(255,255,255,.075);
     --card-hover:rgba(255,255,255,.11);
 
@@ -46,75 +52,109 @@
 }
 
 html{
+    width:100%;
+    min-height:100%;
+    background:#080d20;
     scroll-behavior:smooth;
+    overscroll-behavior-y:none;
 }
 
 body{
+    width:100%;
     min-height:100vh;
+    min-height:100svh;
+
     font-family:"Poppins",sans-serif;
     color:var(--text);
 
     background:
         radial-gradient(
-            circle at 10% 10%,
+            circle at 8% 8%,
             rgba(0,198,255,.20),
-            transparent 28%
+            transparent 25%
         ),
         radial-gradient(
-            circle at 90% 20%,
-            rgba(236,72,153,.15),
+            circle at 92% 18%,
+            rgba(236,72,153,.16),
             transparent 25%
         ),
         radial-gradient(
             circle at 50% 100%,
-            rgba(124,58,237,.20),
+            rgba(124,58,237,.22),
             transparent 35%
         ),
         linear-gradient(
             135deg,
-            #070b18,
+            #070b18 0%,
             #10172f 50%,
-            #080d20
+            #080d20 100%
         );
 
-    overflow-x:hidden;
-}
+    background-attachment:fixed;
 
-/* Fondo decorativo */
+    overflow-x:hidden;
+    overscroll-behavior-y:none;
+
+    padding-bottom:
+        env(safe-area-inset-bottom);
+}
 
 body::before,
 body::after{
     content:"";
     position:fixed;
-    width:280px;
-    height:280px;
+
+    width:340px;
+    height:340px;
+
     border-radius:50%;
-    filter:blur(80px);
-    opacity:.18;
+
+    filter:blur(90px);
+
+    opacity:.16;
+
     pointer-events:none;
+
     z-index:-1;
 }
 
 body::before{
     background:#00c6ff;
-    top:-120px;
-    left:-100px;
+    top:-150px;
+    left:-130px;
 }
 
 body::after{
     background:#ec4899;
-    right:-120px;
-    bottom:-120px;
+    right:-150px;
+    bottom:-150px;
 }
 
-/* Barra superior */
+button,
+input{
+    font:inherit;
+}
+
+button{
+    touch-action:manipulation;
+}
+
+button:focus-visible,
+input:focus-visible{
+    outline:2px solid rgba(34,211,238,.7);
+    outline-offset:3px;
+}
+
+/* TOPBAR */
 
 .topbar{
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
-    height:78px;
+    height:76px;
 
     display:flex;
     align-items:center;
@@ -122,80 +162,113 @@ body::after{
 
     z-index:50;
 
-    background:rgba(8,13,32,.55);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    padding:
+        env(safe-area-inset-top)
+        18px
+        0;
 
-    border-bottom:1px solid rgba(255,255,255,.06);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7,11,24,.90),
+            rgba(8,13,32,.62)
+        );
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:10px;
+    justify-content:center;
+
+    gap:11px;
+
+    max-width:100%;
 
     font-size:16px;
     font-weight:800;
+
+    white-space:nowrap;
 }
 
 .brand-logo{
-    width:38px;
-    height:38px;
+    width:44px;
+    height:44px;
+
     object-fit:contain;
-    border-radius:12px;
+
+    border-radius:13px;
 
     filter:
         drop-shadow(
-            0 5px 15px
-            rgba(0,198,255,.35)
+            0 5px 16px
+            rgba(0,198,255,.40)
         );
 }
 
 .brand-dot{
     width:7px;
     height:7px;
+
+    flex:0 0 auto;
+
     border-radius:50%;
+
     background:var(--cyan);
 
     box-shadow:
-        0 0 12px
-        rgba(34,211,238,.8);
+        0 0 13px
+        rgba(34,211,238,.9);
 }
 
-/* Contenedores */
+/* CONTENEDORES */
 
 .container{
-    width:calc(100% - 28px);
-    max-width:470px;
+    width:min(
+        calc(100% - 32px),
+        560px
+    );
 
-    margin:108px auto 30px;
-    padding:30px 25px;
+    min-height:0;
+
+    margin:
+        max(98px, calc(76px + 22px))
+        auto
+        30px;
+
+    padding:32px;
 
     border-radius:var(--radius);
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.095),
+            rgba(255,255,255,.105),
             rgba(255,255,255,.045)
         );
 
-    border:1px solid rgba(255,255,255,.10);
+    border:
+        1px solid rgba(255,255,255,.105);
 
-    backdrop-filter:blur(24px);
-    -webkit-backdrop-filter:blur(24px);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.38),
-        inset 0 1px 0 rgba(255,255,255,.05);
+        0 30px 90px rgba(0,0,0,.40),
+        inset 0 1px 0 rgba(255,255,255,.055);
 
-    animation:appear .45s ease;
+    animation:appear .4s ease;
 }
 
 @keyframes appear{
     from{
         opacity:0;
-        transform:translateY(18px) scale(.98);
+        transform:translateY(14px) scale(.985);
     }
 
     to{
@@ -204,84 +277,118 @@ body::after{
     }
 }
 
-/* Bienvenida */
+/* BIENVENIDA */
 
 .welcome{
-    max-width:540px;
+    width:min(
+        calc(100% - 32px),
+        680px
+    );
+
     text-align:center;
+
+    padding:
+        38px
+        42px
+        34px;
 }
 
-.hero-icon{
-    width:100px;
-    height:100px;
+.hero-logo-wrapper{
+    width:150px;
+    height:150px;
 
-    margin:0 auto 20px;
+    margin:0 auto 22px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:30px;
-
-    font-size:50px;
+    border-radius:42px;
 
     background:
         linear-gradient(
             135deg,
-            #00c6ff,
-            #2563eb 45%,
-            #7c3aed 75%,
-            #ec4899
+            rgba(0,198,255,.16),
+            rgba(124,58,237,.18),
+            rgba(236,72,153,.15)
         );
 
-    box-shadow:
-        0 18px 45px
-        rgba(37,99,235,.30);
+    border:
+        1px solid rgba(255,255,255,.12);
 
-    animation:float 3s ease-in-out infinite;
+    box-shadow:
+        0 25px 65px rgba(0,0,0,.28),
+        0 0 55px rgba(0,198,255,.12),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    animation:float 3.5s ease-in-out infinite;
+}
+
+.hero-logo{
+    width:125px;
+    height:125px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 10px 24px
+            rgba(0,198,255,.35)
+        );
 }
 
 @keyframes float{
     0%,100%{
-        transform:translateY(0) rotate(0deg);
+        transform:translateY(0);
     }
 
     50%{
-        transform:translateY(-8px) rotate(2deg);
+        transform:translateY(-7px);
     }
 }
 
 .badge{
     display:inline-flex;
     align-items:center;
-    gap:6px;
+    justify-content:center;
 
-    padding:7px 12px;
-    margin-bottom:12px;
+    gap:7px;
+
+    padding:8px 14px;
+
+    margin-bottom:13px;
 
     border-radius:50px;
 
     font-size:9px;
     font-weight:700;
 
+    letter-spacing:.5px;
+
     color:#b9efff;
 
-    background:rgba(0,198,255,.09);
-    border:1px solid rgba(0,198,255,.15);
+    background:
+        rgba(0,198,255,.09);
+
+    border:
+        1px solid rgba(0,198,255,.17);
 }
 
 h1{
-    font-size:34px;
-    line-height:1.15;
+    font-size:clamp(31px,5vw,44px);
+    line-height:1.1;
+
     font-weight:800;
-    margin-bottom:12px;
+
+    margin-bottom:14px;
 
     background:
         linear-gradient(
             90deg,
-            #fff,
+            #ffffff,
             #bdefff,
-            #d7c4ff
+            #d7c4ff,
+            #ffffff
         );
 
     -webkit-background-clip:text;
@@ -290,27 +397,34 @@ h1{
 
 .welcome-description{
     color:var(--muted);
-    font-size:12px;
+
+    font-size:13px;
     line-height:1.8;
-    max-width:430px;
-    margin:auto;
+
+    max-width:500px;
+
+    margin:0 auto;
 }
 
-/* Características */
+/* FEATURES */
 
 .features{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin:25px 0;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin:28px 0;
 }
 
 .feature{
     min-width:0;
 
-    padding:15px 8px;
+    padding:17px 9px;
 
-    border-radius:18px;
+    border-radius:19px;
 
     background:
         rgba(255,255,255,.045);
@@ -318,64 +432,87 @@ h1{
     border:
         1px solid rgba(255,255,255,.07);
 
-    transition:.25s;
+    transition:
+        transform .25s,
+        background .25s,
+        border .25s;
 }
 
 .feature:hover{
     transform:translateY(-4px);
-    background:var(--card-hover);
+
+    background:
+        rgba(255,255,255,.09);
+
+    border-color:
+        rgba(0,198,255,.18);
 }
 
 .feature-icon{
     display:block;
-    font-size:22px;
+
+    font-size:23px;
+
     margin-bottom:7px;
 }
 
 .feature-title{
     display:block;
-    font-size:9px;
+
+    font-size:10px;
+
     font-weight:700;
 }
 
 .feature-text{
     display:block;
+
     margin-top:2px;
 
     color:#7f8ca5;
+
     font-size:8px;
 }
 
-/* Títulos */
+/* TITULOS */
 
 h2{
-    font-size:25px;
+    font-size:27px;
+
+    line-height:1.2;
+
     font-weight:800;
+
     margin-bottom:7px;
 }
 
 .subtitle{
     color:var(--muted);
+
     font-size:11px;
-    line-height:1.6;
-    margin-bottom:24px;
+    line-height:1.65;
+
+    margin-bottom:25px;
 }
 
-/* Botones */
+/* BOTONES */
 
 button{
     width:100%;
+
+    min-height:49px;
+
     border:0;
     outline:0;
 
-    padding:14px 17px;
+    padding:14px 18px;
+
     margin-top:10px;
 
-    border-radius:15px;
+    border-radius:16px;
 
     color:white;
 
-    font-family:"Poppins",sans-serif;
     font-size:11px;
     font-weight:700;
 
@@ -412,19 +549,19 @@ button:disabled{
         );
 
     box-shadow:
-        0 12px 30px
-        rgba(37,99,235,.22);
+        0 12px 32px
+        rgba(37,99,235,.24);
 }
 
 .btn-primary:hover{
     box-shadow:
-        0 16px 38px
-        rgba(37,99,235,.32);
+        0 17px 42px
+        rgba(37,99,235,.34);
 }
 
 .btn-secondary{
     background:
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.065);
 
     border:
         1px solid rgba(255,255,255,.09);
@@ -432,7 +569,7 @@ button:disabled{
 
 .btn-secondary:hover{
     background:
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.115);
 }
 
 .btn-danger{
@@ -453,21 +590,21 @@ button:disabled{
         );
 }
 
-/* Login */
+/* LOGIN */
 
 .login-icon{
-    width:78px;
-    height:78px;
+    width:82px;
+    height:82px;
 
-    margin:0 auto 18px;
+    margin:0 auto 19px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:23px;
+    border-radius:25px;
 
-    font-size:36px;
+    font-size:37px;
 
     background:
         linear-gradient(
@@ -477,44 +614,55 @@ button:disabled{
         );
 
     box-shadow:
-        0 15px 35px
-        rgba(124,58,237,.25);
+        0 17px 38px
+        rgba(124,58,237,.28);
 }
 
 .input-group{
     text-align:left;
-    margin-bottom:13px;
+
+    margin-bottom:14px;
 }
 
 .input-group label{
     display:block;
-    margin:0 0 6px 2px;
+
+    margin:
+        0 0 7px 3px;
 
     color:#aebbd0;
+
     font-size:9px;
     font-weight:600;
 }
 
 input{
     width:100%;
-    min-height:48px;
 
-    border:1px solid rgba(255,255,255,.09);
+    height:50px;
+    min-height:50px;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
     outline:none;
 
-    border-radius:15px;
+    border-radius:16px;
 
-    padding:13px 15px;
+    padding:
+        13px 15px;
 
     color:white;
 
     background:
         rgba(0,0,0,.18);
 
-    font-family:"Poppins",sans-serif;
     font-size:12px;
 
     transition:.25s;
+
+    -webkit-appearance:none;
+    appearance:none;
 }
 
 input::placeholder{
@@ -522,7 +670,8 @@ input::placeholder{
 }
 
 input:focus{
-    border-color:rgba(0,198,255,.7);
+    border-color:
+        rgba(0,198,255,.7);
 
     background:
         rgba(0,198,255,.035);
@@ -538,10 +687,11 @@ input:focus{
     margin:12px 0 2px;
 
     font-size:10px;
+
     color:#93c5fd;
 }
 
-/* Lobby */
+/* LOBBY */
 
 .lobby-header{
     margin-bottom:22px;
@@ -553,25 +703,29 @@ input:focus{
 
 .themes{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:13px;
 }
 
 .theme{
     position:relative;
 
-    min-height:125px;
+    min-height:135px;
 
-    padding:19px 12px;
+    padding:20px 12px;
 
     display:flex;
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
     text-align:center;
 
-    border-radius:20px;
+    border-radius:21px;
 
     cursor:pointer;
 
@@ -582,7 +736,8 @@ input:focus{
             rgba(255,255,255,.035)
         );
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid rgba(255,255,255,.08);
 
     overflow:hidden;
 
@@ -595,57 +750,63 @@ input:focus{
 
 .theme::before{
     content:"";
+
     position:absolute;
 
-    width:80px;
-    height:80px;
+    width:100px;
+    height:100px;
 
-    top:-35px;
-    right:-35px;
+    top:-45px;
+    right:-45px;
 
     border-radius:50%;
 
     background:
-        rgba(0,198,255,.15);
+        rgba(0,198,255,.14);
 
-    filter:blur(10px);
+    filter:blur(12px);
 }
 
 .theme:hover{
     transform:translateY(-5px);
 
     background:
-        rgba(255,255,255,.11);
+        rgba(255,255,255,.105);
 
     border-color:
-        rgba(0,198,255,.25);
+        rgba(0,198,255,.27);
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.18);
+        0 17px 40px
+        rgba(0,0,0,.20);
+}
+
+.theme:active{
+    transform:scale(.97);
 }
 
 .theme-icon{
     position:relative;
     z-index:1;
 
-    width:54px;
-    height:54px;
+    width:58px;
+    height:58px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    margin-bottom:9px;
+    margin-bottom:10px;
 
-    border-radius:17px;
+    border-radius:18px;
 
-    font-size:27px;
+    font-size:29px;
 
     background:
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.075);
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.09);
 }
 
 .theme-name{
@@ -653,22 +814,26 @@ input:focus{
     z-index:1;
 
     font-size:11px;
+
     font-weight:700;
 }
 
-/* Juego */
+/* JUEGO */
 
 .game-header{
     display:flex;
+
     align-items:center;
     justify-content:space-between;
-    gap:15px;
 
-    margin-bottom:22px;
+    gap:18px;
+
+    margin-bottom:21px;
 }
 
 .game-theme{
     min-width:0;
+
     text-align:left;
 }
 
@@ -676,26 +841,31 @@ input:focus{
     display:block;
 
     color:#6f7d96;
+
     font-size:8px;
+
     font-weight:700;
-    letter-spacing:1px;
+
+    letter-spacing:1.2px;
 }
 
 .game-theme h2{
     margin-top:3px;
 
-    font-size:19px;
+    font-size:21px;
 
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
 }
 
 .timer{
     flex:0 0 auto;
 
-    width:72px;
-    height:72px;
+    width:76px;
+    height:76px;
 
     padding:5px;
 
@@ -716,6 +886,7 @@ input:focus{
     height:100%;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -723,7 +894,8 @@ input:focus{
 
     background:#10182f;
 
-    font-size:17px;
+    font-size:18px;
+
     font-weight:800;
 }
 
@@ -753,26 +925,32 @@ input:focus{
     }
 }
 
-/* Progreso */
+/* PROGRESO */
 
 .question-info{
     display:flex;
+
     justify-content:space-between;
+
+    gap:10px;
 
     margin-bottom:7px;
 
     color:#8391aa;
+
     font-size:9px;
+
     font-weight:600;
 }
 
 .progress-bar{
     width:100%;
+
     height:8px;
 
     overflow:hidden;
 
-    margin-bottom:22px;
+    margin-bottom:21px;
 
     border-radius:20px;
 
@@ -795,28 +973,29 @@ input:focus{
             #ec4899
         );
 
-    transition:width .4s ease;
+    transition:
+        width .4s ease;
 }
 
-/* Pista */
+/* PISTA */
 
 .clue-card{
     position:relative;
 
-    padding:27px 16px;
+    padding:30px 18px;
 
     margin-bottom:14px;
 
     text-align:center;
 
-    border-radius:22px;
+    border-radius:23px;
 
     overflow:hidden;
 
     background:
         radial-gradient(
             circle at 50% 0,
-            rgba(0,198,255,.12),
+            rgba(0,198,255,.13),
             transparent 60%
         ),
         rgba(255,255,255,.045);
@@ -829,19 +1008,25 @@ input:focus{
 }
 
 .clue-label{
-    margin-bottom:11px;
+    margin-bottom:12px;
 
     color:#71809a;
 
     font-size:8px;
+
     font-weight:700;
-    letter-spacing:1.3px;
+
+    letter-spacing:1.4px;
 }
 
 #pista{
-    font-size:28px;
+    font-size:clamp(24px,6vw,31px);
+
     font-weight:800;
+
     letter-spacing:4px;
+
+    line-height:1.3;
 
     word-break:break-word;
 
@@ -857,19 +1042,23 @@ input:focus{
     -webkit-text-fill-color:transparent;
 }
 
-/* Resultado */
+/* RESULTADO */
 
 #resultado{
-    min-height:25px;
+    min-height:26px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    margin:12px 0;
+    margin:11px 0;
 
     font-size:11px;
+
     font-weight:700;
+
+    text-align:center;
 }
 
 .correcto{
@@ -880,22 +1069,25 @@ input:focus{
     color:#fb7185;
 }
 
-/* Puntuación */
+/* PUNTUACIÓN */
 
 .score-panel{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:9px;
 
     margin-top:15px;
 }
 
 .score-item{
-    padding:12px 7px;
+    padding:13px 7px;
 
     text-align:center;
 
-    border-radius:15px;
+    border-radius:16px;
 
     background:
         rgba(255,255,255,.045);
@@ -908,34 +1100,37 @@ input:focus{
     display:block;
 
     color:#7d8ba3;
+
     font-size:8px;
+
     margin-bottom:3px;
 }
 
 .score-value{
-    font-size:17px;
+    font-size:18px;
+
     font-weight:800;
 }
 
-/* Pantalla de resultado */
+/* RESULTADO FINAL */
 
 .result-screen{
     text-align:center;
 }
 
 .result-icon{
-    width:100px;
-    height:100px;
+    width:105px;
+    height:105px;
 
-    margin:0 auto 18px;
+    margin:0 auto 19px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:30px;
+    border-radius:32px;
 
-    font-size:50px;
+    font-size:51px;
 
     background:
         linear-gradient(
@@ -946,8 +1141,8 @@ input:focus{
         );
 
     box-shadow:
-        0 18px 45px
-        rgba(249,115,22,.25);
+        0 20px 50px
+        rgba(249,115,22,.27);
 
     animation:resultPop .5s ease;
 }
@@ -965,25 +1160,32 @@ input:focus{
 }
 
 .result-screen h2{
-    font-size:27px;
+    font-size:28px;
 }
 
 .result-description{
     color:var(--muted);
+
     font-size:11px;
+
     line-height:1.7;
-    margin-bottom:20px;
+
+    margin-bottom:21px;
 }
 
 .result-stats{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
     gap:9px;
-    margin-bottom:18px;
+
+    margin-bottom:19px;
 }
 
 .result-stat{
-    padding:14px 6px;
+    padding:15px 6px;
 
     border-radius:17px;
 
@@ -996,46 +1198,59 @@ input:focus{
 
 .result-stat strong{
     display:block;
-    font-size:20px;
+
+    font-size:21px;
 }
 
 .result-stat span{
     display:block;
+
     color:#7e8ba2;
+
     font-size:8px;
+
     margin-top:2px;
 }
 
-/* Progreso */
+/* MI PROGRESO */
 
 .progress-screen-title{
-    font-size:26px;
+    font-size:27px;
+
     font-weight:800;
+
     margin-bottom:5px;
 }
 
 .progress-screen-subtitle{
     color:var(--muted);
+
     font-size:10px;
+
     line-height:1.7;
-    margin-bottom:20px;
+
+    margin-bottom:21px;
 }
 
 .stats-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
     gap:10px;
+
     margin-bottom:20px;
 }
 
 .stat-card{
     position:relative;
 
-    padding:16px;
+    padding:17px;
 
     text-align:left;
 
-    border-radius:19px;
+    border-radius:20px;
 
     background:
         rgba(255,255,255,.055);
@@ -1050,11 +1265,14 @@ input:focus{
 
 .stat-card:hover{
     transform:translateY(-3px);
-    background:rgba(255,255,255,.085);
+
+    background:
+        rgba(255,255,255,.085);
 }
 
 .stat-icon{
     font-size:22px;
+
     margin-bottom:7px;
 }
 
@@ -1062,34 +1280,39 @@ input:focus{
     display:block;
 
     color:#8998b0;
+
     font-size:8px;
+
     margin-bottom:3px;
 }
 
 .stat-value{
     font-size:21px;
+
     font-weight:800;
 }
 
-/* Tabla */
+/* TABLA */
 
 .table-wrapper{
     width:100%;
+
     overflow-x:auto;
 
     border-radius:18px;
+
+    -webkit-overflow-scrolling:touch;
 }
 
 .progress-table{
     width:100%;
+
     min-width:350px;
 
     border-collapse:collapse;
 
     background:
         rgba(255,255,255,.035);
-
-    overflow:hidden;
 }
 
 .progress-table th{
@@ -1098,6 +1321,7 @@ input:focus{
     color:#77869f;
 
     font-size:8px;
+
     font-weight:700;
 
     text-align:left;
@@ -1123,7 +1347,9 @@ input:focus{
 
 .theme-progress-name{
     display:flex;
+
     align-items:center;
+
     gap:7px;
 
     font-weight:600;
@@ -1135,6 +1361,7 @@ input:focus{
 
 .progress-number{
     color:var(--blue);
+
     font-weight:800;
 }
 
@@ -1146,28 +1373,36 @@ input:focus{
     border-radius:8px;
 
     font-size:7px;
+
     white-space:nowrap;
 }
 
 .status-complete{
     color:#4ade80;
-    background:rgba(34,197,94,.12);
+
+    background:
+        rgba(34,197,94,.12);
 }
 
 .status-progress{
     color:#60a5fa;
-    background:rgba(37,99,235,.12);
+
+    background:
+        rgba(37,99,235,.12);
 }
 
 .status-start{
     color:#94a3b8;
-    background:rgba(148,163,184,.10);
+
+    background:
+        rgba(148,163,184,.10);
 }
 
-/* Consejo */
+/* CONSEJO */
 
 .tip{
     margin-top:17px;
+
     padding:15px;
 
     text-align:left;
@@ -1191,6 +1426,7 @@ input:focus{
     margin-bottom:5px;
 
     font-size:10px;
+
     font-weight:700;
 }
 
@@ -1198,13 +1434,15 @@ input:focus{
     color:#93a1b8;
 
     font-size:8px;
+
     line-height:1.7;
 }
 
-/* Premio */
+/* PREMIO */
 
 #estrella{
     position:fixed;
+
     inset:0;
 
     display:none;
@@ -1217,9 +1455,10 @@ input:focus{
     pointer-events:none;
 
     background:
-        rgba(4,8,20,.18);
+        rgba(4,8,20,.20);
 
-    backdrop-filter:blur(3px);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
 }
 
 .estrella-contenido{
@@ -1228,13 +1467,15 @@ input:focus{
 
 .estrella-icon{
     display:block;
-    font-size:85px;
+
+    font-size:90px;
 }
 
 .estrella-texto{
     margin-top:8px;
 
-    font-size:25px;
+    font-size:26px;
+
     font-weight:800;
 
     background:
@@ -1250,75 +1491,175 @@ input:focus{
 }
 
 .estrella-animar{
-    animation:starAnimation 1.35s ease forwards;
+    animation:
+        starAnimation 1.35s ease forwards;
 }
 
 @keyframes starAnimation{
     0%{
         opacity:0;
-        transform:scale(.25) rotate(-180deg);
+        transform:
+            scale(.25)
+            rotate(-180deg);
     }
 
     45%{
         opacity:1;
-        transform:scale(1.1) rotate(15deg);
+        transform:
+            scale(1.1)
+            rotate(15deg);
     }
 
     100%{
         opacity:0;
-        transform:scale(.75) rotate(180deg);
+        transform:
+            scale(.75)
+            rotate(180deg);
     }
 }
 
-/* Responsive */
+/* TABLET */
+
+@media(min-width:601px){
+
+    .container:not(.welcome){
+        max-width:600px;
+    }
+
+}
+
+/* CELULAR */
 
 @media(max-width:600px){
 
+    body{
+        background-attachment:scroll;
+
+        background:
+            radial-gradient(
+                circle at 8% 8%,
+                rgba(0,198,255,.18),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 92% 18%,
+                rgba(236,72,153,.14),
+                transparent 27%
+            ),
+            linear-gradient(
+                145deg,
+                #070b18,
+                #10172f 52%,
+                #080d20
+            );
+    }
+
+    body::before,
+    body::after{
+        width:240px;
+        height:240px;
+
+        filter:blur(70px);
+    }
+
     .topbar{
         height:68px;
+
+        padding:
+            env(safe-area-inset-top)
+            12px
+            0;
     }
 
     .brand{
-        font-size:14px;
+        font-size:13px;
+
+        gap:8px;
     }
 
     .brand-logo{
-        width:34px;
-        height:34px;
+        width:39px;
+        height:39px;
+
+        border-radius:11px;
+    }
+
+    .brand-dot{
+        width:6px;
+        height:6px;
     }
 
     .container{
-        width:calc(100% - 20px);
-        margin-top:88px;
-        padding:23px 17px;
-        border-radius:23px;
+        width:
+            calc(100% - 18px);
+
+        margin:
+            84px
+            auto
+            18px;
+
+        padding:
+            22px 16px;
+
+        border-radius:22px;
     }
 
-    .hero-icon{
-        width:82px;
-        height:82px;
-        border-radius:25px;
-        font-size:42px;
+    .welcome{
+        width:
+            calc(100% - 18px);
+
+        padding:
+            24px
+            16px
+            20px;
+    }
+
+    .hero-logo-wrapper{
+        width:120px;
+        height:120px;
+
+        margin-bottom:18px;
+
+        border-radius:34px;
+    }
+
+    .hero-logo{
+        width:102px;
+        height:102px;
+    }
+
+    .badge{
+        font-size:8px;
+
+        padding:7px 11px;
     }
 
     h1{
-        font-size:28px;
+        font-size:29px;
     }
 
     .welcome-description{
-        font-size:11px;
+        font-size:10.5px;
+
+        line-height:1.7;
     }
 
     .features{
         gap:7px;
+
+        margin:
+            21px 0;
     }
 
     .feature{
-        padding:12px 5px;
+        padding:
+            13px 5px;
+
+        border-radius:16px;
     }
 
     .feature-icon{
-        font-size:19px;
+        font-size:20px;
     }
 
     .feature-title{
@@ -1329,90 +1670,427 @@ input:focus{
         font-size:7px;
     }
 
+    h2{
+        font-size:24px;
+    }
+
+    .subtitle{
+        margin-bottom:20px;
+    }
+
+    button{
+        min-height:48px;
+
+        padding:
+            13px 15px;
+
+        margin-top:8px;
+    }
+
+    .login-icon{
+        width:70px;
+        height:70px;
+
+        border-radius:21px;
+
+        font-size:32px;
+
+        margin-bottom:16px;
+    }
+
+    input{
+        height:48px;
+        min-height:48px;
+    }
+
     .themes{
         gap:9px;
     }
 
     .theme{
-        min-height:115px;
-        padding:15px 8px;
+        min-height:118px;
+
+        padding:
+            14px 7px;
+
+        border-radius:18px;
     }
 
     .theme-icon{
-        width:48px;
-        height:48px;
-        font-size:24px;
+        width:50px;
+        height:50px;
+
+        margin-bottom:8px;
+
+        border-radius:16px;
+
+        font-size:25px;
+    }
+
+    .theme-name{
+        font-size:9.5px;
     }
 
     .game-header{
         gap:8px;
+
+        margin-bottom:17px;
     }
 
     .game-theme h2{
-        font-size:17px;
+        font-size:18px;
     }
 
     .timer{
-        width:65px;
-        height:65px;
+        width:64px;
+        height:64px;
+    }
+
+    .timer-inner{
+        font-size:16px;
+    }
+
+    .progress-bar{
+        margin-bottom:16px;
+    }
+
+    .clue-card{
+        padding:
+            23px
+            12px;
+
+        margin-bottom:11px;
+
+        border-radius:19px;
+    }
+
+    .clue-label{
+        margin-bottom:9px;
     }
 
     #pista{
-        font-size:23px;
+        font-size:22px;
+
         letter-spacing:3px;
+    }
+
+    .score-panel{
+        margin-top:12px;
+
+        gap:6px;
+    }
+
+    .score-item{
+        padding:
+            10px 5px;
+    }
+
+    .score-value{
+        font-size:16px;
+    }
+
+    .result-icon{
+        width:90px;
+        height:90px;
+
+        border-radius:27px;
+
+        font-size:43px;
+    }
+
+    .result-screen h2{
+        font-size:25px;
+    }
+
+    .result-stats{
+        gap:6px;
+    }
+
+    .result-stat{
+        padding:
+            12px 4px;
+    }
+
+    .result-stat strong{
+        font-size:18px;
+    }
+
+    .stats-grid{
+        gap:8px;
+    }
+
+    .stat-card{
+        padding:13px;
+
+        border-radius:17px;
+    }
+
+    .stat-value{
+        font-size:19px;
+    }
+
+    .table-wrapper{
+        border-radius:15px;
     }
 
     .progress-table th,
     .progress-table td{
-        padding:10px 6px;
+        padding:
+            10px 6px;
     }
+
 }
 
-@media(max-width:380px){
+/* CELULARES PEQUEÑOS */
+
+@media(max-width:390px){
+
+    .brand{
+        font-size:11px;
+    }
+
+    .brand-logo{
+        width:35px;
+        height:35px;
+    }
 
     .container{
-        padding:20px 14px;
+        width:
+            calc(100% - 12px);
+
+        padding:
+            19px 12px;
+    }
+
+    .welcome{
+        width:
+            calc(100% - 12px);
+
+        padding:
+            20px 11px;
+        }
+
+    .hero-logo-wrapper{
+        width:105px;
+        height:105px;
+
+        border-radius:30px;
+    }
+
+    .hero-logo{
+        width:88px;
+        height:88px;
     }
 
     h1{
         font-size:25px;
     }
 
+    .welcome-description{
+        font-size:10px;
+    }
+
     .features{
-        grid-template-columns:1fr;
+        grid-template-columns:
+            repeat(3,1fr);
+
+        gap:5px;
     }
 
     .feature{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:8px;
+        padding:
+            10px 3px;
     }
 
     .feature-icon{
-        margin:0;
+        font-size:18px;
     }
 
-    .themes{
-        grid-template-columns:1fr 1fr;
+    .feature-title{
+        font-size:7px;
+    }
+
+    .feature-text{
+        font-size:6.5px;
     }
 
     .theme{
         min-height:105px;
     }
 
+    .theme-icon{
+        width:45px;
+        height:45px;
+
+        font-size:23px;
+    }
+
     .theme-name{
-        font-size:9px;
+        font-size:8.5px;
+    }
+
+    .timer{
+        width:59px;
+        height:59px;
+    }
+
+    .timer-inner{
+        font-size:15px;
+    }
+
+    .game-theme h2{
+        font-size:16px;
     }
 
     #pista{
-        font-size:20px;
+        font-size:19px;
+
         letter-spacing:2px;
     }
 
-    .result-stats{
-        gap:6px;
+    .score-label{
+        font-size:7px;
     }
+
+    .score-value{
+        font-size:15px;
+    }
+
+}
+
+/* TECLADO ABIERTO */
+
+body.keyboard-open .topbar{
+    display:none;
+}
+
+body.keyboard-open .container{
+    margin-top:
+        max(
+            10px,
+            env(safe-area-inset-top)
+        );
+
+    margin-bottom:10px;
+
+    padding:
+        15px 13px;
+
+    border-radius:19px;
+}
+
+body.keyboard-open .game-header{
+    margin-bottom:10px;
+}
+
+body.keyboard-open .game-theme small{
+    font-size:7px;
+}
+
+body.keyboard-open .game-theme h2{
+    font-size:16px;
+}
+
+body.keyboard-open .timer{
+    width:52px;
+    height:52px;
+}
+
+body.keyboard-open .timer-inner{
+    font-size:14px;
+}
+
+body.keyboard-open .question-info{
+    font-size:8px;
+}
+
+body.keyboard-open .progress-bar{
+    height:6px;
+    margin-bottom:10px;
+}
+
+body.keyboard-open .clue-card{
+    padding:
+        14px 10px;
+
+    margin-bottom:8px;
+}
+
+body.keyboard-open .clue-label{
+    margin-bottom:5px;
+}
+
+body.keyboard-open #pista{
+    font-size:19px;
+    letter-spacing:2px;
+}
+
+body.keyboard-open #respuesta{
+    height:43px;
+    min-height:43px;
+
+    padding:
+        10px 12px;
+
+    font-size:12px;
+}
+
+body.keyboard-open #btn-verificar{
+    min-height:42px;
+
+    padding:10px;
+
+    margin-top:6px;
+}
+
+body.keyboard-open #resultado{
+    min-height:19px;
+
+    margin:6px 0;
+
+    font-size:9px;
+}
+
+body.keyboard-open .score-panel{
+    margin-top:7px;
+}
+
+body.keyboard-open .score-item{
+    padding:7px 4px;
+}
+
+body.keyboard-open .score-label{
+    font-size:6.5px;
+}
+
+body.keyboard-open .score-value{
+    font-size:14px;
+}
+
+body.keyboard-open .game-container > .btn-secondary,
+body.keyboard-open .game-container > .btn-warning{
+    min-height:37px;
+
+    padding:8px;
+
+    margin-top:5px;
+
+    font-size:9px;
+}
+
+/* REDUCE ANIMACIONES SI EL SISTEMA LO PIDE */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+        scroll-behavior:auto !important;
+    }
+
 }
 
 </style>
@@ -1427,7 +2105,7 @@ input:focus{
         <img
             src="img/logo.png"
             class="brand-logo"
-            alt="Logo"
+            alt="Logo de Encuentra la Palabra"
         >
 
         <span>Encuentra la Palabra</span>
@@ -1439,15 +2117,19 @@ input:focus{
 </header>
 
 
-<!-- BIENVENIDA -->
-
 <div
     id="welcome-container"
     class="container welcome"
 >
 
-    <div class="hero-icon">
-        🎯
+    <div class="hero-logo-wrapper">
+
+        <img
+            src="img/logo.png"
+            class="hero-logo"
+            alt="Encuentra la Palabra"
+        >
+
     </div>
 
     <div class="badge">
@@ -1518,8 +2200,6 @@ input:focus{
 
 </div>
 
-
-<!-- LOGIN -->
 
 <div
     id="login-container"
@@ -1594,8 +2274,6 @@ input:focus{
 
 </div>
 
-
-<!-- LOBBY -->
 
 <div
     id="lobby-container"
@@ -1683,8 +2361,6 @@ input:focus{
 
 </div>
 
-
-<!-- PROGRESO -->
 
 <div
     id="progress-container"
@@ -1818,8 +2494,6 @@ input:focus{
 </div>
 
 
-<!-- JUEGO -->
-
 <div
     id="game-container"
     class="container"
@@ -1882,7 +2556,7 @@ input:focus{
         </div>
 
         <p id="pista">
-            C_MPU_____ 
+            C_MPU_____
         </p>
 
     </div>
@@ -1972,8 +2646,6 @@ input:focus{
 </div>
 
 
-<!-- RESULTADO FINAL -->
-
 <div
     id="result-container"
     class="container result-screen"
@@ -2059,8 +2731,6 @@ input:focus{
 </div>
 
 
-<!-- PREMIO -->
-
 <div id="estrella">
 
     <div class="estrella-contenido">
@@ -2080,8 +2750,6 @@ input:focus{
 
 <script>
 
-/* Firebase */
-
 const API_KEY =
     "AIzaSyAkb7BsSW6ROnIfM01djn4ZbiX7PKpi-f8";
 
@@ -2091,8 +2759,6 @@ const SIGNUP_URL =
 const SIGNIN_URL =
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
-
-/* Estado */
 
 let userToken = null;
 let palabras = [];
@@ -2105,8 +2771,6 @@ let bloqueado = false;
 let tiempo = 30;
 let intervalo = null;
 
-
-/* Palabras */
 
 const temas = {
 
@@ -2173,8 +2837,6 @@ const temas = {
 };
 
 
-/* Nombres */
-
 const nombresTemas = {
 
     tecnologia:"Tecnología",
@@ -2186,8 +2848,6 @@ const nombresTemas = {
 
 };
 
-
-/* Categorías */
 
 const categorias = [
 
@@ -2230,8 +2890,6 @@ const categorias = [
 ];
 
 
-/* Pantallas */
-
 function mostrarSolo(id){
 
     document
@@ -2248,18 +2906,18 @@ function mostrarSolo(id){
 }
 
 
-/* Bienvenida */
-
 function irBienvenida(){
 
     detenerCronometro();
+
+    document.body.classList.remove(
+        "keyboard-open"
+    );
 
     mostrarSolo("welcome-container");
 
 }
 
-
-/* Login */
 
 function irLogin(){
 
@@ -2271,8 +2929,6 @@ function irLogin(){
 
 }
 
-
-/* Errores Firebase */
 
 function traducirError(error){
 
@@ -2318,8 +2974,6 @@ function traducirError(error){
 
 }
 
-
-/* Registro */
 
 async function register(){
 
@@ -2395,8 +3049,6 @@ async function register(){
 
 }
 
-
-/* Login */
 
 async function login(){
 
@@ -2480,37 +3132,45 @@ async function login(){
 }
 
 
-/* Cerrar sesión */
-
 function cerrarSesion(){
 
     userToken=null;
 
-    localStorage.removeItem("userToken");
+    localStorage.removeItem(
+        "userToken"
+    );
 
     detenerCronometro();
+
+    document.body.classList.remove(
+        "keyboard-open"
+    );
 
     irBienvenida();
 
 }
 
 
-/* Lobby */
-
 function mostrarLobby(){
 
     detenerCronometro();
+
+    document.body.classList.remove(
+        "keyboard-open"
+    );
 
     mostrarSolo("lobby-container");
 
 }
 
 
-/* Seleccionar tema */
-
 function seleccionarTema(tema){
 
     detenerCronometro();
+
+    document.body.classList.remove(
+        "keyboard-open"
+    );
 
     temaActual=tema;
 
@@ -2562,8 +3222,6 @@ function seleccionarTema(tema){
 
     }
 
-    /* Si ya terminó, empieza de nuevo */
-
     if(indice >= palabras.length){
 
         indice=0;
@@ -2595,11 +3253,13 @@ function seleccionarTema(tema){
 }
 
 
-/* Volver */
-
 function volverLobby(){
 
     detenerCronometro();
+
+    document.body.classList.remove(
+        "keyboard-open"
+    );
 
     guardarProgreso();
 
@@ -2607,8 +3267,6 @@ function volverLobby(){
 
 }
 
-
-/* Reiniciar */
 
 function reiniciarNivel(){
 
@@ -2635,8 +3293,6 @@ function reiniciarNivel(){
 
 }
 
-
-/* Mostrar palabra */
 
 function mostrarPalabra(){
 
@@ -2694,27 +3350,35 @@ function mostrarPalabra(){
 
     setTimeout(() => {
 
-        input.focus();
+        if(
+            document.activeElement !== input &&
+            !document.body.classList.contains(
+                "keyboard-open"
+            )
+        ){
 
-    },100);
+            input.focus();
+
+        }
+
+    },150);
 
 }
 
-
-/* Normalizar */
 
 function normalizar(texto){
 
     return texto
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
         .toUpperCase()
         .trim();
 
 }
 
-
-/* Cronómetro */
 
 function iniciarCronometro(){
 
@@ -2767,15 +3431,21 @@ function actualizarCronometro(){
 
     if(tiempo<=10){
 
-        timer.classList.add("warning");
+        timer.classList.add(
+            "warning"
+        );
 
     }
 
     if(tiempo<=5){
 
-        timer.classList.remove("warning");
+        timer.classList.remove(
+            "warning"
+        );
 
-        timer.classList.add("danger");
+        timer.classList.add(
+            "danger"
+        );
 
     }
 
@@ -2786,7 +3456,9 @@ function detenerCronometro(){
 
     if(intervalo){
 
-        clearInterval(intervalo);
+        clearInterval(
+            intervalo
+        );
 
         intervalo=null;
 
@@ -2794,8 +3466,6 @@ function detenerCronometro(){
 
 }
 
-
-/* Tiempo agotado */
 
 function tiempoAgotado(){
 
@@ -2810,12 +3480,15 @@ function tiempoAgotado(){
     errores++;
 
     const resultado =
-        document.getElementById("resultado");
+        document.getElementById(
+            "resultado"
+        );
 
     resultado.textContent =
         "⏰ Se acabó el tiempo";
 
-    resultado.className="incorrecto";
+    resultado.className =
+        "incorrecto";
 
     document
         .getElementById("respuesta")
@@ -2833,7 +3506,9 @@ function tiempoAgotado(){
 
     setTimeout(() => {
 
-        if(indice>=palabras.length){
+        if(
+            indice >= palabras.length
+        ){
 
             finalizarJuego();
 
@@ -2850,8 +3525,6 @@ function tiempoAgotado(){
 }
 
 
-/* Verificar */
-
 function verificar(){
 
     if(bloqueado){
@@ -2859,20 +3532,27 @@ function verificar(){
     }
 
     const input =
-        document.getElementById("respuesta");
+        document.getElementById(
+            "respuesta"
+        );
 
     const respuesta =
-        normalizar(input.value);
+        normalizar(
+            input.value
+        );
 
     const resultado =
-        document.getElementById("resultado");
+        document.getElementById(
+            "resultado"
+        );
 
     if(!respuesta){
 
         resultado.textContent =
             "Escribe una respuesta.";
 
-        resultado.className="incorrecto";
+        resultado.className =
+            "incorrecto";
 
         input.focus();
 
@@ -2892,8 +3572,14 @@ function verificar(){
     input.disabled=true;
 
     document
-        .getElementById("btn-verificar")
+        .getElementById(
+            "btn-verificar"
+        )
         .disabled=true;
+
+    document.body.classList.remove(
+        "keyboard-open"
+    );
 
     if(respuesta===correcta){
 
@@ -2904,7 +3590,8 @@ function verificar(){
         resultado.textContent =
             "✓ ¡Respuesta correcta!";
 
-        resultado.className="correcto";
+        resultado.className =
+            "correcto";
 
         actualizarEstadisticasJuego();
 
@@ -2919,7 +3606,8 @@ function verificar(){
         resultado.textContent =
             `✕ Era: ${palabras[indice].respuesta}`;
 
-        resultado.className="incorrecto";
+        resultado.className =
+            "incorrecto";
 
         actualizarEstadisticasJuego();
 
@@ -2931,7 +3619,9 @@ function verificar(){
 
     setTimeout(() => {
 
-        if(indice>=palabras.length){
+        if(
+            indice >= palabras.length
+        ){
 
             finalizarJuego();
 
@@ -2947,8 +3637,6 @@ function verificar(){
 
 }
 
-
-/* Estadísticas del juego */
 
 function actualizarEstadisticasJuego(){
 
@@ -2970,12 +3658,12 @@ function actualizarEstadisticasJuego(){
 }
 
 
-/* Premio */
-
 function mostrarPremio(){
 
     const estrella =
-        document.getElementById("estrella");
+        document.getElementById(
+            "estrella"
+        );
 
     estrella.style.display="flex";
 
@@ -3002,51 +3690,64 @@ function mostrarPremio(){
 }
 
 
-/* Finalizar */
-
 function finalizarJuego(){
 
     detenerCronometro();
 
+    document.body.classList.remove(
+        "keyboard-open"
+    );
+
     guardarProgreso();
 
     document
-        .getElementById("progress-fill")
+        .getElementById(
+            "progress-fill"
+        )
         .style.width="100%";
 
     const precision =
         palabras.length > 0
         ? Math.round(
-            (aciertos / palabras.length)*100
+            (aciertos / palabras.length)
+            * 100
         )
         : 0;
 
     document
-        .getElementById("result-points")
+        .getElementById(
+            "result-points"
+        )
         .textContent =
         puntaje;
 
     document
-        .getElementById("result-correct")
+        .getElementById(
+            "result-correct"
+        )
         .textContent =
         aciertos;
 
     document
-        .getElementById("result-accuracy")
+        .getElementById(
+            "result-accuracy"
+        )
         .textContent =
         precision+"%";
 
     document
-        .getElementById("result-description")
+        .getElementById(
+            "result-description"
+        )
         .textContent =
         `Terminaste ${nombresTemas[temaActual]} con ${aciertos} aciertos de ${palabras.length} palabras.`;
 
-    mostrarSolo("result-container");
+    mostrarSolo(
+        "result-container"
+    );
 
 }
 
-
-/* Jugar de nuevo */
 
 function jugarDeNuevo(){
 
@@ -3055,9 +3756,15 @@ function jugarDeNuevo(){
     aciertos=0;
     errores=0;
 
+    document.body.classList.remove(
+        "keyboard-open"
+    );
+
     guardarProgreso();
 
-    mostrarSolo("game-container");
+    mostrarSolo(
+        "game-container"
+    );
 
     actualizarEstadisticasJuego();
 
@@ -3065,8 +3772,6 @@ function jugarDeNuevo(){
 
 }
 
-
-/* Guardar */
 
 function guardarProgreso(){
 
@@ -3089,13 +3794,17 @@ function guardarProgreso(){
 }
 
 
-/* Mi progreso */
-
 function mostrarProgreso(){
 
     detenerCronometro();
 
-    mostrarSolo("progress-container");
+    document.body.classList.remove(
+        "keyboard-open"
+    );
+
+    mostrarSolo(
+        "progress-container"
+    );
 
     let puntosTotales=0;
     let palabrasRespondidas=0;
@@ -3109,188 +3818,340 @@ function mostrarProgreso(){
 
     tabla.innerHTML="";
 
-    categorias.forEach(categoria => {
+    categorias.forEach(
+        categoria => {
 
-        const guardado =
-            localStorage.getItem(
-                "progreso_"+categoria.id
-            );
+            const guardado =
+                localStorage.getItem(
+                    "progreso_"+
+                    categoria.id
+                );
 
-        let respondidas=0;
-        let puntos=0;
-        let aciertosCategoria=0;
+            let respondidas=0;
+            let puntos=0;
+            let aciertosCategoria=0;
 
-        if(guardado){
+            if(guardado){
 
-            try{
+                try{
 
-                const progreso =
-                    JSON.parse(guardado);
+                    const progreso =
+                        JSON.parse(
+                            guardado
+                        );
 
-                respondidas =
-                    Math.min(
-                        Number(progreso.indice)||0,
-                        temas[categoria.id].length
-                    );
+                    respondidas =
+                        Math.min(
+                            Number(
+                                progreso.indice
+                            ) || 0,
+                            temas[
+                                categoria.id
+                            ].length
+                        );
 
-                puntos =
-                    Number(progreso.puntaje)||0;
+                    puntos =
+                        Number(
+                            progreso.puntaje
+                        ) || 0;
 
-                aciertosCategoria =
-                    Math.min(
-                        Number(progreso.aciertos)||0,
-                        respondidas
-                    );
+                    aciertosCategoria =
+                        Math.min(
+                            Number(
+                                progreso.aciertos
+                            ) || 0,
+                            respondidas
+                        );
+
+                }
+
+                catch{
+
+                    respondidas=0;
+                    puntos=0;
+                    aciertosCategoria=0;
+
+                }
 
             }
 
-            catch{
+            const total =
+                temas[
+                    categoria.id
+                ].length;
 
-                respondidas=0;
-                puntos=0;
-                aciertosCategoria=0;
+            const porcentaje =
+                total>0
+                ? Math.round(
+                    (respondidas/total)*100
+                )
+                : 0;
+
+            puntosTotales+=puntos;
+
+            palabrasRespondidas+=
+                respondidas;
+
+            respuestasCorrectas+=
+                aciertosCategoria;
+
+            let estado =
+                "Sin comenzar";
+
+            let claseEstado =
+                "status-start";
+
+            if(respondidas>=total){
+
+                estado="Completado";
+
+                claseEstado =
+                    "status-complete";
+
+                categoriasCompletadas++;
 
             }
 
-        }
+            else if(respondidas>0){
 
-        const total =
-            temas[categoria.id].length;
+                estado="En progreso";
 
-        const porcentaje =
-            total>0
-            ? Math.round(
-                (respondidas/total)*100
-            )
-            : 0;
+                claseEstado =
+                    "status-progress";
 
-        puntosTotales+=puntos;
+            }
 
-        palabrasRespondidas+=respondidas;
+            const fila =
+                document.createElement(
+                    "tr"
+                );
 
-        respuestasCorrectas+=
-            aciertosCategoria;
+            fila.innerHTML=`
 
-        let estado="Sin comenzar";
-        let claseEstado="status-start";
+                <td>
 
-        if(respondidas>=total){
+                    <div class="theme-progress-name">
 
-            estado="Completado";
-            claseEstado="status-complete";
+                        <span class="theme-progress-icon">
+                            ${categoria.icono}
+                        </span>
 
-            categoriasCompletadas++;
+                        ${categoria.nombre}
 
-        }
+                    </div>
 
-        else if(respondidas>0){
+                </td>
 
-            estado="En progreso";
-            claseEstado="status-progress";
+                <td>
 
-        }
-
-        const fila =
-            document.createElement("tr");
-
-        fila.innerHTML=`
-
-            <td>
-
-                <div class="theme-progress-name">
-
-                    <span class="theme-progress-icon">
-                        ${categoria.icono}
+                    <span class="progress-number">
+                        ${respondidas}/${total}
                     </span>
 
-                    ${categoria.nombre}
+                </td>
 
-                </div>
+                <td>
 
-            </td>
+                    <span class="progress-status ${claseEstado}">
+                        ${estado}
+                    </span>
 
-            <td>
+                </td>
 
-                <span class="progress-number">
-                    ${respondidas}/${total}
-                </span>
+            `;
 
-            </td>
+            tabla.appendChild(
+                fila
+            );
 
-            <td>
-
-                <span class="progress-status ${claseEstado}">
-                    ${estado}
-                </span>
-
-            </td>
-
-        `;
-
-        tabla.appendChild(fila);
-
-    });
+        }
+    );
 
     const precision =
         palabrasRespondidas>0
         ? Math.round(
-            (respuestasCorrectas /
-            palabrasRespondidas)*100
+            (
+                respuestasCorrectas /
+                palabrasRespondidas
+            ) * 100
         )
         : 0;
 
     document
-        .getElementById("total-puntos")
+        .getElementById(
+            "total-puntos"
+        )
         .textContent =
         puntosTotales;
 
     document
-        .getElementById("total-palabras")
+        .getElementById(
+            "total-palabras"
+        )
         .textContent =
         palabrasRespondidas;
 
     document
-        .getElementById("precision")
+        .getElementById(
+            "precision"
+        )
         .textContent =
         precision+"%";
 
     document
-        .getElementById("categorias-completadas")
+        .getElementById(
+            "categorias-completadas"
+        )
         .textContent =
         categoriasCompletadas+"/6";
 
 }
 
 
-/* Enter */
+const respuestaInput =
+    document.getElementById(
+        "respuesta"
+    );
 
-document
-    .getElementById("respuesta")
-    .addEventListener(
-        "keydown",
-        event => {
+respuestaInput.addEventListener(
+    "keydown",
+    event => {
 
-            if(event.key==="Enter"){
+        if(event.key==="Enter"){
 
-                event.preventDefault();
+            event.preventDefault();
 
-                verificar();
+            verificar();
+
+        }
+
+    }
+);
+
+
+/* DETECCIÓN DEL TECLADO */
+
+function actualizarEstadoTeclado(){
+
+    if(
+        !window.visualViewport ||
+        window.innerWidth > 600
+    ){
+
+        document.body.classList.remove(
+            "keyboard-open"
+        );
+
+        return;
+
+    }
+
+    const viewport =
+        window.visualViewport;
+
+    const alturaVentana =
+        window.innerHeight;
+
+    const alturaVisible =
+        viewport.height;
+
+    const tecladoAbierto =
+        alturaVisible <
+        alturaVentana * .78;
+
+    if(
+        tecladoAbierto &&
+        document.activeElement === respuestaInput
+    ){
+
+        document.body.classList.add(
+            "keyboard-open"
+        );
+
+    }
+
+    else if(
+        !tecladoAbierto
+    ){
+
+        document.body.classList.remove(
+            "keyboard-open"
+        );
+
+    }
+
+}
+
+
+if(window.visualViewport){
+
+    window.visualViewport.addEventListener(
+        "resize",
+        actualizarEstadoTeclado
+    );
+
+    window.visualViewport.addEventListener(
+        "scroll",
+        actualizarEstadoTeclado
+    );
+
+}
+
+window.addEventListener(
+    "resize",
+    actualizarEstadoTeclado
+);
+
+respuestaInput.addEventListener(
+    "focus",
+    () => {
+
+        setTimeout(() => {
+
+            actualizarEstadoTeclado();
+
+            if(window.innerWidth <= 600){
+
+                respuestaInput.scrollIntoView({
+                    behavior:"smooth",
+                    block:"center"
+                });
 
             }
 
-        }
-    );
+        },250);
+
+    }
+);
+
+respuestaInput.addEventListener(
+    "blur",
+    () => {
+
+        setTimeout(
+            actualizarEstadoTeclado,
+            200
+        );
+
+    }
+);
 
 
-/* Inicio */
+/* INICIO */
 
 window.addEventListener(
     "load",
     () => {
 
-        mostrarSolo("welcome-container");
+        mostrarSolo(
+            "welcome-container"
+        );
 
         detenerCronometro();
+
+        document.body.classList.remove(
+            "keyboard-open"
+        );
 
     }
 );
