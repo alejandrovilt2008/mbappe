@@ -73,12 +73,15 @@ body{
 }
 
 @supports(min-height:100dvh){
+
     body{
         min-height:100dvh;
     }
+
 }
 
 :root{
+
     --navy:#033D65;
     --blue:#2585BD;
     --cyan:#2FAEE3;
@@ -86,69 +89,99 @@ body{
     --purple:#6464D6;
     --orange:#FA8D1E;
     --coral:#F04B38;
+
     --bg:#FFFCF5;
     --bg-soft:#F7FAFC;
+
     --surface:#FFFFFF;
     --surface-soft:#F4F8FA;
     --surface-hover:#EDF6FA;
+
     --text:#18384D;
     --heading:#033D65;
     --muted:#6D8494;
-    --border:rgba(3,61,101,.10);
-    --border-strong:rgba(3,61,101,.16);
+
+    --border:
+        rgba(3,61,101,.10);
+
+    --border-strong:
+        rgba(3,61,101,.16);
+
     --input-bg:#FFFFFF;
     --input-text:#18384D;
     --input-placeholder:#8DA0AD;
+
     --shadow:
         0 18px 50px
         rgba(3,61,101,.09);
+
     --shadow-soft:
         0 8px 24px
         rgba(3,61,101,.07);
+
     --radius:24px;
+
     --topbar-bg:
         rgba(255,252,245,.94);
+
     --topbar-border:
         rgba(3,61,101,.10);
+
     --timer-empty:
         rgba(3,61,101,.10);
+
     --glass:
         rgba(255,255,255,.90);
+
 }
 
 html[data-theme="dark"]{
+
     --bg:#071A28;
     --bg-soft:#0A2233;
+
     --surface:#0D2C41;
     --surface-soft:#0A2638;
     --surface-hover:#12384E;
+
     --text:#F2FAFF;
     --heading:#F5FBFF;
     --muted:#AFC7D5;
+
     --border:
         rgba(47,174,227,.16);
+
     --border-strong:
         rgba(47,174,227,.24);
+
     --input-bg:#092335;
     --input-text:#F2FAFF;
     --input-placeholder:#7894A5;
+
     --shadow:
         0 20px 60px
         rgba(0,0,0,.30);
+
     --shadow-soft:
         0 8px 25px
         rgba(0,0,0,.20);
+
     --topbar-bg:
         rgba(7,26,40,.94);
+
     --topbar-border:
         rgba(47,174,227,.16);
+
     --timer-empty:
         rgba(47,174,227,.13);
+
     --glass:
         rgba(13,44,65,.94);
+
 }
 
 body{
+
     background:
         radial-gradient(
             circle at 5% 5%,
@@ -161,9 +194,11 @@ body{
             transparent 25%
         ),
         var(--bg);
+
 }
 
 html[data-theme="dark"] body{
+
     background:
         radial-gradient(
             circle at 5% 5%,
@@ -176,163 +211,248 @@ html[data-theme="dark"] body{
             transparent 25%
         ),
         var(--bg);
+
 }
 
 body::before,
 body::after{
+
     content:"";
+
     position:fixed;
+
     width:320px;
     height:320px;
+
     border-radius:50%;
+
     filter:blur(100px);
+
     opacity:.06;
+
     pointer-events:none;
+
     z-index:0;
+
 }
 
 body::before{
+
     background:var(--cyan);
+
     top:-160px;
     left:-160px;
+
 }
 
 body::after{
+
     background:var(--purple);
+
     right:-160px;
     bottom:-160px;
+
 }
 
 button,
 input{
+
     font:inherit;
+
 }
 
 button{
+
     touch-action:manipulation;
+
     cursor:pointer;
+
 }
 
 button:focus-visible,
 input:focus-visible{
+
     outline:
         2px solid
         rgba(47,174,227,.80);
+
     outline-offset:3px;
+
 }
 
 button:active{
+
     transform:scale(.98);
+
 }
 
 .topbar{
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
+
     height:
         calc(
             70px +
             env(safe-area-inset-top)
         );
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     padding:
         env(safe-area-inset-top)
         20px
         0;
+
     z-index:50;
+
     background:var(--topbar-bg);
+
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
+
     border-bottom:
         1px solid
         var(--topbar-border);
+
     transition:
         transform .25s ease,
         opacity .25s ease,
         background .3s ease;
+
 }
 
 .topbar-inner{
+
     width:
         min(
             100%,
             1100px
         );
+
     display:flex;
+
     align-items:center;
     justify-content:space-between;
+
     gap:16px;
+
 }
 
 .brand{
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     min-width:0;
+
     font-size:17px;
+
     font-weight:800;
+
     color:var(--heading);
+
     white-space:nowrap;
+
 }
 
 .brand-logo{
+
     width:48px;
     height:48px;
+
     flex:0 0 auto;
+
     display:block;
+
     object-fit:contain;
+
 }
 
 .brand-dot{
+
     width:7px;
     height:7px;
+
     flex:0 0 auto;
+
     border-radius:50%;
+
     background:var(--green);
+
 }
 
 .theme-toggle{
+
     width:44px;
     height:44px;
+
     min-height:44px;
+
     padding:0;
     margin:0;
+
     flex:0 0 auto;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     border-radius:13px;
+
     color:var(--heading);
+
     background:var(--surface);
+
     border:
         1px solid
         var(--border);
+
     box-shadow:var(--shadow-soft);
+
     font-size:19px;
+
     transition:
         transform .2s ease,
         background .25s ease,
         border .25s ease;
+
 }
 
 .theme-toggle:hover{
+
     transform:translateY(-2px);
+
     background:var(--surface-hover);
+
     border-color:
         rgba(47,174,227,.35);
+
 }
 
 .container{
+
     position:relative;
+
     z-index:1;
+
     width:
         min(
             calc(100% - 40px),
             1000px
         );
+
     margin:
         calc(
             90px +
@@ -340,586 +460,937 @@ button:active{
         )
         auto
         24px;
+
     padding:26px;
+
     border-radius:var(--radius);
+
     background:var(--glass);
+
     border:
         1px solid
         var(--border);
+
     box-shadow:var(--shadow);
+
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
+
     animation:appear .35s ease;
+
     transition:
         background .3s ease,
         border .3s ease,
         box-shadow .3s ease;
+
 }
 
 @keyframes appear{
+
     from{
+
         opacity:0;
-        transform:translateY(10px);
+
+        transform:
+            translateY(10px);
+
     }
+
     to{
+
         opacity:1;
-        transform:translateY(0);
+
+        transform:
+            translateY(0);
+
     }
+
 }
 
 #welcome-container{
+
     width:
         min(
             calc(100% - 40px),
             780px
         );
+
 }
 
 #login-container,
 #result-container{
+
     width:
         min(
             calc(100% - 40px),
             600px
         );
+
 }
 
 #lobby-container,
 #progress-container{
+
     width:
         min(
             calc(100% - 40px),
             900px
         );
+
 }
 
 #game-container{
+
     width:
         min(
             calc(100% - 40px),
             820px
         );
+
 }
 
 .welcome{
+
     text-align:center;
+
     padding:28px;
+
 }
 
 .hero-logo-wrapper{
+
     width:150px;
     height:150px;
+
     margin:
         0
         auto
         18px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    animation:float 3.5s ease-in-out infinite;
+
+    animation:
+        float
+        3.5s
+        ease-in-out
+        infinite;
+
 }
 
 .hero-logo{
+
     display:block;
+
     width:140px;
     height:140px;
+
     max-width:100%;
     max-height:100%;
+
     object-fit:contain;
+
     filter:
         drop-shadow(
             0 8px 18px
             rgba(3,61,101,.13)
         );
+
 }
 
 @keyframes float{
+
     0%,100%{
-        transform:translateY(0);
+
+        transform:
+            translateY(0);
+
     }
+
     50%{
-        transform:translateY(-5px);
+
+        transform:
+            translateY(-5px);
+
     }
+
 }
 
 .badge{
+
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
+
     gap:6px;
+
     padding:
         7px
         13px;
+
     margin-bottom:11px;
+
     border-radius:50px;
+
     font-size:10px;
+
     font-weight:700;
+
     letter-spacing:.5px;
+
     color:var(--blue);
+
     background:
         rgba(47,174,227,.08);
+
     border:
         1px solid
         rgba(47,174,227,.18);
+
 }
 
 h1{
+
     font-size:
         clamp(
             36px,
             5vw,
             48px
         );
+
     line-height:1.08;
+
     font-weight:800;
+
     margin-bottom:10px;
+
     color:var(--heading);
+
 }
 
 .welcome-description{
+
     color:var(--muted);
+
     font-size:14px;
+
     line-height:1.6;
+
     max-width:600px;
+
     margin:0 auto;
+
 }
 
 h2{
+
     font-size:28px;
+
     line-height:1.15;
+
     font-weight:800;
+
     margin-bottom:7px;
+
     color:var(--heading);
+
 }
 
 .subtitle{
+
     color:var(--muted);
+
     font-size:13px;
+
     line-height:1.55;
+
     margin-bottom:19px;
+
 }
 
 .features{
+
     display:grid;
+
     grid-template-columns:
         repeat(3,1fr);
+
     gap:12px;
+
     margin:22px 0;
+
 }
 
 .feature{
+
     min-width:0;
+
     padding:
         17px
         10px;
+
     border-radius:18px;
+
     background:var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
     transition:
         transform .2s,
         background .2s;
+
 }
 
 .feature:hover{
-    transform:translateY(-3px);
-    background:var(--surface-hover);
+
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--surface-hover);
+
 }
 
 .feature-icon{
+
     display:block;
+
     font-size:25px;
+
     margin-bottom:6px;
+
 }
 
 .feature-title{
+
     display:block;
+
     font-size:12px;
+
     font-weight:700;
+
     color:var(--heading);
+
 }
 
 .feature-text{
+
     display:block;
+
     margin-top:2px;
+
     color:var(--muted);
+
     font-size:9px;
+
 }
 
 button{
+
     width:100%;
+
     min-height:48px;
+
     border:0;
+
     outline:0;
+
     padding:
         12px
         18px;
+
     margin-top:8px;
+
     border-radius:15px;
+
     color:#FFFFFF;
+
     font-size:13px;
+
     font-weight:700;
+
     transition:
         transform .2s,
         box-shadow .2s,
         opacity .2s,
         background .25s,
         border .25s;
+
 }
 
 button:hover{
-    transform:translateY(-1px);
+
+    transform:
+        translateY(-1px);
+
 }
 
 button:disabled{
+
     cursor:not-allowed;
+
     opacity:.45;
+
     transform:none;
+
 }
 
 .btn-primary{
+
     background:
         linear-gradient(
             135deg,
             var(--blue),
             var(--cyan)
         );
+
     box-shadow:
         0 9px 22px
         rgba(37,133,189,.20);
+
 }
 
 .btn-primary:hover{
+
     box-shadow:
         0 12px 28px
         rgba(37,133,189,.28);
+
 }
 
 .btn-secondary{
+
     color:var(--heading);
-    background:var(--surface-soft);
+
+    background:
+        var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
 }
 
 .btn-secondary:hover{
-    background:var(--surface-hover);
+
+    background:
+        var(--surface-hover);
+
     border-color:
         rgba(47,174,227,.30);
+
 }
 
 .btn-danger{
+
     background:
         linear-gradient(
             135deg,
             var(--coral),
             #D9362A
         );
+
 }
 
 .btn-warning{
+
     background:
         linear-gradient(
             135deg,
             var(--orange),
             #E66D0C
         );
+
 }
 
 .login-icon{
+
     width:115px;
     height:115px;
+
     margin:
         0
         auto
         16px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     background:transparent;
+
     border:0;
+
     box-shadow:none;
+
     overflow:visible;
+
 }
 
 .login-icon img{
+
     width:100%;
     height:100%;
+
     display:block;
+
     object-fit:contain;
+
     object-position:center;
+
 }
 
 .input-group{
+
     text-align:left;
+
     margin-bottom:13px;
+
 }
 
 .input-group label{
+
     display:block;
+
     margin:
         0 0 6px 3px;
+
     color:var(--muted);
+
     font-size:10px;
+
     font-weight:600;
+
 }
 
 input{
+
     width:100%;
+
     height:50px;
+
     min-height:50px;
+
     border:
         1px solid
         var(--border-strong);
+
     outline:none;
+
     border-radius:14px;
+
     padding:
         12px
         15px;
+
     color:var(--input-text);
+
     background:var(--input-bg);
+
     font-size:16px;
+
     transition:
         border .2s,
         background .2s,
         box-shadow .2s;
+
     -webkit-appearance:none;
+
     appearance:none;
+
 }
 
 input::placeholder{
-    color:var(--input-placeholder);
+
+    color:
+        var(--input-placeholder);
+
 }
 
 input:focus{
+
     border-color:
         rgba(47,174,227,.75);
-    background:var(--input-bg);
+
+    background:
+        var(--input-bg);
+
     box-shadow:
         0 0 0 3px
         rgba(47,174,227,.09);
+
 }
 
 #auth-message{
+
     min-height:20px;
+
     margin:
         10px 0
         1px;
+
     font-size:11px;
+
     color:var(--blue);
+
 }
 
 .lobby-header{
+
     margin-bottom:20px;
+
 }
 
 .lobby-header h2{
+
     font-size:30px;
+
 }
 
 .themes{
+
     display:grid;
+
     grid-template-columns:
         repeat(3,minmax(0,1fr));
+
     gap:12px;
+
 }
 
 .theme{
+
     position:relative;
+
     min-height:125px;
+
     padding:
         15px
         10px;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
+
     border-radius:19px;
+
     cursor:pointer;
+
     background:var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
     overflow:hidden;
+
     transition:
         transform .2s,
         border .2s,
         background .2s,
         box-shadow .2s;
+
 }
 
 .theme::before{
+
     content:"";
+
     position:absolute;
+
     width:100px;
     height:100px;
+
     top:-50px;
     right:-50px;
+
     border-radius:50%;
+
     background:
         rgba(47,174,227,.08);
+
     filter:blur(15px);
+
 }
 
 .theme:hover{
-    transform:translateY(-3px);
-    background:var(--surface-hover);
+
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--surface-hover);
+
     border-color:
         rgba(47,174,227,.30);
-    box-shadow:var(--shadow-soft);
+
+    box-shadow:
+        var(--shadow-soft);
+
 }
 
 .theme:active{
-    transform:scale(.98);
+
+    transform:
+        scale(.98);
+
 }
 
 .theme-icon{
+
     position:relative;
+
     z-index:1;
+
     width:58px;
     height:58px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     margin-bottom:9px;
+
     border-radius:17px;
+
     font-size:31px;
-    background:var(--surface);
+
+    background:
+        var(--surface);
+
     border:
         1px solid
         var(--border);
+
 }
 
 .theme-name{
+
     position:relative;
+
     z-index:1;
+
     font-size:12px;
+
     font-weight:700;
+
     color:var(--heading);
+
 }
 
 .game-header{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:15px;
+
     margin-bottom:17px;
+
 }
 
 .game-theme{
+
     min-width:0;
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     text-align:left;
+
 }
 
 .game-logo{
+
     width:48px;
     height:48px;
+
     flex:0 0 auto;
+
     display:block;
+
     object-fit:contain;
+
     object-position:center;
+
 }
 
 .game-theme small{
+
     display:block;
+
     color:var(--muted);
+
     font-size:8px;
+
     font-weight:700;
+
     letter-spacing:1.3px;
+
 }
 
 .game-theme h2{
+
     margin-top:3px;
+
     margin-bottom:0;
+
     font-size:25px;
+
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
+
 }
 
 .timer{
+
     flex:0 0 auto;
+
     width:68px;
     height:68px;
+
     padding:5px;
+
     border-radius:50%;
+
     background:
         conic-gradient(
             var(--cyan)
             var(--progreso,100%),
             var(--timer-empty) 0
         );
+
     transition:.3s;
+
 }
 
 .timer-inner{
+
     width:100%;
     height:100%;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     border-radius:50%;
-    background:var(--surface);
-    color:var(--heading);
+
+    background:
+        var(--surface);
+
+    color:
+        var(--heading);
+
     font-size:18px;
+
     font-weight:800;
+
 }
 
 .timer.warning{
+
     background:
         conic-gradient(
             var(--orange)
             var(--progreso,100%),
             var(--timer-empty) 0
         );
+
 }
 
 .timer.danger{
+
     background:
         conic-gradient(
             var(--coral)
             var(--progreso,100%),
             var(--timer-empty) 0
         );
-    animation:pulse .75s infinite;
+
+    animation:
+        pulse
+        .75s
+        infinite;
+
 }
 
 @keyframes pulse{
+
     50%{
-        transform:scale(1.04);
+
+        transform:
+            scale(1.04);
+
     }
+
 }
 
 .question-info{
+
     display:flex;
+
     justify-content:space-between;
+
     gap:10px;
+
     margin-bottom:7px;
+
     color:var(--muted);
+
     font-size:10px;
+
     font-weight:600;
+
 }
 
 .progress-bar{
+
     width:100%;
+
     height:7px;
+
     overflow:hidden;
+
     margin-bottom:17px;
+
     border-radius:20px;
+
     background:
         var(--timer-empty);
+
 }
 
 #progress-fill{
+
     width:0;
+
     height:100%;
+
     border-radius:20px;
+
     background:
         linear-gradient(
             90deg,
@@ -928,494 +1399,783 @@ input:focus{
             var(--purple),
             var(--orange)
         );
+
     transition:
         width .35s ease;
+
 }
 
 .clue-card{
+
     position:relative;
+
     padding:
         25px
         18px;
+
     margin-bottom:13px;
+
     text-align:center;
+
     border-radius:20px;
+
     overflow:hidden;
-    background:var(--surface-soft);
+
+    background:
+        var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
     box-shadow:
         inset 0 1px 0
         rgba(255,255,255,.08);
+
 }
 
 .clue-label{
+
     margin-bottom:8px;
+
     color:var(--muted);
+
     font-size:8px;
+
     font-weight:700;
+
     letter-spacing:1.5px;
+
 }
 
 #pista{
+
     font-size:
         clamp(
             27px,
             4vw,
             36px
         );
+
     font-weight:800;
+
     letter-spacing:4px;
+
     line-height:1.25;
+
     word-break:break-word;
+
     color:var(--heading);
+
 }
 
 #resultado{
+
     min-height:24px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     margin:
         9px 0
         2px;
+
     font-size:11px;
+
     font-weight:700;
+
     text-align:center;
+
 }
 
 .correcto{
+
     color:var(--green);
+
 }
 
 .incorrecto{
+
     color:var(--coral);
+
 }
 
 .score-panel{
+
     display:grid;
+
     grid-template-columns:
         repeat(3,minmax(0,1fr));
+
     gap:9px;
+
     margin-top:11px;
+
 }
 
 .score-item{
+
     padding:
         12px
         7px;
+
     text-align:center;
+
     border-radius:15px;
-    background:var(--surface-soft);
+
+    background:
+        var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
 }
 
 .score-label{
+
     display:block;
+
     color:var(--muted);
+
     font-size:8px;
+
     margin-bottom:3px;
+
 }
 
 .score-value{
+
     font-size:20px;
+
     font-weight:800;
+
     color:var(--heading);
+
 }
 
 .result-screen{
+
     text-align:center;
+
 }
 
 .result-icon{
+
     width:115px;
     height:115px;
+
     margin:
         0
         auto
         15px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     background:transparent;
+
     border:0;
+
     box-shadow:none;
+
     overflow:visible;
+
 }
 
 .result-icon img{
+
     width:100%;
     height:100%;
+
     display:block;
+
     object-fit:contain;
+
 }
 
 .result-screen h2{
+
     font-size:31px;
+
     margin-bottom:7px;
+
 }
 
 .result-description{
+
     color:var(--muted);
+
     font-size:12px;
+
     line-height:1.6;
+
     margin-bottom:17px;
+
 }
 
 .result-stats{
+
     display:grid;
+
     grid-template-columns:
         repeat(3,minmax(0,1fr));
+
     gap:9px;
+
     margin-bottom:15px;
+
 }
 
 .result-stat{
+
     padding:
         13px
         7px;
+
     border-radius:15px;
-    background:var(--surface-soft);
+
+    background:
+        var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
 }
 
 .result-stat strong{
+
     display:block;
+
     font-size:23px;
+
     color:var(--heading);
+
 }
 
 .result-stat span{
+
     display:block;
+
     color:var(--muted);
+
     font-size:8px;
+
     margin-top:2px;
+
 }
 
 .progress-screen-title{
+
     font-size:30px;
+
     font-weight:800;
+
     margin-bottom:5px;
+
     color:var(--heading);
+
 }
 
 .progress-screen-subtitle{
+
     color:var(--muted);
+
     font-size:12px;
+
     line-height:1.55;
+
     margin-bottom:18px;
+
 }
 
 .stats-grid{
+
     display:grid;
+
     grid-template-columns:
         repeat(4,minmax(0,1fr));
+
     gap:10px;
+
     margin-bottom:17px;
+
 }
 
 .stat-card{
+
     position:relative;
+
     padding:15px;
+
     text-align:left;
+
     border-radius:17px;
-    background:var(--surface-soft);
+
+    background:
+        var(--surface-soft);
+
     border:
         1px solid
         var(--border);
+
     overflow:hidden;
+
     transition:.2s;
+
 }
 
 .stat-card:hover{
-    transform:translateY(-2px);
-    background:var(--surface-hover);
+
+    transform:
+        translateY(-2px);
+
+    background:
+        var(--surface-hover);
+
 }
 
 .stat-icon{
+
     font-size:21px;
+
     margin-bottom:6px;
+
 }
 
 .stat-label{
+
     display:block;
+
     color:var(--muted);
+
     font-size:8px;
+
     margin-bottom:3px;
+
 }
 
 .stat-value{
+
     font-size:22px;
+
     font-weight:800;
+
     color:var(--heading);
+
 }
 
 .table-wrapper{
+
     width:100%;
+
     overflow-x:auto;
+
     border-radius:16px;
+
     -webkit-overflow-scrolling:touch;
+
 }
 
 .progress-table{
+
     width:100%;
+
     min-width:450px;
+
     border-collapse:collapse;
-    background:var(--surface-soft);
+
+    background:
+        var(--surface-soft);
+
 }
 
 .progress-table th{
+
     padding:
         11px
         9px;
+
     color:var(--muted);
+
     font-size:9px;
+
     font-weight:700;
+
     text-align:left;
+
     border-bottom:
         1px solid
         var(--border);
+
 }
 
 .progress-table td{
+
     padding:
         11px
         9px;
+
     font-size:10px;
+
     text-align:left;
+
     border-bottom:
         1px solid
         var(--border);
+
 }
 
 .progress-table tr:last-child td{
+
     border-bottom:0;
+
 }
 
 .theme-progress-name{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
+
     font-weight:600;
+
     color:var(--heading);
+
 }
 
 .theme-progress-icon{
+
     font-size:18px;
+
 }
 
 .progress-number{
+
     color:var(--blue);
+
     font-weight:800;
+
 }
 
 .progress-status{
+
     display:inline-block;
+
     padding:
         4px
         8px;
+
     border-radius:7px;
+
     font-size:7px;
+
     white-space:nowrap;
+
 }
 
 .status-complete{
+
     color:var(--green);
+
     background:
         rgba(37,186,119,.12);
+
 }
 
 .status-progress{
+
     color:var(--blue);
+
     background:
         rgba(37,133,189,.12);
+
 }
 
 .status-start{
+
     color:var(--muted);
+
     background:
         rgba(109,132,148,.10);
+
 }
 
 .tip{
+
     margin-top:14px;
+
     padding:13px;
+
     text-align:left;
+
     border-radius:15px;
+
     background:
         linear-gradient(
             135deg,
             rgba(47,174,227,.07),
             rgba(100,100,214,.07)
         );
+
     border:
         1px solid
         var(--border);
+
 }
 
 .tip-title{
+
     display:block;
+
     margin-bottom:4px;
+
     font-size:10px;
+
     font-weight:700;
+
     color:var(--heading);
+
 }
 
 .tip-text{
+
     color:var(--muted);
+
     font-size:9px;
+
     line-height:1.55;
+
 }
 
 #estrella{
+
     position:fixed;
+
     inset:0;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     z-index:9999;
+
     pointer-events:none;
+
     background:
         rgba(3,61,101,.08);
+
 }
 
 .estrella-contenido{
+
     text-align:center;
+
     opacity:0;
+
     transform:
         translateY(24px)
         scale(.40);
-    will-change:transform,opacity;
+
+    will-change:
+        transform,
+        opacity;
+
 }
 
 .estrella-icon{
+
     width:
         clamp(
             90px,
             15vw,
             150px
         );
+
     height:
         clamp(
             90px,
             15vw,
             150px
         );
-    margin:0 auto;
+
+    margin:
+        0 auto;
+
     display:block;
-    transform-origin:center center;
-    will-change:transform;
+
+    transform-origin:
+        center center;
+
+    will-change:
+        transform;
+
 }
 
 .estrella-icon svg{
+
     display:block;
+
     width:100%;
     height:100%;
+
     overflow:visible;
+
 }
 
 .estrella-icon polygon{
+
     fill:#FFD54A;
+
     stroke:#F59E0B;
+
     stroke-width:5;
+
     stroke-linejoin:round;
+
     filter:
         drop-shadow(
             0 9px 16px
             rgba(250,141,30,.28)
         );
+
 }
 
 .estrella-titulo{
+
     margin-top:10px;
+
     font-size:
         clamp(
             30px,
             5vw,
             48px
         );
+
     line-height:1.1;
+
     font-weight:800;
-    color:var(--heading);
+
+    color:#F5B800;
+
+    text-shadow:
+        0 2px 8px
+        rgba(245,184,0,.25);
+
 }
 
 .estrella-texto{
+
     margin-top:5px;
+
     font-size:16px;
+
     font-weight:600;
+
     color:var(--muted);
+
 }
 
-.estrella-animar .estrella-contenido{
+.estrella-animar
+.estrella-contenido{
+
     animation:
         estrellaEntrada
         1.45s
         cubic-bezier(.16,.85,.25,1)
         forwards;
+
 }
 
-.estrella-animar .estrella-icon{
+.estrella-animar
+.estrella-icon{
+
     animation:
         estrellaGiro
         1.45s
         cubic-bezier(.18,.82,.22,1)
         forwards;
+
 }
 
 @keyframes estrellaEntrada{
 
     0%{
+
         opacity:0;
+
         transform:
             translateY(24px)
             scale(.40);
+
     }
 
     18%{
+
         opacity:1;
+
         transform:
             translateY(-8px)
             scale(1.12);
+
     }
 
     35%{
+
         opacity:1;
+
         transform:
             translateY(2px)
             scale(.97);
+
     }
 
     52%{
+
         opacity:1;
+
         transform:
             translateY(-2px)
             scale(1.04);
+
     }
 
     72%{
+
         opacity:1;
+
         transform:
             translateY(0)
             scale(1);
+
     }
 
     86%{
+
         opacity:1;
+
         transform:
             translateY(-3px)
             scale(1.01);
+
     }
 
     100%{
+
         opacity:0;
+
         transform:
             translateY(-12px)
             scale(.92);
+
     }
 
 }
@@ -1423,57 +2183,75 @@ input:focus{
 @keyframes estrellaGiro{
 
     0%{
+
         transform:
             rotate(0deg)
             scale(.62);
+
     }
 
     12%{
+
         transform:
             rotate(90deg)
             scale(.88);
+
     }
 
     24%{
+
         transform:
             rotate(180deg)
             scale(1.08);
+
     }
 
     36%{
+
         transform:
             rotate(270deg)
             scale(.96);
+
     }
 
     48%{
+
         transform:
             rotate(360deg)
             scale(1.04);
+
     }
 
     60%{
+
         transform:
             rotate(450deg)
             scale(.98);
+
     }
 
     72%{
+
         transform:
             rotate(540deg)
             scale(1.02);
+
     }
 
     84%{
+
         transform:
             rotate(630deg)
             scale(1);
+
     }
 
     100%{
+
         transform:
             rotate(720deg)
             scale(.92);
+
     }
 
 }
@@ -1481,9 +2259,12 @@ input:focus{
 @media(max-width:900px){
 
     .container{
+
         width:
             calc(100% - 30px);
+
         padding:22px;
+
     }
 
     #welcome-container,
@@ -1492,13 +2273,17 @@ input:focus{
     #lobby-container,
     #progress-container,
     #game-container{
+
         width:
             calc(100% - 30px);
+
     }
 
     .stats-grid{
+
         grid-template-columns:
             repeat(2,minmax(0,1fr));
+
     }
 
 }
@@ -1507,59 +2292,86 @@ input:focus{
 
     html,
     body{
-        background:var(--bg);
+
+        background:
+            var(--bg);
+
     }
 
     body::before,
     body::after{
+
         width:200px;
         height:200px;
-        filter:blur(65px);
+
+        filter:
+            blur(65px);
+
         opacity:.05;
+
     }
 
     .topbar{
+
         height:
             calc(
                 62px +
                 env(safe-area-inset-top)
             );
+
         padding:
             env(safe-area-inset-top)
             10px
             0;
+
     }
 
     .topbar-inner{
+
         gap:8px;
+
     }
 
     .brand{
+
         gap:7px;
+
         font-size:12px;
+
     }
 
     .brand-logo{
+
         width:40px;
         height:40px;
+
     }
 
     .brand-dot{
+
         width:5px;
         height:5px;
+
     }
 
     .theme-toggle{
+
         width:40px;
         height:40px;
+
         min-height:40px;
+
         border-radius:12px;
+
         font-size:17px;
+
     }
 
     .container{
+
         width:
             calc(100% - 16px) !important;
+
         margin:
             calc(
                 76px +
@@ -1567,360 +2379,542 @@ input:focus{
             )
             auto
             14px;
+
         padding:
             18px
             14px;
+
         border-radius:20px;
+
     }
 
     #welcome-container{
+
         padding:
             21px
             14px
             18px;
+
     }
 
     .hero-logo-wrapper{
+
         width:112px;
         height:112px;
+
         margin-bottom:14px;
+
     }
 
     .hero-logo{
+
         width:105px;
         height:105px;
+
         filter:
             drop-shadow(
                 0 7px 14px
                 rgba(3,61,101,.12)
             );
+
     }
 
     .badge{
+
         font-size:8px;
+
         padding:
             6px
             10px;
+
         margin-bottom:8px;
+
     }
 
     h1{
+
         font-size:29px;
+
         margin-bottom:9px;
+
     }
 
     .welcome-description{
+
         font-size:11px;
+
         line-height:1.6;
+
     }
 
     .features{
+
         gap:6px;
+
         margin:
             17px 0;
+
     }
 
     .feature{
+
         padding:
             12px
             4px;
+
         border-radius:15px;
+
     }
 
     .feature-icon{
+
         font-size:20px;
+
         margin-bottom:4px;
+
     }
 
     .feature-title{
+
         font-size:8px;
+
     }
 
     .feature-text{
+
         font-size:6.5px;
+
     }
 
     h2{
+
         font-size:25px;
+
     }
 
     .subtitle{
+
         font-size:11px;
+
         margin-bottom:16px;
+
     }
 
     button{
+
         min-height:46px;
+
         padding:
             11px
             14px;
+
         margin-top:7px;
+
         border-radius:14px;
+
         font-size:12px;
+
     }
 
     .login-icon{
+
         width:95px;
         height:95px;
+
         margin-bottom:13px;
+
     }
 
     .input-group{
+
         margin-bottom:11px;
+
     }
 
     .input-group label{
+
         font-size:9px;
+
         margin-bottom:5px;
+
     }
 
     input{
+
         height:50px;
+
         min-height:50px;
+
         padding:
             12px
             14px;
+
         font-size:16px;
+
     }
 
     #auth-message{
+
         font-size:10px;
+
         min-height:18px;
+
     }
 
     .lobby-header{
+
         margin-bottom:16px;
+
     }
 
     .lobby-header h2{
+
         font-size:25px;
+
     }
 
     .themes{
+
         grid-template-columns:
             repeat(2,minmax(0,1fr));
+
         gap:8px;
+
     }
 
     .theme{
+
         min-height:105px;
+
         padding:
             13px
             7px;
+
         border-radius:17px;
+
     }
 
     .theme-icon{
+
         width:50px;
         height:50px;
+
         margin-bottom:7px;
+
         border-radius:15px;
+
         font-size:27px;
+
     }
 
     .theme-name{
+
         font-size:10px;
+
     }
 
     .game-header{
+
         gap:7px;
+
         margin-bottom:13px;
+
     }
 
     .game-theme{
+
         gap:7px;
+
     }
 
     .game-logo{
+
         width:42px;
         height:42px;
+
     }
 
     .game-theme small{
+
         font-size:7px;
+
     }
 
     .game-theme h2{
+
         font-size:19px;
+
     }
 
     .timer{
+
         width:60px;
         height:60px;
+
         padding:4px;
+
     }
 
     .timer-inner{
+
         font-size:16px;
+
     }
 
     .question-info{
+
         font-size:9px;
+
         margin-bottom:5px;
+
     }
 
     .progress-bar{
+
         height:7px;
+
         margin-bottom:12px;
+
     }
 
     .clue-card{
+
         padding:
             21px
             8px;
+
         margin-bottom:10px;
+
         border-radius:17px;
+
     }
 
     .clue-label{
+
         font-size:7px;
+
         margin-bottom:7px;
+
     }
 
     #pista{
+
         font-size:
             clamp(
                 21px,
                 7vw,
                 28px
             );
+
         letter-spacing:2.5px;
+
     }
 
     #respuesta{
+
         height:50px;
+
         min-height:50px;
+
         font-size:16px;
+
     }
 
     .score-panel{
+
         gap:6px;
+
         margin-top:8px;
+
     }
 
     .score-item{
+
         padding:
             9px
             4px;
+
         border-radius:13px;
+
     }
 
     .score-label{
+
         font-size:7px;
+
     }
 
     .score-value{
+
         font-size:17px;
+
     }
 
     #resultado{
+
         min-height:21px;
+
         font-size:10px;
+
         margin:
             6px 0
             1px;
+
     }
 
     .result-icon{
+
         width:95px;
         height:95px;
+
         margin-bottom:13px;
+
     }
 
     .result-screen h2{
+
         font-size:26px;
+
     }
 
     .result-description{
+
         font-size:11px;
+
         margin-bottom:14px;
+
     }
 
     .result-stats{
+
         gap:6px;
+
         margin-bottom:12px;
+
     }
 
     .result-stat{
+
         padding:
             11px
             4px;
+
     }
 
     .result-stat strong{
+
         font-size:19px;
+
     }
 
     .result-stat span{
+
         font-size:7px;
+
     }
 
     .progress-screen-title{
+
         font-size:25px;
+
     }
 
     .progress-screen-subtitle{
+
         font-size:10px;
+
         margin-bottom:14px;
+
     }
 
     .stats-grid{
+
         grid-template-columns:
             repeat(2,minmax(0,1fr));
+
         gap:7px;
+
         margin-bottom:13px;
+
     }
 
     .stat-card{
+
         padding:12px;
+
         border-radius:15px;
+
     }
 
     .stat-icon{
+
         font-size:19px;
+
         margin-bottom:4px;
+
     }
 
     .stat-label{
+
         font-size:7px;
+
     }
 
     .stat-value{
+
         font-size:19px;
+
     }
 
     .progress-table{
+
         min-width:420px;
+
     }
 
     .progress-table th{
+
         font-size:7px;
+
     }
 
     .progress-table td{
+
         font-size:8px;
+
     }
 
     .tip{
+
         margin-top:11px;
+
         padding:11px;
+
     }
 
     .tip-text{
+
         font-size:8px;
+
     }
 
     .estrella-icon{
+
         width:72px;
         height:72px;
+
     }
 
     .estrella-titulo{
+
         font-size:29px;
+
     }
 
     .estrella-texto{
+
         font-size:14px;
+
     }
 
 }
@@ -1928,239 +2922,355 @@ input:focus{
 @media(max-width:390px){
 
     .brand{
+
         font-size:10px;
+
     }
 
     .brand-logo{
+
         width:37px;
         height:37px;
+
     }
 
     .theme-toggle{
+
         width:38px;
         height:38px;
+
         min-height:38px;
+
         font-size:16px;
+
     }
 
     .container{
+
         width:
             calc(100% - 10px) !important;
+
         padding:
             17px
             11px;
+
     }
 
     #welcome-container{
+
         padding:
             19px
             10px
             16px;
+
     }
 
     .hero-logo-wrapper{
+
         width:105px;
         height:105px;
+
     }
 
     .hero-logo{
+
         width:98px;
         height:98px;
+
     }
 
     h1{
+
         font-size:26px;
+
     }
 
     .welcome-description{
+
         font-size:10px;
+
     }
 
     .features{
+
         gap:4px;
+
     }
 
     .feature{
+
         padding:
             10px
             2px;
+
     }
 
     .feature-icon{
+
         font-size:18px;
+
     }
 
     .feature-title{
+
         font-size:7px;
+
     }
 
     .feature-text{
+
         font-size:6px;
+
     }
 
     .theme{
+
         min-height:98px;
+
     }
 
     .theme-icon{
+
         width:46px;
         height:46px;
+
         font-size:25px;
+
     }
 
     .theme-name{
+
         font-size:9px;
+
     }
 
     .game-logo{
+
         width:38px;
         height:38px;
+
     }
 
     .game-theme h2{
+
         font-size:17px;
+
     }
 
     .timer{
+
         width:56px;
         height:56px;
+
     }
 
     #pista{
+
         font-size:20px;
+
         letter-spacing:2px;
+
     }
 
     .estrella-icon{
+
         width:65px;
         height:65px;
+
     }
 
     .estrella-titulo{
+
         font-size:26px;
+
     }
 
     .estrella-texto{
+
         font-size:13px;
+
     }
 
 }
 
 body.keyboard-open .topbar{
-    transform:translateY(-110%);
+
+    transform:
+        translateY(-110%);
+
     opacity:0;
+
     pointer-events:none;
+
 }
 
 body.keyboard-open .container{
+
     margin-top:
         max(
             8px,
             env(safe-area-inset-top)
         );
+
     margin-bottom:8px;
+
     padding:
         13px
         11px;
+
     border-radius:17px;
+
 }
 
 body.keyboard-open .game-header{
+
     margin-bottom:7px;
+
 }
 
 body.keyboard-open .game-logo{
+
     width:36px;
     height:36px;
+
 }
 
 body.keyboard-open .game-theme small{
+
     font-size:6px;
+
 }
 
 body.keyboard-open .game-theme h2{
+
     font-size:15px;
+
 }
 
 body.keyboard-open .timer{
+
     width:47px;
     height:47px;
+
 }
 
 body.keyboard-open .timer-inner{
+
     font-size:12px;
+
 }
 
 body.keyboard-open .question-info{
+
     font-size:7px;
+
 }
 
 body.keyboard-open .progress-bar{
+
     height:5px;
+
     margin-bottom:7px;
+
 }
 
 body.keyboard-open .clue-card{
+
     padding:
         10px
         7px;
+
     margin-bottom:5px;
+
     border-radius:15px;
+
 }
 
 body.keyboard-open .clue-label{
+
     margin-bottom:4px;
+
     font-size:6px;
+
 }
 
 body.keyboard-open #pista{
+
     font-size:17px;
+
     letter-spacing:1.5px;
+
 }
 
 body.keyboard-open #respuesta{
+
     height:45px;
+
     min-height:45px;
+
     font-size:16px;
+
 }
 
 body.keyboard-open #btn-verificar{
+
     min-height:40px;
+
     padding:8px;
+
     margin-top:4px;
+
     font-size:10px;
+
 }
 
 body.keyboard-open #resultado{
+
     min-height:15px;
+
     margin:3px 0;
+
     font-size:8px;
+
 }
 
 body.keyboard-open .score-panel{
+
     margin-top:3px;
+
 }
 
 body.keyboard-open .score-item{
+
     padding:
         5px
         3px;
+
 }
 
 body.keyboard-open .score-label{
+
     font-size:5px;
+
 }
 
 body.keyboard-open .score-value{
+
     font-size:12px;
+
 }
 
 body.keyboard-open #game-container > .btn-secondary,
 body.keyboard-open #game-container > .btn-warning{
+
     min-height:30px;
+
     padding:6px;
+
     margin-top:3px;
+
     font-size:7px;
+
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -2168,10 +3278,15 @@ body.keyboard-open #game-container > .btn-warning{
     *,
     *::before,
     *::after{
+
         animation-duration:.01ms !important;
+
         animation-iteration-count:1 !important;
+
         transition-duration:.01ms !important;
+
         scroll-behavior:auto !important;
+
     }
 
 }
@@ -2183,7 +3298,9 @@ body.keyboard-open #game-container > .btn-warning{
 (function(){
 
     const temaGuardado =
-        localStorage.getItem("modoVisual");
+        localStorage.getItem(
+            "modoVisual"
+        );
 
     if(temaGuardado === "dark"){
 
@@ -2253,16 +3370,22 @@ body.keyboard-open #game-container > .btn-warning{
     </div>
 
     <div class="badge">
+
         ⚡ DESAFÍO DE PALABRAS
+
     </div>
 
     <h1>
+
         Encuentra la Palabra
+
     </h1>
 
     <p class="welcome-description">
+
         Pon a prueba tu rapidez mental, completa las palabras
         y demuestra cuánto sabes.
+
     </p>
 
     <div class="features">
@@ -2270,15 +3393,21 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="feature">
 
             <span class="feature-icon">
+
                 ⏱️
+
             </span>
 
             <span class="feature-title">
+
                 30 segundos
+
             </span>
 
             <span class="feature-text">
+
                 por palabra
+
             </span>
 
         </div>
@@ -2286,15 +3415,21 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="feature">
 
             <span class="feature-icon">
+
                 🧠
+
             </span>
 
             <span class="feature-title">
+
                 Entrena
+
             </span>
 
             <span class="feature-text">
+
                 tu mente
+
             </span>
 
         </div>
@@ -2302,15 +3437,21 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="feature">
 
             <span class="feature-icon">
+
                 🏆
+
             </span>
 
             <span class="feature-title">
+
                 Consigue
+
             </span>
 
             <span class="feature-text">
+
                 puntos
+
             </span>
 
         </div>
@@ -2321,7 +3462,9 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-primary"
         onclick="irLogin()"
     >
+
         🚀 Comenzar juego
+
     </button>
 
 </div>
@@ -2342,17 +3485,23 @@ body.keyboard-open #game-container > .btn-warning{
     </div>
 
     <h2>
+
         Bienvenido
+
     </h2>
 
     <p class="subtitle">
+
         Inicia sesión para guardar tu progreso.
+
     </p>
 
     <div class="input-group">
 
         <label>
+
             CORREO ELECTRÓNICO
+
         </label>
 
         <input
@@ -2367,7 +3516,9 @@ body.keyboard-open #game-container > .btn-warning{
     <div class="input-group">
 
         <label>
+
             CONTRASEÑA
+
         </label>
 
         <input
@@ -2383,14 +3534,18 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-primary"
         onclick="login()"
     >
+
         🔑 Iniciar sesión
+
     </button>
 
     <button
         class="btn-secondary"
         onclick="register()"
     >
+
         📝 Crear cuenta
+
     </button>
 
     <p id="auth-message"></p>
@@ -2399,7 +3554,9 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-secondary"
         onclick="irBienvenida()"
     >
+
         ← Volver
+
     </button>
 
 </div>
@@ -2413,11 +3570,15 @@ body.keyboard-open #game-container > .btn-warning{
     <div class="lobby-header">
 
         <h2>
+
             Elige tu desafío
+
         </h2>
 
         <p class="subtitle">
+
             Selecciona una categoría y comienza a jugar.
+
         </p>
 
     </div>
@@ -2430,11 +3591,15 @@ body.keyboard-open #game-container > .btn-warning{
         >
 
             <span class="theme-icon">
+
                 💻
+
             </span>
 
             <span class="theme-name">
+
                 Tecnología
+
             </span>
 
         </div>
@@ -2445,11 +3610,15 @@ body.keyboard-open #game-container > .btn-warning{
         >
 
             <span class="theme-icon">
+
                 🌎
+
             </span>
 
             <span class="theme-name">
+
                 Países y ciudades
+
             </span>
 
         </div>
@@ -2460,11 +3629,15 @@ body.keyboard-open #game-container > .btn-warning{
         >
 
             <span class="theme-icon">
+
                 🐶
+
             </span>
 
             <span class="theme-name">
+
                 Animales
+
             </span>
 
         </div>
@@ -2475,11 +3648,15 @@ body.keyboard-open #game-container > .btn-warning{
         >
 
             <span class="theme-icon">
+
                 🍎
+
             </span>
 
             <span class="theme-name">
+
                 Frutas
+
             </span>
 
         </div>
@@ -2490,11 +3667,15 @@ body.keyboard-open #game-container > .btn-warning{
         >
 
             <span class="theme-icon">
+
                 ⚽
+
             </span>
 
             <span class="theme-name">
+
                 Deportes
+
             </span>
 
         </div>
@@ -2505,11 +3686,15 @@ body.keyboard-open #game-container > .btn-warning{
         >
 
             <span class="theme-icon">
+
                 🍔
+
             </span>
 
             <span class="theme-name">
+
                 Comida
+
             </span>
 
         </div>
@@ -2520,14 +3705,18 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-secondary"
         onclick="mostrarProgreso()"
     >
+
         📊 Mi progreso
+
     </button>
 
     <button
         class="btn-danger"
         onclick="cerrarSesion()"
     >
+
         🚪 Cerrar sesión
+
     </button>
 
 </div>
@@ -2539,11 +3728,15 @@ body.keyboard-open #game-container > .btn-warning{
 >
 
     <div class="progress-screen-title">
+
         📊 Mi progreso
+
     </div>
 
     <p class="progress-screen-subtitle">
+
         Revisa tus resultados y mira cuánto has avanzado.
+
     </p>
 
     <div class="stats-grid">
@@ -2551,18 +3744,24 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="stat-card">
 
             <div class="stat-icon">
+
                 🏆
+
             </div>
 
             <span class="stat-label">
+
                 Puntos totales
+
             </span>
 
             <span
                 class="stat-value"
                 id="total-puntos"
             >
+
                 0
+
             </span>
 
         </div>
@@ -2570,18 +3769,24 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="stat-card">
 
             <div class="stat-icon">
+
                 📝
+
             </div>
 
             <span class="stat-label">
+
                 Palabras respondidas
+
             </span>
 
             <span
                 class="stat-value"
                 id="total-palabras"
             >
+
                 0
+
             </span>
 
         </div>
@@ -2589,18 +3794,24 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="stat-card">
 
             <div class="stat-icon">
+
                 🎯
+
             </div>
 
             <span class="stat-label">
+
                 Precisión
+
             </span>
 
             <span
                 class="stat-value"
                 id="precision"
             >
+
                 0%
+
             </span>
 
         </div>
@@ -2608,18 +3819,24 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="stat-card">
 
             <div class="stat-icon">
+
                 📚
+
             </div>
 
             <span class="stat-label">
+
                 Categorías terminadas
+
             </span>
 
             <span
                 class="stat-value"
                 id="categorias-completadas"
             >
+
                 0/6
+
             </span>
 
         </div>
@@ -2635,15 +3852,21 @@ body.keyboard-open #game-container > .btn-warning{
                 <tr>
 
                     <th>
+
                         Categoría
+
                     </th>
 
                     <th>
+
                         Progreso
+
                     </th>
 
                     <th>
+
                         Estado
+
                     </th>
 
                 </tr>
@@ -2659,13 +3882,17 @@ body.keyboard-open #game-container > .btn-warning{
     <div class="tip">
 
         <span class="tip-title">
+
             💡 Consejo
+
         </span>
 
         <p class="tip-text">
+
             Intenta recordar las palabras que falles.
             La idea no es solamente conseguir puntos,
             sino mejorar mientras juegas.
+
         </p>
 
     </div>
@@ -2674,7 +3901,9 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-secondary"
         onclick="mostrarLobby()"
     >
+
         ← Volver al lobby
+
     </button>
 
 </div>
@@ -2698,11 +3927,15 @@ body.keyboard-open #game-container > .btn-warning{
             <div>
 
                 <small>
+
                     CATEGORÍA
+
                 </small>
 
                 <h2 id="tema-actual">
+
                     Tecnología
+
                 </h2>
 
             </div>
@@ -2717,7 +3950,9 @@ body.keyboard-open #game-container > .btn-warning{
             <div class="timer-inner">
 
                 <span id="timer-text">
+
                     30
+
                 </span>
 
             </div>
@@ -2729,11 +3964,15 @@ body.keyboard-open #game-container > .btn-warning{
     <div class="question-info">
 
         <span id="pregunta-numero">
+
             Palabra 1 de 8
+
         </span>
 
         <span id="porcentaje">
+
             0%
+
         </span>
 
     </div>
@@ -2747,11 +3986,15 @@ body.keyboard-open #game-container > .btn-warning{
     <div class="clue-card">
 
         <div class="clue-label">
+
             COMPLETA LA PALABRA
+
         </div>
 
         <p id="pista">
+
             C_MPU_____
+
         </p>
 
     </div>
@@ -2770,7 +4013,9 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-primary"
         onclick="verificar()"
     >
+
         ✓ Verificar respuesta
+
     </button>
 
     <div id="resultado"></div>
@@ -2780,14 +4025,18 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="score-item">
 
             <span class="score-label">
+
                 PUNTOS
+
             </span>
 
             <span
                 class="score-value"
                 id="puntaje"
             >
+
                 0
+
             </span>
 
         </div>
@@ -2795,14 +4044,18 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="score-item">
 
             <span class="score-label">
+
                 ACIERTOS
+
             </span>
 
             <span
                 class="score-value"
                 id="aciertos"
             >
+
                 0
+
             </span>
 
         </div>
@@ -2810,14 +4063,18 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="score-item">
 
             <span class="score-label">
+
                 ERRORES
+
             </span>
 
             <span
                 class="score-value"
                 id="errores"
             >
+
                 0
+
             </span>
 
         </div>
@@ -2828,14 +4085,18 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-secondary"
         onclick="volverLobby()"
     >
+
         ← Volver al lobby
+
     </button>
 
     <button
         class="btn-warning"
         onclick="reiniciarNivel()"
     >
+
         🔄 Reiniciar nivel
+
     </button>
 
 </div>
@@ -2856,14 +4117,18 @@ body.keyboard-open #game-container > .btn-warning{
     </div>
 
     <h2>
+
         ¡Nivel completado!
+
     </h2>
 
     <p
         class="result-description"
         id="result-description"
     >
+
         Has terminado esta categoría.
+
     </p>
 
     <div class="result-stats">
@@ -2871,11 +4136,15 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="result-stat">
 
             <strong id="result-points">
+
                 0
+
             </strong>
 
             <span>
+
                 Puntos
+
             </span>
 
         </div>
@@ -2883,11 +4152,15 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="result-stat">
 
             <strong id="result-correct">
+
                 0
+
             </strong>
 
             <span>
+
                 Aciertos
+
             </span>
 
         </div>
@@ -2895,11 +4168,15 @@ body.keyboard-open #game-container > .btn-warning{
         <div class="result-stat">
 
             <strong id="result-accuracy">
+
                 0%
+
             </strong>
 
             <span>
+
                 Precisión
+
             </span>
 
         </div>
@@ -2910,21 +4187,27 @@ body.keyboard-open #game-container > .btn-warning{
         class="btn-primary"
         onclick="jugarDeNuevo()"
     >
+
         🔄 Jugar otra vez
+
     </button>
 
     <button
         class="btn-secondary"
         onclick="mostrarLobby()"
     >
+
         📚 Elegir otra categoría
+
     </button>
 
     <button
         class="btn-secondary"
         onclick="mostrarProgreso()"
     >
+
         📊 Ver mi progreso
+
     </button>
 
 </div>
@@ -2966,11 +4249,15 @@ body.keyboard-open #game-container > .btn-warning{
         </div>
 
         <div class="estrella-titulo">
+
             ¡Felicidades!
+
         </div>
 
         <div class="estrella-texto">
+
             ¡Respuesta correcta!
+
         </div>
 
     </div>
@@ -3087,206 +4374,264 @@ const SIGNIN_URL =
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
 let userToken=null;
+
 let palabras=[];
+
 let indice=0;
+
 let puntaje=0;
+
 let aciertos=0;
+
 let errores=0;
+
 let temaActual="";
+
 let bloqueado=false;
+
 let tiempo=30;
+
 let intervalo=null;
 
 const temas={
 
     tecnologia:[
+
         {
             pista:"C_MPU_____",
             respuesta:"COMPUTADOR"
         },
+
         {
             pista:"C_MP_T_D_R_",
             respuesta:"COMPUTADORA"
         },
+
         {
             pista:"PR_GR_MA",
             respuesta:"PROGRAMA"
         },
+
         {
             pista:"INT_RN_T",
             respuesta:"INTERNET"
         },
+
         {
             pista:"J_V_SCR_PT",
             respuesta:"JAVASCRIPT"
         },
+
         {
             pista:"HT_L",
             respuesta:"HTML"
         },
+
         {
             pista:"CI_NCI_",
             respuesta:"CIENCIA"
         },
+
         {
             pista:"M_T_M_TIC_S",
             respuesta:"MATEMÁTICAS"
         }
+
     ],
 
     paises:[
+
         {
             pista:"C_L_MB__",
             respuesta:"COLOMBIA"
         },
+
         {
             pista:"M_X_C_",
             respuesta:"MÉXICO"
         },
+
         {
             pista:"ESP_Ñ_",
             respuesta:"ESPAÑA"
         },
+
         {
             pista:"ARG_NT_N_",
             respuesta:"ARGENTINA"
         },
+
         {
             pista:"P_R_",
             respuesta:"PERÚ"
         },
+
         {
             pista:"B_G_T_",
             respuesta:"BOGOTÁ"
         },
+
         {
             pista:"M_DR_D",
             respuesta:"MADRID"
         }
+
     ],
 
     animales:[
+
         {
             pista:"P_RR_",
             respuesta:"PERRO"
         },
+
         {
             pista:"G_T_",
             respuesta:"GATO"
         },
+
         {
             pista:"L_ON",
             respuesta:"LEÓN"
         },
+
         {
             pista:"T_GR_",
             respuesta:"TIGRE"
         },
+
         {
             pista:"E_L_F_NT_",
             respuesta:"ELEFANTE"
         },
+
         {
             pista:"D_LF_N",
             respuesta:"DELFIN"
         },
+
         {
             pista:"P_G_S_",
             respuesta:"PEGASO"
         }
+
     ],
 
     frutas:[
+
         {
             pista:"M_NZ_N_",
             respuesta:"MANZANA"
         },
+
         {
             pista:"P_R_",
             respuesta:"PERA"
         },
+
         {
             pista:"PL_T_NO",
             respuesta:"PLÁTANO"
         },
+
         {
             pista:"S_ND_A",
             respuesta:"SANDÍA"
         },
+
         {
             pista:"FR_S_",
             respuesta:"FRESA"
         },
+
         {
             pista:"M_L_N",
             respuesta:"MELÓN"
         },
+
         {
             pista:"N_R_NJ_",
             respuesta:"NARANJA"
         }
+
     ],
 
     deportes:[
+
         {
             pista:"F_TB_L",
             respuesta:"FÚTBOL"
         },
+
         {
             pista:"B_LONC_ST_",
             respuesta:"BALONCESTO"
         },
+
         {
             pista:"T_N_S",
             respuesta:"TENIS"
         },
+
         {
             pista:"V_L_IB_L",
             respuesta:"VOLEIBOL"
         },
+
         {
             pista:"N_T_CI_N",
             respuesta:"NATACIÓN"
         },
+
         {
             pista:"C_RR_R_",
             respuesta:"CARRERA"
         },
+
         {
             pista:"B_X__",
             respuesta:"BOXEO"
         }
+
     ],
 
     comida:[
+
         {
             pista:"P_ZZ_",
             respuesta:"PIZZA"
         },
+
         {
             pista:"H_MBUR__ESA",
             respuesta:"HAMBURGUESA"
         },
+
         {
             pista:"P_ST_",
             respuesta:"PASTA"
         },
+
         {
             pista:"S_P_",
             respuesta:"SOPA"
         },
+
         {
             pista:"A_R_Z",
             respuesta:"ARROZ"
         },
+
         {
             pista:"P_LL_",
             respuesta:"POLLO"
         },
+
         {
             pista:"H__V_",
             respuesta:"HUEVO"
         }
+
     ]
 
 };
@@ -3294,10 +4639,15 @@ const temas={
 const nombresTemas={
 
     tecnologia:"Tecnología",
+
     paises:"Países y ciudades",
+
     animales:"Animales",
+
     frutas:"Frutas",
+
     deportes:"Deportes",
+
     comida:"Comida"
 
 };
@@ -3465,15 +4815,18 @@ async function register(){
                 SIGNUP_URL,
                 {
                     method:"POST",
+
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
+
                     body:JSON.stringify({
                         email,
                         password,
                         returnSecureToken:true
                     })
+
                 }
             );
 
@@ -3542,15 +4895,18 @@ async function login(){
                 SIGNIN_URL,
                 {
                     method:"POST",
+
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
+
                     body:JSON.stringify({
                         email,
                         password,
                         returnSecureToken:true
                     })
+
                 }
             );
 
@@ -3631,7 +4987,9 @@ function seleccionarTema(tema){
 
     temaActual=tema;
 
-    palabras=[...temas[tema]];
+    palabras=[
+        ...temas[tema]
+    ];
 
     const guardado=
         localStorage.getItem(
@@ -3648,24 +5006,39 @@ function seleccionarTema(tema){
                 );
 
             indice=
-                Number(progreso.indice)||0;
+                Number(
+                    progreso.indice
+                ) ||
+                0;
 
             puntaje=
-                Number(progreso.puntaje)||0;
+                Number(
+                    progreso.puntaje
+                ) ||
+                0;
 
             aciertos=
-                Number(progreso.aciertos)||0;
+                Number(
+                    progreso.aciertos
+                ) ||
+                0;
 
             errores=
-                Number(progreso.errores)||0;
+                Number(
+                    progreso.errores
+                ) ||
+                0;
 
         }
 
         catch{
 
             indice=0;
+
             puntaje=0;
+
             aciertos=0;
+
             errores=0;
 
         }
@@ -3675,8 +5048,11 @@ function seleccionarTema(tema){
     else{
 
         indice=0;
+
         puntaje=0;
+
         aciertos=0;
+
         errores=0;
 
     }
@@ -3684,8 +5060,11 @@ function seleccionarTema(tema){
     if(indice>=palabras.length){
 
         indice=0;
+
         puntaje=0;
+
         aciertos=0;
+
         errores=0;
 
     }
@@ -3732,8 +5111,11 @@ function reiniciarNivel(){
     detenerCronometro();
 
     indice=0;
+
     puntaje=0;
+
     aciertos=0;
+
     errores=0;
 
     guardarProgreso();
@@ -4258,8 +5640,11 @@ function finalizarJuego(){
 function jugarDeNuevo(){
 
     indice=0;
+
     puntaje=0;
+
     aciertos=0;
+
     errores=0;
 
     document.body.classList.remove(
@@ -4291,8 +5676,11 @@ function guardarProgreso(){
         JSON.stringify({
 
             indice,
+
             puntaje,
+
             aciertos,
+
             errores
 
         })
@@ -4313,8 +5701,11 @@ function mostrarProgreso(){
     );
 
     let puntosTotales=0;
+
     let palabrasRespondidas=0;
+
     let respuestasCorrectas=0;
+
     let categoriasCompletadas=0;
 
     const tabla=
@@ -4334,7 +5725,9 @@ function mostrarProgreso(){
                 );
 
             let respondidas=0;
+
             let puntos=0;
+
             let aciertosCategoria=0;
 
             if(guardado){
@@ -4350,7 +5743,9 @@ function mostrarProgreso(){
                         Math.min(
                             Number(
                                 progreso.indice
-                            )||0,
+                            ) ||
+                            0,
+
                             temas[
                                 categoria.id
                             ].length
@@ -4359,13 +5754,16 @@ function mostrarProgreso(){
                     puntos=
                         Number(
                             progreso.puntaje
-                        )||0;
+                        ) ||
+                        0;
 
                     aciertosCategoria=
                         Math.min(
                             Number(
                                 progreso.aciertos
-                            )||0,
+                            ) ||
+                            0,
+
                             respondidas
                         );
 
@@ -4374,7 +5772,9 @@ function mostrarProgreso(){
                 catch{
 
                     respondidas=0;
+
                     puntos=0;
+
                     aciertosCategoria=0;
 
                 }
@@ -4411,7 +5811,8 @@ function mostrarProgreso(){
 
             if(respondidas>=total){
 
-                estado="Completado";
+                estado=
+                    "Completado";
 
                 claseEstado=
                     "status-complete";
@@ -4422,7 +5823,8 @@ function mostrarProgreso(){
 
             else if(respondidas>0){
 
-                estado="En progreso";
+                estado=
+                    "En progreso";
 
                 claseEstado=
                     "status-progress";
@@ -4441,7 +5843,9 @@ function mostrarProgreso(){
                     <div class="theme-progress-name">
 
                         <span class="theme-progress-icon">
+
                             ${categoria.icono}
+
                         </span>
 
                         ${categoria.nombre}
@@ -4453,7 +5857,9 @@ function mostrarProgreso(){
                 <td>
 
                     <span class="progress-number">
+
                         ${respondidas}/${total}
+
                     </span>
 
                 </td>
@@ -4461,7 +5867,9 @@ function mostrarProgreso(){
                 <td>
 
                     <span class="progress-status ${claseEstado}">
+
                         ${estado}
+
                     </span>
 
                 </td>
@@ -4617,8 +6025,11 @@ respuestaInput.addEventListener(
             if(window.innerWidth<=600){
 
                 respuestaInput.scrollIntoView({
+
                     behavior:"smooth",
+
                     block:"center"
+
                 });
 
             }
