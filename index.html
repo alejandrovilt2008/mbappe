@@ -1,379 +1,338 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Encuentra la Palabra</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #74ebd5, #ACB6E5, #fcb045, #fd1d1d, #833ab4);
-      background-size: 400% 400%;
-      animation: gradient 12s ease infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    <meta charset="UTF-8">
 
-    #logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 120px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.3);
-      padding: 5px;
-    }
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    h1 {
-      color: #fff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-      margin-top: 100px;
-    }
+    <title>Encuentra la Palabra</title>
 
-    .container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      width: 320px;
-      animation: aparecer 1s ease;
-    }
+    <!-- Google Fonts -->
 
-    @keyframes aparecer {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      width: 80%;
-    }
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
-    button {
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
 
-    button:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
-    }
+    <!-- CSS -->
 
-    #resultado {
-      font-size: 18px;
-      font-weight: bold;
-    }
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
-    #puntaje {
-      font-size: 20px;
-      margin-top: 15px;
-      color: #333;
-    }
-
-    #estrella {
-      font-size: 45px;
-      color: gold;
-      margin-top: 20px;
-      text-shadow: 0 0 20px gold, 0 0 40px orange;
-      display: none;
-      transform-origin: center;
-      animation: brillarGirar 1.5s ease forwards;
-    }
-
-    @keyframes brillarGirar {
-      0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
-      30% { transform: scale(1.3) rotate(180deg); opacity: 1; }
-      70% { transform: scale(1.1) rotate(360deg); opacity: 1; }
-      100% { transform: scale(0.8) rotate(720deg); opacity: 0; }
-    }
-  </style>
 </head>
+
 <body>
 
-  <img id="logo" src="img/logo.png" alt="Logo del juego">
-  <h1>Juego: Encuentra la Palabra</h1>
+<!--==================================================
+LOGO
+===================================================-->
 
-  <!-- LOGIN -->
-  <div id="login-container" class="container">
-    <h2>Iniciar sesión</h2>
-    <input type="email" id="email" placeholder="Correo electrónico">
-    <input type="password" id="password" placeholder="Contraseña">
-    <button onclick="login()">Iniciar sesión</button>
-    <button onclick="register()">Registrarse</button>
-    <p id="auth-message" style="color:red;"></p>
-  </div>
+<header>
 
-  <!-- LOBBY -->
-  <div id="lobby-container" class="container" style="display:none;">
-    <h2>Selecciona un tema</h2>
-    <button onclick="seleccionarTema('tecnologia')">💻 Tecnología</button>
-    <button onclick="seleccionarTema('paises')">🌎 Países y Ciudades</button>
-    <button onclick="seleccionarTema('animales')">🐶 Animales</button>
-    <button onclick="seleccionarTema('frutas')">🍎 Frutas</button>
-    <button onclick="seleccionarTema('deportes')">⚽ Deportes</button>
-    <button onclick="seleccionarTema('comida')">🍔 Comida</button>
-    <button onclick="cerrarSesion()" style="background-color:#d9534f;">Cerrar sesión</button>
-  </div>
+    <img
+        id="logo"
+        src="img/logo.png"
+        alt="Logo Encuentra la Palabra">
 
-  <!-- JUEGO -->
-  <div id="game-container" class="container" style="display:none;">
-    <p id="tema-actual"></p>
-    <p id="pista"><b>Pista:</b></p>
-    <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
-    <button onclick="verificar()">Verificar</button>
+    <h1>
+        Encuentra la Palabra
+    </h1>
+
+</header>
+
+<!--==================================================
+CONTENEDOR PRINCIPAL
+===================================================-->
+
+<main>
+
+<!--==================================================
+PANTALLA DE INICIO
+===================================================-->
+
+<section
+    id="inicio-container"
+    class="container">
+
+    <h2>
+        ¡Bienvenido!
+    </h2>
+
+    <p class="descripcion">
+
+        Aprende nuevas palabras mientras te diviertes.
+
+    </p>
+
+    <button
+        onclick="mostrarLogin()">
+
+        🚀 Comenzar
+
+    </button>
+
+</section>
+
+<!--==================================================
+LOGIN
+===================================================-->
+
+<section
+    id="login-container"
+    class="container"
+    style="display:none;">
+
+    <h2>
+        Iniciar sesión
+    </h2>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Correo electrónico"
+        autocomplete="email">
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Contraseña"
+        autocomplete="current-password">
+
+    <button onclick="login()">
+
+        Iniciar sesión
+
+    </button>
+
+    <button onclick="register()">
+
+        Registrarse
+
+    </button>
+
+    <p
+        id="auth-message">
+
+    </p>
+
+</section>
+    <!-- ========================================= -->
+<!-- LOBBY -->
+<!-- ========================================= -->
+
+<div id="lobby-container" class="container" style="display:none;">
+
+    <h2>🎮 Selecciona un tema</h2>
+
+    <div class="perfil">
+
+        <div class="avatar">
+            👤
+        </div>
+
+        <div class="datos">
+            <h3 id="usuario">Usuario</h3>
+            <p>¡Bienvenido nuevamente!</p>
+        </div>
+
+    </div>
+
+    <div class="estadisticas">
+
+        <div class="stat">
+            ⭐
+            <span id="nivel">Nivel 1</span>
+        </div>
+
+        <div class="stat">
+            🏆
+            <span id="puntajeTotal">0 pts</span>
+        </div>
+
+    </div>
+
+    <div class="grid-temas">
+
+        <button class="tema-btn"
+                onclick="seleccionarTema('tecnologia')">
+
+            💻
+
+            <span>Tecnología</span>
+
+        </button>
+
+        <button class="tema-btn"
+                onclick="seleccionarTema('paises')">
+
+            🌎
+
+            <span>Países</span>
+
+        </button>
+
+        <button class="tema-btn"
+                onclick="seleccionarTema('animales')">
+
+            🐶
+
+            <span>Animales</span>
+
+        </button>
+
+        <button class="tema-btn"
+                onclick="seleccionarTema('frutas')">
+
+            🍎
+
+            <span>Frutas</span>
+
+        </button>
+
+        <button class="tema-btn"
+                onclick="seleccionarTema('deportes')">
+
+            ⚽
+
+            <span>Deportes</span>
+
+        </button>
+
+        <button class="tema-btn"
+                onclick="seleccionarTema('comida')">
+
+            🍔
+
+            <span>Comida</span>
+
+        </button>
+
+    </div>
+
+    <button
+        class="cerrar-btn"
+        onclick="cerrarSesion()">
+
+        🚪 Cerrar sesión
+
+    </button>
+
+</div>
+    <!-- ========================================= -->
+<!-- PANTALLA DEL JUEGO -->
+<!-- ========================================= -->
+
+<div id="game-container"
+     class="container"
+     style="display:none;">
+
+    <!-- Tema -->
+
+    <h2 id="tema-actual"></h2>
+
+    <!-- Tarjeta de pista -->
+
+    <div class="card-pista">
+
+        <p>Pista</p>
+
+        <h1 id="pista"></h1>
+
+    </div>
+
+    <!-- Cronómetro -->
+
+    <p id="contador">
+        ⏱ 30 segundos
+    </p>
+
+    <!-- Barra de progreso -->
+
+    <div class="barra">
+
+        <div id="barra-progreso"></div>
+
+    </div>
+
+    <!-- Caja de respuesta -->
+
+    <input
+        type="text"
+        id="respuesta"
+        placeholder="Escribe la palabra">
+
+    <!-- Botón verificar -->
+
+    <button
+        onclick="verificar()">
+
+        ✔ Verificar
+
+    </button>
+
+    <!-- Resultado -->
+
     <p id="resultado"></p>
-    <p id="puntaje">Puntaje: 0</p>
-    <div id="estrella">🌟 ¡Felicitaciones!</div>
-    <button onclick="volverLobby()" style="background-color:#0275d8;">Volver al lobby</button>
-    <button onclick="reiniciarNivel()" style="background-color:#f0ad4e;">🔄 Reiniciar nivel</button>
-  </div>
 
-  <script>
-    const API_KEY = "AIzaSyAkb7BsSW6ROnIfM01djn4ZbiX7PKpi-f8";
-    const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
-    const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+    <!-- Puntaje -->
 
-    let userToken = null;
-    let palabras = [];
-    let indice = 0;
-    let puntaje = 0;
-    let temaActual = "";
+    <p id="puntaje">
 
-    const temas = {
-      tecnologia: [
-        { pista: "C_MPU_____ / C_MPU______", respuesta: ["COMPUTADOR", "COMPUTADORA", "COMPUTADOR ", "COMPUTADORA "] },
-        { pista: "PR_GR_MA", respuesta: ["PROGRAMA", "PROGRAMA "] },
-        { pista: "INT_RN_T", respuesta: ["INTERNET", "INTERNET "] },
-        { pista: "J_V_SCR_PT", respuesta: ["JAVASCRIPT", "JAVASCRIPT "] },
-        { pista: "HT_L", respuesta: ["HTML", "HTML "] },
-        { pista: "CI_NCI_", respuesta: ["CIENCIA", "CIENCIA "] },
-        { pista: "M_T_M_TIC_S", respuesta: ["MATEMÁTICAS", "MATEMÁTICAS "] }
-      ],
-      paises: [
-        { pista: "C_L_MB__", respuesta: ["COLOMBIA", "COLOMBIA "] },
-        { pista: "M_X_C_", respuesta: ["MÉXICO", "MÉXICO "] },
-        { pista: "ESP_Ñ_", respuesta: ["ESPAÑA", "ESPAÑA "] },
-        { pista: "ARG_NT_N_", respuesta: ["ARGENTINA", "ARGENTINA "] },
-        { pista: "P_R_", respuesta: ["PERÚ", "PERÚ "] },
-        { pista: "B_G_T_", respuesta: ["BOGOTÁ", "BOGOTÁ "] },
-        { pista: "M_DR_D", respuesta: ["MADRID", "MADRID "] }
-      ],
-      animales: [
-        { pista: "P_RR_", respuesta: ["PERRO", "PERRO "] },
-        { pista: "G_T_", respuesta: ["GATO", "GATO "] },
-        { pista: "L_ON", respuesta: ["LEÓN", "LEÓN "] },
-        { pista: "T_GR_", respuesta: ["TIGRE", "TIGRE "] },
-        { pista: "E_F_NT_", respuesta: ["ELEFANTE", "ELEFANTE "] },
-        { pista: "D_LF_N", respuesta: ["DELFIN", "DELFIN "] },
-        { pista: "P_G_S_", respuesta: ["PEGASO", "PEGASO "] }
-      ],
-      frutas: [
-        { pista: "M_NZ_N_", respuesta: ["MANZANA", "MANZANA "] },
-        { pista: "P_R_", respuesta: ["PERA", "PERA "] },
-        { pista: "PL_T_NO", respuesta: ["PLÁTANO", "PLÁTANO "] },
-        { pista: "S_ND_A", respuesta: ["SANDÍA", "SANDÍA "] },
-        { pista: "FR_S_", respuesta: ["FRESA", "FRESA "] },
-        { pista: "M_L_N", respuesta: ["MELÓN", "MELÓN "] },
-        { pista: "N_R_NJ_", respuesta: ["NARANJA", "NARANJA "] }
-      ],
-      deportes: [
-        { pista: "F_TB_L", respuesta: ["FÚTBOL", "FÚTBOL "] },
-        { pista: "B_LON_ES_O", respuesta: ["BALONCESTO", "BALONCESTO "] },
-        { pista: "T_N_S", respuesta: ["TENIS", "TENIS "] },
-        { pista: "V_L_IB_L", respuesta: ["VOLEIBOL", "VOLEIBOL "] },
-        { pista: "N_T_CI_N", respuesta: ["NATACIÓN", "NATACIÓN "] },
-        { pista: "C_RR_R_", respuesta: ["CARRERA", "CARRERA "] },
-        { pista: "B_X__", respuesta: ["BOXEO", "BOXEO "] }
-      ],
-      comida: [
-        { pista: "P_ZZ_", respuesta: ["PIZZA", "PIZZA "] },
-        { pista: "H_MB_RG_S_", respuesta: ["HAMBURGUESA", "HAMBURGUESA "] },
-        { pista: "P_ST_", respuesta: ["PASTA", "PASTA "] },
-        { pista: "S_P_", respuesta: ["SOPA", "SOPA "] },
-        { pista: "A_R__Z", respuesta: ["ARROZ", "ARROZ "] },
-        { pista: "P_LL_", respuesta: ["POLLO", "POLLO "] },
-        { pista: "H__V_", respuesta: ["HUEVO", "HUEVO "] }
-      ]
-    };
+        Puntaje: 0
 
-    function traducirError(errorCode) {
-      const errores = {
-        "EMAIL_EXISTS": "El correo ya está registrado.",
-        "EMAIL_NOT_FOUND": "No existe una cuenta con ese correo.",
-        "INVALID_PASSWORD": "La contraseña es incorrecta.",
-        "INVALID_EMAIL": "El correo no es válido.",
-        "WEAK_PASSWORD : Password should be at least 6 characters": "La contraseña debe tener al menos 6 caracteres."
-      };
-      return errores[errorCode] || "Ha ocurrido un error inesperado.";
-    }
+    </p>
 
-    async function register() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const msg = document.getElementById("auth-message");
-      msg.textContent = "";
-      try {
-        const res = await fetch(SIGNUP_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, returnSecureToken: true })
-        });
-        const data = await res.json();
-        if (data.error) throw new Error(data.error.message);
-        msg.style.color = "green";
-        msg.textContent = "✅ Registro exitoso. Ahora puedes iniciar sesión.";
-      } catch (err) {
-        msg.style.color = "red";
-        msg.textContent = traducirError(err.message);
-      }
-    }
+    <!-- Estrella de recompensa -->
 
-    async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const msg = document.getElementById("auth-message");
-      msg.textContent = "";
-      try {
-        const res = await fetch(SIGNIN_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, returnSecureToken: true })
-        });
-        const data = await res.json();
-        if (data.error) throw new Error(data.error.message);
-        userToken = data.idToken;
-        localStorage.setItem("userToken", userToken);
-        mostrarLobby();
-      } catch (err) {
-        msg.style.color = "red";
-        msg.textContent = traducirError(err.message);
-      }
-    }
+    <div id="estrella">
 
-    function cerrarSesion() {
-      userToken = null;
-      localStorage.removeItem("userToken");
-      document.getElementById("login-container").style.display = "block";
-      document.getElementById("lobby-container").style.display = "none";
-      document.getElementById("game-container").style.display = "none";
-    }
+        🌟
 
-    function mostrarLobby() {
-      document.getElementById("login-container").style.display = "none";
-      document.getElementById("game-container").style.display = "none";
-      document.getElementById("lobby-container").style.display = "block";
-    }
+    </div>
 
-    function seleccionarTema(tema) {
-      temaActual = tema;
-      palabras = [...temas[tema]];
-      const progresoGuardado = JSON.parse(localStorage.getItem("progreso_" + tema));
-      if (progresoGuardado) {
-        indice = progresoGuardado.indice;
-        puntaje = progresoGuardado.puntaje;
-      } else {
-        indice = 0;
-        puntaje = 0;
-      }
+    <!-- Botones inferiores -->
 
-      document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
-      document.getElementById("tema-actual").innerHTML = "Tema actual: <b>" + tema.charAt(0).toUpperCase() + tema.slice(1) + "</b>";
-      document.getElementById("lobby-container").style.display = "none";
-      document.getElementById("game-container").style.display = "block";
-      mostrarPalabra();
-    }
+    <div class="acciones-juego">
 
-    function volverLobby() {
-      document.getElementById("game-container").style.display = "none";
-      document.getElementById("lobby-container").style.display = "block";
-    }
+        <button
+            class="volver-btn"
+            onclick="volverLobby()">
 
-    function reiniciarNivel() {
-      indice = 0;
-      puntaje = 0;
-      guardarProgreso();
-      document.getElementById("puntaje").innerHTML = "Puntaje: 0";
-      mostrarPalabra();
-      document.getElementById("resultado").innerHTML = "🔁 Nivel reiniciado.";
-      document.getElementById("resultado").style.color = "blue";
-    }
+            ⬅ Volver
 
-    function mostrarPalabra() {
-      if (indice >= palabras.length) {
-        document.getElementById("resultado").innerHTML = "🎉 ¡Juego terminado! Puntaje final: " + puntaje;
-        document.getElementById("pista").innerHTML = "";
-        return;
-      }
-      document.getElementById("pista").innerHTML =
-        "<b>Pista:</b> " + palabras[indice].pista + " → ¿Cuál es la palabra?";
-      document.getElementById("respuesta").value = "";
-      document.getElementById("resultado").innerHTML = "";
-    }
+        </button>
 
-    function verificar() {
-      const respuesta = document.getElementById("respuesta").value.toUpperCase().trim();
-      const resultado = document.getElementById("resultado");
+        <button
+            class="reiniciar-btn"
+            onclick="reiniciarNivel()">
 
-      if (palabras[indice].respuesta.includes(respuesta)) {
-        resultado.innerHTML = "✅ ¡Correcto!";
-        resultado.style.color = "green";
-        puntaje++;
-        document.getElementById("puntaje").innerHTML = "Puntaje: " + puntaje;
+            🔄 Reiniciar
 
-        const estrella = document.getElementById("estrella");
-        estrella.style.display = "block";
-        estrella.style.animation = "none";
-        void estrella.offsetWidth;
-        estrella.style.animation = "brillarGirar 1.5s ease forwards";
-        setTimeout(() => estrella.style.display = "none", 1500);
-      } else {
-        resultado.innerHTML = "❌ Incorrecto.";
-        resultado.style.color = "red";
-      }
+        </button>
 
-      indice++;
-      guardarProgreso();
+    </div>
 
-      if (indice < palabras.length) {
-        setTimeout(mostrarPalabra, 1200);
-      } else {
-        setTimeout(() => {
-          resultado.innerHTML = "🎉 ¡Juego terminado! Puntaje final: " + puntaje;
-        }, 1000);
-      }
-    }
+</div>
+    <!-- ========================================= -->
+<!-- FIN DEL CONTENIDO -->
+<!-- ========================================= -->
 
-    function guardarProgreso() {
-      if (!temaActual) return;
-      const progreso = { indice, puntaje };
-      localStorage.setItem("progreso_" + temaActual, JSON.stringify(progreso));
-    }
+<!-- JavaScript principal -->
 
-    window.onload = () => {
-      const token = localStorage.getItem("userToken");
-      if (token) {
-        userToken = token;
-        mostrarLobby();
-      } else {
-        document.getElementById("login-container").style.display = "block";
-      }
-    };
-  </script>
+<script src="js/app.js"></script>
+
 </body>
 </html>
