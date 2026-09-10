@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
-<meta name="theme-color" content="#080d20">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta
+    name="theme-color"
+    content="#033D65"
+    id="theme-color"
+>
+
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+>
 
 <title>Encuentra la Palabra</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
@@ -19,6 +42,10 @@
 
 <style>
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -26,37 +53,13 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-:root{
-    --blue:#00c6ff;
-    --blue2:#2563eb;
-    --purple:#7c3aed;
-    --purple2:#8b5cf6;
-    --pink:#ec4899;
-    --cyan:#22d3ee;
-
-    --green:#22c55e;
-    --yellow:#facc15;
-    --orange:#f97316;
-    --red:#ef4444;
-
-    --bg:#080d20;
-    --bg2:#10172f;
-
-    --card:rgba(255,255,255,.075);
-    --card-hover:rgba(255,255,255,.11);
-
-    --text:#ffffff;
-    --muted:#9aa8c2;
-
-    --radius:26px;
-}
-
 html{
     width:100%;
     min-height:100%;
-    background:#080d20;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-text-size-adjust:100%;
     scroll-behavior:smooth;
-    overscroll-behavior-y:none;
 }
 
 body{
@@ -65,70 +68,217 @@ body{
     min-height:100svh;
 
     font-family:"Poppins",sans-serif;
+
     color:var(--text);
+
+    overflow-x:hidden;
+
+    background:var(--bg);
+
+    padding-bottom:env(safe-area-inset-bottom);
+
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+@supports(min-height:100dvh){
+
+    body{
+        min-height:100dvh;
+    }
+
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+
+    --navy:#033D65;
+    --blue:#2585BD;
+    --cyan:#2FAEE3;
+
+    --green:#25BA77;
+    --purple:#6464D6;
+    --orange:#FA8D1E;
+    --coral:#F04B38;
+
+    --bg:#FFFCF5;
+    --bg-soft:#F7FAFC;
+
+    --surface:#FFFFFF;
+    --surface-soft:#F4F8FA;
+    --surface-hover:#EDF6FA;
+
+    --text:#18384D;
+    --heading:#033D65;
+    --muted:#6D8494;
+
+    --border:rgba(3,61,101,.10);
+    --border-strong:rgba(3,61,101,.16);
+
+    --input-bg:#FFFFFF;
+    --input-text:#18384D;
+    --input-placeholder:#8DA0AD;
+
+    --shadow:
+        0 18px 50px
+        rgba(3,61,101,.09);
+
+    --shadow-soft:
+        0 8px 24px
+        rgba(3,61,101,.07);
+
+    --radius:24px;
+
+    --topbar-bg:
+        rgba(255,252,245,.94);
+
+    --topbar-border:
+        rgba(3,61,101,.10);
+
+    --timer-empty:
+        rgba(3,61,101,.10);
+
+    --glass:
+        rgba(255,255,255,.90);
+}
+
+
+/* =========================================================
+   MODO OSCURO
+========================================================= */
+
+html[data-theme="dark"]{
+
+    --bg:#071A28;
+    --bg-soft:#0A2233;
+
+    --surface:#0D2C41;
+    --surface-soft:#0A2638;
+    --surface-hover:#12384E;
+
+    --text:#F2FAFF;
+    --heading:#F5FBFF;
+    --muted:#AFC7D5;
+
+    --border:
+        rgba(47,174,227,.16);
+
+    --border-strong:
+        rgba(47,174,227,.24);
+
+    --input-bg:#092335;
+    --input-text:#F2FAFF;
+    --input-placeholder:#7894A5;
+
+    --shadow:
+        0 20px 60px
+        rgba(0,0,0,.30);
+
+    --shadow-soft:
+        0 8px 25px
+        rgba(0,0,0,.20);
+
+    --topbar-bg:
+        rgba(7,26,40,.94);
+
+    --topbar-border:
+        rgba(47,174,227,.16);
+
+    --timer-empty:
+        rgba(47,174,227,.13);
+
+    --glass:
+        rgba(13,44,65,.94);
+}
+
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+body{
 
     background:
         radial-gradient(
-            circle at 8% 8%,
-            rgba(0,198,255,.20),
+            circle at 5% 5%,
+            rgba(47,174,227,.09),
             transparent 25%
         ),
         radial-gradient(
-            circle at 92% 18%,
-            rgba(236,72,153,.16),
+            circle at 95% 10%,
+            rgba(100,100,214,.08),
             transparent 25%
         ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(124,58,237,.22),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #070b18 0%,
-            #10172f 50%,
-            #080d20 100%
-        );
-
-    background-attachment:fixed;
-
-    overflow-x:hidden;
-    overscroll-behavior-y:none;
-
-    padding-bottom:
-        env(safe-area-inset-bottom);
+        var(--bg);
 }
+
+html[data-theme="dark"] body{
+
+    background:
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(47,174,227,.11),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 95% 10%,
+            rgba(100,100,214,.10),
+            transparent 25%
+        ),
+        var(--bg);
+}
+
+
+/* =========================================================
+   DECORACIÓN
+========================================================= */
 
 body::before,
 body::after{
+
     content:"";
+
     position:fixed;
 
-    width:340px;
-    height:340px;
+    width:320px;
+    height:320px;
 
     border-radius:50%;
 
-    filter:blur(90px);
+    filter:blur(100px);
 
-    opacity:.16;
+    opacity:.06;
 
     pointer-events:none;
 
-    z-index:-1;
+    z-index:0;
 }
 
 body::before{
-    background:#00c6ff;
-    top:-150px;
-    left:-130px;
+
+    background:var(--cyan);
+
+    top:-160px;
+    left:-160px;
 }
 
 body::after{
-    background:#ec4899;
-    right:-150px;
-    bottom:-150px;
+
+    background:var(--purple);
+
+    right:-160px;
+    bottom:-160px;
 }
+
+
+/* =========================================================
+   ELEMENTOS GENERALES
+========================================================= */
 
 button,
 input{
@@ -136,82 +286,123 @@ input{
 }
 
 button{
+
     touch-action:manipulation;
+
+    cursor:pointer;
 }
 
 button:focus-visible,
 input:focus-visible{
-    outline:2px solid rgba(34,211,238,.7);
+
+    outline:
+        2px solid
+        rgba(47,174,227,.80);
+
     outline-offset:3px;
 }
 
-/* TOPBAR */
+button:active{
+
+    transform:scale(.98);
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
 
 .topbar{
+
     position:fixed;
 
     top:0;
     left:0;
 
     width:100%;
-    height:76px;
+
+    height:
+        calc(
+            70px +
+            env(safe-area-inset-top)
+        );
 
     display:flex;
+
     align-items:center;
     justify-content:center;
-
-    z-index:50;
 
     padding:
         env(safe-area-inset-top)
-        18px
+        20px
         0;
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(7,11,24,.90),
-            rgba(8,13,32,.62)
-        );
+    z-index:50;
 
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    background:var(--topbar-bg);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
     border-bottom:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        var(--topbar-border);
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease,
+        background .3s ease;
+}
+
+.topbar-inner{
+
+    width:
+        min(
+            100%,
+            1100px
+        );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:16px;
 }
 
 .brand{
+
     display:flex;
+
     align-items:center;
-    justify-content:center;
 
-    gap:11px;
+    gap:10px;
 
-    max-width:100%;
+    min-width:0;
 
-    font-size:16px;
+    font-size:17px;
+
     font-weight:800;
+
+    color:var(--heading);
 
     white-space:nowrap;
 }
 
 .brand-logo{
-    width:44px;
-    height:44px;
+
+    width:48px;
+    height:48px;
+
+    flex:0 0 auto;
+
+    display:block;
 
     object-fit:contain;
-
-    border-radius:13px;
-
-    filter:
-        drop-shadow(
-            0 5px 16px
-            rgba(0,198,255,.40)
-        );
 }
 
 .brand-dot{
+
     width:7px;
     height:7px;
 
@@ -219,196 +410,344 @@ input:focus-visible{
 
     border-radius:50%;
 
-    background:var(--cyan);
-
-    box-shadow:
-        0 0 13px
-        rgba(34,211,238,.9);
+    background:var(--green);
 }
 
-/* CONTENEDORES */
+
+/* =========================================================
+   BOTÓN MODO OSCURO
+========================================================= */
+
+.theme-toggle{
+
+    width:44px;
+    height:44px;
+
+    min-height:44px;
+
+    padding:0;
+    margin:0;
+
+    flex:0 0 auto;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    color:var(--heading);
+
+    background:var(--surface);
+
+    border:
+        1px solid
+        var(--border);
+
+    box-shadow:var(--shadow-soft);
+
+    font-size:19px;
+
+    transition:
+        transform .2s ease,
+        background .25s ease,
+        border .25s ease;
+}
+
+.theme-toggle:hover{
+
+    transform:
+        translateY(-2px);
+
+    background:var(--surface-hover);
+
+    border-color:
+        rgba(47,174,227,.35);
+}
+
+
+/* =========================================================
+   CONTENEDORES
+========================================================= */
 
 .container{
-    width:min(
-        calc(100% - 32px),
-        560px
-    );
 
-    min-height:0;
+    position:relative;
+
+    z-index:1;
+
+    width:
+        min(
+            calc(100% - 40px),
+            1000px
+        );
 
     margin:
-        max(98px, calc(76px + 22px))
+        calc(
+            90px +
+            env(safe-area-inset-top)
+        )
         auto
-        30px;
+        24px;
 
-    padding:32px;
+    padding:26px;
 
     border-radius:var(--radius);
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.105),
-            rgba(255,255,255,.045)
-        );
+    background:var(--glass);
 
     border:
-        1px solid rgba(255,255,255,.105);
+        1px solid
+        var(--border);
 
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
+    box-shadow:var(--shadow);
 
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.40),
-        inset 0 1px 0 rgba(255,255,255,.055);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
 
-    animation:appear .4s ease;
+    animation:appear .35s ease;
+
+    transition:
+        background .3s ease,
+        border .3s ease,
+        box-shadow .3s ease;
 }
 
 @keyframes appear{
+
     from{
         opacity:0;
-        transform:translateY(14px) scale(.985);
+        transform:
+            translateY(10px);
     }
 
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0);
     }
+
 }
 
-/* BIENVENIDA */
+
+/* =========================================================
+   TAMAÑOS
+========================================================= */
+
+#welcome-container{
+
+    width:
+        min(
+            calc(100% - 40px),
+            780px
+        );
+}
+
+#login-container,
+#result-container{
+
+    width:
+        min(
+            calc(100% - 40px),
+            600px
+        );
+}
+
+#lobby-container{
+
+    width:
+        min(
+            calc(100% - 40px),
+            900px
+        );
+}
+
+#progress-container{
+
+    width:
+        min(
+            calc(100% - 40px),
+            900px
+        );
+}
+
+#game-container{
+
+    width:
+        min(
+            calc(100% - 40px),
+            820px
+        );
+}
+
+
+/* =========================================================
+   BIENVENIDA
+========================================================= */
 
 .welcome{
-    width:min(
-        calc(100% - 32px),
-        680px
-    );
 
     text-align:center;
 
     padding:
-        38px
-        42px
-        34px;
+        28px;
 }
 
 .hero-logo-wrapper{
+
     width:150px;
     height:150px;
 
-    margin:0 auto 22px;
+    margin:
+        0
+        auto
+        18px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
-
-    border-radius:42px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(0,198,255,.16),
-            rgba(124,58,237,.18),
-            rgba(236,72,153,.15)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 25px 65px rgba(0,0,0,.28),
-        0 0 55px rgba(0,198,255,.12),
-        inset 0 1px 0 rgba(255,255,255,.08);
 
     animation:float 3.5s ease-in-out infinite;
 }
 
 .hero-logo{
-    width:125px;
-    height:125px;
+
+    display:block;
+
+    width:140px;
+    height:140px;
+
+    max-width:100%;
+    max-height:100%;
 
     object-fit:contain;
 
     filter:
         drop-shadow(
-            0 10px 24px
-            rgba(0,198,255,.35)
+            0 8px 18px
+            rgba(3,61,101,.13)
         );
 }
 
 @keyframes float{
+
     0%,100%{
         transform:translateY(0);
     }
 
     50%{
-        transform:translateY(-7px);
+        transform:translateY(-5px);
     }
+
 }
 
+
+/* =========================================================
+   BADGE
+========================================================= */
+
 .badge{
+
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
 
-    gap:7px;
+    gap:6px;
 
-    padding:8px 14px;
+    padding:
+        7px
+        13px;
 
-    margin-bottom:13px;
+    margin-bottom:11px;
 
     border-radius:50px;
 
-    font-size:9px;
+    font-size:10px;
+
     font-weight:700;
 
     letter-spacing:.5px;
 
-    color:#b9efff;
+    color:var(--blue);
 
     background:
-        rgba(0,198,255,.09);
+        rgba(47,174,227,.08);
 
     border:
-        1px solid rgba(0,198,255,.17);
+        1px solid
+        rgba(47,174,227,.18);
 }
 
+
+/* =========================================================
+   TITULOS
+========================================================= */
+
 h1{
-    font-size:clamp(31px,5vw,44px);
-    line-height:1.1;
+
+    font-size:
+        clamp(
+            36px,
+            5vw,
+            48px
+        );
+
+    line-height:1.08;
 
     font-weight:800;
 
-    margin-bottom:14px;
+    margin-bottom:10px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #bdefff,
-            #d7c4ff,
-            #ffffff
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:var(--heading);
 }
 
 .welcome-description{
+
     color:var(--muted);
 
-    font-size:13px;
-    line-height:1.8;
+    font-size:14px;
 
-    max-width:500px;
+    line-height:1.6;
+
+    max-width:600px;
 
     margin:0 auto;
 }
 
-/* FEATURES */
+h2{
+
+    font-size:28px;
+
+    line-height:1.15;
+
+    font-weight:800;
+
+    margin-bottom:7px;
+
+    color:var(--heading);
+}
+
+.subtitle{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.55;
+
+    margin-bottom:19px;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
 
 .features{
+
     display:grid;
 
     grid-template-columns:
@@ -416,308 +755,341 @@ h1{
 
     gap:12px;
 
-    margin:28px 0;
+    margin:22px 0;
 }
 
 .feature{
+
     min-width:0;
 
-    padding:17px 9px;
+    padding:
+        17px
+        10px;
 
-    border-radius:19px;
+    border-radius:18px;
 
-    background:
-        rgba(255,255,255,.045);
+    background:var(--surface-soft);
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        var(--border);
 
     transition:
-        transform .25s,
-        background .25s,
-        border .25s;
+        transform .2s,
+        background .2s;
 }
 
 .feature:hover{
-    transform:translateY(-4px);
 
-    background:
-        rgba(255,255,255,.09);
+    transform:translateY(-3px);
 
-    border-color:
-        rgba(0,198,255,.18);
+    background:var(--surface-hover);
 }
 
 .feature-icon{
+
     display:block;
 
-    font-size:23px;
+    font-size:25px;
 
-    margin-bottom:7px;
+    margin-bottom:6px;
 }
 
 .feature-title{
+
     display:block;
 
-    font-size:10px;
+    font-size:12px;
 
     font-weight:700;
+
+    color:var(--heading);
 }
 
 .feature-text{
+
     display:block;
 
     margin-top:2px;
 
-    color:#7f8ca5;
-
-    font-size:8px;
-}
-
-/* TITULOS */
-
-h2{
-    font-size:27px;
-
-    line-height:1.2;
-
-    font-weight:800;
-
-    margin-bottom:7px;
-}
-
-.subtitle{
     color:var(--muted);
 
-    font-size:11px;
-    line-height:1.65;
-
-    margin-bottom:25px;
+    font-size:9px;
 }
 
-/* BOTONES */
+
+/* =========================================================
+   BOTONES
+========================================================= */
 
 button{
+
     width:100%;
 
-    min-height:49px;
+    min-height:48px;
 
     border:0;
     outline:0;
 
-    padding:14px 18px;
+    padding:
+        12px
+        18px;
 
-    margin-top:10px;
+    margin-top:8px;
 
-    border-radius:16px;
+    border-radius:15px;
 
-    color:white;
+    color:#FFFFFF;
 
-    font-size:11px;
+    font-size:13px;
+
     font-weight:700;
-
-    cursor:pointer;
 
     transition:
         transform .2s,
         box-shadow .2s,
         opacity .2s,
-        background .2s;
+        background .25s,
+        border .25s;
 }
 
 button:hover{
-    transform:translateY(-2px);
-}
 
-button:active{
-    transform:scale(.98);
+    transform:translateY(-1px);
 }
 
 button:disabled{
+
     cursor:not-allowed;
+
     opacity:.45;
+
     transform:none;
 }
 
 .btn-primary{
+
     background:
         linear-gradient(
             135deg,
-            #2563eb,
-            #00aef0,
-            #7c3aed
+            var(--blue),
+            var(--cyan)
         );
 
     box-shadow:
-        0 12px 32px
-        rgba(37,99,235,.24);
+        0 9px 22px
+        rgba(37,133,189,.20);
 }
 
 .btn-primary:hover{
+
     box-shadow:
-        0 17px 42px
-        rgba(37,99,235,.34);
+        0 12px 28px
+        rgba(37,133,189,.28);
 }
 
 .btn-secondary{
-    background:
-        rgba(255,255,255,.065);
+
+    color:var(--heading);
+
+    background:var(--surface-soft);
 
     border:
-        1px solid rgba(255,255,255,.09);
+        1px solid
+        var(--border);
 }
 
 .btn-secondary:hover{
-    background:
-        rgba(255,255,255,.115);
+
+    background:var(--surface-hover);
+
+    border-color:
+        rgba(47,174,227,.30);
 }
 
 .btn-danger{
+
     background:
         linear-gradient(
             135deg,
-            #dc2626,
-            #f43f5e
+            var(--coral),
+            #D9362A
         );
 }
 
 .btn-warning{
+
     background:
         linear-gradient(
             135deg,
-            #ea580c,
-            #f97316
+            var(--orange),
+            #E66D0C
         );
 }
 
-/* LOGIN */
+
+/* =========================================================
+   LOGIN
+========================================================= */
 
 .login-icon{
-    width:82px;
-    height:82px;
 
-    margin:0 auto 19px;
+    width:115px;
+    height:115px;
+
+    margin:
+        0
+        auto
+        16px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    border-radius:25px;
+    background:transparent;
 
-    font-size:37px;
+    border:0;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #7c3aed
-        );
+    box-shadow:none;
 
-    box-shadow:
-        0 17px 38px
-        rgba(124,58,237,.28);
+    overflow:visible;
+}
+
+.login-icon img{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:contain;
+
+    object-position:center;
 }
 
 .input-group{
+
     text-align:left;
 
-    margin-bottom:14px;
+    margin-bottom:13px;
 }
 
 .input-group label{
+
     display:block;
 
     margin:
-        0 0 7px 3px;
+        0 0 6px 3px;
 
-    color:#aebbd0;
+    color:var(--muted);
 
-    font-size:9px;
+    font-size:10px;
+
     font-weight:600;
 }
 
 input{
+
     width:100%;
 
     height:50px;
     min-height:50px;
 
     border:
-        1px solid rgba(255,255,255,.09);
+        1px solid
+        var(--border-strong);
 
     outline:none;
 
-    border-radius:16px;
+    border-radius:14px;
 
     padding:
-        13px 15px;
+        12px
+        15px;
 
-    color:white;
+    color:var(--input-text);
 
-    background:
-        rgba(0,0,0,.18);
+    background:var(--input-bg);
 
-    font-size:12px;
+    font-size:16px;
 
-    transition:.25s;
+    transition:
+        border .2s,
+        background .2s,
+        box-shadow .2s;
 
     -webkit-appearance:none;
     appearance:none;
 }
 
 input::placeholder{
-    color:#69778f;
+
+    color:var(--input-placeholder);
 }
 
 input:focus{
-    border-color:
-        rgba(0,198,255,.7);
 
-    background:
-        rgba(0,198,255,.035);
+    border-color:
+        rgba(47,174,227,.75);
+
+    background:var(--input-bg);
 
     box-shadow:
-        0 0 0 4px
-        rgba(0,198,255,.07);
+        0 0 0 3px
+        rgba(47,174,227,.09);
 }
 
 #auth-message{
-    min-height:18px;
 
-    margin:12px 0 2px;
+    min-height:20px;
 
-    font-size:10px;
+    margin:
+        10px 0
+        1px;
 
-    color:#93c5fd;
+    font-size:11px;
+
+    color:var(--blue);
 }
 
-/* LOBBY */
+
+/* =========================================================
+   LOBBY
+========================================================= */
 
 .lobby-header{
-    margin-bottom:22px;
+
+    margin-bottom:20px;
 }
 
 .lobby-header h2{
-    margin-bottom:6px;
+
+    font-size:30px;
 }
 
 .themes{
+
     display:grid;
 
     grid-template-columns:
-        repeat(2,minmax(0,1fr));
+        repeat(3,minmax(0,1fr));
 
-    gap:13px;
+    gap:12px;
 }
 
 .theme{
+
     position:relative;
 
-    min-height:135px;
+    min-height:125px;
 
-    padding:20px 12px;
+    padding:
+        15px
+        10px;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
@@ -725,30 +1097,27 @@ input:focus{
 
     text-align:center;
 
-    border-radius:21px;
+    border-radius:19px;
 
     cursor:pointer;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.035)
-        );
+    background:var(--surface-soft);
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid
+        var(--border);
 
     overflow:hidden;
 
     transition:
-        transform .25s,
-        border .25s,
-        background .25s,
-        box-shadow .25s;
+        transform .2s,
+        border .2s,
+        background .2s,
+        box-shadow .2s;
 }
 
 .theme::before{
+
     content:"";
 
     position:absolute;
@@ -756,103 +1125,138 @@ input:focus{
     width:100px;
     height:100px;
 
-    top:-45px;
-    right:-45px;
+    top:-50px;
+    right:-50px;
 
     border-radius:50%;
 
     background:
-        rgba(0,198,255,.14);
+        rgba(47,174,227,.08);
 
-    filter:blur(12px);
+    filter:blur(15px);
 }
 
 .theme:hover{
-    transform:translateY(-5px);
 
-    background:
-        rgba(255,255,255,.105);
+    transform:translateY(-3px);
+
+    background:var(--surface-hover);
 
     border-color:
-        rgba(0,198,255,.27);
+        rgba(47,174,227,.30);
 
-    box-shadow:
-        0 17px 40px
-        rgba(0,0,0,.20);
+    box-shadow:var(--shadow-soft);
 }
 
 .theme:active{
-    transform:scale(.97);
+
+    transform:scale(.98);
 }
 
 .theme-icon{
+
     position:relative;
+
     z-index:1;
 
     width:58px;
     height:58px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    margin-bottom:10px;
+    margin-bottom:9px;
 
-    border-radius:18px;
+    border-radius:17px;
 
-    font-size:29px;
+    font-size:31px;
 
-    background:
-        rgba(255,255,255,.075);
+    background:var(--surface);
 
     border:
-        1px solid rgba(255,255,255,.09);
+        1px solid
+        var(--border);
 }
 
 .theme-name{
+
     position:relative;
+
     z-index:1;
 
-    font-size:11px;
+    font-size:12px;
 
     font-weight:700;
+
+    color:var(--heading);
 }
 
-/* JUEGO */
+
+/* =========================================================
+   JUEGO
+========================================================= */
 
 .game-header{
+
     display:flex;
 
     align-items:center;
     justify-content:space-between;
 
-    gap:18px;
+    gap:15px;
 
-    margin-bottom:21px;
+    margin-bottom:17px;
 }
 
 .game-theme{
+
     min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 
     text-align:left;
 }
 
-.game-theme small{
+.game-logo{
+
+    width:48px;
+    height:48px;
+
+    flex:0 0 auto;
+
     display:block;
 
-    color:#6f7d96;
+    object-fit:contain;
+
+    object-position:center;
+}
+
+.game-theme small{
+
+    display:block;
+
+    color:var(--muted);
 
     font-size:8px;
 
     font-weight:700;
 
-    letter-spacing:1.2px;
+    letter-spacing:1.3px;
 }
 
 .game-theme h2{
+
     margin-top:3px;
 
-    font-size:21px;
+    margin-bottom:0;
+
+    font-size:25px;
 
     white-space:nowrap;
 
@@ -861,11 +1265,17 @@ input:focus{
     text-overflow:ellipsis;
 }
 
+
+/* =========================================================
+   CRONOMETRO
+========================================================= */
+
 .timer{
+
     flex:0 0 auto;
 
-    width:76px;
-    height:76px;
+    width:68px;
+    height:68px;
 
     padding:5px;
 
@@ -873,15 +1283,16 @@ input:focus{
 
     background:
         conic-gradient(
-            var(--blue)
+            var(--cyan)
             var(--progreso,100%),
-            rgba(255,255,255,.08) 0
+            var(--timer-empty) 0
         );
 
     transition:.3s;
 }
 
 .timer-inner{
+
     width:100%;
     height:100%;
 
@@ -892,7 +1303,9 @@ input:focus{
 
     border-radius:50%;
 
-    background:#10182f;
+    background:var(--surface);
+
+    color:var(--heading);
 
     font-size:18px;
 
@@ -900,34 +1313,42 @@ input:focus{
 }
 
 .timer.warning{
+
     background:
         conic-gradient(
-            var(--yellow)
+            var(--orange)
             var(--progreso,100%),
-            rgba(255,255,255,.08) 0
+            var(--timer-empty) 0
         );
 }
 
 .timer.danger{
+
     background:
         conic-gradient(
-            var(--red)
+            var(--coral)
             var(--progreso,100%),
-            rgba(255,255,255,.08) 0
+            var(--timer-empty) 0
         );
 
     animation:pulse .75s infinite;
 }
 
 @keyframes pulse{
+
     50%{
-        transform:scale(1.06);
+        transform:scale(1.04);
     }
+
 }
 
-/* PROGRESO */
+
+/* =========================================================
+   PROGRESO
+========================================================= */
 
 .question-info{
+
     display:flex;
 
     justify-content:space-between;
@@ -936,29 +1357,31 @@ input:focus{
 
     margin-bottom:7px;
 
-    color:#8391aa;
+    color:var(--muted);
 
-    font-size:9px;
+    font-size:10px;
 
     font-weight:600;
 }
 
 .progress-bar{
+
     width:100%;
 
-    height:8px;
+    height:7px;
 
     overflow:hidden;
 
-    margin-bottom:21px;
+    margin-bottom:17px;
 
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.07);
+        var(--timer-empty);
 }
 
 #progress-fill{
+
     width:0;
     height:100%;
 
@@ -967,92 +1390,98 @@ input:focus{
     background:
         linear-gradient(
             90deg,
-            #00c6ff,
-            #2563eb,
-            #8b5cf6,
-            #ec4899
+            var(--cyan),
+            var(--blue),
+            var(--purple),
+            var(--orange)
         );
 
     transition:
-        width .4s ease;
+        width .35s ease;
 }
 
-/* PISTA */
+
+/* =========================================================
+   PISTA
+========================================================= */
 
 .clue-card{
+
     position:relative;
 
-    padding:30px 18px;
+    padding:
+        25px
+        18px;
 
-    margin-bottom:14px;
+    margin-bottom:13px;
 
     text-align:center;
 
-    border-radius:23px;
+    border-radius:20px;
 
     overflow:hidden;
 
-    background:
-        radial-gradient(
-            circle at 50% 0,
-            rgba(0,198,255,.13),
-            transparent 60%
-        ),
-        rgba(255,255,255,.045);
+    background:var(--surface-soft);
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid
+        var(--border);
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.04);
+        inset 0 1px 0
+        rgba(255,255,255,.08);
 }
 
 .clue-label{
-    margin-bottom:12px;
 
-    color:#71809a;
+    margin-bottom:8px;
+
+    color:var(--muted);
 
     font-size:8px;
 
     font-weight:700;
 
-    letter-spacing:1.4px;
+    letter-spacing:1.5px;
 }
 
 #pista{
-    font-size:clamp(24px,6vw,31px);
+
+    font-size:
+        clamp(
+            27px,
+            4vw,
+            36px
+        );
 
     font-weight:800;
 
     letter-spacing:4px;
 
-    line-height:1.3;
+    line-height:1.25;
 
     word-break:break-word;
 
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #9eeeff,
-            #c9b7ff
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:var(--heading);
 }
 
-/* RESULTADO */
+
+/* =========================================================
+   RESULTADO
+========================================================= */
 
 #resultado{
-    min-height:26px;
+
+    min-height:24px;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    margin:11px 0;
+    margin:
+        9px 0
+        2px;
 
     font-size:11px;
 
@@ -1062,16 +1491,20 @@ input:focus{
 }
 
 .correcto{
-    color:#4ade80;
+    color:var(--green);
 }
 
 .incorrecto{
-    color:#fb7185;
+    color:var(--coral);
 }
 
-/* PUNTUACIÓN */
+
+/* =========================================================
+   PUNTUACION
+========================================================= */
 
 .score-panel{
+
     display:grid;
 
     grid-template-columns:
@@ -1079,27 +1512,31 @@ input:focus{
 
     gap:9px;
 
-    margin-top:15px;
+    margin-top:11px;
 }
 
 .score-item{
-    padding:13px 7px;
+
+    padding:
+        12px
+        7px;
 
     text-align:center;
 
-    border-radius:16px;
+    border-radius:15px;
 
-    background:
-        rgba(255,255,255,.045);
+    background:var(--surface-soft);
 
     border:
-        1px solid rgba(255,255,255,.06);
+        1px solid
+        var(--border);
 }
 
 .score-label{
+
     display:block;
 
-    color:#7d8ba3;
+    color:var(--muted);
 
     font-size:8px;
 
@@ -1107,73 +1544,78 @@ input:focus{
 }
 
 .score-value{
-    font-size:18px;
+
+    font-size:20px;
 
     font-weight:800;
+
+    color:var(--heading);
 }
 
-/* RESULTADO FINAL */
+
+/* =========================================================
+   RESULTADO FINAL
+========================================================= */
 
 .result-screen{
+
     text-align:center;
 }
 
 .result-icon{
-    width:105px;
-    height:105px;
 
-    margin:0 auto 19px;
+    width:115px;
+    height:115px;
+
+    margin:
+        0
+        auto
+        15px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    border-radius:32px;
+    background:transparent;
 
-    font-size:51px;
+    border:0;
 
-    background:
-        linear-gradient(
-            135deg,
-            #facc15,
-            #f97316,
-            #ec4899
-        );
+    box-shadow:none;
 
-    box-shadow:
-        0 20px 50px
-        rgba(249,115,22,.27);
-
-    animation:resultPop .5s ease;
+    overflow:visible;
 }
 
-@keyframes resultPop{
-    from{
-        transform:scale(.6);
-        opacity:0;
-    }
+.result-icon img{
 
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:contain;
 }
 
 .result-screen h2{
-    font-size:28px;
+
+    font-size:31px;
+
+    margin-bottom:7px;
 }
 
 .result-description{
+
     color:var(--muted);
 
-    font-size:11px;
+    font-size:12px;
 
-    line-height:1.7;
+    line-height:1.6;
 
-    margin-bottom:21px;
+    margin-bottom:17px;
 }
 
 .result-stats{
+
     display:grid;
 
     grid-template-columns:
@@ -1181,227 +1623,86 @@ input:focus{
 
     gap:9px;
 
-    margin-bottom:19px;
+    margin-bottom:15px;
 }
 
 .result-stat{
-    padding:15px 6px;
 
-    border-radius:17px;
+    padding:
+        13px
+        7px;
 
-    background:
-        rgba(255,255,255,.055);
+    border-radius:15px;
+
+    background:var(--surface-soft);
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        var(--border);
 }
 
 .result-stat strong{
+
     display:block;
 
-    font-size:21px;
+    font-size:23px;
+
+    color:var(--heading);
 }
 
 .result-stat span{
+
     display:block;
 
-    color:#7e8ba2;
+    color:var(--muted);
 
     font-size:8px;
 
     margin-top:2px;
 }
 
-/* MI PROGRESO */
+
+/* =========================================================
+   MI PROGRESO
+========================================================= */
 
 .progress-screen-title{
-    font-size:27px;
+
+    font-size:30px;
 
     font-weight:800;
 
     margin-bottom:5px;
+
+    color:var(--heading);
 }
 
 .progress-screen-subtitle{
+
     color:var(--muted);
 
-    font-size:10px;
+    font-size:12px;
 
-    line-height:1.7;
+    line-height:1.55;
 
-    margin-bottom:21px;
+    margin-bottom:18px;
 }
 
 .stats-grid{
+
     display:grid;
 
     grid-template-columns:
-        repeat(2,minmax(0,1fr));
+        repeat(4,minmax(0,1fr));
 
     gap:10px;
 
-    margin-bottom:20px;
+    margin-bottom:17px;
 }
 
 .stat-card{
+
     position:relative;
-
-    padding:17px;
-
-    text-align:left;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    border:
-        1px solid rgba(255,255,255,.07);
-
-    overflow:hidden;
-
-    transition:.25s;
-}
-
-.stat-card:hover{
-    transform:translateY(-3px);
-
-    background:
-        rgba(255,255,255,.085);
-}
-
-.stat-icon{
-    font-size:22px;
-
-    margin-bottom:7px;
-}
-
-.stat-label{
-    display:block;
-
-    color:#8998b0;
-
-    font-size:8px;
-
-    margin-bottom:3px;
-}
-
-.stat-value{
-    font-size:21px;
-
-    font-weight:800;
-}
-
-/* TABLA */
-
-.table-wrapper{
-    width:100%;
-
-    overflow-x:auto;
-
-    border-radius:18px;
-
-    -webkit-overflow-scrolling:touch;
-}
-
-.progress-table{
-    width:100%;
-
-    min-width:350px;
-
-    border-collapse:collapse;
-
-    background:
-        rgba(255,255,255,.035);
-}
-
-.progress-table th{
-    padding:12px 8px;
-
-    color:#77869f;
-
-    font-size:8px;
-
-    font-weight:700;
-
-    text-align:left;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
-}
-
-.progress-table td{
-    padding:12px 8px;
-
-    font-size:9px;
-
-    text-align:left;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.055);
-}
-
-.progress-table tr:last-child td{
-    border-bottom:0;
-}
-
-.theme-progress-name{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    font-weight:600;
-}
-
-.theme-progress-icon{
-    font-size:17px;
-}
-
-.progress-number{
-    color:var(--blue);
-
-    font-weight:800;
-}
-
-.progress-status{
-    display:inline-block;
-
-    padding:4px 7px;
-
-    border-radius:8px;
-
-    font-size:7px;
-
-    white-space:nowrap;
-}
-
-.status-complete{
-    color:#4ade80;
-
-    background:
-        rgba(34,197,94,.12);
-}
-
-.status-progress{
-    color:#60a5fa;
-
-    background:
-        rgba(37,99,235,.12);
-}
-
-.status-start{
-    color:#94a3b8;
-
-    background:
-        rgba(148,163,184,.10);
-}
-
-/* CONSEJO */
-
-.tip{
-    margin-top:17px;
 
     padding:15px;
 
@@ -1409,38 +1710,237 @@ input:focus{
 
     border-radius:17px;
 
+    background:var(--surface-soft);
+
+    border:
+        1px solid
+        var(--border);
+
+    overflow:hidden;
+
+    transition:.2s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-2px);
+
+    background:var(--surface-hover);
+}
+
+.stat-icon{
+
+    font-size:21px;
+
+    margin-bottom:6px;
+}
+
+.stat-label{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-bottom:3px;
+}
+
+.stat-value{
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:var(--heading);
+}
+
+
+/* =========================================================
+   TABLA
+========================================================= */
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    border-radius:16px;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+.progress-table{
+
+    width:100%;
+
+    min-width:450px;
+
+    border-collapse:collapse;
+
+    background:var(--surface-soft);
+}
+
+.progress-table th{
+
+    padding:
+        11px
+        9px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    text-align:left;
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+.progress-table td{
+
+    padding:
+        11px
+        9px;
+
+    font-size:10px;
+
+    text-align:left;
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+.progress-table tr:last-child td{
+
+    border-bottom:0;
+}
+
+.theme-progress-name{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    font-weight:600;
+
+    color:var(--heading);
+}
+
+.theme-progress-icon{
+
+    font-size:18px;
+}
+
+.progress-number{
+
+    color:var(--blue);
+
+    font-weight:800;
+}
+
+.progress-status{
+
+    display:inline-block;
+
+    padding:
+        4px
+        8px;
+
+    border-radius:7px;
+
+    font-size:7px;
+
+    white-space:nowrap;
+}
+
+.status-complete{
+
+    color:var(--green);
+
+    background:
+        rgba(37,186,119,.12);
+}
+
+.status-progress{
+
+    color:var(--blue);
+
+    background:
+        rgba(37,133,189,.12);
+}
+
+.status-start{
+
+    color:var(--muted);
+
+    background:
+        rgba(109,132,148,.10);
+}
+
+
+/* =========================================================
+   CONSEJO
+========================================================= */
+
+.tip{
+
+    margin-top:14px;
+
+    padding:13px;
+
+    text-align:left;
+
+    border-radius:15px;
+
     background:
         linear-gradient(
             135deg,
-            rgba(0,198,255,.07),
-            rgba(124,58,237,.07)
+            rgba(47,174,227,.07),
+            rgba(100,100,214,.07)
         );
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        var(--border);
 }
 
 .tip-title{
+
     display:block;
 
-    margin-bottom:5px;
+    margin-bottom:4px;
 
     font-size:10px;
 
     font-weight:700;
+
+    color:var(--heading);
 }
 
 .tip-text{
-    color:#93a1b8;
 
-    font-size:8px;
+    color:var(--muted);
 
-    line-height:1.7;
+    font-size:9px;
+
+    line-height:1.55;
 }
 
-/* PREMIO */
+
+/* =========================================================
+   PREMIO
+========================================================= */
 
 #estrella{
+
     position:fixed;
 
     inset:0;
@@ -1450,672 +1950,1192 @@ input:focus{
     align-items:center;
     justify-content:center;
 
-    z-index:100;
+    z-index:9999;
 
     pointer-events:none;
 
     background:
-        rgba(4,8,20,.20);
+        rgba(3,61,101,.10);
 
     backdrop-filter:blur(4px);
     -webkit-backdrop-filter:blur(4px);
 }
 
 .estrella-contenido{
+
     text-align:center;
+
+    opacity:0;
+
+    transform:
+        scale(.45)
+        translateY(20px);
 }
 
 .estrella-icon{
+
     display:block;
 
-    font-size:90px;
+    font-size:
+        clamp(
+            90px,
+            15vw,
+            150px
+        );
+
+    line-height:1;
+
+    filter:
+        drop-shadow(
+            0 10px 18px
+            rgba(250,141,30,.30)
+        );
 }
 
-.estrella-texto{
-    margin-top:8px;
+.estrella-titulo{
 
-    font-size:26px;
+    margin-top:10px;
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            48px
+        );
+
+    line-height:1.1;
 
     font-weight:800;
 
-    background:
-        linear-gradient(
-            90deg,
-            #facc15,
-            #fb923c,
-            #f472b6
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:var(--heading);
 }
 
-.estrella-animar{
+.estrella-texto{
+
+    margin-top:5px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:var(--muted);
+}
+
+.estrella-animar
+.estrella-contenido{
+
     animation:
-        starAnimation 1.35s ease forwards;
+        estrellaEntrada
+        1.35s
+        cubic-bezier(.2,.9,.3,1.2)
+        forwards;
 }
 
-@keyframes starAnimation{
+.estrella-animar
+.estrella-icon{
+
+    animation:
+        estrellaPulso
+        .65s
+        ease-in-out
+        .15s
+        infinite alternate;
+}
+
+@keyframes estrellaEntrada{
+
     0%{
+
         opacity:0;
+
         transform:
-            scale(.25)
-            rotate(-180deg);
+            scale(.45)
+            translateY(20px);
     }
 
     45%{
+
         opacity:1;
+
         transform:
-            scale(1.1)
-            rotate(15deg);
+            scale(1.10)
+            translateY(-5px);
+    }
+
+    70%{
+
+        opacity:1;
+
+        transform:
+            scale(.98)
+            translateY(0);
     }
 
     100%{
+
         opacity:0;
+
         transform:
-            scale(.75)
-            rotate(180deg);
-    }
-}
-
-/* TABLET */
-
-@media(min-width:601px){
-
-    .container:not(.welcome){
-        max-width:600px;
+            scale(.90)
+            translateY(-8px);
     }
 
 }
 
-/* CELULAR */
+@keyframes estrellaPulso{
+
+    from{
+
+        transform:
+            scale(1)
+            rotate(-5deg);
+    }
+
+    to{
+
+        transform:
+            scale(1.13)
+            rotate(5deg);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .container{
+
+        width:
+            calc(100% - 30px);
+
+        padding:22px;
+    }
+
+    #welcome-container,
+    #login-container,
+    #result-container,
+    #lobby-container,
+    #progress-container,
+    #game-container{
+
+        width:
+            calc(100% - 30px);
+    }
+
+    .stats-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
 
 @media(max-width:600px){
 
+    html,
     body{
-        background-attachment:scroll;
 
-        background:
-            radial-gradient(
-                circle at 8% 8%,
-                rgba(0,198,255,.18),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 92% 18%,
-                rgba(236,72,153,.14),
-                transparent 27%
-            ),
-            linear-gradient(
-                145deg,
-                #070b18,
-                #10172f 52%,
-                #080d20
-            );
+        background:var(--bg);
     }
 
     body::before,
     body::after{
-        width:240px;
-        height:240px;
 
-        filter:blur(70px);
+        width:200px;
+        height:200px;
+
+        filter:blur(65px);
+
+        opacity:.05;
     }
 
+
+    /* TOPBAR */
+
     .topbar{
-        height:68px;
+
+        height:
+            calc(
+                62px +
+                env(safe-area-inset-top)
+            );
 
         padding:
             env(safe-area-inset-top)
-            12px
+            10px
             0;
     }
 
-    .brand{
-        font-size:13px;
+    .topbar-inner{
 
         gap:8px;
     }
 
-    .brand-logo{
-        width:39px;
-        height:39px;
+    .brand{
 
-        border-radius:11px;
+        gap:7px;
+
+        font-size:12px;
+    }
+
+    .brand-logo{
+
+        width:40px;
+        height:40px;
     }
 
     .brand-dot{
-        width:6px;
-        height:6px;
+
+        width:5px;
+        height:5px;
     }
+
+    .theme-toggle{
+
+        width:40px;
+        height:40px;
+
+        min-height:40px;
+
+        border-radius:12px;
+
+        font-size:17px;
+    }
+
+
+    /* CONTENEDOR */
 
     .container{
+
         width:
-            calc(100% - 18px);
+            calc(100% - 16px) !important;
 
         margin:
-            84px
+            calc(
+                76px +
+                env(safe-area-inset-top)
+            )
             auto
+            14px;
+
+        padding:
+            18px
+            14px;
+
+        border-radius:20px;
+    }
+
+
+    #welcome-container{
+
+        padding:
+            21px
+            14px
             18px;
-
-        padding:
-            22px 16px;
-
-        border-radius:22px;
     }
 
-    .welcome{
-        width:
-            calc(100% - 18px);
 
-        padding:
-            24px
-            16px
-            20px;
-    }
+    /* LOGO */
 
     .hero-logo-wrapper{
-        width:120px;
-        height:120px;
 
-        margin-bottom:18px;
+        width:112px;
+        height:112px;
 
-        border-radius:34px;
+        margin-bottom:14px;
     }
 
     .hero-logo{
-        width:102px;
-        height:102px;
+
+        width:105px;
+        height:105px;
+
+        filter:
+            drop-shadow(
+                0 7px 14px
+                rgba(3,61,101,.12)
+            );
     }
 
+
+    /* BIENVENIDA */
+
     .badge{
+
         font-size:8px;
 
-        padding:7px 11px;
+        padding:
+            6px
+            10px;
+
+        margin-bottom:8px;
     }
 
     h1{
+
         font-size:29px;
+
+        margin-bottom:9px;
     }
 
     .welcome-description{
-        font-size:10.5px;
 
-        line-height:1.7;
+        font-size:11px;
+
+        line-height:1.6;
     }
 
+
+    /* FEATURES */
+
     .features{
-        gap:7px;
+
+        gap:6px;
 
         margin:
-            21px 0;
+            17px 0;
     }
 
     .feature{
-        padding:
-            13px 5px;
 
-        border-radius:16px;
+        padding:
+            12px
+            4px;
+
+        border-radius:15px;
     }
 
     .feature-icon{
+
         font-size:20px;
+
+        margin-bottom:4px;
     }
 
     .feature-title{
+
         font-size:8px;
     }
 
     .feature-text{
-        font-size:7px;
+
+        font-size:6.5px;
     }
 
+
+    /* TITULOS */
+
     h2{
-        font-size:24px;
+
+        font-size:25px;
     }
 
     .subtitle{
-        margin-bottom:20px;
-    }
 
-    button{
-        min-height:48px;
-
-        padding:
-            13px 15px;
-
-        margin-top:8px;
-    }
-
-    .login-icon{
-        width:70px;
-        height:70px;
-
-        border-radius:21px;
-
-        font-size:32px;
+        font-size:11px;
 
         margin-bottom:16px;
+    }
+
+
+    /* BOTONES */
+
+    button{
+
+        min-height:46px;
+
+        padding:
+            11px
+            14px;
+
+        margin-top:7px;
+
+        border-radius:14px;
+
+        font-size:12px;
+    }
+
+
+    /* LOGIN */
+
+    .login-icon{
+
+        width:95px;
+        height:95px;
+
+        margin-bottom:13px;
+    }
+
+    .input-group{
+
+        margin-bottom:11px;
+    }
+
+    .input-group label{
+
+        font-size:9px;
+
+        margin-bottom:5px;
     }
 
     input{
-        height:48px;
-        min-height:48px;
-    }
 
-    .themes{
-        gap:9px;
-    }
-
-    .theme{
-        min-height:118px;
+        height:50px;
+        min-height:50px;
 
         padding:
-            14px 7px;
+            12px
+            14px;
 
-        border-radius:18px;
-    }
-
-    .theme-icon{
-        width:50px;
-        height:50px;
-
-        margin-bottom:8px;
-
-        border-radius:16px;
-
-        font-size:25px;
-    }
-
-    .theme-name{
-        font-size:9.5px;
-    }
-
-    .game-header{
-        gap:8px;
-
-        margin-bottom:17px;
-    }
-
-    .game-theme h2{
-        font-size:18px;
-    }
-
-    .timer{
-        width:64px;
-        height:64px;
-    }
-
-    .timer-inner{
         font-size:16px;
     }
 
-    .progress-bar{
+    #auth-message{
+
+        font-size:10px;
+
+        min-height:18px;
+    }
+
+
+    /* LOBBY */
+
+    .lobby-header{
+
         margin-bottom:16px;
     }
 
-    .clue-card{
-        padding:
-            23px
-            12px;
+    .lobby-header h2{
 
-        margin-bottom:11px;
-
-        border-radius:19px;
-    }
-
-    .clue-label{
-        margin-bottom:9px;
-    }
-
-    #pista{
-        font-size:22px;
-
-        letter-spacing:3px;
-    }
-
-    .score-panel{
-        margin-top:12px;
-
-        gap:6px;
-    }
-
-    .score-item{
-        padding:
-            10px 5px;
-    }
-
-    .score-value{
-        font-size:16px;
-    }
-
-    .result-icon{
-        width:90px;
-        height:90px;
-
-        border-radius:27px;
-
-        font-size:43px;
-    }
-
-    .result-screen h2{
         font-size:25px;
     }
 
-    .result-stats{
-        gap:6px;
-    }
+    .themes{
 
-    .result-stat{
-        padding:
-            12px 4px;
-    }
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
 
-    .result-stat strong{
-        font-size:18px;
-    }
-
-    .stats-grid{
         gap:8px;
     }
 
-    .stat-card{
-        padding:13px;
+    .theme{
+
+        min-height:105px;
+
+        padding:
+            13px
+            7px;
 
         border-radius:17px;
     }
 
-    .stat-value{
-        font-size:19px;
-    }
-
-    .table-wrapper{
-        border-radius:15px;
-    }
-
-    .progress-table th,
-    .progress-table td{
-        padding:
-            10px 6px;
-    }
-
-}
-
-/* CELULARES PEQUEÑOS */
-
-@media(max-width:390px){
-
-    .brand{
-        font-size:11px;
-    }
-
-    .brand-logo{
-        width:35px;
-        height:35px;
-    }
-
-    .container{
-        width:
-            calc(100% - 12px);
-
-        padding:
-            19px 12px;
-    }
-
-    .welcome{
-        width:
-            calc(100% - 12px);
-
-        padding:
-            20px 11px;
-        }
-
-    .hero-logo-wrapper{
-        width:105px;
-        height:105px;
-
-        border-radius:30px;
-    }
-
-    .hero-logo{
-        width:88px;
-        height:88px;
-    }
-
-    h1{
-        font-size:25px;
-    }
-
-    .welcome-description{
-        font-size:10px;
-    }
-
-    .features{
-        grid-template-columns:
-            repeat(3,1fr);
-
-        gap:5px;
-    }
-
-    .feature{
-        padding:
-            10px 3px;
-    }
-
-    .feature-icon{
-        font-size:18px;
-    }
-
-    .feature-title{
-        font-size:7px;
-    }
-
-    .feature-text{
-        font-size:6.5px;
-    }
-
-    .theme{
-        min-height:105px;
-    }
-
     .theme-icon{
-        width:45px;
-        height:45px;
 
-        font-size:23px;
+        width:50px;
+        height:50px;
+
+        margin-bottom:7px;
+
+        border-radius:15px;
+
+        font-size:27px;
     }
 
     .theme-name{
-        font-size:8.5px;
+
+        font-size:10px;
     }
 
-    .timer{
-        width:59px;
-        height:59px;
+
+    /* JUEGO */
+
+    .game-header{
+
+        gap:7px;
+
+        margin-bottom:13px;
     }
 
-    .timer-inner{
-        font-size:15px;
+    .game-theme{
+
+        gap:7px;
+    }
+
+    .game-logo{
+
+        width:42px;
+        height:42px;
+    }
+
+    .game-theme small{
+
+        font-size:7px;
     }
 
     .game-theme h2{
+
+        font-size:19px;
+    }
+
+    .timer{
+
+        width:60px;
+        height:60px;
+
+        padding:4px;
+    }
+
+    .timer-inner{
+
         font-size:16px;
     }
 
-    #pista{
-        font-size:19px;
 
-        letter-spacing:2px;
+    .question-info{
+
+        font-size:9px;
+
+        margin-bottom:5px;
+    }
+
+    .progress-bar{
+
+        height:7px;
+
+        margin-bottom:12px;
+    }
+
+
+    .clue-card{
+
+        padding:
+            21px
+            8px;
+
+        margin-bottom:10px;
+
+        border-radius:17px;
+    }
+
+    .clue-label{
+
+        font-size:7px;
+
+        margin-bottom:7px;
+    }
+
+    #pista{
+
+        font-size:
+            clamp(
+                21px,
+                7vw,
+                28px
+            );
+
+        letter-spacing:2.5px;
+    }
+
+
+    #respuesta{
+
+        height:50px;
+        min-height:50px;
+
+        font-size:16px;
+    }
+
+
+    .score-panel{
+
+        gap:6px;
+
+        margin-top:8px;
+    }
+
+    .score-item{
+
+        padding:
+            9px
+            4px;
+
+        border-radius:13px;
     }
 
     .score-label{
+
         font-size:7px;
     }
 
     .score-value{
-        font-size:15px;
+
+        font-size:17px;
+    }
+
+    #resultado{
+
+        min-height:21px;
+
+        font-size:10px;
+
+        margin:
+            6px 0
+            1px;
+    }
+
+
+    /* RESULTADO */
+
+    .result-icon{
+
+        width:95px;
+        height:95px;
+
+        margin-bottom:13px;
+    }
+
+    .result-screen h2{
+
+        font-size:26px;
+    }
+
+    .result-description{
+
+        font-size:11px;
+
+        margin-bottom:14px;
+    }
+
+    .result-stats{
+
+        gap:6px;
+
+        margin-bottom:12px;
+    }
+
+    .result-stat{
+
+        padding:
+            11px
+            4px;
+    }
+
+    .result-stat strong{
+
+        font-size:19px;
+    }
+
+    .result-stat span{
+
+        font-size:7px;
+    }
+
+
+    /* PROGRESO */
+
+    .progress-screen-title{
+
+        font-size:25px;
+    }
+
+    .progress-screen-subtitle{
+
+        font-size:10px;
+
+        margin-bottom:14px;
+    }
+
+    .stats-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:7px;
+
+        margin-bottom:13px;
+    }
+
+    .stat-card{
+
+        padding:12px;
+
+        border-radius:15px;
+    }
+
+    .stat-icon{
+
+        font-size:19px;
+
+        margin-bottom:4px;
+    }
+
+    .stat-label{
+
+        font-size:7px;
+    }
+
+    .stat-value{
+
+        font-size:19px;
+    }
+
+    .progress-table{
+
+        min-width:420px;
+    }
+
+    .progress-table th{
+
+        font-size:7px;
+    }
+
+    .progress-table td{
+
+        font-size:8px;
+    }
+
+    .tip{
+
+        margin-top:11px;
+
+        padding:11px;
+    }
+
+    .tip-text{
+
+        font-size:8px;
+    }
+
+
+    /* PREMIO */
+
+    .estrella-icon{
+
+        font-size:72px;
+    }
+
+    .estrella-titulo{
+
+        font-size:29px;
+    }
+
+    .estrella-texto{
+
+        font-size:14px;
     }
 
 }
 
-/* TECLADO ABIERTO */
+
+/* =========================================================
+   CELULARES PEQUEÑOS
+========================================================= */
+
+@media(max-width:390px){
+
+    .brand{
+
+        font-size:10px;
+    }
+
+    .brand-logo{
+
+        width:37px;
+        height:37px;
+    }
+
+    .theme-toggle{
+
+        width:38px;
+        height:38px;
+
+        min-height:38px;
+
+        font-size:16px;
+    }
+
+    .container{
+
+        width:
+            calc(100% - 10px) !important;
+
+        padding:
+            17px
+            11px;
+    }
+
+    #welcome-container{
+
+        padding:
+            19px
+            10px
+            16px;
+    }
+
+    .hero-logo-wrapper{
+
+        width:105px;
+        height:105px;
+    }
+
+    .hero-logo{
+
+        width:98px;
+        height:98px;
+    }
+
+    h1{
+
+        font-size:26px;
+    }
+
+    .welcome-description{
+
+        font-size:10px;
+    }
+
+    .features{
+
+        gap:4px;
+    }
+
+    .feature{
+
+        padding:
+            10px
+            2px;
+    }
+
+    .feature-icon{
+
+        font-size:18px;
+    }
+
+    .feature-title{
+
+        font-size:7px;
+    }
+
+    .feature-text{
+
+        font-size:6px;
+    }
+
+    .theme{
+
+        min-height:98px;
+    }
+
+    .theme-icon{
+
+        width:46px;
+        height:46px;
+
+        font-size:25px;
+    }
+
+    .theme-name{
+
+        font-size:9px;
+    }
+
+    .game-logo{
+
+        width:38px;
+        height:38px;
+    }
+
+    .game-theme h2{
+
+        font-size:17px;
+    }
+
+    .timer{
+
+        width:56px;
+        height:56px;
+    }
+
+    #pista{
+
+        font-size:20px;
+
+        letter-spacing:2px;
+    }
+
+}
+
+
+/* =========================================================
+   TECLADO MOVIL
+========================================================= */
 
 body.keyboard-open .topbar{
-    display:none;
+
+    transform:translateY(-110%);
+
+    opacity:0;
+
+    pointer-events:none;
 }
 
 body.keyboard-open .container{
+
     margin-top:
         max(
-            10px,
+            8px,
             env(safe-area-inset-top)
         );
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
     padding:
-        15px 13px;
+        13px
+        11px;
 
-    border-radius:19px;
+    border-radius:17px;
 }
 
 body.keyboard-open .game-header{
-    margin-bottom:10px;
+
+    margin-bottom:7px;
+}
+
+body.keyboard-open .game-logo{
+
+    width:36px;
+    height:36px;
 }
 
 body.keyboard-open .game-theme small{
-    font-size:7px;
+
+    font-size:6px;
 }
 
 body.keyboard-open .game-theme h2{
-    font-size:16px;
+
+    font-size:15px;
 }
 
 body.keyboard-open .timer{
-    width:52px;
-    height:52px;
+
+    width:47px;
+    height:47px;
 }
 
 body.keyboard-open .timer-inner{
-    font-size:14px;
-}
-
-body.keyboard-open .question-info{
-    font-size:8px;
-}
-
-body.keyboard-open .progress-bar{
-    height:6px;
-    margin-bottom:10px;
-}
-
-body.keyboard-open .clue-card{
-    padding:
-        14px 10px;
-
-    margin-bottom:8px;
-}
-
-body.keyboard-open .clue-label{
-    margin-bottom:5px;
-}
-
-body.keyboard-open #pista{
-    font-size:19px;
-    letter-spacing:2px;
-}
-
-body.keyboard-open #respuesta{
-    height:43px;
-    min-height:43px;
-
-    padding:
-        10px 12px;
 
     font-size:12px;
 }
 
+body.keyboard-open .question-info{
+
+    font-size:7px;
+}
+
+body.keyboard-open .progress-bar{
+
+    height:5px;
+
+    margin-bottom:7px;
+}
+
+body.keyboard-open .clue-card{
+
+    padding:
+        10px
+        7px;
+
+    margin-bottom:5px;
+
+    border-radius:15px;
+}
+
+body.keyboard-open .clue-label{
+
+    margin-bottom:4px;
+
+    font-size:6px;
+}
+
+body.keyboard-open #pista{
+
+    font-size:17px;
+
+    letter-spacing:1.5px;
+}
+
+body.keyboard-open #respuesta{
+
+    height:45px;
+    min-height:45px;
+
+    font-size:16px;
+}
+
 body.keyboard-open #btn-verificar{
-    min-height:42px;
 
-    padding:10px;
-
-    margin-top:6px;
-}
-
-body.keyboard-open #resultado{
-    min-height:19px;
-
-    margin:6px 0;
-
-    font-size:9px;
-}
-
-body.keyboard-open .score-panel{
-    margin-top:7px;
-}
-
-body.keyboard-open .score-item{
-    padding:7px 4px;
-}
-
-body.keyboard-open .score-label{
-    font-size:6.5px;
-}
-
-body.keyboard-open .score-value{
-    font-size:14px;
-}
-
-body.keyboard-open .game-container > .btn-secondary,
-body.keyboard-open .game-container > .btn-warning{
-    min-height:37px;
+    min-height:40px;
 
     padding:8px;
 
-    margin-top:5px;
+    margin-top:4px;
 
-    font-size:9px;
+    font-size:10px;
 }
 
-/* REDUCE ANIMACIONES SI EL SISTEMA LO PIDE */
+body.keyboard-open #resultado{
+
+    min-height:15px;
+
+    margin:3px 0;
+
+    font-size:8px;
+}
+
+body.keyboard-open .score-panel{
+
+    margin-top:3px;
+}
+
+body.keyboard-open .score-item{
+
+    padding:
+        5px
+        3px;
+}
+
+body.keyboard-open .score-label{
+
+    font-size:5px;
+}
+
+body.keyboard-open .score-value{
+
+    font-size:12px;
+}
+
+body.keyboard-open #game-container > .btn-secondary,
+body.keyboard-open #game-container > .btn-warning{
+
+    min-height:30px;
+
+    padding:6px;
+
+    margin-top:3px;
+
+    font-size:7px;
+}
+
+
+/* =========================================================
+   REDUCIR ANIMACIONES
+========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
     *::after{
+
         animation-duration:.01ms !important;
+
         animation-iteration-count:1 !important;
+
         transition-duration:.01ms !important;
+
         scroll-behavior:auto !important;
     }
 
 }
 
 </style>
+
+
+<script>
+
+/* =========================================================
+   APLICAR TEMA ANTES DE CARGAR
+========================================================= */
+
+(function(){
+
+    const temaGuardado =
+        localStorage.getItem("modoVisual");
+
+    if(temaGuardado === "dark"){
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                "dark"
+            );
+
+    }
+
+})();
+
+</script>
+
 </head>
+
 
 <body>
 
+
+<!-- =======================================================
+     TOPBAR
+======================================================= -->
+
 <header class="topbar">
 
-    <div class="brand">
+    <div class="topbar-inner">
 
-        <img
-            src="img/logo.png"
-            class="brand-logo"
-            alt="Logo de Encuentra la Palabra"
+        <div class="brand">
+
+            <img
+                src="img/logo.png"
+                class="brand-logo"
+                alt="Logo de Encuentra la Palabra"
+            >
+
+            <span>
+                Encuentra la Palabra
+            </span>
+
+            <span class="brand-dot"></span>
+
+        </div>
+
+
+        <button
+            id="btn-theme"
+            class="theme-toggle"
+            type="button"
+            onclick="alternarTema()"
+            aria-label="Activar modo oscuro"
+            title="Modo oscuro"
         >
-
-        <span>Encuentra la Palabra</span>
-
-        <span class="brand-dot"></span>
+            🌙
+        </button>
 
     </div>
 
 </header>
 
+
+<!-- =======================================================
+     BIENVENIDA
+======================================================= -->
 
 <div
     id="welcome-container"
@@ -2127,29 +3147,35 @@ body.keyboard-open .game-container > .btn-warning{
         <img
             src="img/logo.png"
             class="hero-logo"
-            alt="Encuentra la Palabra"
+            alt="Logo de Encuentra la Palabra"
         >
 
     </div>
+
 
     <div class="badge">
         ⚡ DESAFÍO DE PALABRAS
     </div>
 
+
     <h1>
         Encuentra la Palabra
     </h1>
+
 
     <p class="welcome-description">
         Pon a prueba tu rapidez mental, completa las palabras
         y demuestra cuánto sabes.
     </p>
 
+
     <div class="features">
 
         <div class="feature">
 
-            <span class="feature-icon">⏱️</span>
+            <span class="feature-icon">
+                ⏱️
+            </span>
 
             <span class="feature-title">
                 30 segundos
@@ -2161,9 +3187,12 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="feature">
 
-            <span class="feature-icon">🧠</span>
+            <span class="feature-icon">
+                🧠
+            </span>
 
             <span class="feature-title">
                 Entrena
@@ -2175,9 +3204,12 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="feature">
 
-            <span class="feature-icon">🏆</span>
+            <span class="feature-icon">
+                🏆
+            </span>
 
             <span class="feature-title">
                 Consigue
@@ -2191,6 +3223,7 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <button
         class="btn-primary"
         onclick="irLogin()"
@@ -2201,6 +3234,10 @@ body.keyboard-open .game-container > .btn-warning{
 </div>
 
 
+<!-- =======================================================
+     LOGIN
+======================================================= -->
+
 <div
     id="login-container"
     class="container"
@@ -2208,16 +3245,24 @@ body.keyboard-open .game-container > .btn-warning{
 >
 
     <div class="login-icon">
-        🔐
+
+        <img
+            src="img/logo.png"
+            alt="Logo"
+        >
+
     </div>
+
 
     <h2>
         Bienvenido
     </h2>
 
+
     <p class="subtitle">
         Inicia sesión para guardar tu progreso.
     </p>
+
 
     <div class="input-group">
 
@@ -2234,6 +3279,7 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <div class="input-group">
 
         <label>
@@ -2249,12 +3295,14 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <button
         class="btn-primary"
         onclick="login()"
     >
         🔑 Iniciar sesión
     </button>
+
 
     <button
         class="btn-secondary"
@@ -2263,7 +3311,9 @@ body.keyboard-open .game-container > .btn-warning{
         📝 Crear cuenta
     </button>
 
+
     <p id="auth-message"></p>
+
 
     <button
         class="btn-secondary"
@@ -2274,6 +3324,10 @@ body.keyboard-open .game-container > .btn-warning{
 
 </div>
 
+
+<!-- =======================================================
+     LOBBY
+======================================================= -->
 
 <div
     id="lobby-container"
@@ -2293,57 +3347,106 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <div class="themes">
 
         <div
             class="theme"
             onclick="seleccionarTema('tecnologia')"
         >
-            <span class="theme-icon">💻</span>
-            <span class="theme-name">Tecnología</span>
+
+            <span class="theme-icon">
+                💻
+            </span>
+
+            <span class="theme-name">
+                Tecnología
+            </span>
+
         </div>
+
 
         <div
             class="theme"
             onclick="seleccionarTema('paises')"
         >
-            <span class="theme-icon">🌎</span>
-            <span class="theme-name">Países y ciudades</span>
+
+            <span class="theme-icon">
+                🌎
+            </span>
+
+            <span class="theme-name">
+                Países y ciudades
+            </span>
+
         </div>
+
 
         <div
             class="theme"
             onclick="seleccionarTema('animales')"
         >
-            <span class="theme-icon">🐶</span>
-            <span class="theme-name">Animales</span>
+
+            <span class="theme-icon">
+                🐶
+            </span>
+
+            <span class="theme-name">
+                Animales
+            </span>
+
         </div>
+
 
         <div
             class="theme"
             onclick="seleccionarTema('frutas')"
         >
-            <span class="theme-icon">🍎</span>
-            <span class="theme-name">Frutas</span>
+
+            <span class="theme-icon">
+                🍎
+            </span>
+
+            <span class="theme-name">
+                Frutas
+            </span>
+
         </div>
+
 
         <div
             class="theme"
             onclick="seleccionarTema('deportes')"
         >
-            <span class="theme-icon">⚽</span>
-            <span class="theme-name">Deportes</span>
+
+            <span class="theme-icon">
+                ⚽
+            </span>
+
+            <span class="theme-name">
+                Deportes
+            </span>
+
         </div>
+
 
         <div
             class="theme"
             onclick="seleccionarTema('comida')"
         >
-            <span class="theme-icon">🍔</span>
-            <span class="theme-name">Comida</span>
+
+            <span class="theme-icon">
+                🍔
+            </span>
+
+            <span class="theme-name">
+                Comida
+            </span>
+
         </div>
 
     </div>
+
 
     <button
         class="btn-secondary"
@@ -2351,6 +3454,7 @@ body.keyboard-open .game-container > .btn-warning{
     >
         📊 Mi progreso
     </button>
+
 
     <button
         class="btn-danger"
@@ -2362,6 +3466,10 @@ body.keyboard-open .game-container > .btn-warning{
 </div>
 
 
+<!-- =======================================================
+     PROGRESO
+======================================================= -->
+
 <div
     id="progress-container"
     class="container"
@@ -2372,15 +3480,19 @@ body.keyboard-open .game-container > .btn-warning{
         📊 Mi progreso
     </div>
 
+
     <p class="progress-screen-subtitle">
         Revisa tus resultados y mira cuánto has avanzado.
     </p>
+
 
     <div class="stats-grid">
 
         <div class="stat-card">
 
-            <div class="stat-icon">🏆</div>
+            <div class="stat-icon">
+                🏆
+            </div>
 
             <span class="stat-label">
                 Puntos totales
@@ -2395,9 +3507,12 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="stat-card">
 
-            <div class="stat-icon">📝</div>
+            <div class="stat-icon">
+                📝
+            </div>
 
             <span class="stat-label">
                 Palabras respondidas
@@ -2412,9 +3527,12 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="stat-card">
 
-            <div class="stat-icon">🎯</div>
+            <div class="stat-icon">
+                🎯
+            </div>
 
             <span class="stat-label">
                 Precisión
@@ -2429,9 +3547,12 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="stat-card">
 
-            <div class="stat-icon">📚</div>
+            <div class="stat-icon">
+                📚
+            </div>
 
             <span class="stat-label">
                 Categorías terminadas
@@ -2448,6 +3569,7 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <div class="table-wrapper">
 
         <table class="progress-table">
@@ -2456,9 +3578,17 @@ body.keyboard-open .game-container > .btn-warning{
 
                 <tr>
 
-                    <th>Categoría</th>
-                    <th>Progreso</th>
-                    <th>Estado</th>
+                    <th>
+                        Categoría
+                    </th>
+
+                    <th>
+                        Progreso
+                    </th>
+
+                    <th>
+                        Estado
+                    </th>
 
                 </tr>
 
@@ -2469,6 +3599,7 @@ body.keyboard-open .game-container > .btn-warning{
         </table>
 
     </div>
+
 
     <div class="tip">
 
@@ -2484,6 +3615,7 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <button
         class="btn-secondary"
         onclick="mostrarLobby()"
@@ -2493,6 +3625,10 @@ body.keyboard-open .game-container > .btn-warning{
 
 </div>
 
+
+<!-- =======================================================
+     JUEGO
+======================================================= -->
 
 <div
     id="game-container"
@@ -2504,15 +3640,26 @@ body.keyboard-open .game-container > .btn-warning{
 
         <div class="game-theme">
 
-            <small>
-                CATEGORÍA
-            </small>
+            <img
+                src="img/logo.png"
+                class="game-logo"
+                alt="Logo"
+            >
 
-            <h2 id="tema-actual">
-                Tecnología
-            </h2>
+            <div>
+
+                <small>
+                    CATEGORÍA
+                </small>
+
+                <h2 id="tema-actual">
+                    Tecnología
+                </h2>
+
+            </div>
 
         </div>
+
 
         <div
             class="timer"
@@ -2531,10 +3678,11 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <div class="question-info">
 
         <span id="pregunta-numero">
-            Palabra 1 de 7
+            Palabra 1 de 8
         </span>
 
         <span id="porcentaje">
@@ -2543,11 +3691,13 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <div class="progress-bar">
 
         <div id="progress-fill"></div>
 
     </div>
+
 
     <div class="clue-card">
 
@@ -2561,6 +3711,7 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <input
         type="text"
         id="respuesta"
@@ -2570,6 +3721,7 @@ body.keyboard-open .game-container > .btn-warning{
         spellcheck="false"
     >
 
+
     <button
         id="btn-verificar"
         class="btn-primary"
@@ -2578,7 +3730,9 @@ body.keyboard-open .game-container > .btn-warning{
         ✓ Verificar respuesta
     </button>
 
+
     <div id="resultado"></div>
+
 
     <div class="score-panel">
 
@@ -2597,6 +3751,7 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="score-item">
 
             <span class="score-label">
@@ -2611,6 +3766,7 @@ body.keyboard-open .game-container > .btn-warning{
             </span>
 
         </div>
+
 
         <div class="score-item">
 
@@ -2629,12 +3785,14 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <button
         class="btn-secondary"
         onclick="volverLobby()"
     >
         ← Volver al lobby
     </button>
+
 
     <button
         class="btn-warning"
@@ -2646,6 +3804,10 @@ body.keyboard-open .game-container > .btn-warning{
 </div>
 
 
+<!-- =======================================================
+     RESULTADO FINAL
+======================================================= -->
+
 <div
     id="result-container"
     class="container result-screen"
@@ -2653,12 +3815,19 @@ body.keyboard-open .game-container > .btn-warning{
 >
 
     <div class="result-icon">
-        🏆
+
+        <img
+            src="img/logo.png"
+            alt="Logo"
+        >
+
     </div>
+
 
     <h2>
         ¡Nivel completado!
     </h2>
+
 
     <p
         class="result-description"
@@ -2666,6 +3835,7 @@ body.keyboard-open .game-container > .btn-warning{
     >
         Has terminado esta categoría.
     </p>
+
 
     <div class="result-stats">
 
@@ -2681,6 +3851,7 @@ body.keyboard-open .game-container > .btn-warning{
 
         </div>
 
+
         <div class="result-stat">
 
             <strong id="result-correct">
@@ -2692,6 +3863,7 @@ body.keyboard-open .game-container > .btn-warning{
             </span>
 
         </div>
+
 
         <div class="result-stat">
 
@@ -2707,6 +3879,7 @@ body.keyboard-open .game-container > .btn-warning{
 
     </div>
 
+
     <button
         class="btn-primary"
         onclick="jugarDeNuevo()"
@@ -2714,12 +3887,14 @@ body.keyboard-open .game-container > .btn-warning{
         🔄 Jugar otra vez
     </button>
 
+
     <button
         class="btn-secondary"
         onclick="mostrarLobby()"
     >
         📚 Elegir otra categoría
     </button>
+
 
     <button
         class="btn-secondary"
@@ -2731,16 +3906,27 @@ body.keyboard-open .game-container > .btn-warning{
 </div>
 
 
-<div id="estrella">
+<!-- =======================================================
+     PREMIO
+======================================================= -->
+
+<div
+    id="estrella"
+    aria-hidden="true"
+>
 
     <div class="estrella-contenido">
 
-        <span class="estrella-icon">
-            🌟
-        </span>
+        <div class="estrella-icon">
+            ⭐
+        </div>
+
+        <div class="estrella-titulo">
+            ¡Felicidades!
+        </div>
 
         <div class="estrella-texto">
-            ¡Correcto!
+            ¡Respuesta correcta!
         </div>
 
     </div>
@@ -2749,6 +3935,115 @@ body.keyboard-open .game-container > .btn-warning{
 
 
 <script>
+
+/* =========================================================
+   TEMA
+========================================================= */
+
+function aplicarTema(tema){
+
+    document.documentElement
+        .setAttribute(
+            "data-theme",
+            tema
+        );
+
+    localStorage.setItem(
+        "modoVisual",
+        tema
+    );
+
+    const boton =
+        document.getElementById(
+            "btn-theme"
+        );
+
+    const themeColor =
+        document.getElementById(
+            "theme-color"
+        );
+
+    if(tema==="dark"){
+
+        if(boton){
+
+            boton.textContent="☀️";
+
+            boton.setAttribute(
+                "aria-label",
+                "Activar modo claro"
+            );
+
+            boton.setAttribute(
+                "title",
+                "Modo claro"
+            );
+
+        }
+
+        if(themeColor){
+
+            themeColor.setAttribute(
+                "content",
+                "#071A28"
+            );
+
+        }
+
+    }
+
+    else{
+
+        if(boton){
+
+            boton.textContent="🌙";
+
+            boton.setAttribute(
+                "aria-label",
+                "Activar modo oscuro"
+            );
+
+            boton.setAttribute(
+                "title",
+                "Modo oscuro"
+            );
+
+        }
+
+        if(themeColor){
+
+            themeColor.setAttribute(
+                "content",
+                "#033D65"
+            );
+
+        }
+
+    }
+
+}
+
+
+function alternarTema(){
+
+    const temaActual =
+        document.documentElement
+            .getAttribute("data-theme")
+        ||
+        "light";
+
+    aplicarTema(
+        temaActual==="dark"
+        ? "light"
+        : "dark"
+    );
+
+}
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 const API_KEY =
     "AIzaSyAkb7BsSW6ROnIfM01djn4ZbiX7PKpi-f8";
@@ -2760,84 +4055,235 @@ const SIGNIN_URL =
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
 
-let userToken = null;
-let palabras = [];
-let indice = 0;
-let puntaje = 0;
-let aciertos = 0;
-let errores = 0;
-let temaActual = "";
-let bloqueado = false;
-let tiempo = 30;
-let intervalo = null;
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let userToken=null;
+
+let palabras=[];
+
+let indice=0;
+
+let puntaje=0;
+
+let aciertos=0;
+
+let errores=0;
+
+let temaActual="";
+
+let bloqueado=false;
+
+let tiempo=30;
+
+let intervalo=null;
 
 
-const temas = {
+/* =========================================================
+   PALABRAS
+========================================================= */
+
+const temas={
 
     tecnologia:[
-        {pista:"C_MPU_____",respuesta:"COMPUTADOR"},
-        {pista:"PR_GR_MA",respuesta:"PROGRAMA"},
-        {pista:"INT_RN_T",respuesta:"INTERNET"},
-        {pista:"J_V_SCR_PT",respuesta:"JAVASCRIPT"},
-        {pista:"HT_L",respuesta:"HTML"},
-        {pista:"CI_NCI_",respuesta:"CIENCIA"},
-        {pista:"M_T_M_TIC_S",respuesta:"MATEMÁTICAS"}
+        {
+            pista:"C_MPU_____",
+            respuesta:"COMPUTADOR"
+        },
+        {
+            pista:"C_MP_T_D_R_",
+            respuesta:"COMPUTADORA"
+        },
+        {
+            pista:"PR_GR_MA",
+            respuesta:"PROGRAMA"
+        },
+        {
+            pista:"INT_RN_T",
+            respuesta:"INTERNET"
+        },
+        {
+            pista:"J_V_SCR_PT",
+            respuesta:"JAVASCRIPT"
+        },
+        {
+            pista:"HT_L",
+            respuesta:"HTML"
+        },
+        {
+            pista:"CI_NCI_",
+            respuesta:"CIENCIA"
+        },
+        {
+            pista:"M_T_M_TIC_S",
+            respuesta:"MATEMÁTICAS"
+        }
     ],
 
     paises:[
-        {pista:"C_L_MB__",respuesta:"COLOMBIA"},
-        {pista:"M_X_C_",respuesta:"MÉXICO"},
-        {pista:"ESP_Ñ_",respuesta:"ESPAÑA"},
-        {pista:"ARG_NT_N_",respuesta:"ARGENTINA"},
-        {pista:"P_R_",respuesta:"PERÚ"},
-        {pista:"B_G_T_",respuesta:"BOGOTÁ"},
-        {pista:"M_DR_D",respuesta:"MADRID"}
+        {
+            pista:"C_L_MB__",
+            respuesta:"COLOMBIA"
+        },
+        {
+            pista:"M_X_C_",
+            respuesta:"MÉXICO"
+        },
+        {
+            pista:"ESP_Ñ_",
+            respuesta:"ESPAÑA"
+        },
+        {
+            pista:"ARG_NT_N_",
+            respuesta:"ARGENTINA"
+        },
+        {
+            pista:"P_R_",
+            respuesta:"PERÚ"
+        },
+        {
+            pista:"B_G_T_",
+            respuesta:"BOGOTÁ"
+        },
+        {
+            pista:"M_DR_D",
+            respuesta:"MADRID"
+        }
     ],
 
     animales:[
-        {pista:"P_RR_",respuesta:"PERRO"},
-        {pista:"G_T_",respuesta:"GATO"},
-        {pista:"L_ON",respuesta:"LEÓN"},
-        {pista:"T_GR_",respuesta:"TIGRE"},
-        {pista:"E_F_NT_",respuesta:"ELEFANTE"},
-        {pista:"D_LF_N",respuesta:"DELFÍN"},
-        {pista:"P_G_S_",respuesta:"PEGASO"}
+        {
+            pista:"P_RR_",
+            respuesta:"PERRO"
+        },
+        {
+            pista:"G_T_",
+            respuesta:"GATO"
+        },
+        {
+            pista:"L_ON",
+            respuesta:"LEÓN"
+        },
+        {
+            pista:"T_GR_",
+            respuesta:"TIGRE"
+        },
+        {
+            pista:"E_F_NT_",
+            respuesta:"ELEFANTE"
+        },
+        {
+            pista:"D_LF_N",
+            respuesta:"DELFIN"
+        },
+        {
+            pista:"P_G_S_",
+            respuesta:"PEGASO"
+        }
     ],
 
     frutas:[
-        {pista:"M_NZ_N_",respuesta:"MANZANA"},
-        {pista:"P_R_",respuesta:"PERA"},
-        {pista:"PL_T_NO",respuesta:"PLÁTANO"},
-        {pista:"S_ND_A",respuesta:"SANDÍA"},
-        {pista:"FR_S_",respuesta:"FRESA"},
-        {pista:"M_L_N",respuesta:"MELÓN"},
-        {pista:"N_R_NJ_",respuesta:"NARANJA"}
+        {
+            pista:"M_NZ_N_",
+            respuesta:"MANZANA"
+        },
+        {
+            pista:"P_R_",
+            respuesta:"PERA"
+        },
+        {
+            pista:"PL_T_NO",
+            respuesta:"PLÁTANO"
+        },
+        {
+            pista:"S_ND_A",
+            respuesta:"SANDÍA"
+        },
+        {
+            pista:"FR_S_",
+            respuesta:"FRESA"
+        },
+        {
+            pista:"M_L_N",
+            respuesta:"MELÓN"
+        },
+        {
+            pista:"N_R_NJ_",
+            respuesta:"NARANJA"
+        }
     ],
 
     deportes:[
-        {pista:"F_TB_L",respuesta:"FÚTBOL"},
-        {pista:"B_LON_ES_O",respuesta:"BALONCESTO"},
-        {pista:"T_N_S",respuesta:"TENIS"},
-        {pista:"V_L_IB_L",respuesta:"VOLEIBOL"},
-        {pista:"N_T_CI_N",respuesta:"NATACIÓN"},
-        {pista:"C_RR_R_",respuesta:"CARRERA"},
-        {pista:"B_X__",respuesta:"BOXEO"}
+        {
+            pista:"F_TB_L",
+            respuesta:"FÚTBOL"
+        },
+        {
+            pista:"B_LON_ES_O",
+            respuesta:"BALONCESTO"
+        },
+        {
+            pista:"T_N_S",
+            respuesta:"TENIS"
+        },
+        {
+            pista:"V_L_IB_L",
+            respuesta:"VOLEIBOL"
+        },
+        {
+            pista:"N_T_CI_N",
+            respuesta:"NATACIÓN"
+        },
+        {
+            pista:"C_RR_R_",
+            respuesta:"CARRERA"
+        },
+        {
+            pista:"B_X__",
+            respuesta:"BOXEO"
+        }
     ],
 
     comida:[
-        {pista:"P_ZZ_",respuesta:"PIZZA"},
-        {pista:"H_MB_RG_S_",respuesta:"HAMBURGUESA"},
-        {pista:"P_ST_",respuesta:"PASTA"},
-        {pista:"S_P_",respuesta:"SOPA"},
-        {pista:"A_R__Z",respuesta:"ARROZ"},
-        {pista:"P_LL_",respuesta:"POLLO"},
-        {pista:"H__V_",respuesta:"HUEVO"}
+        {
+            pista:"P_ZZ_",
+            respuesta:"PIZZA"
+        },
+        {
+            pista:"H_MB_RG_S_",
+            respuesta:"HAMBURGUESA"
+        },
+        {
+            pista:"P_ST_",
+            respuesta:"PASTA"
+        },
+        {
+            pista:"S_P_",
+            respuesta:"SOPA"
+        },
+        {
+            pista:"A_R__Z",
+            respuesta:"ARROZ"
+        },
+        {
+            pista:"P_LL_",
+            respuesta:"POLLO"
+        },
+        {
+            pista:"H__V_",
+            respuesta:"HUEVO"
+        }
     ]
 
 };
 
 
-const nombresTemas = {
+/* =========================================================
+   NOMBRES
+========================================================= */
+
+const nombresTemas={
 
     tecnologia:"Tecnología",
     paises:"Países y ciudades",
@@ -2849,7 +4295,11 @@ const nombresTemas = {
 };
 
 
-const categorias = [
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
+
+const categorias=[
 
     {
         id:"tecnologia",
@@ -2890,21 +4340,29 @@ const categorias = [
 ];
 
 
+/* =========================================================
+   MOSTRAR PANTALLA
+========================================================= */
+
 function mostrarSolo(id){
 
     document
         .querySelectorAll(".container")
-        .forEach(container => {
+        .forEach(container=>{
 
-            container.style.display =
-                container.id === id
-                ? "block"
-                : "none";
+            container.style.display=
+                container.id===id
+                ?"block"
+                :"none";
 
         });
 
 }
 
+
+/* =========================================================
+   BIENVENIDA
+========================================================= */
 
 function irBienvenida(){
 
@@ -2914,14 +4372,22 @@ function irBienvenida(){
         "keyboard-open"
     );
 
-    mostrarSolo("welcome-container");
+    mostrarSolo(
+        "welcome-container"
+    );
 
 }
 
 
+/* =========================================================
+   LOGIN
+========================================================= */
+
 function irLogin(){
 
-    mostrarSolo("login-container");
+    mostrarSolo(
+        "login-container"
+    );
 
     document
         .getElementById("auth-message")
@@ -2930,9 +4396,13 @@ function irLogin(){
 }
 
 
+/* =========================================================
+   ERRORES FIREBASE
+========================================================= */
+
 function traducirError(error){
 
-    const erroresFirebase = {
+    const erroresFirebase={
 
         EMAIL_EXISTS:
             "Este correo ya está registrado.",
@@ -2970,42 +4440,49 @@ function traducirError(error){
     };
 
     return erroresFirebase[error]
-        || "Ha ocurrido un error inesperado.";
+        ||
+        "Ha ocurrido un error inesperado.";
 
 }
 
 
+/* =========================================================
+   REGISTRO
+========================================================= */
+
 async function register(){
 
-    const email =
+    const email=
         document
             .getElementById("email")
             .value
             .trim();
 
-    const password =
+    const password=
         document
             .getElementById("password")
             .value;
 
-    const message =
-        document.getElementById("auth-message");
+    const message=
+        document.getElementById(
+            "auth-message"
+        );
 
     if(!email || !password){
 
-        message.textContent =
+        message.textContent=
             "Completa todos los campos.";
 
         return;
 
     }
 
-    message.textContent =
+    message.textContent=
         "Creando cuenta...";
 
     try{
 
-        const res =
+        const res=
             await fetch(
                 SIGNUP_URL,
                 {
@@ -3024,63 +4501,72 @@ async function register(){
                 }
             );
 
-        const data =
+        const data=
             await res.json();
 
         if(!res.ok || data.error){
 
             throw new Error(
-                data.error?.message || "ERROR"
+                data.error?.message ||
+                "ERROR"
             );
 
         }
 
-        message.textContent =
+        message.textContent=
             "✓ Cuenta creada correctamente.";
 
     }
 
     catch(error){
 
-        message.textContent =
-            traducirError(error.message);
+        message.textContent=
+            traducirError(
+                error.message
+            );
 
     }
 
 }
 
 
+/* =========================================================
+   LOGIN
+========================================================= */
+
 async function login(){
 
-    const email =
+    const email=
         document
             .getElementById("email")
             .value
             .trim();
 
-    const password =
+    const password=
         document
             .getElementById("password")
             .value;
 
-    const message =
-        document.getElementById("auth-message");
+    const message=
+        document.getElementById(
+            "auth-message"
+        );
 
     if(!email || !password){
 
-        message.textContent =
+        message.textContent=
             "Completa todos los campos.";
 
         return;
 
     }
 
-    message.textContent =
+    message.textContent=
         "Iniciando sesión...";
 
     try{
 
-        const res =
+        const res=
             await fetch(
                 SIGNIN_URL,
                 {
@@ -3099,18 +4585,19 @@ async function login(){
                 }
             );
 
-        const data =
+        const data=
             await res.json();
 
         if(!res.ok || data.error){
 
             throw new Error(
-                data.error?.message || "ERROR"
+                data.error?.message ||
+                "ERROR"
             );
 
         }
 
-        userToken =
+        userToken=
             data.idToken;
 
         localStorage.setItem(
@@ -3124,13 +4611,19 @@ async function login(){
 
     catch(error){
 
-        message.textContent =
-            traducirError(error.message);
+        message.textContent=
+            traducirError(
+                error.message
+            );
 
     }
 
 }
 
+
+/* =========================================================
+   CERRAR SESIÓN
+========================================================= */
 
 function cerrarSesion(){
 
@@ -3151,6 +4644,10 @@ function cerrarSesion(){
 }
 
 
+/* =========================================================
+   LOBBY
+========================================================= */
+
 function mostrarLobby(){
 
     detenerCronometro();
@@ -3159,10 +4656,16 @@ function mostrarLobby(){
         "keyboard-open"
     );
 
-    mostrarSolo("lobby-container");
+    mostrarSolo(
+        "lobby-container"
+    );
 
 }
 
+
+/* =========================================================
+   SELECCIONAR TEMA
+========================================================= */
 
 function seleccionarTema(tema){
 
@@ -3176,7 +4679,7 @@ function seleccionarTema(tema){
 
     palabras=[...temas[tema]];
 
-    const guardado =
+    const guardado=
         localStorage.getItem(
             "progreso_"+tema
         );
@@ -3185,20 +4688,22 @@ function seleccionarTema(tema){
 
         try{
 
-            const progreso =
-                JSON.parse(guardado);
+            const progreso=
+                JSON.parse(
+                    guardado
+                );
 
-            indice =
-                Number(progreso.indice) || 0;
+            indice=
+                Number(progreso.indice)||0;
 
-            puntaje =
-                Number(progreso.puntaje) || 0;
+            puntaje=
+                Number(progreso.puntaje)||0;
 
-            aciertos =
-                Number(progreso.aciertos) || 0;
+            aciertos=
+                Number(progreso.aciertos)||0;
 
-            errores =
-                Number(progreso.errores) || 0;
+            errores=
+                Number(progreso.errores)||0;
 
         }
 
@@ -3222,7 +4727,7 @@ function seleccionarTema(tema){
 
     }
 
-    if(indice >= palabras.length){
+    if(indice>=palabras.length){
 
         indice=0;
         puntaje=0;
@@ -3233,7 +4738,7 @@ function seleccionarTema(tema){
 
     document
         .getElementById("tema-actual")
-        .textContent =
+        .textContent=
         nombresTemas[tema];
 
     actualizarEstadisticasJuego();
@@ -3246,12 +4751,18 @@ function seleccionarTema(tema){
         .getElementById("btn-verificar")
         .disabled=false;
 
-    mostrarSolo("game-container");
+    mostrarSolo(
+        "game-container"
+    );
 
     mostrarPalabra();
 
 }
 
+
+/* =========================================================
+   VOLVER AL LOBBY
+========================================================= */
 
 function volverLobby(){
 
@@ -3268,13 +4779,20 @@ function volverLobby(){
 }
 
 
+/* =========================================================
+   REINICIAR NIVEL
+========================================================= */
+
 function reiniciarNivel(){
 
     detenerCronometro();
 
     indice=0;
+
     puntaje=0;
+
     aciertos=0;
+
     errores=0;
 
     guardarProgreso();
@@ -3294,9 +4812,13 @@ function reiniciarNivel(){
 }
 
 
+/* =========================================================
+   MOSTRAR PALABRA
+========================================================= */
+
 function mostrarPalabra(){
 
-    if(indice >= palabras.length){
+    if(indice>=palabras.length){
 
         finalizarJuego();
 
@@ -3306,65 +4828,96 @@ function mostrarPalabra(){
 
     bloqueado=false;
 
-    const porcentaje =
+    const porcentaje=
         Math.round(
-            (indice / palabras.length) * 100
+            (indice/palabras.length)*100
         );
 
     document
-        .getElementById("pregunta-numero")
-        .textContent =
+        .getElementById(
+            "pregunta-numero"
+        )
+        .textContent=
         `Palabra ${indice+1} de ${palabras.length}`;
 
     document
-        .getElementById("porcentaje")
-        .textContent =
+        .getElementById(
+            "porcentaje"
+        )
+        .textContent=
         porcentaje+"%";
 
     document
-        .getElementById("progress-fill")
-        .style.width =
+        .getElementById(
+            "progress-fill"
+        )
+        .style.width=
         porcentaje+"%";
 
     document
-        .getElementById("pista")
-        .textContent =
+        .getElementById(
+            "pista"
+        )
+        .textContent=
         palabras[indice].pista;
 
-    const input =
-        document.getElementById("respuesta");
+    const input=
+        document.getElementById(
+            "respuesta"
+        );
 
     input.value="";
 
     document
-        .getElementById("resultado")
+        .getElementById(
+            "resultado"
+        )
         .textContent="";
+
+    document
+        .getElementById(
+            "resultado"
+        )
+        .className="";
 
     input.disabled=false;
 
     document
-        .getElementById("btn-verificar")
+        .getElementById(
+            "btn-verificar"
+        )
         .disabled=false;
 
     iniciarCronometro();
 
-    setTimeout(() => {
 
-        if(
-            document.activeElement !== input &&
-            !document.body.classList.contains(
-                "keyboard-open"
-            )
-        ){
+    const esMovil=
+        window.matchMedia(
+            "(pointer:coarse)"
+        ).matches;
 
-            input.focus();
+    if(!esMovil){
 
-        }
+        setTimeout(()=>{
 
-    },150);
+            if(
+                document.activeElement!==input
+            ){
+
+                input.focus();
+
+            }
+
+        },120);
+
+    }
 
 }
 
+
+/* =========================================================
+   NORMALIZAR
+========================================================= */
 
 function normalizar(texto){
 
@@ -3380,6 +4933,10 @@ function normalizar(texto){
 }
 
 
+/* =========================================================
+   CRONOMETRO
+========================================================= */
+
 function iniciarCronometro(){
 
     detenerCronometro();
@@ -3388,8 +4945,8 @@ function iniciarCronometro(){
 
     actualizarCronometro();
 
-    intervalo =
-        setInterval(() => {
+    intervalo=
+        setInterval(()=>{
 
             tiempo--;
 
@@ -3408,15 +4965,19 @@ function iniciarCronometro(){
 
 function actualizarCronometro(){
 
-    const timer =
-        document.getElementById("timer");
+    const timer=
+        document.getElementById(
+            "timer"
+        );
 
     document
-        .getElementById("timer-text")
-        .textContent =
+        .getElementById(
+            "timer-text"
+        )
+        .textContent=
         tiempo;
 
-    const porcentaje =
+    const porcentaje=
         (tiempo/30)*100;
 
     timer.style.setProperty(
@@ -3467,10 +5028,16 @@ function detenerCronometro(){
 }
 
 
+/* =========================================================
+   TIEMPO AGOTADO
+========================================================= */
+
 function tiempoAgotado(){
 
     if(bloqueado){
+
         return;
+
     }
 
     bloqueado=true;
@@ -3479,23 +5046,27 @@ function tiempoAgotado(){
 
     errores++;
 
-    const resultado =
+    const resultado=
         document.getElementById(
             "resultado"
         );
 
-    resultado.textContent =
+    resultado.textContent=
         "⏰ Se acabó el tiempo";
 
-    resultado.className =
+    resultado.className=
         "incorrecto";
 
     document
-        .getElementById("respuesta")
+        .getElementById(
+            "respuesta"
+        )
         .disabled=true;
 
     document
-        .getElementById("btn-verificar")
+        .getElementById(
+            "btn-verificar"
+        )
         .disabled=true;
 
     actualizarEstadisticasJuego();
@@ -3504,11 +5075,9 @@ function tiempoAgotado(){
 
     guardarProgreso();
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
-        if(
-            indice >= palabras.length
-        ){
+        if(indice>=palabras.length){
 
             finalizarJuego();
 
@@ -3520,38 +5089,44 @@ function tiempoAgotado(){
 
         }
 
-    },1100);
+    },1000);
 
 }
 
 
+/* =========================================================
+   VERIFICAR
+========================================================= */
+
 function verificar(){
 
     if(bloqueado){
+
         return;
+
     }
 
-    const input =
+    const input=
         document.getElementById(
             "respuesta"
         );
 
-    const respuesta =
+    const respuesta=
         normalizar(
             input.value
         );
 
-    const resultado =
+    const resultado=
         document.getElementById(
             "resultado"
         );
 
     if(!respuesta){
 
-        resultado.textContent =
+        resultado.textContent=
             "Escribe una respuesta.";
 
-        resultado.className =
+        resultado.className=
             "incorrecto";
 
         input.focus();
@@ -3564,7 +5139,7 @@ function verificar(){
 
     detenerCronometro();
 
-    const correcta =
+    const correcta=
         normalizar(
             palabras[indice].respuesta
         );
@@ -3587,10 +5162,10 @@ function verificar(){
 
         puntaje++;
 
-        resultado.textContent =
+        resultado.textContent=
             "✓ ¡Respuesta correcta!";
 
-        resultado.className =
+        resultado.className=
             "correcto";
 
         actualizarEstadisticasJuego();
@@ -3603,10 +5178,10 @@ function verificar(){
 
         errores++;
 
-        resultado.textContent =
+        resultado.textContent=
             `✕ Era: ${palabras[indice].respuesta}`;
 
-        resultado.className =
+        resultado.className=
             "incorrecto";
 
         actualizarEstadisticasJuego();
@@ -3617,11 +5192,9 @@ function verificar(){
 
     guardarProgreso();
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
-        if(
-            indice >= palabras.length
-        ){
+        if(indice>=palabras.length){
 
             finalizarJuego();
 
@@ -3633,39 +5206,64 @@ function verificar(){
 
         }
 
-    },1100);
+    },1000);
 
 }
 
 
+/* =========================================================
+   ESTADISTICAS
+========================================================= */
+
 function actualizarEstadisticasJuego(){
 
     document
-        .getElementById("puntaje")
-        .textContent =
+        .getElementById(
+            "puntaje"
+        )
+        .textContent=
         puntaje;
 
     document
-        .getElementById("aciertos")
-        .textContent =
+        .getElementById(
+            "aciertos"
+        )
+        .textContent=
         aciertos;
 
     document
-        .getElementById("errores")
-        .textContent =
+        .getElementById(
+            "errores"
+        )
+        .textContent=
         errores;
 
 }
 
 
+/* =========================================================
+   PREMIO
+========================================================= */
+
 function mostrarPremio(){
 
-    const estrella =
+    const estrella=
         document.getElementById(
             "estrella"
         );
 
+    if(!estrella){
+
+        return;
+
+    }
+
     estrella.style.display="flex";
+
+    estrella.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
     estrella.classList.remove(
         "estrella-animar"
@@ -3677,18 +5275,32 @@ function mostrarPremio(){
         "estrella-animar"
     );
 
-    setTimeout(() => {
+    clearTimeout(
+        window.__premioTimeout
+    );
 
-        estrella.style.display="none";
+    window.__premioTimeout=
+        setTimeout(()=>{
 
-        estrella.classList.remove(
-            "estrella-animar"
-        );
+            estrella.style.display="none";
 
-    },1350);
+            estrella.classList.remove(
+                "estrella-animar"
+            );
+
+            estrella.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        },1350);
 
 }
 
+
+/* =========================================================
+   FINALIZAR
+========================================================= */
 
 function finalizarJuego(){
 
@@ -3706,40 +5318,41 @@ function finalizarJuego(){
         )
         .style.width="100%";
 
-    const precision =
-        palabras.length > 0
-        ? Math.round(
-            (aciertos / palabras.length)
-            * 100
+    const precision=
+        palabras.length>0
+        ?
+        Math.round(
+            (aciertos/palabras.length)*100
         )
-        : 0;
+        :
+        0;
 
     document
         .getElementById(
             "result-points"
         )
-        .textContent =
+        .textContent=
         puntaje;
 
     document
         .getElementById(
             "result-correct"
         )
-        .textContent =
+        .textContent=
         aciertos;
 
     document
         .getElementById(
             "result-accuracy"
         )
-        .textContent =
+        .textContent=
         precision+"%";
 
     document
         .getElementById(
             "result-description"
         )
-        .textContent =
+        .textContent=
         `Terminaste ${nombresTemas[temaActual]} con ${aciertos} aciertos de ${palabras.length} palabras.`;
 
     mostrarSolo(
@@ -3749,11 +5362,18 @@ function finalizarJuego(){
 }
 
 
+/* =========================================================
+   JUGAR DE NUEVO
+========================================================= */
+
 function jugarDeNuevo(){
 
     indice=0;
+
     puntaje=0;
+
     aciertos=0;
+
     errores=0;
 
     document.body.classList.remove(
@@ -3773,10 +5393,16 @@ function jugarDeNuevo(){
 }
 
 
+/* =========================================================
+   GUARDAR PROGRESO
+========================================================= */
+
 function guardarProgreso(){
 
     if(!temaActual){
+
         return;
+
     }
 
     localStorage.setItem(
@@ -3794,6 +5420,10 @@ function guardarProgreso(){
 }
 
 
+/* =========================================================
+   MOSTRAR PROGRESO
+========================================================= */
+
 function mostrarProgreso(){
 
     detenerCronometro();
@@ -3807,59 +5437,66 @@ function mostrarProgreso(){
     );
 
     let puntosTotales=0;
+
     let palabrasRespondidas=0;
+
     let respuestasCorrectas=0;
+
     let categoriasCompletadas=0;
 
-    const tabla =
+    const tabla=
         document.getElementById(
             "tabla-progreso"
         );
 
     tabla.innerHTML="";
 
-    categorias.forEach(
-        categoria => {
 
-            const guardado =
+    categorias.forEach(
+        categoria=>{
+
+            const guardado=
                 localStorage.getItem(
                     "progreso_"+
                     categoria.id
                 );
 
             let respondidas=0;
+
             let puntos=0;
+
             let aciertosCategoria=0;
+
 
             if(guardado){
 
                 try{
 
-                    const progreso =
+                    const progreso=
                         JSON.parse(
                             guardado
                         );
 
-                    respondidas =
+                    respondidas=
                         Math.min(
                             Number(
                                 progreso.indice
-                            ) || 0,
+                            )||0,
                             temas[
                                 categoria.id
                             ].length
                         );
 
-                    puntos =
+                    puntos=
                         Number(
                             progreso.puntaje
-                        ) || 0;
+                        )||0;
 
-                    aciertosCategoria =
+                    aciertosCategoria=
                         Math.min(
                             Number(
                                 progreso.aciertos
-                            ) || 0,
+                            )||0,
                             respondidas
                         );
 
@@ -3868,24 +5505,31 @@ function mostrarProgreso(){
                 catch{
 
                     respondidas=0;
+
                     puntos=0;
+
                     aciertosCategoria=0;
 
                 }
 
             }
 
-            const total =
+
+            const total=
                 temas[
                     categoria.id
                 ].length;
 
-            const porcentaje =
+
+            const porcentaje=
                 total>0
-                ? Math.round(
+                ?
+                Math.round(
                     (respondidas/total)*100
                 )
-                : 0;
+                :
+                0;
+
 
             puntosTotales+=puntos;
 
@@ -3895,17 +5539,19 @@ function mostrarProgreso(){
             respuestasCorrectas+=
                 aciertosCategoria;
 
-            let estado =
+
+            let estado=
                 "Sin comenzar";
 
-            let claseEstado =
+            let claseEstado=
                 "status-start";
+
 
             if(respondidas>=total){
 
                 estado="Completado";
 
-                claseEstado =
+                claseEstado=
                     "status-complete";
 
                 categoriasCompletadas++;
@@ -3916,15 +5562,17 @@ function mostrarProgreso(){
 
                 estado="En progreso";
 
-                claseEstado =
+                claseEstado=
                     "status-progress";
 
             }
 
-            const fila =
+
+            const fila=
                 document.createElement(
                     "tr"
                 );
+
 
             fila.innerHTML=`
 
@@ -3960,6 +5608,7 @@ function mostrarProgreso(){
 
             `;
 
+
             tabla.appendChild(
                 fila
             );
@@ -3967,55 +5616,64 @@ function mostrarProgreso(){
         }
     );
 
-    const precision =
+
+    const precision=
         palabrasRespondidas>0
-        ? Math.round(
+        ?
+        Math.round(
             (
-                respuestasCorrectas /
+                respuestasCorrectas/
                 palabrasRespondidas
-            ) * 100
+            )*100
         )
-        : 0;
+        :
+        0;
+
 
     document
         .getElementById(
             "total-puntos"
         )
-        .textContent =
+        .textContent=
         puntosTotales;
 
     document
         .getElementById(
             "total-palabras"
         )
-        .textContent =
+        .textContent=
         palabrasRespondidas;
 
     document
         .getElementById(
             "precision"
         )
-        .textContent =
+        .textContent=
         precision+"%";
 
     document
         .getElementById(
             "categorias-completadas"
         )
-        .textContent =
+        .textContent=
         categoriasCompletadas+"/6";
 
 }
 
 
-const respuestaInput =
+/* =========================================================
+   INPUT
+========================================================= */
+
+const respuestaInput=
     document.getElementById(
         "respuesta"
     );
 
+
 respuestaInput.addEventListener(
     "keydown",
-    event => {
+    event=>{
 
         if(event.key==="Enter"){
 
@@ -4029,13 +5687,15 @@ respuestaInput.addEventListener(
 );
 
 
-/* DETECCIÓN DEL TECLADO */
+/* =========================================================
+   TECLADO MOVIL
+========================================================= */
 
 function actualizarEstadoTeclado(){
 
     if(
         !window.visualViewport ||
-        window.innerWidth > 600
+        window.innerWidth>600
     ){
 
         document.body.classList.remove(
@@ -4046,22 +5706,25 @@ function actualizarEstadoTeclado(){
 
     }
 
-    const viewport =
+
+    const viewport=
         window.visualViewport;
 
-    const alturaVentana =
-        window.innerHeight;
-
-    const alturaVisible =
+    const alturaVisible=
         viewport.height;
 
-    const tecladoAbierto =
-        alturaVisible <
-        alturaVentana * .78;
+    const alturaNormal=
+        window.innerHeight;
+
+    const tecladoAbierto=
+        alturaVisible<
+        alturaNormal*.78;
+
 
     if(
         tecladoAbierto &&
-        document.activeElement === respuestaInput
+        document.activeElement===
+        respuestaInput
     ){
 
         document.body.classList.add(
@@ -4070,9 +5733,7 @@ function actualizarEstadoTeclado(){
 
     }
 
-    else if(
-        !tecladoAbierto
-    ){
+    else if(!tecladoAbierto){
 
         document.body.classList.remove(
             "keyboard-open"
@@ -4097,20 +5758,22 @@ if(window.visualViewport){
 
 }
 
+
 window.addEventListener(
     "resize",
     actualizarEstadoTeclado
 );
 
+
 respuestaInput.addEventListener(
     "focus",
-    () => {
+    ()=>{
 
-        setTimeout(() => {
+        setTimeout(()=>{
 
             actualizarEstadoTeclado();
 
-            if(window.innerWidth <= 600){
+            if(window.innerWidth<=600){
 
                 respuestaInput.scrollIntoView({
                     behavior:"smooth",
@@ -4124,9 +5787,10 @@ respuestaInput.addEventListener(
     }
 );
 
+
 respuestaInput.addEventListener(
     "blur",
-    () => {
+    ()=>{
 
         setTimeout(
             actualizarEstadoTeclado,
@@ -4137,11 +5801,24 @@ respuestaInput.addEventListener(
 );
 
 
-/* INICIO */
+/* =========================================================
+   CARGA INICIAL
+========================================================= */
 
 window.addEventListener(
     "load",
-    () => {
+    ()=>{
+
+        const temaGuardado=
+            localStorage.getItem(
+                "modoVisual"
+            )
+            ||
+            "light";
+
+        aplicarTema(
+            temaGuardado
+        );
 
         mostrarSolo(
             "welcome-container"
