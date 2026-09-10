@@ -42,10 +42,6 @@
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -66,143 +62,93 @@ body{
     width:100%;
     min-height:100vh;
     min-height:100svh;
-
     font-family:"Poppins",sans-serif;
-
     color:var(--text);
-
     overflow-x:hidden;
-
     background:var(--bg);
-
     padding-bottom:env(safe-area-inset-bottom);
-
     transition:
         background .3s ease,
         color .3s ease;
 }
 
 @supports(min-height:100dvh){
-
     body{
         min-height:100dvh;
     }
-
 }
 
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 :root{
-
     --navy:#033D65;
     --blue:#2585BD;
     --cyan:#2FAEE3;
-
     --green:#25BA77;
     --purple:#6464D6;
     --orange:#FA8D1E;
     --coral:#F04B38;
-
     --bg:#FFFCF5;
     --bg-soft:#F7FAFC;
-
     --surface:#FFFFFF;
     --surface-soft:#F4F8FA;
     --surface-hover:#EDF6FA;
-
     --text:#18384D;
     --heading:#033D65;
     --muted:#6D8494;
-
     --border:rgba(3,61,101,.10);
     --border-strong:rgba(3,61,101,.16);
-
     --input-bg:#FFFFFF;
     --input-text:#18384D;
     --input-placeholder:#8DA0AD;
-
     --shadow:
         0 18px 50px
         rgba(3,61,101,.09);
-
     --shadow-soft:
         0 8px 24px
         rgba(3,61,101,.07);
-
     --radius:24px;
-
     --topbar-bg:
         rgba(255,252,245,.94);
-
     --topbar-border:
         rgba(3,61,101,.10);
-
     --timer-empty:
         rgba(3,61,101,.10);
-
     --glass:
         rgba(255,255,255,.90);
 }
 
-
-/* =========================================================
-   MODO OSCURO
-========================================================= */
-
 html[data-theme="dark"]{
-
     --bg:#071A28;
     --bg-soft:#0A2233;
-
     --surface:#0D2C41;
     --surface-soft:#0A2638;
     --surface-hover:#12384E;
-
     --text:#F2FAFF;
     --heading:#F5FBFF;
     --muted:#AFC7D5;
-
     --border:
         rgba(47,174,227,.16);
-
     --border-strong:
         rgba(47,174,227,.24);
-
     --input-bg:#092335;
     --input-text:#F2FAFF;
     --input-placeholder:#7894A5;
-
     --shadow:
         0 20px 60px
         rgba(0,0,0,.30);
-
     --shadow-soft:
         0 8px 25px
         rgba(0,0,0,.20);
-
     --topbar-bg:
         rgba(7,26,40,.94);
-
     --topbar-border:
         rgba(47,174,227,.16);
-
     --timer-empty:
         rgba(47,174,227,.13);
-
     --glass:
         rgba(13,44,65,.94);
 }
 
-
-/* =========================================================
-   FONDO
-========================================================= */
-
 body{
-
     background:
         radial-gradient(
             circle at 5% 5%,
@@ -218,7 +164,6 @@ body{
 }
 
 html[data-theme="dark"] body{
-
     background:
         radial-gradient(
             circle at 5% 5%,
@@ -233,52 +178,30 @@ html[data-theme="dark"] body{
         var(--bg);
 }
 
-
-/* =========================================================
-   DECORACIÓN
-========================================================= */
-
 body::before,
 body::after{
-
     content:"";
-
     position:fixed;
-
     width:320px;
     height:320px;
-
     border-radius:50%;
-
     filter:blur(100px);
-
     opacity:.06;
-
     pointer-events:none;
-
     z-index:0;
 }
 
 body::before{
-
     background:var(--cyan);
-
     top:-160px;
     left:-160px;
 }
 
 body::after{
-
     background:var(--purple);
-
     right:-160px;
     bottom:-160px;
 }
-
-
-/* =========================================================
-   ELEMENTOS GENERALES
-========================================================= */
 
 button,
 input{
@@ -286,68 +209,46 @@ input{
 }
 
 button{
-
     touch-action:manipulation;
-
     cursor:pointer;
 }
 
 button:focus-visible,
 input:focus-visible{
-
     outline:
         2px solid
         rgba(47,174,227,.80);
-
     outline-offset:3px;
 }
 
 button:active{
-
     transform:scale(.98);
 }
 
-
-/* =========================================================
-   TOPBAR
-========================================================= */
-
 .topbar{
-
     position:fixed;
-
     top:0;
     left:0;
-
     width:100%;
-
     height:
         calc(
             70px +
             env(safe-area-inset-top)
         );
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     padding:
         env(safe-area-inset-top)
         20px
         0;
-
     z-index:50;
-
     background:var(--topbar-bg);
-
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
-
     border-bottom:
         1px solid
         var(--topbar-border);
-
     transition:
         transform .25s ease,
         opacity .25s ease,
@@ -355,100 +256,62 @@ button:active{
 }
 
 .topbar-inner{
-
     width:
         min(
             100%,
             1100px
         );
-
     display:flex;
-
     align-items:center;
     justify-content:space-between;
-
     gap:16px;
 }
 
 .brand{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     min-width:0;
-
     font-size:17px;
-
     font-weight:800;
-
     color:var(--heading);
-
     white-space:nowrap;
 }
 
 .brand-logo{
-
     width:48px;
     height:48px;
-
     flex:0 0 auto;
-
     display:block;
-
     object-fit:contain;
 }
 
 .brand-dot{
-
     width:7px;
     height:7px;
-
     flex:0 0 auto;
-
     border-radius:50%;
-
     background:var(--green);
 }
 
-
-/* =========================================================
-   BOTÓN MODO OSCURO
-========================================================= */
-
 .theme-toggle{
-
     width:44px;
     height:44px;
-
     min-height:44px;
-
     padding:0;
     margin:0;
-
     flex:0 0 auto;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     border-radius:13px;
-
     color:var(--heading);
-
     background:var(--surface);
-
     border:
         1px solid
         var(--border);
-
     box-shadow:var(--shadow-soft);
-
     font-size:19px;
-
     transition:
         transform .2s ease,
         background .25s ease,
@@ -456,33 +319,20 @@ button:active{
 }
 
 .theme-toggle:hover{
-
-    transform:
-        translateY(-2px);
-
+    transform:translateY(-2px);
     background:var(--surface-hover);
-
     border-color:
         rgba(47,174,227,.35);
 }
 
-
-/* =========================================================
-   CONTENEDORES
-========================================================= */
-
 .container{
-
     position:relative;
-
     z-index:1;
-
     width:
         min(
             calc(100% - 40px),
             1000px
         );
-
     margin:
         calc(
             90px +
@@ -490,24 +340,16 @@ button:active{
         )
         auto
         24px;
-
     padding:26px;
-
     border-radius:var(--radius);
-
     background:var(--glass);
-
     border:
         1px solid
         var(--border);
-
     box-shadow:var(--shadow);
-
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
-
     animation:appear .35s ease;
-
     transition:
         background .3s ease,
         border .3s ease,
@@ -515,28 +357,17 @@ button:active{
 }
 
 @keyframes appear{
-
     from{
         opacity:0;
-        transform:
-            translateY(10px);
+        transform:translateY(10px);
     }
-
     to{
         opacity:1;
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
-
 }
 
-
-/* =========================================================
-   TAMAÑOS
-========================================================= */
-
 #welcome-container{
-
     width:
         min(
             calc(100% - 40px),
@@ -546,7 +377,6 @@ button:active{
 
 #login-container,
 #result-container{
-
     width:
         min(
             calc(100% - 40px),
@@ -554,17 +384,8 @@ button:active{
         );
 }
 
-#lobby-container{
-
-    width:
-        min(
-            calc(100% - 40px),
-            900px
-        );
-}
-
+#lobby-container,
 #progress-container{
-
     width:
         min(
             calc(100% - 40px),
@@ -573,7 +394,6 @@ button:active{
 }
 
 #game-container{
-
     width:
         min(
             calc(100% - 40px),
@@ -581,49 +401,31 @@ button:active{
         );
 }
 
-
-/* =========================================================
-   BIENVENIDA
-========================================================= */
-
 .welcome{
-
     text-align:center;
-
-    padding:
-        28px;
+    padding:28px;
 }
 
 .hero-logo-wrapper{
-
     width:150px;
     height:150px;
-
     margin:
         0
         auto
         18px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     animation:float 3.5s ease-in-out infinite;
 }
 
 .hero-logo{
-
     display:block;
-
     width:140px;
     height:140px;
-
     max-width:100%;
     max-height:100%;
-
     object-fit:contain;
-
     filter:
         drop-shadow(
             0 8px 18px
@@ -632,219 +434,132 @@ button:active{
 }
 
 @keyframes float{
-
     0%,100%{
         transform:translateY(0);
     }
-
     50%{
         transform:translateY(-5px);
     }
-
 }
 
-
-/* =========================================================
-   BADGE
-========================================================= */
-
 .badge{
-
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
-
     gap:6px;
-
     padding:
         7px
         13px;
-
     margin-bottom:11px;
-
     border-radius:50px;
-
     font-size:10px;
-
     font-weight:700;
-
     letter-spacing:.5px;
-
     color:var(--blue);
-
     background:
         rgba(47,174,227,.08);
-
     border:
         1px solid
         rgba(47,174,227,.18);
 }
 
-
-/* =========================================================
-   TITULOS
-========================================================= */
-
 h1{
-
     font-size:
         clamp(
             36px,
             5vw,
             48px
         );
-
     line-height:1.08;
-
     font-weight:800;
-
     margin-bottom:10px;
-
     color:var(--heading);
 }
 
 .welcome-description{
-
     color:var(--muted);
-
     font-size:14px;
-
     line-height:1.6;
-
     max-width:600px;
-
     margin:0 auto;
 }
 
 h2{
-
     font-size:28px;
-
     line-height:1.15;
-
     font-weight:800;
-
     margin-bottom:7px;
-
     color:var(--heading);
 }
 
 .subtitle{
-
     color:var(--muted);
-
     font-size:13px;
-
     line-height:1.55;
-
     margin-bottom:19px;
 }
 
-
-/* =========================================================
-   FEATURES
-========================================================= */
-
 .features{
-
     display:grid;
-
     grid-template-columns:
         repeat(3,1fr);
-
     gap:12px;
-
     margin:22px 0;
 }
 
 .feature{
-
     min-width:0;
-
     padding:
         17px
         10px;
-
     border-radius:18px;
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
-
     transition:
         transform .2s,
         background .2s;
 }
 
 .feature:hover{
-
     transform:translateY(-3px);
-
     background:var(--surface-hover);
 }
 
 .feature-icon{
-
     display:block;
-
     font-size:25px;
-
     margin-bottom:6px;
 }
 
 .feature-title{
-
     display:block;
-
     font-size:12px;
-
     font-weight:700;
-
     color:var(--heading);
 }
 
 .feature-text{
-
     display:block;
-
     margin-top:2px;
-
     color:var(--muted);
-
     font-size:9px;
 }
 
-
-/* =========================================================
-   BOTONES
-========================================================= */
-
 button{
-
     width:100%;
-
     min-height:48px;
-
     border:0;
     outline:0;
-
     padding:
         12px
         18px;
-
     margin-top:8px;
-
     border-radius:15px;
-
     color:#FFFFFF;
-
     font-size:13px;
-
     font-weight:700;
-
     transition:
         transform .2s,
         box-shadow .2s,
@@ -854,61 +569,48 @@ button{
 }
 
 button:hover{
-
     transform:translateY(-1px);
 }
 
 button:disabled{
-
     cursor:not-allowed;
-
     opacity:.45;
-
     transform:none;
 }
 
 .btn-primary{
-
     background:
         linear-gradient(
             135deg,
             var(--blue),
             var(--cyan)
         );
-
     box-shadow:
         0 9px 22px
         rgba(37,133,189,.20);
 }
 
 .btn-primary:hover{
-
     box-shadow:
         0 12px 28px
         rgba(37,133,189,.28);
 }
 
 .btn-secondary{
-
     color:var(--heading);
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
 }
 
 .btn-secondary:hover{
-
     background:var(--surface-hover);
-
     border-color:
         rgba(47,174,227,.30);
 }
 
 .btn-danger{
-
     background:
         linear-gradient(
             135deg,
@@ -918,7 +620,6 @@ button:disabled{
 }
 
 .btn-warning{
-
     background:
         linear-gradient(
             135deg,
@@ -927,188 +628,122 @@ button:disabled{
         );
 }
 
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
 .login-icon{
-
     width:115px;
     height:115px;
-
     margin:
         0
         auto
         16px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     background:transparent;
-
     border:0;
-
     box-shadow:none;
-
     overflow:visible;
 }
 
 .login-icon img{
-
     width:100%;
     height:100%;
-
     display:block;
-
     object-fit:contain;
-
     object-position:center;
 }
 
 .input-group{
-
     text-align:left;
-
     margin-bottom:13px;
 }
 
 .input-group label{
-
     display:block;
-
     margin:
         0 0 6px 3px;
-
     color:var(--muted);
-
     font-size:10px;
-
     font-weight:600;
 }
 
 input{
-
     width:100%;
-
     height:50px;
     min-height:50px;
-
     border:
         1px solid
         var(--border-strong);
-
     outline:none;
-
     border-radius:14px;
-
     padding:
         12px
         15px;
-
     color:var(--input-text);
-
     background:var(--input-bg);
-
     font-size:16px;
-
     transition:
         border .2s,
         background .2s,
         box-shadow .2s;
-
     -webkit-appearance:none;
     appearance:none;
 }
 
 input::placeholder{
-
     color:var(--input-placeholder);
 }
 
 input:focus{
-
     border-color:
         rgba(47,174,227,.75);
-
     background:var(--input-bg);
-
     box-shadow:
         0 0 0 3px
         rgba(47,174,227,.09);
 }
 
 #auth-message{
-
     min-height:20px;
-
     margin:
         10px 0
         1px;
-
     font-size:11px;
-
     color:var(--blue);
 }
 
-
-/* =========================================================
-   LOBBY
-========================================================= */
-
 .lobby-header{
-
     margin-bottom:20px;
 }
 
 .lobby-header h2{
-
     font-size:30px;
 }
 
 .themes{
-
     display:grid;
-
     grid-template-columns:
         repeat(3,minmax(0,1fr));
-
     gap:12px;
 }
 
 .theme{
-
     position:relative;
-
     min-height:125px;
-
     padding:
         15px
         10px;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
     border-radius:19px;
-
     cursor:pointer;
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
-
     overflow:hidden;
-
     transition:
         transform .2s,
         border .2s,
@@ -1117,203 +752,126 @@ input:focus{
 }
 
 .theme::before{
-
     content:"";
-
     position:absolute;
-
     width:100px;
     height:100px;
-
     top:-50px;
     right:-50px;
-
     border-radius:50%;
-
     background:
         rgba(47,174,227,.08);
-
     filter:blur(15px);
 }
 
 .theme:hover{
-
     transform:translateY(-3px);
-
     background:var(--surface-hover);
-
     border-color:
         rgba(47,174,227,.30);
-
     box-shadow:var(--shadow-soft);
 }
 
 .theme:active{
-
     transform:scale(.98);
 }
 
 .theme-icon{
-
     position:relative;
-
     z-index:1;
-
     width:58px;
     height:58px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     margin-bottom:9px;
-
     border-radius:17px;
-
     font-size:31px;
-
     background:var(--surface);
-
     border:
         1px solid
         var(--border);
 }
 
 .theme-name{
-
     position:relative;
-
     z-index:1;
-
     font-size:12px;
-
     font-weight:700;
-
     color:var(--heading);
 }
 
-
-/* =========================================================
-   JUEGO
-========================================================= */
-
 .game-header{
-
     display:flex;
-
     align-items:center;
     justify-content:space-between;
-
     gap:15px;
-
     margin-bottom:17px;
 }
 
 .game-theme{
-
     min-width:0;
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     text-align:left;
 }
 
 .game-logo{
-
     width:48px;
     height:48px;
-
     flex:0 0 auto;
-
     display:block;
-
     object-fit:contain;
-
     object-position:center;
 }
 
 .game-theme small{
-
     display:block;
-
     color:var(--muted);
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:1.3px;
 }
 
 .game-theme h2{
-
     margin-top:3px;
-
     margin-bottom:0;
-
     font-size:25px;
-
     white-space:nowrap;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
 
-
-/* =========================================================
-   CRONOMETRO
-========================================================= */
-
 .timer{
-
     flex:0 0 auto;
-
     width:68px;
     height:68px;
-
     padding:5px;
-
     border-radius:50%;
-
     background:
         conic-gradient(
             var(--cyan)
             var(--progreso,100%),
             var(--timer-empty) 0
         );
-
     transition:.3s;
 }
 
 .timer-inner{
-
     width:100%;
     height:100%;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     border-radius:50%;
-
     background:var(--surface);
-
     color:var(--heading);
-
     font-size:18px;
-
     font-weight:800;
 }
 
 .timer.warning{
-
     background:
         conic-gradient(
             var(--orange)
@@ -1323,70 +881,45 @@ input:focus{
 }
 
 .timer.danger{
-
     background:
         conic-gradient(
             var(--coral)
             var(--progreso,100%),
             var(--timer-empty) 0
         );
-
     animation:pulse .75s infinite;
 }
 
 @keyframes pulse{
-
     50%{
         transform:scale(1.04);
     }
-
 }
 
-
-/* =========================================================
-   PROGRESO
-========================================================= */
-
 .question-info{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
-
     margin-bottom:7px;
-
     color:var(--muted);
-
     font-size:10px;
-
     font-weight:600;
 }
 
 .progress-bar{
-
     width:100%;
-
     height:7px;
-
     overflow:hidden;
-
     margin-bottom:17px;
-
     border-radius:20px;
-
     background:
         var(--timer-empty);
 }
 
 #progress-fill{
-
     width:0;
     height:100%;
-
     border-radius:20px;
-
     background:
         linear-gradient(
             90deg,
@@ -1395,98 +928,60 @@ input:focus{
             var(--purple),
             var(--orange)
         );
-
     transition:
         width .35s ease;
 }
 
-
-/* =========================================================
-   PISTA
-========================================================= */
-
 .clue-card{
-
     position:relative;
-
     padding:
         25px
         18px;
-
     margin-bottom:13px;
-
     text-align:center;
-
     border-radius:20px;
-
     overflow:hidden;
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
-
     box-shadow:
         inset 0 1px 0
         rgba(255,255,255,.08);
 }
 
 .clue-label{
-
     margin-bottom:8px;
-
     color:var(--muted);
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:1.5px;
 }
 
 #pista{
-
     font-size:
         clamp(
             27px,
             4vw,
             36px
         );
-
     font-weight:800;
-
     letter-spacing:4px;
-
     line-height:1.25;
-
     word-break:break-word;
-
     color:var(--heading);
 }
 
-
-/* =========================================================
-   RESULTADO
-========================================================= */
-
 #resultado{
-
     min-height:24px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     margin:
         9px 0
         2px;
-
     font-size:11px;
-
     font-weight:700;
-
     text-align:center;
 }
 
@@ -1498,620 +993,496 @@ input:focus{
     color:var(--coral);
 }
 
-
-/* =========================================================
-   PUNTUACION
-========================================================= */
-
 .score-panel{
-
     display:grid;
-
     grid-template-columns:
         repeat(3,minmax(0,1fr));
-
     gap:9px;
-
     margin-top:11px;
 }
 
 .score-item{
-
     padding:
         12px
         7px;
-
     text-align:center;
-
     border-radius:15px;
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
 }
 
 .score-label{
-
     display:block;
-
     color:var(--muted);
-
     font-size:8px;
-
     margin-bottom:3px;
 }
 
 .score-value{
-
     font-size:20px;
-
     font-weight:800;
-
     color:var(--heading);
 }
 
-
-/* =========================================================
-   RESULTADO FINAL
-========================================================= */
-
 .result-screen{
-
     text-align:center;
 }
 
 .result-icon{
-
     width:115px;
     height:115px;
-
     margin:
         0
         auto
         15px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     background:transparent;
-
     border:0;
-
     box-shadow:none;
-
     overflow:visible;
 }
 
 .result-icon img{
-
     width:100%;
     height:100%;
-
     display:block;
-
     object-fit:contain;
 }
 
 .result-screen h2{
-
     font-size:31px;
-
     margin-bottom:7px;
 }
 
 .result-description{
-
     color:var(--muted);
-
     font-size:12px;
-
     line-height:1.6;
-
     margin-bottom:17px;
 }
 
 .result-stats{
-
     display:grid;
-
     grid-template-columns:
         repeat(3,minmax(0,1fr));
-
     gap:9px;
-
     margin-bottom:15px;
 }
 
 .result-stat{
-
     padding:
         13px
         7px;
-
     border-radius:15px;
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
 }
 
 .result-stat strong{
-
     display:block;
-
     font-size:23px;
-
     color:var(--heading);
 }
 
 .result-stat span{
-
     display:block;
-
     color:var(--muted);
-
     font-size:8px;
-
     margin-top:2px;
 }
 
-
-/* =========================================================
-   MI PROGRESO
-========================================================= */
-
 .progress-screen-title{
-
     font-size:30px;
-
     font-weight:800;
-
     margin-bottom:5px;
-
     color:var(--heading);
 }
 
 .progress-screen-subtitle{
-
     color:var(--muted);
-
     font-size:12px;
-
     line-height:1.55;
-
     margin-bottom:18px;
 }
 
 .stats-grid{
-
     display:grid;
-
     grid-template-columns:
         repeat(4,minmax(0,1fr));
-
     gap:10px;
-
     margin-bottom:17px;
 }
 
 .stat-card{
-
     position:relative;
-
     padding:15px;
-
     text-align:left;
-
     border-radius:17px;
-
     background:var(--surface-soft);
-
     border:
         1px solid
         var(--border);
-
     overflow:hidden;
-
     transition:.2s;
 }
 
 .stat-card:hover{
-
     transform:translateY(-2px);
-
     background:var(--surface-hover);
 }
 
 .stat-icon{
-
     font-size:21px;
-
     margin-bottom:6px;
 }
 
 .stat-label{
-
     display:block;
-
     color:var(--muted);
-
     font-size:8px;
-
     margin-bottom:3px;
 }
 
 .stat-value{
-
     font-size:22px;
-
     font-weight:800;
-
     color:var(--heading);
 }
 
-
-/* =========================================================
-   TABLA
-========================================================= */
-
 .table-wrapper{
-
     width:100%;
-
     overflow-x:auto;
-
     border-radius:16px;
-
     -webkit-overflow-scrolling:touch;
 }
 
 .progress-table{
-
     width:100%;
-
     min-width:450px;
-
     border-collapse:collapse;
-
     background:var(--surface-soft);
 }
 
 .progress-table th{
-
     padding:
         11px
         9px;
-
     color:var(--muted);
-
     font-size:9px;
-
     font-weight:700;
-
     text-align:left;
-
     border-bottom:
         1px solid
         var(--border);
 }
 
 .progress-table td{
-
     padding:
         11px
         9px;
-
     font-size:10px;
-
     text-align:left;
-
     border-bottom:
         1px solid
         var(--border);
 }
 
 .progress-table tr:last-child td{
-
     border-bottom:0;
 }
 
 .theme-progress-name{
-
     display:flex;
-
     align-items:center;
-
     gap:7px;
-
     font-weight:600;
-
     color:var(--heading);
 }
 
 .theme-progress-icon{
-
     font-size:18px;
 }
 
 .progress-number{
-
     color:var(--blue);
-
     font-weight:800;
 }
 
 .progress-status{
-
     display:inline-block;
-
     padding:
         4px
         8px;
-
     border-radius:7px;
-
     font-size:7px;
-
     white-space:nowrap;
 }
 
 .status-complete{
-
     color:var(--green);
-
     background:
         rgba(37,186,119,.12);
 }
 
 .status-progress{
-
     color:var(--blue);
-
     background:
         rgba(37,133,189,.12);
 }
 
 .status-start{
-
     color:var(--muted);
-
     background:
         rgba(109,132,148,.10);
 }
 
-
-/* =========================================================
-   CONSEJO
-========================================================= */
-
 .tip{
-
     margin-top:14px;
-
     padding:13px;
-
     text-align:left;
-
     border-radius:15px;
-
     background:
         linear-gradient(
             135deg,
             rgba(47,174,227,.07),
             rgba(100,100,214,.07)
         );
-
     border:
         1px solid
         var(--border);
 }
 
 .tip-title{
-
     display:block;
-
     margin-bottom:4px;
-
     font-size:10px;
-
     font-weight:700;
-
     color:var(--heading);
 }
 
 .tip-text{
-
     color:var(--muted);
-
     font-size:9px;
-
     line-height:1.55;
 }
 
-
-/* =========================================================
-   PREMIO
-========================================================= */
-
 #estrella{
-
     position:fixed;
-
     inset:0;
-
     display:none;
-
     align-items:center;
     justify-content:center;
-
     z-index:9999;
-
     pointer-events:none;
-
     background:
-        rgba(3,61,101,.10);
-
-    backdrop-filter:blur(4px);
-    -webkit-backdrop-filter:blur(4px);
+        rgba(3,61,101,.08);
 }
 
 .estrella-contenido{
-
     text-align:center;
-
     opacity:0;
-
     transform:
-        scale(.45)
-        translateY(20px);
+        translateY(24px)
+        scale(.40);
+    will-change:transform,opacity;
 }
 
 .estrella-icon{
-
-    display:block;
-
-    font-size:
+    width:
         clamp(
             90px,
             15vw,
             150px
         );
+    height:
+        clamp(
+            90px,
+            15vw,
+            150px
+        );
+    margin:0 auto;
+    display:block;
+    transform-origin:center center;
+    will-change:transform;
+}
 
-    line-height:1;
+.estrella-icon svg{
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
 
+.estrella-icon polygon{
+    fill:#FFD54A;
+    stroke:#F59E0B;
+    stroke-width:5;
+    stroke-linejoin:round;
     filter:
         drop-shadow(
-            0 10px 18px
-            rgba(250,141,30,.30)
+            0 9px 16px
+            rgba(250,141,30,.28)
         );
 }
 
 .estrella-titulo{
-
     margin-top:10px;
-
     font-size:
         clamp(
             30px,
             5vw,
             48px
         );
-
     line-height:1.1;
-
     font-weight:800;
-
     color:var(--heading);
 }
 
 .estrella-texto{
-
     margin-top:5px;
-
     font-size:16px;
-
     font-weight:600;
-
     color:var(--muted);
 }
 
-.estrella-animar
-.estrella-contenido{
-
+.estrella-animar .estrella-contenido{
     animation:
         estrellaEntrada
-        1.35s
-        cubic-bezier(.2,.9,.3,1.2)
+        1.45s
+        cubic-bezier(.16,.85,.25,1)
         forwards;
 }
 
-.estrella-animar
-.estrella-icon{
-
+.estrella-animar .estrella-icon{
     animation:
-        estrellaPulso
-        .65s
-        ease-in-out
-        .15s
-        infinite alternate;
+        estrellaGiro
+        1.45s
+        cubic-bezier(.18,.82,.22,1)
+        forwards;
 }
 
 @keyframes estrellaEntrada{
 
     0%{
-
         opacity:0;
-
         transform:
-            scale(.45)
-            translateY(20px);
+            translateY(24px)
+            scale(.40);
     }
 
-    45%{
-
+    18%{
         opacity:1;
-
         transform:
-            scale(1.10)
-            translateY(-5px);
+            translateY(-8px)
+            scale(1.12);
     }
 
-    70%{
-
+    35%{
         opacity:1;
-
         transform:
-            scale(.98)
-            translateY(0);
+            translateY(2px)
+            scale(.97);
+    }
+
+    52%{
+        opacity:1;
+        transform:
+            translateY(-2px)
+            scale(1.04);
+    }
+
+    72%{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    86%{
+        opacity:1;
+        transform:
+            translateY(-3px)
+            scale(1.01);
     }
 
     100%{
-
         opacity:0;
-
         transform:
-            scale(.90)
-            translateY(-8px);
+            translateY(-12px)
+            scale(.92);
     }
 
 }
 
-@keyframes estrellaPulso{
+@keyframes estrellaGiro{
 
-    from{
-
+    0%{
         transform:
-            scale(1)
-            rotate(-5deg);
+            rotate(0deg)
+            scale(.62);
     }
 
-    to{
-
+    12%{
         transform:
-            scale(1.13)
-            rotate(5deg);
+            rotate(90deg)
+            scale(.88);
+    }
+
+    24%{
+        transform:
+            rotate(180deg)
+            scale(1.08);
+    }
+
+    36%{
+        transform:
+            rotate(270deg)
+            scale(.96);
+    }
+
+    48%{
+        transform:
+            rotate(360deg)
+            scale(1.04);
+    }
+
+    60%{
+        transform:
+            rotate(450deg)
+            scale(.98);
+    }
+
+    72%{
+        transform:
+            rotate(540deg)
+            scale(1.02);
+    }
+
+    84%{
+        transform:
+            rotate(630deg)
+            scale(1);
+    }
+
+    100%{
+        transform:
+            rotate(720deg)
+            scale(.92);
     }
 
 }
-
-
-/* =========================================================
-   TABLET
-========================================================= */
 
 @media(max-width:900px){
 
     .container{
-
         width:
             calc(100% - 30px);
-
         padding:22px;
     }
 
@@ -2121,54 +1492,38 @@ input:focus{
     #lobby-container,
     #progress-container,
     #game-container{
-
         width:
             calc(100% - 30px);
     }
 
     .stats-grid{
-
         grid-template-columns:
             repeat(2,minmax(0,1fr));
     }
 
 }
 
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
 @media(max-width:600px){
 
     html,
     body{
-
         background:var(--bg);
     }
 
     body::before,
     body::after{
-
         width:200px;
         height:200px;
-
         filter:blur(65px);
-
         opacity:.05;
     }
 
-
-    /* TOPBAR */
-
     .topbar{
-
         height:
             calc(
                 62px +
                 env(safe-area-inset-top)
             );
-
         padding:
             env(safe-area-inset-top)
             10px
@@ -2176,49 +1531,35 @@ input:focus{
     }
 
     .topbar-inner{
-
         gap:8px;
     }
 
     .brand{
-
         gap:7px;
-
         font-size:12px;
     }
 
     .brand-logo{
-
         width:40px;
         height:40px;
     }
 
     .brand-dot{
-
         width:5px;
         height:5px;
     }
 
     .theme-toggle{
-
         width:40px;
         height:40px;
-
         min-height:40px;
-
         border-radius:12px;
-
         font-size:17px;
     }
 
-
-    /* CONTENEDOR */
-
     .container{
-
         width:
             calc(100% - 16px) !important;
-
         margin:
             calc(
                 76px +
@@ -2226,39 +1567,28 @@ input:focus{
             )
             auto
             14px;
-
         padding:
             18px
             14px;
-
         border-radius:20px;
     }
 
-
     #welcome-container{
-
         padding:
             21px
             14px
             18px;
     }
 
-
-    /* LOGO */
-
     .hero-logo-wrapper{
-
         width:112px;
         height:112px;
-
         margin-bottom:14px;
     }
 
     .hero-logo{
-
         width:105px;
         height:105px;
-
         filter:
             drop-shadow(
                 0 7px 14px
@@ -2266,515 +1596,362 @@ input:focus{
             );
     }
 
-
-    /* BIENVENIDA */
-
     .badge{
-
         font-size:8px;
-
         padding:
             6px
             10px;
-
         margin-bottom:8px;
     }
 
     h1{
-
         font-size:29px;
-
         margin-bottom:9px;
     }
 
     .welcome-description{
-
         font-size:11px;
-
         line-height:1.6;
     }
 
-
-    /* FEATURES */
-
     .features{
-
         gap:6px;
-
         margin:
             17px 0;
     }
 
     .feature{
-
         padding:
             12px
             4px;
-
         border-radius:15px;
     }
 
     .feature-icon{
-
         font-size:20px;
-
         margin-bottom:4px;
     }
 
     .feature-title{
-
         font-size:8px;
     }
 
     .feature-text{
-
         font-size:6.5px;
     }
 
-
-    /* TITULOS */
-
     h2{
-
         font-size:25px;
     }
 
     .subtitle{
-
         font-size:11px;
-
         margin-bottom:16px;
     }
 
-
-    /* BOTONES */
-
     button{
-
         min-height:46px;
-
         padding:
             11px
             14px;
-
         margin-top:7px;
-
         border-radius:14px;
-
         font-size:12px;
     }
 
-
-    /* LOGIN */
-
     .login-icon{
-
         width:95px;
         height:95px;
-
         margin-bottom:13px;
     }
 
     .input-group{
-
         margin-bottom:11px;
     }
 
     .input-group label{
-
         font-size:9px;
-
         margin-bottom:5px;
     }
 
     input{
-
         height:50px;
         min-height:50px;
-
         padding:
             12px
             14px;
-
         font-size:16px;
     }
 
     #auth-message{
-
         font-size:10px;
-
         min-height:18px;
     }
 
-
-    /* LOBBY */
-
     .lobby-header{
-
         margin-bottom:16px;
     }
 
     .lobby-header h2{
-
         font-size:25px;
     }
 
     .themes{
-
         grid-template-columns:
             repeat(2,minmax(0,1fr));
-
         gap:8px;
     }
 
     .theme{
-
         min-height:105px;
-
         padding:
             13px
             7px;
-
         border-radius:17px;
     }
 
     .theme-icon{
-
         width:50px;
         height:50px;
-
         margin-bottom:7px;
-
         border-radius:15px;
-
         font-size:27px;
     }
 
     .theme-name{
-
         font-size:10px;
     }
 
-
-    /* JUEGO */
-
     .game-header{
-
         gap:7px;
-
         margin-bottom:13px;
     }
 
     .game-theme{
-
         gap:7px;
     }
 
     .game-logo{
-
         width:42px;
         height:42px;
     }
 
     .game-theme small{
-
         font-size:7px;
     }
 
     .game-theme h2{
-
         font-size:19px;
     }
 
     .timer{
-
         width:60px;
         height:60px;
-
         padding:4px;
     }
 
     .timer-inner{
-
         font-size:16px;
     }
 
-
     .question-info{
-
         font-size:9px;
-
         margin-bottom:5px;
     }
 
     .progress-bar{
-
         height:7px;
-
         margin-bottom:12px;
     }
 
-
     .clue-card{
-
         padding:
             21px
             8px;
-
         margin-bottom:10px;
-
         border-radius:17px;
     }
 
     .clue-label{
-
         font-size:7px;
-
         margin-bottom:7px;
     }
 
     #pista{
-
         font-size:
             clamp(
                 21px,
                 7vw,
                 28px
             );
-
         letter-spacing:2.5px;
     }
 
-
     #respuesta{
-
         height:50px;
         min-height:50px;
-
         font-size:16px;
     }
 
-
     .score-panel{
-
         gap:6px;
-
         margin-top:8px;
     }
 
     .score-item{
-
         padding:
             9px
             4px;
-
         border-radius:13px;
     }
 
     .score-label{
-
         font-size:7px;
     }
 
     .score-value{
-
         font-size:17px;
     }
 
     #resultado{
-
         min-height:21px;
-
         font-size:10px;
-
         margin:
             6px 0
             1px;
     }
 
-
-    /* RESULTADO */
-
     .result-icon{
-
         width:95px;
         height:95px;
-
         margin-bottom:13px;
     }
 
     .result-screen h2{
-
         font-size:26px;
     }
 
     .result-description{
-
         font-size:11px;
-
         margin-bottom:14px;
     }
 
     .result-stats{
-
         gap:6px;
-
         margin-bottom:12px;
     }
 
     .result-stat{
-
         padding:
             11px
             4px;
     }
 
     .result-stat strong{
-
         font-size:19px;
     }
 
     .result-stat span{
-
         font-size:7px;
     }
 
-
-    /* PROGRESO */
-
     .progress-screen-title{
-
         font-size:25px;
     }
 
     .progress-screen-subtitle{
-
         font-size:10px;
-
         margin-bottom:14px;
     }
 
     .stats-grid{
-
         grid-template-columns:
             repeat(2,minmax(0,1fr));
-
         gap:7px;
-
         margin-bottom:13px;
     }
 
     .stat-card{
-
         padding:12px;
-
         border-radius:15px;
     }
 
     .stat-icon{
-
         font-size:19px;
-
         margin-bottom:4px;
     }
 
     .stat-label{
-
         font-size:7px;
     }
 
     .stat-value{
-
         font-size:19px;
     }
 
     .progress-table{
-
         min-width:420px;
     }
 
     .progress-table th{
-
         font-size:7px;
     }
 
     .progress-table td{
-
         font-size:8px;
     }
 
     .tip{
-
         margin-top:11px;
-
         padding:11px;
     }
 
     .tip-text{
-
         font-size:8px;
     }
 
-
-    /* PREMIO */
-
     .estrella-icon{
-
-        font-size:72px;
+        width:72px;
+        height:72px;
     }
 
     .estrella-titulo{
-
         font-size:29px;
     }
 
     .estrella-texto{
-
         font-size:14px;
     }
 
 }
 
-
-/* =========================================================
-   CELULARES PEQUEÑOS
-========================================================= */
-
 @media(max-width:390px){
 
     .brand{
-
         font-size:10px;
     }
 
     .brand-logo{
-
         width:37px;
         height:37px;
     }
 
     .theme-toggle{
-
         width:38px;
         height:38px;
-
         min-height:38px;
-
         font-size:16px;
     }
 
     .container{
-
         width:
             calc(100% - 10px) !important;
-
         padding:
             17px
             11px;
     }
 
     #welcome-container{
-
         padding:
             19px
             10px
@@ -2782,277 +1959,218 @@ input:focus{
     }
 
     .hero-logo-wrapper{
-
         width:105px;
         height:105px;
     }
 
     .hero-logo{
-
         width:98px;
         height:98px;
     }
 
     h1{
-
         font-size:26px;
     }
 
     .welcome-description{
-
         font-size:10px;
     }
 
     .features{
-
         gap:4px;
     }
 
     .feature{
-
         padding:
             10px
             2px;
     }
 
     .feature-icon{
-
         font-size:18px;
     }
 
     .feature-title{
-
         font-size:7px;
     }
 
     .feature-text{
-
         font-size:6px;
     }
 
     .theme{
-
         min-height:98px;
     }
 
     .theme-icon{
-
         width:46px;
         height:46px;
-
         font-size:25px;
     }
 
     .theme-name{
-
         font-size:9px;
     }
 
     .game-logo{
-
         width:38px;
         height:38px;
     }
 
     .game-theme h2{
-
         font-size:17px;
     }
 
     .timer{
-
         width:56px;
         height:56px;
     }
 
     #pista{
-
         font-size:20px;
-
         letter-spacing:2px;
+    }
+
+    .estrella-icon{
+        width:65px;
+        height:65px;
+    }
+
+    .estrella-titulo{
+        font-size:26px;
+    }
+
+    .estrella-texto{
+        font-size:13px;
     }
 
 }
 
-
-/* =========================================================
-   TECLADO MOVIL
-========================================================= */
-
 body.keyboard-open .topbar{
-
     transform:translateY(-110%);
-
     opacity:0;
-
     pointer-events:none;
 }
 
 body.keyboard-open .container{
-
     margin-top:
         max(
             8px,
             env(safe-area-inset-top)
         );
-
     margin-bottom:8px;
-
     padding:
         13px
         11px;
-
     border-radius:17px;
 }
 
 body.keyboard-open .game-header{
-
     margin-bottom:7px;
 }
 
 body.keyboard-open .game-logo{
-
     width:36px;
     height:36px;
 }
 
 body.keyboard-open .game-theme small{
-
     font-size:6px;
 }
 
 body.keyboard-open .game-theme h2{
-
     font-size:15px;
 }
 
 body.keyboard-open .timer{
-
     width:47px;
     height:47px;
 }
 
 body.keyboard-open .timer-inner{
-
     font-size:12px;
 }
 
 body.keyboard-open .question-info{
-
     font-size:7px;
 }
 
 body.keyboard-open .progress-bar{
-
     height:5px;
-
     margin-bottom:7px;
 }
 
 body.keyboard-open .clue-card{
-
     padding:
         10px
         7px;
-
     margin-bottom:5px;
-
     border-radius:15px;
 }
 
 body.keyboard-open .clue-label{
-
     margin-bottom:4px;
-
     font-size:6px;
 }
 
 body.keyboard-open #pista{
-
     font-size:17px;
-
     letter-spacing:1.5px;
 }
 
 body.keyboard-open #respuesta{
-
     height:45px;
     min-height:45px;
-
     font-size:16px;
 }
 
 body.keyboard-open #btn-verificar{
-
     min-height:40px;
-
     padding:8px;
-
     margin-top:4px;
-
     font-size:10px;
 }
 
 body.keyboard-open #resultado{
-
     min-height:15px;
-
     margin:3px 0;
-
     font-size:8px;
 }
 
 body.keyboard-open .score-panel{
-
     margin-top:3px;
 }
 
 body.keyboard-open .score-item{
-
     padding:
         5px
         3px;
 }
 
 body.keyboard-open .score-label{
-
     font-size:5px;
 }
 
 body.keyboard-open .score-value{
-
     font-size:12px;
 }
 
 body.keyboard-open #game-container > .btn-secondary,
 body.keyboard-open #game-container > .btn-warning{
-
     min-height:30px;
-
     padding:6px;
-
     margin-top:3px;
-
     font-size:7px;
 }
-
-
-/* =========================================================
-   REDUCIR ANIMACIONES
-========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
     *::after{
-
         animation-duration:.01ms !important;
-
         animation-iteration-count:1 !important;
-
         transition-duration:.01ms !important;
-
         scroll-behavior:auto !important;
     }
 
@@ -3060,12 +2178,7 @@ body.keyboard-open #game-container > .btn-warning{
 
 </style>
 
-
 <script>
-
-/* =========================================================
-   APLICAR TEMA ANTES DE CARGAR
-========================================================= */
 
 (function(){
 
@@ -3074,11 +2187,10 @@ body.keyboard-open #game-container > .btn-warning{
 
     if(temaGuardado === "dark"){
 
-        document.documentElement
-            .setAttribute(
-                "data-theme",
-                "dark"
-            );
+        document.documentElement.setAttribute(
+            "data-theme",
+            "dark"
+        );
 
     }
 
@@ -3088,13 +2200,7 @@ body.keyboard-open #game-container > .btn-warning{
 
 </head>
 
-
 <body>
-
-
-<!-- =======================================================
-     TOPBAR
-======================================================= -->
 
 <header class="topbar">
 
@@ -3116,7 +2222,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <button
             id="btn-theme"
             class="theme-toggle"
@@ -3131,11 +2236,6 @@ body.keyboard-open #game-container > .btn-warning{
     </div>
 
 </header>
-
-
-<!-- =======================================================
-     BIENVENIDA
-======================================================= -->
 
 <div
     id="welcome-container"
@@ -3152,22 +2252,18 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <div class="badge">
         ⚡ DESAFÍO DE PALABRAS
     </div>
-
 
     <h1>
         Encuentra la Palabra
     </h1>
 
-
     <p class="welcome-description">
         Pon a prueba tu rapidez mental, completa las palabras
         y demuestra cuánto sabes.
     </p>
-
 
     <div class="features">
 
@@ -3187,7 +2283,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div class="feature">
 
             <span class="feature-icon">
@@ -3203,7 +2298,6 @@ body.keyboard-open #game-container > .btn-warning{
             </span>
 
         </div>
-
 
         <div class="feature">
 
@@ -3223,7 +2317,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <button
         class="btn-primary"
         onclick="irLogin()"
@@ -3232,11 +2325,6 @@ body.keyboard-open #game-container > .btn-warning{
     </button>
 
 </div>
-
-
-<!-- =======================================================
-     LOGIN
-======================================================= -->
 
 <div
     id="login-container"
@@ -3253,16 +2341,13 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <h2>
         Bienvenido
     </h2>
 
-
     <p class="subtitle">
         Inicia sesión para guardar tu progreso.
     </p>
-
 
     <div class="input-group">
 
@@ -3279,7 +2364,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <div class="input-group">
 
         <label>
@@ -3295,14 +2379,12 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <button
         class="btn-primary"
         onclick="login()"
     >
         🔑 Iniciar sesión
     </button>
-
 
     <button
         class="btn-secondary"
@@ -3311,9 +2393,7 @@ body.keyboard-open #game-container > .btn-warning{
         📝 Crear cuenta
     </button>
 
-
     <p id="auth-message"></p>
-
 
     <button
         class="btn-secondary"
@@ -3323,11 +2403,6 @@ body.keyboard-open #game-container > .btn-warning{
     </button>
 
 </div>
-
-
-<!-- =======================================================
-     LOBBY
-======================================================= -->
 
 <div
     id="lobby-container"
@@ -3347,7 +2422,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <div class="themes">
 
         <div
@@ -3365,7 +2439,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div
             class="theme"
             onclick="seleccionarTema('paises')"
@@ -3380,7 +2453,6 @@ body.keyboard-open #game-container > .btn-warning{
             </span>
 
         </div>
-
 
         <div
             class="theme"
@@ -3397,7 +2469,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div
             class="theme"
             onclick="seleccionarTema('frutas')"
@@ -3413,7 +2484,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div
             class="theme"
             onclick="seleccionarTema('deportes')"
@@ -3428,7 +2498,6 @@ body.keyboard-open #game-container > .btn-warning{
             </span>
 
         </div>
-
 
         <div
             class="theme"
@@ -3447,14 +2516,12 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <button
         class="btn-secondary"
         onclick="mostrarProgreso()"
     >
         📊 Mi progreso
     </button>
-
 
     <button
         class="btn-danger"
@@ -3464,11 +2531,6 @@ body.keyboard-open #game-container > .btn-warning{
     </button>
 
 </div>
-
-
-<!-- =======================================================
-     PROGRESO
-======================================================= -->
 
 <div
     id="progress-container"
@@ -3480,11 +2542,9 @@ body.keyboard-open #game-container > .btn-warning{
         📊 Mi progreso
     </div>
 
-
     <p class="progress-screen-subtitle">
         Revisa tus resultados y mira cuánto has avanzado.
     </p>
-
 
     <div class="stats-grid">
 
@@ -3507,7 +2567,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div class="stat-card">
 
             <div class="stat-icon">
@@ -3527,7 +2586,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div class="stat-card">
 
             <div class="stat-icon">
@@ -3546,7 +2604,6 @@ body.keyboard-open #game-container > .btn-warning{
             </span>
 
         </div>
-
 
         <div class="stat-card">
 
@@ -3568,7 +2625,6 @@ body.keyboard-open #game-container > .btn-warning{
         </div>
 
     </div>
-
 
     <div class="table-wrapper">
 
@@ -3600,7 +2656,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <div class="tip">
 
         <span class="tip-title">
@@ -3615,7 +2670,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <button
         class="btn-secondary"
         onclick="mostrarLobby()"
@@ -3624,11 +2678,6 @@ body.keyboard-open #game-container > .btn-warning{
     </button>
 
 </div>
-
-
-<!-- =======================================================
-     JUEGO
-======================================================= -->
 
 <div
     id="game-container"
@@ -3660,7 +2709,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div
             class="timer"
             id="timer"
@@ -3678,7 +2726,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <div class="question-info">
 
         <span id="pregunta-numero">
@@ -3691,13 +2738,11 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <div class="progress-bar">
 
         <div id="progress-fill"></div>
 
     </div>
-
 
     <div class="clue-card">
 
@@ -3711,7 +2756,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <input
         type="text"
         id="respuesta"
@@ -3721,7 +2765,6 @@ body.keyboard-open #game-container > .btn-warning{
         spellcheck="false"
     >
 
-
     <button
         id="btn-verificar"
         class="btn-primary"
@@ -3730,9 +2773,7 @@ body.keyboard-open #game-container > .btn-warning{
         ✓ Verificar respuesta
     </button>
 
-
     <div id="resultado"></div>
-
 
     <div class="score-panel">
 
@@ -3751,7 +2792,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div class="score-item">
 
             <span class="score-label">
@@ -3766,7 +2806,6 @@ body.keyboard-open #game-container > .btn-warning{
             </span>
 
         </div>
-
 
         <div class="score-item">
 
@@ -3785,14 +2824,12 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <button
         class="btn-secondary"
         onclick="volverLobby()"
     >
         ← Volver al lobby
     </button>
-
 
     <button
         class="btn-warning"
@@ -3802,11 +2839,6 @@ body.keyboard-open #game-container > .btn-warning{
     </button>
 
 </div>
-
-
-<!-- =======================================================
-     RESULTADO FINAL
-======================================================= -->
 
 <div
     id="result-container"
@@ -3823,11 +2855,9 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <h2>
         ¡Nivel completado!
     </h2>
-
 
     <p
         class="result-description"
@@ -3835,7 +2865,6 @@ body.keyboard-open #game-container > .btn-warning{
     >
         Has terminado esta categoría.
     </p>
-
 
     <div class="result-stats">
 
@@ -3851,7 +2880,6 @@ body.keyboard-open #game-container > .btn-warning{
 
         </div>
 
-
         <div class="result-stat">
 
             <strong id="result-correct">
@@ -3863,7 +2891,6 @@ body.keyboard-open #game-container > .btn-warning{
             </span>
 
         </div>
-
 
         <div class="result-stat">
 
@@ -3879,7 +2906,6 @@ body.keyboard-open #game-container > .btn-warning{
 
     </div>
 
-
     <button
         class="btn-primary"
         onclick="jugarDeNuevo()"
@@ -3887,14 +2913,12 @@ body.keyboard-open #game-container > .btn-warning{
         🔄 Jugar otra vez
     </button>
 
-
     <button
         class="btn-secondary"
         onclick="mostrarLobby()"
     >
         📚 Elegir otra categoría
     </button>
-
 
     <button
         class="btn-secondary"
@@ -3905,11 +2929,6 @@ body.keyboard-open #game-container > .btn-warning{
 
 </div>
 
-
-<!-- =======================================================
-     PREMIO
-======================================================= -->
-
 <div
     id="estrella"
     aria-hidden="true"
@@ -3917,8 +2936,33 @@ body.keyboard-open #game-container > .btn-warning{
 
     <div class="estrella-contenido">
 
-        <div class="estrella-icon">
-            ⭐
+        <div
+            class="estrella-icon"
+            aria-hidden="true"
+        >
+
+            <svg
+                viewBox="0 0 200 200"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <polygon
+                    points="
+                        100,8
+                        123,72
+                        191,76
+                        138,117
+                        157,184
+                        100,146
+                        43,184
+                        62,117
+                        9,76
+                        77,72
+                    "
+                />
+
+            </svg>
+
         </div>
 
         <div class="estrella-titulo">
@@ -3933,20 +2977,14 @@ body.keyboard-open #game-container > .btn-warning{
 
 </div>
 
-
 <script>
-
-/* =========================================================
-   TEMA
-========================================================= */
 
 function aplicarTema(tema){
 
-    document.documentElement
-        .setAttribute(
-            "data-theme",
-            tema
-        );
+    document.documentElement.setAttribute(
+        "data-theme",
+        tema
+    );
 
     localStorage.setItem(
         "modoVisual",
@@ -4023,7 +3061,6 @@ function aplicarTema(tema){
 
 }
 
-
 function alternarTema(){
 
     const temaActual =
@@ -4040,11 +3077,6 @@ function alternarTema(){
 
 }
 
-
-/* =========================================================
-   FIREBASE
-========================================================= */
-
 const API_KEY =
     "AIzaSyAkb7BsSW6ROnIfM01djn4ZbiX7PKpi-f8";
 
@@ -4054,35 +3086,16 @@ const SIGNUP_URL =
 const SIGNIN_URL =
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 let userToken=null;
-
 let palabras=[];
-
 let indice=0;
-
 let puntaje=0;
-
 let aciertos=0;
-
 let errores=0;
-
 let temaActual="";
-
 let bloqueado=false;
-
 let tiempo=30;
-
 let intervalo=null;
-
-
-/* =========================================================
-   PALABRAS
-========================================================= */
 
 const temas={
 
@@ -4170,7 +3183,7 @@ const temas={
             respuesta:"TIGRE"
         },
         {
-            pista:"E_F_NT_",
+            pista:"E_L_F_NT_",
             respuesta:"ELEFANTE"
         },
         {
@@ -4220,7 +3233,7 @@ const temas={
             respuesta:"FÚTBOL"
         },
         {
-            pista:"B_LON_ES_O",
+            pista:"B_LONC_ST_",
             respuesta:"BALONCESTO"
         },
         {
@@ -4251,7 +3264,7 @@ const temas={
             respuesta:"PIZZA"
         },
         {
-            pista:"H_MB_RG_S_",
+            pista:"H_MBUR__ESA",
             respuesta:"HAMBURGUESA"
         },
         {
@@ -4263,7 +3276,7 @@ const temas={
             respuesta:"SOPA"
         },
         {
-            pista:"A_R__Z",
+            pista:"A_R_Z",
             respuesta:"ARROZ"
         },
         {
@@ -4278,11 +3291,6 @@ const temas={
 
 };
 
-
-/* =========================================================
-   NOMBRES
-========================================================= */
-
 const nombresTemas={
 
     tecnologia:"Tecnología",
@@ -4293,11 +3301,6 @@ const nombresTemas={
     comida:"Comida"
 
 };
-
-
-/* =========================================================
-   CATEGORÍAS
-========================================================= */
 
 const categorias=[
 
@@ -4339,11 +3342,6 @@ const categorias=[
 
 ];
 
-
-/* =========================================================
-   MOSTRAR PANTALLA
-========================================================= */
-
 function mostrarSolo(id){
 
     document
@@ -4359,11 +3357,6 @@ function mostrarSolo(id){
 
 }
 
-
-/* =========================================================
-   BIENVENIDA
-========================================================= */
-
 function irBienvenida(){
 
     detenerCronometro();
@@ -4378,11 +3371,6 @@ function irBienvenida(){
 
 }
 
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
 function irLogin(){
 
     mostrarSolo(
@@ -4394,11 +3382,6 @@ function irLogin(){
         .textContent="";
 
 }
-
-
-/* =========================================================
-   ERRORES FIREBASE
-========================================================= */
 
 function traducirError(error){
 
@@ -4445,11 +3428,6 @@ function traducirError(error){
 
 }
 
-
-/* =========================================================
-   REGISTRO
-========================================================= */
-
 async function register(){
 
     const email=
@@ -4487,12 +3465,10 @@ async function register(){
                 SIGNUP_URL,
                 {
                     method:"POST",
-
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
-
                     body:JSON.stringify({
                         email,
                         password,
@@ -4528,11 +3504,6 @@ async function register(){
     }
 
 }
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
 
 async function login(){
 
@@ -4571,12 +3542,10 @@ async function login(){
                 SIGNIN_URL,
                 {
                     method:"POST",
-
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
-
                     body:JSON.stringify({
                         email,
                         password,
@@ -4620,11 +3589,6 @@ async function login(){
 
 }
 
-
-/* =========================================================
-   CERRAR SESIÓN
-========================================================= */
-
 function cerrarSesion(){
 
     userToken=null;
@@ -4643,11 +3607,6 @@ function cerrarSesion(){
 
 }
 
-
-/* =========================================================
-   LOBBY
-========================================================= */
-
 function mostrarLobby(){
 
     detenerCronometro();
@@ -4661,11 +3620,6 @@ function mostrarLobby(){
     );
 
 }
-
-
-/* =========================================================
-   SELECCIONAR TEMA
-========================================================= */
 
 function seleccionarTema(tema){
 
@@ -4759,11 +3713,6 @@ function seleccionarTema(tema){
 
 }
 
-
-/* =========================================================
-   VOLVER AL LOBBY
-========================================================= */
-
 function volverLobby(){
 
     detenerCronometro();
@@ -4778,21 +3727,13 @@ function volverLobby(){
 
 }
 
-
-/* =========================================================
-   REINICIAR NIVEL
-========================================================= */
-
 function reiniciarNivel(){
 
     detenerCronometro();
 
     indice=0;
-
     puntaje=0;
-
     aciertos=0;
-
     errores=0;
 
     guardarProgreso();
@@ -4810,11 +3751,6 @@ function reiniciarNivel(){
     mostrarPalabra();
 
 }
-
-
-/* =========================================================
-   MOSTRAR PALABRA
-========================================================= */
 
 function mostrarPalabra(){
 
@@ -4890,7 +3826,6 @@ function mostrarPalabra(){
 
     iniciarCronometro();
 
-
     const esMovil=
         window.matchMedia(
             "(pointer:coarse)"
@@ -4914,28 +3849,14 @@ function mostrarPalabra(){
 
 }
 
-
-/* =========================================================
-   NORMALIZAR
-========================================================= */
-
 function normalizar(texto){
 
     return texto
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
         .toUpperCase()
-        .trim();
+        .trim()
+        .replace(/\s+/g," ");
 
 }
-
-
-/* =========================================================
-   CRONOMETRO
-========================================================= */
 
 function iniciarCronometro(){
 
@@ -4961,7 +3882,6 @@ function iniciarCronometro(){
         },1000);
 
 }
-
 
 function actualizarCronometro(){
 
@@ -5012,7 +3932,6 @@ function actualizarCronometro(){
 
 }
 
-
 function detenerCronometro(){
 
     if(intervalo){
@@ -5026,11 +3945,6 @@ function detenerCronometro(){
     }
 
 }
-
-
-/* =========================================================
-   TIEMPO AGOTADO
-========================================================= */
 
 function tiempoAgotado(){
 
@@ -5092,11 +4006,6 @@ function tiempoAgotado(){
     },1000);
 
 }
-
-
-/* =========================================================
-   VERIFICAR
-========================================================= */
 
 function verificar(){
 
@@ -5206,14 +4115,9 @@ function verificar(){
 
         }
 
-    },1000);
+    },1450);
 
 }
-
-
-/* =========================================================
-   ESTADISTICAS
-========================================================= */
 
 function actualizarEstadisticasJuego(){
 
@@ -5240,11 +4144,6 @@ function actualizarEstadisticasJuego(){
 
 }
 
-
-/* =========================================================
-   PREMIO
-========================================================= */
-
 function mostrarPremio(){
 
     const estrella=
@@ -5257,6 +4156,10 @@ function mostrarPremio(){
         return;
 
     }
+
+    clearTimeout(
+        window.__premioTimeout
+    );
 
     estrella.style.display="flex";
 
@@ -5275,10 +4178,6 @@ function mostrarPremio(){
         "estrella-animar"
     );
 
-    clearTimeout(
-        window.__premioTimeout
-    );
-
     window.__premioTimeout=
         setTimeout(()=>{
 
@@ -5293,14 +4192,9 @@ function mostrarPremio(){
                 "true"
             );
 
-        },1350);
+        },1450);
 
 }
-
-
-/* =========================================================
-   FINALIZAR
-========================================================= */
 
 function finalizarJuego(){
 
@@ -5361,19 +4255,11 @@ function finalizarJuego(){
 
 }
 
-
-/* =========================================================
-   JUGAR DE NUEVO
-========================================================= */
-
 function jugarDeNuevo(){
 
     indice=0;
-
     puntaje=0;
-
     aciertos=0;
-
     errores=0;
 
     document.body.classList.remove(
@@ -5391,11 +4277,6 @@ function jugarDeNuevo(){
     mostrarPalabra();
 
 }
-
-
-/* =========================================================
-   GUARDAR PROGRESO
-========================================================= */
 
 function guardarProgreso(){
 
@@ -5419,11 +4300,6 @@ function guardarProgreso(){
 
 }
 
-
-/* =========================================================
-   MOSTRAR PROGRESO
-========================================================= */
-
 function mostrarProgreso(){
 
     detenerCronometro();
@@ -5437,11 +4313,8 @@ function mostrarProgreso(){
     );
 
     let puntosTotales=0;
-
     let palabrasRespondidas=0;
-
     let respuestasCorrectas=0;
-
     let categoriasCompletadas=0;
 
     const tabla=
@@ -5450,7 +4323,6 @@ function mostrarProgreso(){
         );
 
     tabla.innerHTML="";
-
 
     categorias.forEach(
         categoria=>{
@@ -5462,11 +4334,8 @@ function mostrarProgreso(){
                 );
 
             let respondidas=0;
-
             let puntos=0;
-
             let aciertosCategoria=0;
-
 
             if(guardado){
 
@@ -5505,21 +4374,17 @@ function mostrarProgreso(){
                 catch{
 
                     respondidas=0;
-
                     puntos=0;
-
                     aciertosCategoria=0;
 
                 }
 
             }
 
-
             const total=
                 temas[
                     categoria.id
                 ].length;
-
 
             const porcentaje=
                 total>0
@@ -5530,7 +4395,6 @@ function mostrarProgreso(){
                 :
                 0;
 
-
             puntosTotales+=puntos;
 
             palabrasRespondidas+=
@@ -5539,13 +4403,11 @@ function mostrarProgreso(){
             respuestasCorrectas+=
                 aciertosCategoria;
 
-
             let estado=
                 "Sin comenzar";
 
             let claseEstado=
                 "status-start";
-
 
             if(respondidas>=total){
 
@@ -5567,12 +4429,10 @@ function mostrarProgreso(){
 
             }
 
-
             const fila=
                 document.createElement(
                     "tr"
                 );
-
 
             fila.innerHTML=`
 
@@ -5608,14 +4468,12 @@ function mostrarProgreso(){
 
             `;
 
-
             tabla.appendChild(
                 fila
             );
 
         }
     );
-
 
     const precision=
         palabrasRespondidas>0
@@ -5628,7 +4486,6 @@ function mostrarProgreso(){
         )
         :
         0;
-
 
     document
         .getElementById(
@@ -5660,16 +4517,10 @@ function mostrarProgreso(){
 
 }
 
-
-/* =========================================================
-   INPUT
-========================================================= */
-
 const respuestaInput=
     document.getElementById(
         "respuesta"
     );
-
 
 respuestaInput.addEventListener(
     "keydown",
@@ -5686,11 +4537,6 @@ respuestaInput.addEventListener(
     }
 );
 
-
-/* =========================================================
-   TECLADO MOVIL
-========================================================= */
-
 function actualizarEstadoTeclado(){
 
     if(
@@ -5706,7 +4552,6 @@ function actualizarEstadoTeclado(){
 
     }
 
-
     const viewport=
         window.visualViewport;
 
@@ -5719,7 +4564,6 @@ function actualizarEstadoTeclado(){
     const tecladoAbierto=
         alturaVisible<
         alturaNormal*.78;
-
 
     if(
         tecladoAbierto &&
@@ -5743,7 +4587,6 @@ function actualizarEstadoTeclado(){
 
 }
 
-
 if(window.visualViewport){
 
     window.visualViewport.addEventListener(
@@ -5758,12 +4601,10 @@ if(window.visualViewport){
 
 }
 
-
 window.addEventListener(
     "resize",
     actualizarEstadoTeclado
 );
-
 
 respuestaInput.addEventListener(
     "focus",
@@ -5787,7 +4628,6 @@ respuestaInput.addEventListener(
     }
 );
 
-
 respuestaInput.addEventListener(
     "blur",
     ()=>{
@@ -5799,11 +4639,6 @@ respuestaInput.addEventListener(
 
     }
 );
-
-
-/* =========================================================
-   CARGA INICIAL
-========================================================= */
 
 window.addEventListener(
     "load",
