@@ -1792,246 +1792,173 @@ button:disabled{
     z-index:99999;
     display:none;
     align-items:center;
-    justify-content:flex-start;
+    justify-content:center;
     pointer-events:none;
     overflow:hidden;
     background:transparent;
 }
 
-#estrella.visible{
-    display:flex;
-}
-
-.estrella-fallback{
-    display:block;
-    font-size:clamp(82px,11vw,145px);
-    line-height:1;
-    filter:drop-shadow(0 5px 12px rgba(245,158,11,.35));
-    user-select:none;
-}
+#estrella.visible{display:flex;}
 
 .estrella-contenido{
-    position:absolute;
-    left:0;
-    top:50%;
-    width:max-content;
+    position:relative;
+    width:min(88vw,360px);
     text-align:center;
     opacity:0;
-    transform:translate3d(-190px,-50%,0) scale(.45);
-    transform-origin:center center;
+    transform:scale(.65);
+    transform-origin:center;
     will-change:transform,opacity;
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
 }
 
 .estrella-icon{
     display:block;
-    width:clamp(82px,11vw,145px);
-    height:clamp(82px,11vw,145px);
+    width:clamp(90px,20vw,150px);
+    height:clamp(90px,20vw,150px);
     object-fit:contain;
-    margin:0 auto;
-    transform-origin:center center;
+    margin:0 auto 10px;
+    transform-origin:center;
     will-change:transform,opacity;
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-    filter:drop-shadow(0 5px 12px rgba(245,158,11,.35));
+    filter:drop-shadow(0 5px 14px rgba(245,158,11,.38));
     user-select:none;
     -webkit-user-drag:none;
 }
 
 .estrella-texto{
-    margin-top:7px;
-    color:var(--gold);
-    font-size:clamp(16px,3vw,24px);
+    font-size:clamp(24px,5vw,38px);
     font-weight:800;
-    text-shadow:0 3px 14px rgba(245,184,0,.22);
-    white-space:nowrap;
+    line-height:1.1;
+    color:#f59e0b;
+    text-shadow:0 3px 16px rgba(245,158,11,.28);
+    opacity:0;
 }
 
-/*
-   Recorrido real de borde a borde.
-   La estrella sale completamente por la izquierda,
-   cruza toda la pantalla y sale completamente por la derecha.
-*/
-
-
-@keyframes estrellaRecorrido{
-    0%{
-        opacity:0;
-        transform:translate3d(-190px,-50%,0) scale(.45) rotate(-4deg);
-    }
-    7%{
-        opacity:1;
-        transform:translate3d(5vw,-50%,0) scale(.82) rotate(3deg);
-    }
-    16%{
-        opacity:1;
-        transform:translate3d(16vw,calc(-50% - 20px),0) scale(1.02) rotate(-2deg);
-    }
-    25%{
-        transform:translate3d(27vw,calc(-50% + 12px),0) scale(.96) rotate(2deg);
-    }
-    35%{
-        transform:translate3d(38vw,calc(-50% - 14px),0) scale(1.04) rotate(-2deg);
-    }
-    45%{
-        transform:translate3d(50vw,calc(-50% + 8px),0) scale(.98) rotate(1deg);
-    }
-    55%{
-        transform:translate3d(61vw,calc(-50% - 13px),0) scale(1.04) rotate(-2deg);
-    }
-    65%{
-        transform:translate3d(72vw,calc(-50% + 10px),0) scale(.98) rotate(2deg);
-    }
-    75%{
-        transform:translate3d(83vw,calc(-50% - 12px),0) scale(1.02) rotate(-2deg);
-    }
-    88%{
-        opacity:1;
-        transform:translate3d(94vw,-50%,0) scale(.88) rotate(2deg);
-    }
-    100%{
-        opacity:0;
-        transform:translate3d(calc(100vw + 190px),-50%,0) scale(.48) rotate(0deg);
-    }
+.estrella-animar .estrella-contenido{
+    animation:estrellaCentro 2.7s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-@keyframes estrellaGiro720{
-    0%{
-        opacity:0;
-        transform:rotate(0deg) scale(.55);
-    }
-    10%{
-        opacity:1;
-        transform:rotate(90deg) scale(1.08);
-    }
-    25%{
-        transform:rotate(180deg) scale(.96);
-    }
-    37.5%{
-        transform:rotate(270deg) scale(1.05);
-    }
-    50%{
-        transform:rotate(360deg) scale(.98);
-    }
-    62.5%{
-        transform:rotate(450deg) scale(1.05);
-    }
-    75%{
-        transform:rotate(540deg) scale(.98);
-    }
-    87.5%{
-        transform:rotate(630deg) scale(1.03);
-    }
-    96%{
-        opacity:1;
-        transform:rotate(690deg) scale(.94);
-    }
-    100%{
-        opacity:0;
-        transform:rotate(720deg) scale(.72);
-    }
+.estrella-animar .estrella-icon{
+    animation:estrellaGiroCentro 2.7s cubic-bezier(.2,.8,.2,1) forwards,
+              estrellaBrilloCentro .65s ease-in-out .15s infinite alternate;
 }
 
-@keyframes textoPremio{
-    0%,8%{
-        opacity:0;
-        transform:translateY(8px) scale(.8);
-    }
-    15%,78%{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-    100%{
-        opacity:0;
-        transform:translateY(-5px) scale(.88);
-    }
+.estrella-animar .estrella-texto{
+    animation:textoPremioCentro 2.7s ease forwards;
+}
+
+@keyframes estrellaCentro{
+    0%{opacity:0;transform:scale(.45);}
+    12%{opacity:1;transform:scale(1.08);}
+    22%{opacity:1;transform:scale(.96);}
+    32%{opacity:1;transform:scale(1.03);}
+    45%,72%{opacity:1;transform:scale(1);}
+    88%{opacity:.7;transform:scale(.97);}
+    100%{opacity:0;transform:scale(.82);}
+}
+
+@keyframes estrellaGiroCentro{
+    0%{opacity:0;transform:rotate(0deg) scale(.55);}
+    10%{opacity:1;transform:rotate(90deg) scale(1.08);}
+    25%{transform:rotate(180deg) scale(.96);}
+    37.5%{transform:rotate(270deg) scale(1.05);}
+    50%{transform:rotate(360deg) scale(.98);}
+    62.5%{transform:rotate(450deg) scale(1.05);}
+    75%{transform:rotate(540deg) scale(.98);}
+    87.5%{transform:rotate(630deg) scale(1.03);}
+    96%{opacity:1;transform:rotate(690deg) scale(.94);}
+    100%{opacity:0;transform:rotate(720deg) scale(.72);}
+}
+
+@keyframes estrellaBrilloCentro{
+    from{filter:drop-shadow(0 4px 8px rgba(245,158,11,.22));}
+    to{filter:drop-shadow(0 0 22px rgba(245,158,11,.72));}
+}
+
+@keyframes textoPremioCentro{
+    0%,8%{opacity:0;transform:translateY(8px) scale(.82);}
+    15%,78%{opacity:1;transform:translateY(0) scale(1);}
+    100%{opacity:0;transform:translateY(-5px) scale(.9);}
 }
 
 /* =====================================================
    EFECTO DE ERROR
 ====================================================== */
-
 #efecto-error{
     position:fixed;
     inset:0;
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
     z-index:99998;
     pointer-events:none;
     opacity:0;
-    background:rgba(239,68,68,.24);
-    box-shadow:inset 0 0 0 5px rgba(239,68,68,.18);
+    background:rgba(239,68,68,.20);
+    box-shadow:inset 0 0 0 4px rgba(239,68,68,.14);
+}
+
+/* El teclado virtual nunca recibe el flash rojo. */
+body.keyboard-open #efecto-error{
+    display:none !important;
 }
 
 #efecto-error.error-activo{
-    opacity:0;
-}
-
-#game-container.error-temblando{
-    /* El movimiento real lo controla JavaScript. */
+    animation:flashError .42s ease-out forwards;
 }
 
 @keyframes flashError{
     0%{opacity:0;}
-    12%{opacity:1;}
-    30%{opacity:.78;}
-    52%{opacity:.42;}
-    72%{opacity:.18;}
+    18%{opacity:.9;}
+    42%{opacity:.48;}
+    70%{opacity:.18;}
     100%{opacity:0;}
 }
 
+/* Temblor independiente del transform del contenedor */
+#game-container.error-temblando{
+    animation:errorShake .42s ease-out;
+}
+
 @keyframes errorShake{
-    0%,100%{transform:translate3d(0,0,0);}
-    12%{transform:translate3d(-9px,0,0);}
-    24%{transform:translate3d(9px,0,0);}
-    36%{transform:translate3d(-7px,0,0);}
-    48%{transform:translate3d(7px,0,0);}
-    60%{transform:translate3d(-5px,0,0);}
-    72%{transform:translate3d(5px,0,0);}
-    84%{transform:translate3d(-2px,0,0);}
+    0%,100%{left:0;}
+    12%{left:-7px;}
+    24%{left:7px;}
+    36%{left:-6px;}
+    48%{left:6px;}
+    60%{left:-4px;}
+    72%{left:4px;}
+    84%{left:-2px;}
 }
 
 @media(max-width:600px){
-    .estrella-contenido{
-        transform:translate3d(-130px,-50%,0) scale(.42);
-    }
-
-    .estrella-animar .estrella-contenido{
-        animation-duration:4.2s;
-    }
-
-    .estrella-animar .estrella-icon{
-        animation-duration:4.2s;
-    }
-
-    .estrella-animar .estrella-texto{
-        animation-duration:4.2s;
-    }
+    .estrella-contenido{width:90vw;}
 }
 
 @media(prefers-reduced-motion:reduce){
+    /* No anulamos estas dos señales del juego: son retroalimentación funcional. */
+    #efecto-error.error-activo{
+        animation:flashError .42s ease-out forwards;
+    }
+
     #game-container.error-temblando{
-        animation:none;
+        animation:errorShake .42s ease-out;
+    }
+
+    #estrella.estrella-animar .estrella-contenido{
+        animation:estrellaCentro 2.7s ease-out forwards;
+    }
+
+    #estrella.estrella-animar .estrella-icon{
+        animation:estrellaGiroCentro 2.7s ease-out forwards;
+    }
+
+    #estrella.estrella-animar .estrella-texto{
+        animation:textoPremioCentro 2.7s ease-out forwards;
     }
 }
 
-@keyframes estrellaRecorridoReducido{
-    0%{opacity:0;transform:translate3d(-130px,-50%,0) scale(.55);}
-    12%{opacity:1;}
-    88%{opacity:1;}
-    100%{opacity:0;transform:translate3d(calc(100vw + 130px),-50%,0) scale(.65);}
-}
-
-@keyframes estrellaGiroReducido{
-    0%{opacity:0;transform:rotate(0deg) scale(.65);}
-    10%{opacity:1;}
-    100%{opacity:0;transform:rotate(720deg) scale(.8);}
-}
 
 /* =====================================================
    FIN ESTRELLA / ERROR
 ====================================================== */
+
 
 /* =====================================================
    RESULTADO FINAL
@@ -3167,13 +3094,18 @@ button:disabled{
 
 @media(prefers-reduced-motion:reduce){
 
-    /*
-       No desactivamos las celebraciones del juego.
-       Estrella y error se controlan por JavaScript para que
-       funcionen también en equipos con "reducir movimiento".
-    */
-    html{
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
         scroll-behavior:auto !important;
+
+        transition-duration:.01ms !important;
+
     }
 
 }
@@ -3504,7 +3436,7 @@ button:disabled{
 
             <p>
                 Comienza directamente.
-                30 segundos iniciales y +5 segundos
+                30 segundos iniciales y +7 segundos
                 por cada acierto.
             </p>
 
@@ -4102,9 +4034,7 @@ button:disabled{
         <img
             class="estrella-icon"
             src="img/estrella.png"
-            alt="⭐"
-            onerror="this.removeAttribute('src'); this.style.objectFit='contain'; this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<span class=\"estrella-fallback\">⭐</span>');"
-            draggable="false"
+            alt=""
         >
 
         <div class="estrella-texto">
@@ -4172,7 +4102,7 @@ const PALABRAS_POR_NIVEL=10;
 
 const OBJETIVO_CONTRARRELOJ=100;
 const MAX_TIEMPO_CONTRARRELOJ=50;
-const BONO_CONTRARRELOJ=5;
+const BONO_CONTRARRELOJ=7;
 const INTERVALO_BONO_CONTRARRELOJ=1000;
 
 
@@ -4206,7 +4136,7 @@ const MODOS={
         tiempo:30,
         vidas:0,
         descripcion:
-            "30 segundos · +5 segundos por acierto · máximo 50 segundos"
+            "30 segundos · +7 segundos por acierto · máximo 50 segundos"
     }
 
 };
@@ -4636,9 +4566,6 @@ let tiempoMaximo=30;
 let intervalo=null;
 
 let premioTimeout=null;
-let premioAnimFrame=null;
-let errorShakeFrame=null;
-let errorFlashFrame=null;
 
 let vidas=3;
 
@@ -7599,7 +7526,7 @@ function verificar(){
         resultado.textContent=
             juegoContrarreloj
             ?
-            "✓ ¡Correcto! +5 segundos"
+            "✓ ¡Correcto! +7 segundos"
             :
             "✓ ¡Respuesta correcta!";
 
@@ -7612,7 +7539,7 @@ function verificar(){
 
             /*
                 Bono controlado:
-                 +5 segundos, como máximo una vez
+                +7 segundos, como máximo una vez
                 por segundo y sin superar 50 segundos.
             */
             const ahora=
@@ -7876,179 +7803,102 @@ function actualizarEstadisticas(){
 
 function mostrarPremio(){
 
-    const estrella=document.getElementById("estrella");
-    const contenido=estrella?.querySelector(".estrella-contenido");
-    const icono=estrella?.querySelector(".estrella-icon");
-    const texto=estrella?.querySelector(".estrella-texto");
-
-    if(!estrella || !contenido || !icono){
-        return;
-    }
-
-    if(typeof cancelarPremioAnimacion === "function"){
-        cancelarPremioAnimacion();
-    }
-
-    estrella.classList.add("visible","estrella-animar");
-
-    /*
-       Animación por requestAnimationFrame:
-       - cruza TODA la pantalla, de borde a borde;
-       - gira exactamente 720°;
-       - hace un pequeño rebote vertical;
-       - no depende de CSS animation ni de "reducir movimiento" del sistema.
-    */
-    const inicio=performance.now();
-    const duracion=4600;
-    const ancho=Math.max(contenido.offsetWidth || 150, 150);
-    const distanciaInicio=ancho+40;
-    const distanciaFin=window.innerWidth+ancho+40;
-
-    contenido.style.opacity="1";
-    icono.style.opacity="1";
-    icono.style.transform="rotate(0deg) scale(.72)";
-    if(texto){
-        texto.style.opacity="0";
-        texto.style.transform="translateY(10px) scale(.82)";
-    }
-
-    const ease=t=>1-Math.pow(1-t,3);
-
-    function paso(ahora){
-        const t=Math.min((ahora-inicio)/duracion,1);
-        const e=ease(t);
-        const x=-distanciaInicio+(distanciaFin+distanciaInicio)*e;
-        const rebote=Math.sin(t*Math.PI*6)*Math.max(0,1-t)*18;
-        const escala=.72 + Math.sin(t*Math.PI)*.30;
-        const giro=720*e;
-        const opacidad=t<.08 ? t/.08 : t> .90 ? (1-t)/.10 : 1;
-
-        contenido.style.transform=`translate3d(${x}px, calc(-50% + ${rebote}px), 0) scale(${escala})`;
-        contenido.style.opacity=String(Math.max(0,opacidad));
-        icono.style.transform=`rotate(${giro}deg) scale(${.92 + Math.sin(t*Math.PI)*.10})`;
-
-        if(texto){
-            const textoOp=t<.14 ? (t-.05)/.09 : t<.78 ? 1 : Math.max(0,(.95-t)/.17);
-            texto.style.opacity=String(Math.max(0,Math.min(1,textoOp)));
-            texto.style.transform=`translateY(${8*(1-Math.min(1,t/.16))}px) scale(${.82+.18*Math.min(1,t/.16)})`;
-        }
-
-        if(t<1){
-            premioAnimFrame=requestAnimationFrame(paso);
-        }else{
-            ocultarPremio();
-        }
-    }
-
-    premioAnimFrame=requestAnimationFrame(paso);
-}
-
-function ocultarPremio(){
-
-    const estrella=document.getElementById("estrella");
-    const contenido=estrella?.querySelector(".estrella-contenido");
-    const icono=estrella?.querySelector(".estrella-icon");
-    const texto=estrella?.querySelector(".estrella-texto");
-
-    if(typeof premioAnimFrame!=="undefined" && premioAnimFrame){
-        cancelAnimationFrame(premioAnimFrame);
-        premioAnimFrame=null;
-    }
+    const estrella=
+        document.getElementById(
+            "estrella"
+        );
 
     if(!estrella){
         return;
     }
 
-    estrella.classList.remove("estrella-animar","visible");
+    clearTimeout(
+        premioTimeout
+    );
 
+    /*
+        Reiniciamos la animación completamente.
+        Esto permite que la estrella vuelva a girar
+        desde 0° aunque haya aparecido hace poco.
+    */
+    estrella.classList.remove(
+        "visible",
+        "estrella-animar"
+    );
+
+    void estrella.offsetWidth;
+
+    estrella.classList.add(
+        "visible",
+        "estrella-animar"
+    );
+
+    const contenido=estrella.querySelector(".estrella-contenido");
     if(contenido){
-        contenido.style.opacity="0";
-        contenido.style.transform="translate3d(-190px,-50%,0) scale(.45)";
+        contenido.onanimationend=event=>{
+            if(event.animationName==="estrellaCentro") ocultarPremio();
+        };
     }
-    if(icono){
-        icono.style.opacity="0";
-        icono.style.transform="rotate(0deg) scale(.72)";
-    }
-    if(texto){
-        texto.style.opacity="0";
-        texto.style.transform="translateY(8px) scale(.82)";
-    }
+
+    premioTimeout=
+        setTimeout(
+            ocultarPremio,
+            3200
+        );
 
 }
 
-function cancelarPremioAnimacion(){
-    if(typeof premioAnimFrame!=="undefined" && premioAnimFrame){
-        cancelAnimationFrame(premioAnimFrame);
-        premioAnimFrame=null;
+
+function ocultarPremio(){
+
+    const estrella=
+        document.getElementById(
+            "estrella"
+        );
+
+    if(!estrella){
+        return;
     }
+
+    clearTimeout(
+        premioTimeout
+    );
+
+    estrella.classList.remove(
+        "estrella-animar",
+        "visible"
+    );
+
 }
+
 
 /* =========================================================
    EFECTO DE ERROR
 ========================================================= */
 
 function mostrarEfectoError(){
-
     const efecto=document.getElementById("efecto-error");
     const game=document.getElementById("game-container");
 
-    /* Si el teclado virtual está abierto, no dibujamos el rectángulo rojo
-       sobre el viewport reducido. El juego sí recibe el temblor. */
-    const tecladoAbierto=window.visualViewport &&
-        window.visualViewport.height < window.innerHeight*0.78;
+    const tecladoAbierto=
+        document.body.classList.contains("keyboard-open") ||
+        (window.visualViewport && window.innerWidth<=600 &&
+         window.visualViewport.height < window.innerHeight*.78);
 
     if(efecto && !tecladoAbierto){
-        const inicio=performance.now();
-        const duracion=420;
+        efecto.classList.remove("error-activo");
+        void efecto.offsetWidth;
         efecto.classList.add("error-activo");
-        efecto.style.opacity="0";
-
-        function flash(ahora){
-            const t=Math.min((ahora-inicio)/duracion,1);
-            const op=t<.16 ? t/.16 : t<.45 ? 1 : (1-t)/.55;
-            efecto.style.opacity=String(Math.max(0,Math.min(.42,op*.42)));
-            if(t<1){
-                errorFlashFrame=requestAnimationFrame(flash);
-            }else{
-                efecto.style.opacity="0";
-                efecto.classList.remove("error-activo");
-                errorFlashFrame=null;
-            }
-        }
-        if(errorFlashFrame){
-            cancelAnimationFrame(errorFlashFrame);
-        }
-        errorFlashFrame=requestAnimationFrame(flash);
     }
 
     if(game){
-        const inicio=performance.now();
-        const duracion=440;
-
-        if(errorShakeFrame){
-            cancelAnimationFrame(errorShakeFrame);
-        }
-
+        game.classList.remove("error-temblando");
+        void game.offsetWidth;
         game.classList.add("error-temblando");
-
-        function temblar(ahora){
-            const t=Math.min((ahora-inicio)/duracion,1);
-            const fuerza=(1-t)*10;
-            const onda=Math.sin(t*Math.PI*10)*fuerza;
-            game.style.transform=`translate3d(${onda}px,0,0)`;
-
-            if(t<1){
-                errorShakeFrame=requestAnimationFrame(temblar);
-            }else{
-                game.style.transform="";
-                game.classList.remove("error-temblando");
-                errorShakeFrame=null;
-            }
-        }
-
-        errorShakeFrame=requestAnimationFrame(temblar);
+        setTimeout(()=>game.classList.remove("error-temblando"),500);
     }
 }
+
 
 /* =========================================================
    PERDER NIVEL
