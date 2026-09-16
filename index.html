@@ -1787,12 +1787,12 @@ button:disabled{
 #estrella{
     position:fixed;
     inset:0;
-    z-index:9999;
-
+    width:100vw;
+    height:100vh;
+    z-index:99999;
     display:none;
     align-items:center;
-    justify-content:center;
-
+    justify-content:flex-start;
     pointer-events:none;
     overflow:hidden;
     background:transparent;
@@ -1802,15 +1802,23 @@ button:disabled{
     display:flex;
 }
 
+.estrella-fallback{
+    display:block;
+    font-size:clamp(82px,11vw,145px);
+    line-height:1;
+    filter:drop-shadow(0 5px 12px rgba(245,158,11,.35));
+    user-select:none;
+}
+
 .estrella-contenido{
+    position:absolute;
+    left:0;
+    top:50%;
     width:max-content;
     text-align:center;
     opacity:0;
-
-    transform:
-        translate3d(-66vw,10vh,0)
-        scale(.48);
-
+    transform:translate3d(-190px,-50%,0) scale(.45);
+    transform-origin:center center;
     will-change:transform,opacity;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
@@ -1818,323 +1826,239 @@ button:disabled{
 
 .estrella-icon{
     display:block;
-    width:clamp(90px,13vw,155px);
-    height:clamp(90px,13vw,155px);
+    width:clamp(82px,11vw,145px);
+    height:clamp(82px,11vw,145px);
     object-fit:contain;
     margin:0 auto;
-
     transform-origin:center center;
-
     will-change:transform,opacity;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
-
-    filter:
-        drop-shadow(0 6px 9px rgba(245,158,11,.22));
-
+    filter:drop-shadow(0 5px 12px rgba(245,158,11,.35));
     user-select:none;
     -webkit-user-drag:none;
 }
 
 .estrella-texto{
-    margin-top:8px;
+    margin-top:7px;
     color:var(--gold);
-
-    font-size:
-        clamp(
-            17px,
-            4vw,
-            25px
-        );
-
+    font-size:clamp(16px,3vw,24px);
     font-weight:800;
-
-    text-shadow:
-        0 3px 14px
-        rgba(245,184,0,.20);
+    text-shadow:0 3px 14px rgba(245,184,0,.22);
+    white-space:nowrap;
 }
-
 
 /*
-   La estrella entra por la izquierda, da saltitos
-   de felicidad y sale por la derecha.
-   La imagen completa exactamente 720°.
+   Recorrido real de borde a borde.
+   La estrella sale completamente por la izquierda,
+   cruza toda la pantalla y sale completamente por la derecha.
 */
-.estrella-animar
-.estrella-contenido{
-    animation:
-        estrellaSaltos
-        3.8s
-        cubic-bezier(.22,.75,.2,1)
-        forwards;
+.estrella-animar .estrella-contenido{
+    animation:estrellaRecorrido 3.8s cubic-bezier(.22,.72,.18,1) forwards;
 }
 
-.estrella-animar
-.estrella-icon{
-    animation:
-        estrellaGiro720
-        3.8s
-        cubic-bezier(.2,.8,.2,1)
-        forwards,
-        estrellaBrillo
-        .42s
-        ease-in-out
-        .12s
-        3
-        alternate;
+.estrella-animar .estrella-icon{
+    animation:estrellaGiro720 3.8s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-.estrella-animar
-.estrella-texto{
-    animation:
-        textoPremio
-        3.8s
-        ease
-        forwards;
+.estrella-animar .estrella-texto{
+    animation:textoPremio 3.8s ease forwards;
 }
 
-
-@keyframes estrellaSaltos{
-
+@keyframes estrellaRecorrido{
     0%{
         opacity:0;
-        transform:
-            translate3d(-66vw,10vh,0)
-            scale(.48);
+        transform:translate3d(-190px,-50%,0) scale(.45) rotate(-4deg);
     }
-
-    8%{
+    7%{
         opacity:1;
-        transform:
-            translate3d(-52vw,4vh,0)
-            scale(.82);
+        transform:translate3d(5vw,-50%,0) scale(.82) rotate(3deg);
     }
-
-    18%{
+    16%{
         opacity:1;
-        transform:
-            translate3d(-38vw,-8vh,0)
-            scale(1);
+        transform:translate3d(16vw,calc(-50% - 20px),0) scale(1.02) rotate(-2deg);
     }
-
     25%{
-        transform:
-            translate3d(-25vw,3vh,0)
-            scale(.96);
+        transform:translate3d(27vw,calc(-50% + 12px),0) scale(.96) rotate(2deg);
     }
-
     35%{
-        transform:
-            translate3d(-12vw,-10vh,0)
-            scale(1.04);
+        transform:translate3d(38vw,calc(-50% - 14px),0) scale(1.04) rotate(-2deg);
     }
-
     45%{
-        transform:
-            translate3d(2vw,2vh,0)
-            scale(.98);
+        transform:translate3d(50vw,calc(-50% + 8px),0) scale(.98) rotate(1deg);
     }
-
     55%{
-        transform:
-            translate3d(16vw,-9vh,0)
-            scale(1.05);
+        transform:translate3d(61vw,calc(-50% - 13px),0) scale(1.04) rotate(-2deg);
     }
-
     65%{
-        transform:
-            translate3d(30vw,3vh,0)
-            scale(.98);
+        transform:translate3d(72vw,calc(-50% + 10px),0) scale(.98) rotate(2deg);
     }
-
-    76%{
-        transform:
-            translate3d(42vw,-7vh,0)
-            scale(1.03);
+    75%{
+        transform:translate3d(83vw,calc(-50% - 12px),0) scale(1.02) rotate(-2deg);
     }
-
-    87%{
+    88%{
         opacity:1;
-        transform:
-            translate3d(54vw,4vh,0)
-            scale(.92);
+        transform:translate3d(94vw,-50%,0) scale(.88) rotate(2deg);
     }
-
     100%{
         opacity:0;
-        transform:
-            translate3d(68vw,12vh,0)
-            scale(.50);
+        transform:translate3d(calc(100vw + 190px),-50%,0) scale(.48) rotate(0deg);
     }
 }
-
 
 @keyframes estrellaGiro720{
-
     0%{
         opacity:0;
-        transform:
-            rotate(0deg)
-            scale(.55);
+        transform:rotate(0deg) scale(.55);
     }
-
     10%{
         opacity:1;
-        transform:
-            rotate(90deg)
-            scale(1.08);
+        transform:rotate(90deg) scale(1.08);
     }
-
-    22%{
-        transform:
-            rotate(180deg)
-            scale(.96);
+    25%{
+        transform:rotate(180deg) scale(.96);
     }
-
-    34%{
-        transform:
-            rotate(270deg)
-            scale(1.05);
+    37.5%{
+        transform:rotate(270deg) scale(1.05);
     }
-
-    46%{
-        transform:
-            rotate(360deg)
-            scale(.98);
+    50%{
+        transform:rotate(360deg) scale(.98);
     }
-
-    58%{
-        transform:
-            rotate(450deg)
-            scale(1.05);
+    62.5%{
+        transform:rotate(450deg) scale(1.05);
     }
-
-    70%{
-        transform:
-            rotate(540deg)
-            scale(.98);
+    75%{
+        transform:rotate(540deg) scale(.98);
     }
-
-    82%{
-        transform:
-            rotate(630deg)
-            scale(1.03);
+    87.5%{
+        transform:rotate(630deg) scale(1.03);
     }
-
-    92%{
+    96%{
         opacity:1;
-        transform:
-            rotate(700deg)
-            scale(.94);
+        transform:rotate(690deg) scale(.94);
     }
-
     100%{
         opacity:0;
-        transform:
-            rotate(720deg)
-            scale(.72);
+        transform:rotate(720deg) scale(.72);
     }
 }
-
-
-@keyframes estrellaBrillo{
-
-    0%{
-        filter:
-            drop-shadow(
-                0 4px 7px
-                rgba(245,158,11,.20)
-            );
-    }
-
-    100%{
-        filter:
-            drop-shadow(
-                0 0 24px
-                rgba(245,158,11,.72)
-            );
-    }
-}
-
 
 @keyframes textoPremio{
-
-    0%{
+    0%,8%{
         opacity:0;
-        transform:
-            translateY(8px)
-            scale(.8);
+        transform:translateY(8px) scale(.8);
     }
-
-    12%{
+    15%,78%{
         opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
+        transform:translateY(0) scale(1);
     }
-
-    72%{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
     100%{
         opacity:0;
-        transform:
-            translateY(-5px)
-            scale(.88);
+        transform:translateY(-5px) scale(.88);
     }
 }
 
-
 /* =====================================================
-   REDUCCIÓN DE MOVIMIENTO PARA ACCESIBILIDAD
+   EFECTO DE ERROR
 ====================================================== */
 
-@media(prefers-reduced-motion:reduce){
+#efecto-error{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    z-index:99998;
+    pointer-events:none;
+    opacity:0;
+    background:rgba(239,68,68,.24);
+    box-shadow:inset 0 0 0 5px rgba(239,68,68,.18);
+}
 
+#efecto-error.error-activo{
+    animation:flashError .48s ease-out forwards;
+}
+
+#game-container.error-temblando{
+    animation:errorShake .45s ease-out;
+}
+
+@keyframes flashError{
+    0%{opacity:0;}
+    12%{opacity:1;}
+    30%{opacity:.78;}
+    52%{opacity:.42;}
+    72%{opacity:.18;}
+    100%{opacity:0;}
+}
+
+@keyframes errorShake{
+    0%,100%{transform:translate3d(0,0,0);}
+    12%{transform:translate3d(-9px,0,0);}
+    24%{transform:translate3d(9px,0,0);}
+    36%{transform:translate3d(-7px,0,0);}
+    48%{transform:translate3d(7px,0,0);}
+    60%{transform:translate3d(-5px,0,0);}
+    72%{transform:translate3d(5px,0,0);}
+    84%{transform:translate3d(-2px,0,0);}
+}
+
+@media(max-width:600px){
+    .estrella-contenido{
+        transform:translate3d(-130px,-50%,0) scale(.42);
+    }
+
+    .estrella-animar .estrella-contenido{
+        animation-duration:4.2s;
+    }
+
+    .estrella-animar .estrella-icon{
+        animation-duration:4.2s;
+    }
+
+    .estrella-animar .estrella-texto{
+        animation-duration:4.2s;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
     #game-container.error-temblando{
         animation:none;
     }
 
     #efecto-error.error-activo{
-        animation:
-            flashError
-            .35s
-            ease-out
-            forwards;
+        animation:flashError .5s ease-out forwards;
     }
 
-    #estrella.estrella-animar
-    .estrella-contenido{
-        animation:none;
-        opacity:1;
-        transform:none;
+    /* No desactivamos la celebración: hacemos una versión ligera. */
+    .estrella-animar .estrella-contenido{
+        animation:estrellaRecorridoReducido 2.2s linear forwards;
     }
 
-    #estrella.estrella-animar
-    .estrella-icon{
-        animation:none;
-        opacity:1;
-        transform:none;
-        filter:none;
+    .estrella-animar .estrella-icon{
+        animation:estrellaGiroReducido 2.2s linear forwards;
     }
 
-    #estrella.estrella-animar
-    .estrella-texto{
-        animation:none;
-        opacity:1;
-        transform:none;
+    .estrella-animar .estrella-texto{
+        animation:textoPremio 2.2s ease forwards;
     }
 }
 
+@keyframes estrellaRecorridoReducido{
+    0%{opacity:0;transform:translate3d(-130px,-50%,0) scale(.55);}
+    12%{opacity:1;}
+    88%{opacity:1;}
+    100%{opacity:0;transform:translate3d(calc(100vw + 130px),-50%,0) scale(.65);}
+}
+
+@keyframes estrellaGiroReducido{
+    0%{opacity:0;transform:rotate(0deg) scale(.65);}
+    10%{opacity:1;}
+    100%{opacity:0;transform:rotate(720deg) scale(.8);}
+}
 
 /* =====================================================
    FIN ESTRELLA / ERROR
 ====================================================== */
-
 
 /* =====================================================
    RESULTADO FINAL
@@ -4210,7 +4134,8 @@ button:disabled{
         <img
             class="estrella-icon"
             src="img/estrella.png"
-            alt=""
+            alt="⭐"
+            onerror="this.removeAttribute('src'); this.style.objectFit='contain'; this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<span class=\"estrella-fallback\">⭐</span>');"
             draggable="false"
         >
 
@@ -8010,10 +7935,28 @@ function mostrarPremio(){
         "estrella-animar"
     );
 
+    const contenido=
+        estrella.querySelector(
+            ".estrella-contenido"
+        );
+
+    if(contenido){
+        contenido.onanimationend=
+            event=>{
+                if(event.animationName===
+                    "estrellaRecorrido" ||
+                    event.animationName===
+                    "estrellaRecorridoReducido"
+                ){
+                    ocultarPremio();
+                }
+            };
+    }
+
     premioTimeout=
         setTimeout(
             ocultarPremio,
-            4000
+            4400
         );
 
 }
@@ -8077,28 +8020,25 @@ function mostrarEfectoError(){
 
     }
 
-    const objetivoTemblor=
-        game;
+    if(game){
 
-    if(objetivoTemblor){
-
-        objetivoTemblor.classList.remove(
+        game.classList.remove(
             "error-temblando"
         );
 
-        void objetivoTemblor.offsetWidth;
+        void game.offsetWidth;
 
-        objetivoTemblor.classList.add(
+        game.classList.add(
             "error-temblando"
         );
 
         setTimeout(
             ()=>{
-                objetivoTemblor.classList.remove(
+                game.classList.remove(
                     "error-temblando"
                 );
             },
-            450
+            500
         );
 
     }
