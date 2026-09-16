@@ -1853,17 +1853,7 @@ button:disabled{
    La estrella sale completamente por la izquierda,
    cruza toda la pantalla y sale completamente por la derecha.
 */
-.estrella-animar .estrella-contenido{
-    animation:estrellaRecorrido 3.8s cubic-bezier(.22,.72,.18,1) forwards;
-}
 
-.estrella-animar .estrella-icon{
-    animation:estrellaGiro720 3.8s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-.estrella-animar .estrella-texto{
-    animation:textoPremio 3.8s ease forwards;
-}
 
 @keyframes estrellaRecorrido{
     0%{
@@ -1975,11 +1965,11 @@ button:disabled{
 }
 
 #efecto-error.error-activo{
-    animation:flashError .48s ease-out forwards;
+    opacity:0;
 }
 
 #game-container.error-temblando{
-    animation:errorShake .45s ease-out;
+    /* El movimiento real lo controla JavaScript. */
 }
 
 @keyframes flashError{
@@ -2023,23 +2013,6 @@ button:disabled{
 @media(prefers-reduced-motion:reduce){
     #game-container.error-temblando{
         animation:none;
-    }
-
-    #efecto-error.error-activo{
-        animation:flashError .5s ease-out forwards;
-    }
-
-    /* No desactivamos la celebración: hacemos una versión ligera. */
-    .estrella-animar .estrella-contenido{
-        animation:estrellaRecorridoReducido 2.2s linear forwards;
-    }
-
-    .estrella-animar .estrella-icon{
-        animation:estrellaGiroReducido 2.2s linear forwards;
-    }
-
-    .estrella-animar .estrella-texto{
-        animation:textoPremio 2.2s ease forwards;
     }
 }
 
@@ -3194,18 +3167,13 @@ button:disabled{
 
 @media(prefers-reduced-motion:reduce){
 
-    *,
-    *::before,
-    *::after{
-
-        animation-duration:.01ms !important;
-
-        animation-iteration-count:1 !important;
-
+    /*
+       No desactivamos las celebraciones del juego.
+       Estrella y error se controlan por JavaScript para que
+       funcionen también en equipos con "reducir movimiento".
+    */
+    html{
         scroll-behavior:auto !important;
-
-        transition-duration:.01ms !important;
-
     }
 
 }
@@ -4668,6 +4636,9 @@ let tiempoMaximo=30;
 let intervalo=null;
 
 let premioTimeout=null;
+let premioAnimFrame=null;
+let errorShakeFrame=null;
+let errorFlashFrame=null;
 
 let vidas=3;
 
@@ -7905,85 +7876,112 @@ function actualizarEstadisticas(){
 
 function mostrarPremio(){
 
-    const estrella=
-        document.getElementById(
-            "estrella"
-        );
+    const estrella=document.getElementById("estrella");
+    const contenido=estrella?.querySelector(".estrella-contenido");
+    const icono=estrella?.querySelector(".estrella-icon");
+    const texto=estrella?.querySelector(".estrella-texto");
 
-    if(!estrella){
+    if(!estrella || !contenido || !icono){
         return;
     }
 
-    clearTimeout(
-        premioTimeout
-    );
-
-    /*
-        Reiniciamos la animación completamente.
-        Esto permite que la estrella vuelva a girar
-        desde 0° aunque haya aparecido hace poco.
-    */
-    estrella.classList.remove(
-        "visible",
-        "estrella-animar"
-    );
-
-    void estrella.offsetWidth;
-
-    estrella.classList.add(
-        "visible",
-        "estrella-animar"
-    );
-
-    const contenido=
-        estrella.querySelector(
-            ".estrella-contenido"
-        );
-
-    if(contenido){
-        contenido.onanimationend=
-            event=>{
-                if(event.animationName===
-                    "estrellaRecorrido" ||
-                    event.animationName===
-                    "estrellaRecorridoReducido"
-                ){
-                    ocultarPremio();
-                }
-            };
+    if(typeof cancelarPremioAnimacion === "function"){
+        cancelarPremioAnimacion();
     }
 
-    premioTimeout=
-        setTimeout(
-            ocultarPremio,
-            4400
-        );
+    estrella.classList.add("visible","estrella-animar");
 
+    /*
+       Animación por requestAnimationFrame:
+       - cruza TODA la pantalla, de borde a borde;
+       - gira exactamente 720°;
+       - hace un pequeño rebote vertical;
+       - no depende de CSS animation ni de "reducir movimiento" del sistema.
+    */
+    const inicio=performance.now();
+    const duracion=4600;
+    const ancho=Math.max(contenido.offsetWidth || 150, 150);
+    const distanciaInicio=ancho+40;
+    const distanciaFin=window.innerWidth+ancho+40;
+
+    contenido.style.opacity="1";
+    icono.style.opacity="1";
+    icono.style.transform="rotate(0deg) scale(.72)";
+    if(texto){
+        texto.style.opacity="0";
+        texto.style.transform="translateY(10px) scale(.82)";
+    }
+
+    const ease=t=>1-Math.pow(1-t,3);
+
+    function paso(ahora){
+        const t=Math.min((ahora-inicio)/duracion,1);
+        const e=ease(t);
+        const x=-distanciaInicio+(distanciaFin+distanciaInicio)*e;
+        const rebote=Math.sin(t*Math.PI*6)*Math.max(0,1-t)*18;
+        const escala=.72 + Math.sin(t*Math.PI)*.30;
+        const giro=720*e;
+        const opacidad=t<.08 ? t/.08 : t> .90 ? (1-t)/.10 : 1;
+
+        contenido.style.transform=`translate3d(${x}px, calc(-50% + ${rebote}px), 0) scale(${escala})`;
+        contenido.style.opacity=String(Math.max(0,opacidad));
+        icono.style.transform=`rotate(${giro}deg) scale(${.92 + Math.sin(t*Math.PI)*.10})`;
+
+        if(texto){
+            const textoOp=t<.14 ? (t-.05)/.09 : t<.78 ? 1 : Math.max(0,(.95-t)/.17);
+            texto.style.opacity=String(Math.max(0,Math.min(1,textoOp)));
+            texto.style.transform=`translateY(${8*(1-Math.min(1,t/.16))}px) scale(${.82+.18*Math.min(1,t/.16)})`;
+        }
+
+        if(t<1){
+            premioAnimFrame=requestAnimationFrame(paso);
+        }else{
+            ocultarPremio();
+        }
+    }
+
+    premioAnimFrame=requestAnimationFrame(paso);
 }
-
 
 function ocultarPremio(){
 
-    const estrella=
-        document.getElementById(
-            "estrella"
-        );
+    const estrella=document.getElementById("estrella");
+    const contenido=estrella?.querySelector(".estrella-contenido");
+    const icono=estrella?.querySelector(".estrella-icon");
+    const texto=estrella?.querySelector(".estrella-texto");
+
+    if(typeof premioAnimFrame!=="undefined" && premioAnimFrame){
+        cancelAnimationFrame(premioAnimFrame);
+        premioAnimFrame=null;
+    }
 
     if(!estrella){
         return;
     }
 
-    clearTimeout(
-        premioTimeout
-    );
+    estrella.classList.remove("estrella-animar","visible");
 
-    estrella.classList.remove(
-        "estrella-animar",
-        "visible"
-    );
+    if(contenido){
+        contenido.style.opacity="0";
+        contenido.style.transform="translate3d(-190px,-50%,0) scale(.45)";
+    }
+    if(icono){
+        icono.style.opacity="0";
+        icono.style.transform="rotate(0deg) scale(.72)";
+    }
+    if(texto){
+        texto.style.opacity="0";
+        texto.style.transform="translateY(8px) scale(.82)";
+    }
 
 }
 
+function cancelarPremioAnimacion(){
+    if(typeof premioAnimFrame!=="undefined" && premioAnimFrame){
+        cancelAnimationFrame(premioAnimFrame);
+        premioAnimFrame=null;
+    }
+}
 
 /* =========================================================
    EFECTO DE ERROR
@@ -7991,60 +7989,66 @@ function ocultarPremio(){
 
 function mostrarEfectoError(){
 
-    const efecto=
-        document.getElementById(
-            "efecto-error"
-        );
+    const efecto=document.getElementById("efecto-error");
+    const game=document.getElementById("game-container");
 
-    const game=
-        document.getElementById(
-            "game-container"
-        );
+    /* Si el teclado virtual está abierto, no dibujamos el rectángulo rojo
+       sobre el viewport reducido. El juego sí recibe el temblor. */
+    const tecladoAbierto=window.visualViewport &&
+        window.visualViewport.height < window.innerHeight*0.78;
 
-    /*
-        Reiniciamos ambos efectos para que
-        funcionen incluso en errores consecutivos.
-        El temblor se aplica únicamente al juego.
-    */
-    if(efecto){
+    if(efecto && !tecladoAbierto){
+        const inicio=performance.now();
+        const duracion=420;
+        efecto.classList.add("error-activo");
+        efecto.style.opacity="0";
 
-        efecto.classList.remove(
-            "error-activo"
-        );
-
-        void efecto.offsetWidth;
-
-        efecto.classList.add(
-            "error-activo"
-        );
-
+        function flash(ahora){
+            const t=Math.min((ahora-inicio)/duracion,1);
+            const op=t<.16 ? t/.16 : t<.45 ? 1 : (1-t)/.55;
+            efecto.style.opacity=String(Math.max(0,Math.min(.42,op*.42)));
+            if(t<1){
+                errorFlashFrame=requestAnimationFrame(flash);
+            }else{
+                efecto.style.opacity="0";
+                efecto.classList.remove("error-activo");
+                errorFlashFrame=null;
+            }
+        }
+        if(errorFlashFrame){
+            cancelAnimationFrame(errorFlashFrame);
+        }
+        errorFlashFrame=requestAnimationFrame(flash);
     }
 
     if(game){
+        const inicio=performance.now();
+        const duracion=440;
 
-        game.classList.remove(
-            "error-temblando"
-        );
+        if(errorShakeFrame){
+            cancelAnimationFrame(errorShakeFrame);
+        }
 
-        void game.offsetWidth;
+        game.classList.add("error-temblando");
 
-        game.classList.add(
-            "error-temblando"
-        );
+        function temblar(ahora){
+            const t=Math.min((ahora-inicio)/duracion,1);
+            const fuerza=(1-t)*10;
+            const onda=Math.sin(t*Math.PI*10)*fuerza;
+            game.style.transform=`translate3d(${onda}px,0,0)`;
 
-        setTimeout(
-            ()=>{
-                game.classList.remove(
-                    "error-temblando"
-                );
-            },
-            500
-        );
+            if(t<1){
+                errorShakeFrame=requestAnimationFrame(temblar);
+            }else{
+                game.style.transform="";
+                game.classList.remove("error-temblando");
+                errorShakeFrame=null;
+            }
+        }
 
+        errorShakeFrame=requestAnimationFrame(temblar);
     }
-
 }
-
 
 /* =========================================================
    PERDER NIVEL
