@@ -1794,6 +1794,7 @@ button:disabled{
     justify-content:center;
 
     pointer-events:none;
+    overflow:hidden;
     background:transparent;
 }
 
@@ -1802,59 +1803,41 @@ button:disabled{
 }
 
 .estrella-contenido{
+    width:max-content;
     text-align:center;
-
     opacity:0;
 
     transform:
-        translate3d(0,18px,0)
-        scale(.55);
+        translate3d(-58vw,10vh,0)
+        scale(.48);
 
-    will-change:
-        transform,
-        opacity;
-
+    will-change:transform,opacity;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
 }
 
 .estrella-icon{
     display:block;
-
-    font-family:
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Noto Color Emoji",
-        sans-serif;
-
-    font-size:
-        clamp(
-            82px,
-            14vw,
-            145px
-        );
-
-    line-height:1;
+    width:clamp(90px,13vw,155px);
+    height:clamp(90px,13vw,155px);
+    object-fit:contain;
+    margin:0 auto;
 
     transform-origin:center center;
 
-    will-change:
-        transform,
-        opacity;
-
+    will-change:transform,opacity;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
 
     filter:
-        drop-shadow(
-            0 5px 8px
-            rgba(245,158,11,.25)
-        );
+        drop-shadow(0 6px 9px rgba(245,158,11,.22));
+
+    user-select:none;
+    -webkit-user-drag:none;
 }
 
 .estrella-texto{
-    margin-top:10px;
-
+    margin-top:8px;
     color:var(--gold);
 
     font-size:
@@ -1872,28 +1855,32 @@ button:disabled{
 }
 
 
-/* Animación principal de la estrella */
+/*
+   La estrella entra por la izquierda, da saltitos
+   de felicidad y sale por la derecha.
+   La imagen completa exactamente 720°.
+*/
 .estrella-animar
 .estrella-contenido{
     animation:
-        premioEntrada
-        1.5s
-        cubic-bezier(.2,.8,.2,1)
+        estrellaSaltos
+        2.65s
+        cubic-bezier(.22,.75,.2,1)
         forwards;
 }
 
 .estrella-animar
 .estrella-icon{
     animation:
-        premioGiro
-        1.5s
+        estrellaGiro720
+        2.65s
         cubic-bezier(.2,.8,.2,1)
         forwards,
         estrellaBrillo
-        .45s
+        .42s
         ease-in-out
-        .15s
-        2
+        .12s
+        3
         alternate;
 }
 
@@ -1901,132 +1888,162 @@ button:disabled{
 .estrella-texto{
     animation:
         textoPremio
-        1.5s
+        2.65s
         ease
         forwards;
 }
 
 
-/* Entrada, rebote y desaparición */
-@keyframes premioEntrada{
+@keyframes estrellaSaltos{
 
     0%{
         opacity:0;
-
         transform:
-            translate3d(0,20px,0)
-            scale(.55);
+            translate3d(-58vw,10vh,0)
+            scale(.48);
     }
 
-    15%{
+    8%{
         opacity:1;
-
         transform:
-            translate3d(0,0,0)
-            scale(1.10);
+            translate3d(-45vw,4vh,0)
+            scale(.82);
     }
 
-    28%{
+    18%{
+        opacity:1;
         transform:
-            translate3d(0,-3px,0)
+            translate3d(-31vw,-8vh,0)
+            scale(1);
+    }
+
+    25%{
+        transform:
+            translate3d(-20vw,3vh,0)
             scale(.96);
     }
 
-    42%{
+    35%{
         transform:
-            translate3d(0,0,0)
+            translate3d(-8vw,-10vh,0)
             scale(1.04);
     }
 
-    65%{
-        opacity:1;
-
+    45%{
         transform:
-            translate3d(0,0,0)
-            scale(1);
+            translate3d(4vw,2vh,0)
+            scale(.98);
+    }
+
+    55%{
+        transform:
+            translate3d(16vw,-9vh,0)
+            scale(1.05);
+    }
+
+    65%{
+        transform:
+            translate3d(28vw,3vh,0)
+            scale(.98);
+    }
+
+    76%{
+        transform:
+            translate3d(39vw,-7vh,0)
+            scale(1.03);
+    }
+
+    87%{
+        opacity:1;
+        transform:
+            translate3d(49vw,4vh,0)
+            scale(.92);
     }
 
     100%{
         opacity:0;
-
         transform:
-            translate3d(0,-8px,0)
-            scale(.90);
+            translate3d(62vw,12vh,0)
+            scale(.50);
     }
 }
 
 
-/* EXACTAMENTE 720° */
-@keyframes premioGiro{
+@keyframes estrellaGiro720{
 
     0%{
         opacity:0;
         transform:
             rotate(0deg)
-            scale(.68);
+            scale(.55);
     }
 
-    12.5%{
+    10%{
         opacity:1;
         transform:
             rotate(90deg)
-            scale(.88);
+            scale(1.08);
     }
 
-    25%{
+    22%{
         transform:
             rotate(180deg)
-            scale(1.06);
+            scale(.96);
     }
 
-    37.5%{
+    34%{
         transform:
             rotate(270deg)
-            scale(.97);
+            scale(1.05);
     }
 
-    50%{
+    46%{
         transform:
             rotate(360deg)
-            scale(1.035);
+            scale(.98);
     }
 
-    62.5%{
+    58%{
         transform:
             rotate(450deg)
-            scale(.985);
+            scale(1.05);
     }
 
-    75%{
+    70%{
         transform:
             rotate(540deg)
-            scale(1.02);
+            scale(.98);
     }
 
-    87.5%{
+    82%{
         transform:
             rotate(630deg)
-            scale(1);
+            scale(1.03);
+    }
+
+    92%{
+        opacity:1;
+        transform:
+            rotate(700deg)
+            scale(.94);
     }
 
     100%{
         opacity:0;
-
         transform:
             rotate(720deg)
-            scale(.93);
+            scale(.72);
     }
 }
 
 
-/* Brillo ligero */
 @keyframes estrellaBrillo{
 
     0%{
         filter:
             drop-shadow(
-                0 5px 8px
-                rgba(245,158,11,.25)
+                0 4px 7px
+                rgba(245,158,11,.20)
             );
     }
 
@@ -2034,7 +2051,7 @@ button:disabled{
         filter:
             drop-shadow(
                 0 0 24px
-                rgba(245,158,11,.78)
+                rgba(245,158,11,.72)
             );
     }
 }
@@ -2044,150 +2061,30 @@ button:disabled{
 
     0%{
         opacity:0;
-        transform:translateY(8px);
-    }
-
-    20%{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    75%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-        transform:translateY(-5px);
-    }
-}
-
-
-/* =====================================================
-   EFECTO DE ERROR — TEMBLOR + ROJO SUAVE
-====================================================== */
-
-/*
-   La capa solo pinta un rojo muy ligero.
-   No utiliza backdrop-filter.
-*/
-#efecto-error{
-    position:fixed;
-    inset:0;
-
-    z-index:9998;
-    pointer-events:none;
-
-    opacity:0;
-
-    background:
-        rgba(240,75,56,0);
-
-    will-change:opacity;
-}
-
-#efecto-error.error-activo{
-    animation:
-        flashError
-        .48s
-        ease-out
-        forwards;
-}
-
-
-@keyframes flashError{
-
-    0%{
-        opacity:0;
-        background:
-            rgba(240,75,56,0);
-    }
-
-    16%{
-        opacity:1;
-        background:
-            rgba(240,75,56,.12);
-    }
-
-    38%{
-        opacity:.78;
-        background:
-            rgba(240,75,56,.075);
-    }
-
-    65%{
-        opacity:.42;
-        background:
-            rgba(240,75,56,.04);
-    }
-
-    100%{
-        opacity:0;
-        background:
-            rgba(240,75,56,0);
-    }
-}
-
-
-/*
-   Solo tiembla la pantalla de juego.
-   Así no movemos el topbar ni rompemos
-   elementos fixed en computadores.
-*/
-#game-container.error-temblando{
-
-    animation:
-        temblorError
-        .42s
-        cubic-bezier(.36,.07,.19,.97);
-}
-
-
-@keyframes temblorError{
-
-    0%{
         transform:
-            translate3d(0,0,0);
+            translateY(8px)
+            scale(.8);
     }
 
     12%{
+        opacity:1;
         transform:
-            translate3d(-7px,2px,0);
-    }
-
-    24%{
-        transform:
-            translate3d(7px,-2px,0);
-    }
-
-    36%{
-        transform:
-            translate3d(-5px,1px,0);
-    }
-
-    48%{
-        transform:
-            translate3d(5px,-1px,0);
-    }
-
-    60%{
-        transform:
-            translate3d(-3px,1px,0);
+            translateY(0)
+            scale(1);
     }
 
     72%{
+        opacity:1;
         transform:
-            translate3d(3px,0,0);
-    }
-
-    84%{
-        transform:
-            translate3d(-1px,0,0);
+            translateY(0)
+            scale(1);
     }
 
     100%{
+        opacity:0;
         transform:
-            translate3d(0,0,0);
+            translateY(-5px)
+            scale(.88);
     }
 }
 
@@ -2198,6 +2095,7 @@ button:disabled{
 
 @media(prefers-reduced-motion:reduce){
 
+    main.error-temblando,
     #game-container.error-temblando{
         animation:none;
     }
@@ -3715,7 +3613,7 @@ button:disabled{
 
             <p>
                 Comienza directamente.
-                30 segundos iniciales y +5 segundos
+                30 segundos iniciales y +7 segundos
                 por cada acierto.
             </p>
 
@@ -4310,9 +4208,12 @@ button:disabled{
 
     <div class="estrella-contenido">
 
-        <span class="estrella-icon">
-            🌟
-        </span>
+        <img
+            class="estrella-icon"
+            src="img/estrella.png"
+            alt=""
+            draggable="false"
+        >
 
         <div class="estrella-texto">
             ¡Excelente!
@@ -4378,6 +4279,9 @@ const NIVELES_POR_CATEGORIA=5;
 const PALABRAS_POR_NIVEL=10;
 
 const OBJETIVO_CONTRARRELOJ=100;
+const MAX_TIEMPO_CONTRARRELOJ=50;
+const BONO_CONTRARRELOJ=7;
+const INTERVALO_BONO_CONTRARRELOJ=1000;
 
 
 /* =========================================================
@@ -4410,7 +4314,7 @@ const MODOS={
         tiempo:30,
         vidas:0,
         descripcion:
-            "30 segundos · +5 segundos por acierto"
+            "30 segundos · +7 segundos por acierto · máximo 50 segundos"
     }
 
 };
@@ -4850,6 +4754,7 @@ let contrarrelojNivel=1;
 let juegoContrarreloj=false;
 
 let countdownTimeout=null;
+let ultimoBonoContrarreloj=0;
 
 
 /* =========================================================
@@ -7077,6 +6982,8 @@ function iniciarContrarreloj(){
 
     contrarrelojNivel=1;
 
+    ultimoBonoContrarreloj=0;
+
     tiempo=30;
 
     tiempoMaximo=30;
@@ -7797,7 +7704,7 @@ function verificar(){
         resultado.textContent=
             juegoContrarreloj
             ?
-            "✓ ¡Correcto! +5 segundos"
+            "✓ ¡Correcto! +7 segundos"
             :
             "✓ ¡Respuesta correcta!";
 
@@ -7808,7 +7715,42 @@ function verificar(){
 
             contrarrelojAciertos++;
 
-            tiempo+=5;
+            /*
+                Bono controlado:
+                +7 segundos, como máximo una vez
+                por segundo y sin superar 50 segundos.
+            */
+            const ahora=
+                performance.now();
+
+            let bonoAplicado=0;
+
+            if(
+                ahora-ultimoBonoContrarreloj >=
+                INTERVALO_BONO_CONTRARRELOJ
+            ){
+
+                const tiempoAntes=tiempo;
+
+                tiempo=
+                    Math.min(
+                        MAX_TIEMPO_CONTRARRELOJ,
+                        tiempo+BONO_CONTRARRELOJ
+                    );
+
+                bonoAplicado=
+                    tiempo-tiempoAntes;
+
+                ultimoBonoContrarreloj=ahora;
+
+            }
+
+            resultado.textContent=
+                bonoAplicado>0
+                ?
+                `✓ ¡Correcto! +${bonoAplicado} segundos`
+                :
+                "✓ ¡Correcto!";
 
             contrarrelojNivel=
                 Math.min(
@@ -8117,6 +8059,11 @@ function mostrarEfectoError(){
             "game-container"
         );
 
+    const main=
+        document.querySelector(
+            "main"
+        );
+
     /*
         Reiniciamos ambos efectos para que
         funcionen incluso en errores consecutivos.
@@ -8135,21 +8082,24 @@ function mostrarEfectoError(){
 
     }
 
-    if(game){
+    const objetivoTemblor=
+        main || game;
 
-        game.classList.remove(
+    if(objetivoTemblor){
+
+        objetivoTemblor.classList.remove(
             "error-temblando"
         );
 
-        void game.offsetWidth;
+        void objetivoTemblor.offsetWidth;
 
-        game.classList.add(
+        objetivoTemblor.classList.add(
             "error-temblando"
         );
 
         setTimeout(
             ()=>{
-                game.classList.remove(
+                objetivoTemblor.classList.remove(
                     "error-temblando"
                 );
             },
