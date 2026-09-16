@@ -3129,6 +3129,24 @@ body.keyboard-open #efecto-error{
 
 }
 
+
+/* =====================================================
+   ANIMACIONES DE FEEDBACK — FORZADAS TAMBIÉN CON REDUCED MOTION
+   Se controlan principalmente desde JavaScript para que funcionen
+   en PC y móvil incluso si el sistema limita las animaciones CSS.
+===================================================== */
+#estrella.estrella-animar .estrella-contenido,
+#estrella.estrella-animar .estrella-icon,
+#estrella.estrella-animar .estrella-texto,
+#efecto-error.error-activo,
+#game-container.error-temblando{
+    animation:none !important;
+}
+
+#game-container{
+    position:relative;
+}
+
 </style>
 
 </head>
@@ -4038,7 +4056,7 @@ body.keyboard-open #efecto-error{
         >
 
         <div class="estrella-texto">
-            ¡Excelente!
+            ¡Felicitaciones!
         </div>
 
     </div>
@@ -7803,49 +7821,103 @@ function actualizarEstadisticas(){
 
 function mostrarPremio(){
 
-    const estrella=
-        document.getElementById(
-            "estrella"
-        );
+    const estrella=document.getElementById("estrella");
+    if(!estrella) return;
 
-    if(!estrella){
-        return;
-    }
-
-    clearTimeout(
-        premioTimeout
-    );
-
-    /*
-        Reiniciamos la animación completamente.
-        Esto permite que la estrella vuelva a girar
-        desde 0° aunque haya aparecido hace poco.
-    */
-    estrella.classList.remove(
-        "visible",
-        "estrella-animar"
-    );
-
-    void estrella.offsetWidth;
-
-    estrella.classList.add(
-        "visible",
-        "estrella-animar"
-    );
+    clearTimeout(premioTimeout);
 
     const contenido=estrella.querySelector(".estrella-contenido");
+    const icono=estrella.querySelector(".estrella-icon");
+    const texto=estrella.querySelector(".estrella-texto");
+
+    estrella.classList.remove("visible","estrella-animar");
+    if(contenido) contenido.getAnimations().forEach(a=>a.cancel());
+    if(icono) icono.getAnimations().forEach(a=>a.cancel());
+    if(texto) texto.getAnimations().forEach(a=>a.cancel());
+
     if(contenido){
-        contenido.onanimationend=event=>{
-            if(event.animationName==="estrellaCentro") ocultarPremio();
-        };
+        contenido.style.opacity="0";
+        contenido.style.transform="scale(.45)";
+    }
+    if(icono){
+        icono.style.opacity="0";
+        icono.style.transform="rotate(0deg) scale(.55)";
+        icono.style.filter="drop-shadow(0 4px 8px rgba(245,158,11,.22))";
+    }
+    if(texto){
+        texto.style.opacity="0";
+        texto.style.transform="translateY(8px) scale(.82)";
     }
 
-    premioTimeout=
-        setTimeout(
-            ocultarPremio,
-            3200
-        );
+    estrella.classList.add("visible","estrella-animar");
 
+    /*
+       Web Animations API: no depende de @media(prefers-reduced-motion).
+       La estrella permanece en el centro y hace exactamente 720°.
+    */
+    if(contenido){
+        contenido.animate([
+            {opacity:0, transform:"scale(.45)"},
+            {opacity:1, transform:"scale(1.08)", offset:.12},
+            {opacity:1, transform:"scale(.96)", offset:.22},
+            {opacity:1, transform:"scale(1.03)", offset:.32},
+            {opacity:1, transform:"scale(1)", offset:.45},
+            {opacity:1, transform:"scale(1)", offset:.72},
+            {opacity:.7, transform:"scale(.97)", offset:.88},
+            {opacity:0, transform:"scale(.82)"}
+        ],{
+            duration:2700,
+            easing:"cubic-bezier(.2,.8,.2,1)",
+            fill:"forwards"
+        });
+    }
+
+    if(icono){
+        icono.animate([
+            {opacity:0, transform:"rotate(0deg) scale(.55)"},
+            {opacity:1, transform:"rotate(90deg) scale(1.08)", offset:.10},
+            {opacity:1, transform:"rotate(180deg) scale(.96)", offset:.25},
+            {opacity:1, transform:"rotate(270deg) scale(1.05)", offset:.375},
+            {opacity:1, transform:"rotate(360deg) scale(.98)", offset:.50},
+            {opacity:1, transform:"rotate(450deg) scale(1.05)", offset:.625},
+            {opacity:1, transform:"rotate(540deg) scale(.98)", offset:.75},
+            {opacity:1, transform:"rotate(630deg) scale(1.03)", offset:.875},
+            {opacity:1, transform:"rotate(690deg) scale(.94)", offset:.96},
+            {opacity:0, transform:"rotate(720deg) scale(.72)"}
+        ],{
+            duration:2700,
+            easing:"cubic-bezier(.2,.8,.2,1)",
+            fill:"forwards"
+        });
+
+        icono.animate([
+            {filter:"drop-shadow(0 4px 8px rgba(245,158,11,.22))"},
+            {filter:"drop-shadow(0 0 22px rgba(245,158,11,.72))", offset:.5},
+            {filter:"drop-shadow(0 4px 8px rgba(245,158,11,.22))"}
+        ],{
+            duration:650,
+            delay:150,
+            iterations:4,
+            direction:"alternate",
+            easing:"ease-in-out",
+            fill:"both"
+        });
+    }
+
+    if(texto){
+        texto.animate([
+            {opacity:0, transform:"translateY(8px) scale(.82)"},
+            {opacity:1, transform:"translateY(0) scale(1)", offset:.15},
+            {opacity:1, transform:"translateY(0) scale(1)", offset:.78},
+            {opacity:0, transform:"translateY(-5px) scale(.9)"}
+        ],{
+            duration:2700,
+            easing:"ease",
+            fill:"forwards"
+        });
+    }
+
+    premioTimeout=setTimeout(ocultarPremio,3200);
 }
 
 
@@ -7889,15 +7961,54 @@ function mostrarEfectoError(){
         efecto.classList.remove("error-activo");
         void efecto.offsetWidth;
         efecto.classList.add("error-activo");
+
+        /* Flash rojo con Web Animations API, sin depender de CSS. */
+        efecto.animate([
+            {opacity:0},
+            {opacity:.9, offset:.18},
+            {opacity:.48, offset:.42},
+            {opacity:.18, offset:.70},
+            {opacity:0}
+        ],{
+            duration:420,
+            easing:"ease-out",
+            fill:"forwards"
+        });
     }
 
     if(game){
-        game.classList.remove("error-temblando");
-        void game.offsetWidth;
-        game.classList.add("error-temblando");
-        setTimeout(()=>game.classList.remove("error-temblando"),500);
+        if(game._errorShakeAnimation){
+            game._errorShakeAnimation.cancel();
+        }
+
+        /*
+           Temblor real con transform. Antes se usaba `left`, pero un
+           elemento estático puede ignorarlo; transform sí funciona en PC
+           y móvil y no necesita cambiar el layout.
+        */
+        game._errorShakeAnimation=game.animate([
+            {transform:"translate3d(0,0,0)"},
+            {transform:"translate3d(-8px,0,0)", offset:.12},
+            {transform:"translate3d(8px,0,0)", offset:.24},
+            {transform:"translate3d(-7px,0,0)", offset:.36},
+            {transform:"translate3d(7px,0,0)", offset:.48},
+            {transform:"translate3d(-5px,0,0)", offset:.60},
+            {transform:"translate3d(5px,0,0)", offset:.72},
+            {transform:"translate3d(-3px,0,0)", offset:.84},
+            {transform:"translate3d(0,0,0)"}
+        ],{
+            duration:480,
+            easing:"ease-out",
+            fill:"forwards"
+        });
+
+        game._errorShakeAnimation.onfinish=()=>{
+            game.style.transform="";
+            game.classList.remove("error-temblando");
+        };
     }
 }
+
 
 
 /* =========================================================
