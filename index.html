@@ -34,7 +34,9 @@
 <title>Encuentra la Palabra</title>
 
 
-
+<!-- =====================================================
+     FUENTE
+====================================================== -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -48,7 +50,9 @@
 
 <style>
 
-
+/* =====================================================
+   VARIABLES
+====================================================== */
 
 :root{
 
@@ -123,6 +127,9 @@ html[data-theme="dark"]{
 }
 
 
+/* =====================================================
+   RESET
+====================================================== */
 
 *{
     box-sizing:border-box;
@@ -177,7 +184,9 @@ img{
 }
 
 
-
+/* =====================================================
+   UTILIDADES
+====================================================== */
 
 .hidden{
     display:none !important;
@@ -232,7 +241,9 @@ img{
 }
 
 
-
+/* =====================================================
+   TOPBAR
+====================================================== */
 
 .topbar{
 
@@ -378,7 +389,9 @@ img{
 }
 
 
-
+/* =====================================================
+   WELCOME
+====================================================== */
 
 #welcome-container{
 
@@ -518,7 +531,9 @@ img{
 }
 
 
-
+/* =====================================================
+   BOTONES
+====================================================== */
 
 .btn-primary,
 .btn-secondary,
@@ -630,7 +645,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   LOGIN
+====================================================== */
 
 #login-container{
 
@@ -778,7 +795,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   TÍTULOS
+====================================================== */
 
 .screen-heading{
 
@@ -813,6 +832,9 @@ button:disabled{
 }
 
 
+/* =====================================================
+   LOBBY
+====================================================== */
 
 .lobby-actions{
 
@@ -953,7 +975,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   CATEGORÍAS
+====================================================== */
 
 .level-header{
 
@@ -1224,7 +1248,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   GAME
+====================================================== */
 
 #game-container{
 
@@ -1300,7 +1326,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   TIMER
+====================================================== */
 
 .timer{
 
@@ -1406,7 +1434,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   VIDAS
+====================================================== */
 
 .lives{
 
@@ -1437,7 +1467,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   PROGRESO DEL JUEGO
+====================================================== */
 
 .question-info{
 
@@ -1495,7 +1527,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   PISTAS
+====================================================== */
 
 .clue-card{
 
@@ -1591,7 +1625,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   RESPUESTA
+====================================================== */
 
 #respuesta{
 
@@ -1644,7 +1680,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   RESULTADO
+====================================================== */
 
 #resultado{
 
@@ -1673,7 +1711,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   PANEL DE PUNTOS
+====================================================== */
 
 .score-panel{
 
@@ -1740,7 +1780,9 @@ button:disabled{
 }
 
 
-
+/* =====================================================
+   ESTRELLA — ACIERTO
+====================================================== */
 
 #estrella{
     position:fixed;
@@ -1837,7 +1879,9 @@ button:disabled{
     100%{opacity:0;transform:translateY(-5px) scale(.9);}
 }
 
-
+/* =====================================================
+   EFECTO DE ERROR
+====================================================== */
 #efecto-error{
     position:fixed;
     inset:0;
@@ -1850,7 +1894,7 @@ button:disabled{
     box-shadow:inset 0 0 0 4px rgba(239,68,68,.14);
 }
 
-
+/* El teclado virtual nunca recibe el flash rojo. */
 body.keyboard-open #efecto-error{
     display:none !important;
 }
@@ -1867,7 +1911,7 @@ body.keyboard-open #efecto-error{
     100%{opacity:0;}
 }
 
-
+/* Temblor independiente del transform del contenedor */
 #game-container.error-temblando{
     animation:errorShake .42s ease-out;
 }
@@ -1888,7 +1932,7 @@ body.keyboard-open #efecto-error{
 }
 
 @media(prefers-reduced-motion:reduce){
-
+    /* No anulamos estas dos señales del juego: son retroalimentación funcional. */
     #efecto-error.error-activo{
         animation:flashError .42s ease-out forwards;
     }
@@ -1911,7 +1955,14 @@ body.keyboard-open #efecto-error{
 }
 
 
+/* =====================================================
+   FIN ESTRELLA / ERROR
+====================================================== */
 
+
+/* =====================================================
+   RESULTADO FINAL
+====================================================== */
 
 #result-container{
 
@@ -2007,7 +2058,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   MI PROGRESO
+====================================================== */
 
 .progress-screen-title{
 
@@ -2263,7 +2316,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   DETALLE PROGRESO
+====================================================== */
 
 .progress-detail{
 
@@ -2470,7 +2525,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   HISTORIAL
+====================================================== */
 
 .history-section{
 
@@ -2568,7 +2625,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   LOGROS
+====================================================== */
 
 #achievements-container{
 
@@ -2650,7 +2709,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   TOAST
+====================================================== */
 
 #toast{
 
@@ -2711,7 +2772,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   RESPONSIVE
+====================================================== */
 
 @media(max-width:900px){
 
@@ -3025,7 +3088,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   MENOS MOVIMIENTO
+====================================================== */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -3046,7 +3111,9 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   SEGURIDAD DE RENDIMIENTO
+====================================================== */
 
 @media(max-width:600px){
 
@@ -3063,7 +3130,11 @@ body.keyboard-open #efecto-error{
 }
 
 
-
+/* =====================================================
+   ANIMACIONES DE FEEDBACK — FORZADAS TAMBIÉN CON REDUCED MOTION
+   Se controlan principalmente desde JavaScript para que funcionen
+   en PC y móvil incluso si el sistema limita las animaciones CSS.
+===================================================== */
 #estrella.estrella-animar .estrella-contenido,
 #estrella.estrella-animar .estrella-icon,
 #estrella.estrella-animar .estrella-texto,
@@ -4003,7 +4074,9 @@ body.keyboard-open #efecto-error{
 ></div>
 
 
-
+<!-- =====================================================
+     TOAST
+====================================================== -->
 
 <div
     id="toast"
@@ -4014,7 +4087,9 @@ body.keyboard-open #efecto-error{
 
 <script>
 
-
+/* =========================================================
+   CONFIGURACIÓN
+========================================================= */
 
 const API_KEY =
     "AIzaSyAHxhRsIWMOHq436P5In6WsQl_9NksbzSE";
@@ -4038,18 +4113,37 @@ const STORAGE={
 
 };
 
+/* =========================================================
+   DATOS POR CUENTA — FIREBASE REALTIME DATABASE
+========================================================= */
+
+let userUid=null;
+let userEmail=null;
+let sincronizacionLista=false;
+let sincronizacionEnCurso=false;
+
+/*
+   Si tu Realtime Database usa una URL regional personalizada,
+   puedes colocarla aquí. Si queda vacía, se intenta la URL
+   predeterminada <PROJECT_ID>-default-rtdb.firebaseio.com.
+*/
+const FIREBASE_DATABASE_URL="";
+
 
 const NIVELES_POR_CATEGORIA=5;
 
 const PALABRAS_POR_NIVEL=10;
 
 const OBJETIVO_CONTRARRELOJ=100;
-const MAX_TIEMPO_CONTRARRELOJ=50;
-const BONO_CONTRARRELOJ=7;
-const INTERVALO_BONO_CONTRARRELOJ=1000;
+const TIEMPO_INICIAL_CONTRARRELOJ=100;
+const MAX_TIEMPO_CONTRARRELOJ=100;
+const BONO_CONTRARRELOJ=5;
+const UMBRAL_BONO_CONTRARRELOJ=10;
 
 
-
+/* =========================================================
+   MODOS
+========================================================= */
 
 const MODOS={
 
@@ -4074,16 +4168,18 @@ const MODOS={
     contrarreloj:{
         nombre:"Contrarreloj",
         icono:"⚡",
-        tiempo:30,
+        tiempo:100,
         vidas:0,
         descripcion:
-            "30 segundos · +7 segundos por acierto · máximo 50 segundos"
+            "100 segundos · +5 segundos cuando quedan menos de 10"
     }
 
 };
 
 
-
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
 
 const categorias=[
 
@@ -4179,7 +4275,9 @@ const categoriaPorId=
     );
 
 
-
+/* =========================================================
+   BANCO DE PALABRAS
+========================================================= */
 
 const bancoPalabras={
 
@@ -4472,7 +4570,9 @@ english:[
 };
 
 
-
+/* =========================================================
+   ESTADO
+========================================================= */
 
 let userToken=null;
 
@@ -4494,9 +4594,9 @@ let modoActual="clasico";
 
 let bloqueado=false;
 
-let tiempo=30;
+let tiempo=TIEMPO_INICIAL_CONTRARRELOJ;
 
-let tiempoMaximo=30;
+let tiempoMaximo=TIEMPO_INICIAL_CONTRARRELOJ;
 
 let intervalo=null;
 
@@ -4511,10 +4611,11 @@ let contrarrelojNivel=1;
 let juegoContrarreloj=false;
 
 let countdownTimeout=null;
-let ultimoBonoContrarreloj=0;
 
 
-
+/* =========================================================
+   UTILIDADES
+========================================================= */
 
 function normalizar(texto){
 
@@ -4606,7 +4707,9 @@ function obtenerPalabrasNivel(
 }
 
 
-
+/* =========================================================
+   SONIDO
+========================================================= */
 
 let audioCtx=null;
 
@@ -4878,7 +4981,9 @@ function actualizarBotonSonido(){
 }
 
 
-
+/* =========================================================
+   TEMA
+========================================================= */
 
 function aplicarTema(tema){
 
@@ -4964,7 +5069,9 @@ function alternarTema(){
 }
 
 
-
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
 
 const PANTALLAS=[
 
@@ -5085,7 +5192,9 @@ function mostrarLobby(){
 }
 
 
-
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 function traducirError(error){
 
@@ -5268,7 +5377,15 @@ async function login(){
         userToken=
             data.idToken;
 
+        userUid=
+            data.localId || null;
+
+        userEmail=
+            data.email || email;
+
         limpiarFormularioAuth();
+
+        await cargarDatosCuenta();
 
         mostrarLobby();
 
@@ -5291,6 +5408,9 @@ async function login(){
 function cerrarSesion(){
 
     userToken=null;
+    userUid=null;
+    userEmail=null;
+    sincronizacionLista=false;
 
     detenerCronometro();
 
@@ -5305,7 +5425,9 @@ function cerrarSesion(){
 }
 
 
-
+/* =========================================================
+   PATRÓN
+========================================================= */
 
 function crearPatron(
     palabra,
@@ -5421,7 +5543,9 @@ function crearPatron(
 }
 
 
-
+/* =========================================================
+   PISTAS
+========================================================= */
 
 const PISTAS={
 
@@ -5791,6 +5915,245 @@ function obtenerPista(
 }
 
 
+/* =========================================================
+   SINCRONIZACIÓN POR CUENTA
+========================================================= */
+
+function decodificarToken(token){
+
+    try{
+
+        const parte=
+            String(token || "").split(".")[1];
+
+        if(!parte){
+            return {};
+        }
+
+        const normalizado=
+            parte.replace(/-/g,"+").replace(/_/g,"/");
+
+        return JSON.parse(
+            decodeURIComponent(
+                atob(normalizado.padEnd(
+                    normalizado.length+
+                    (4-normalizado.length%4)%4,
+                    "="
+                ))
+                .split("")
+                .map(c=>"%"+c.charCodeAt(0).toString(16).padStart(2,"0"))
+                .join("")
+            )
+        );
+
+    }
+
+    catch{
+        return {};
+    }
+
+}
+
+
+function obtenerProyectoFirebase(){
+
+    const datos=
+        decodificarToken(userToken);
+
+    return datos.aud || "";
+
+}
+
+
+function obtenerUrlBaseDatabase(){
+
+    if(FIREBASE_DATABASE_URL){
+
+        return FIREBASE_DATABASE_URL.replace(/\/$/,"");
+
+    }
+
+    const proyecto=
+        obtenerProyectoFirebase();
+
+    if(!proyecto){
+        return "";
+    }
+
+    return `https://${proyecto}-default-rtdb.firebaseio.com`;
+
+}
+
+
+function obtenerUrlDatosCuenta(){
+
+    const base=
+        obtenerUrlBaseDatabase();
+
+    if(!base || !userUid || !userToken){
+        return "";
+    }
+
+    return `${base}/usuarios/${encodeURIComponent(userUid)}/encuentraLaPalabra.json?auth=${encodeURIComponent(userToken)}`;
+
+}
+
+
+function paqueteDatosCuenta(){
+
+    return {
+        progress:leerProgreso(),
+        history:leerHistorial(),
+        achievements:leerLogros(),
+        updatedAt:Date.now()
+    };
+
+}
+
+
+async function sincronizarDatosCuenta(){
+
+    const url=
+        obtenerUrlDatosCuenta();
+
+    if(!url || sincronizacionEnCurso){
+        return;
+    }
+
+    sincronizacionEnCurso=true;
+
+    try{
+
+        const response=
+            await fetch(
+                url,
+                {
+                    method:"PUT",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(
+                        paqueteDatosCuenta()
+                    )
+                }
+            );
+
+        sincronizacionLista=response.ok;
+
+    }
+
+    catch{
+
+        sincronizacionLista=false;
+
+    }
+
+    finally{
+        sincronizacionEnCurso=false;
+    }
+
+}
+
+
+function programarSincronizacion(){
+
+    if(!userUid || !userToken){
+        return;
+    }
+
+    clearTimeout(programarSincronizacion.timer);
+
+    programarSincronizacion.timer=
+        setTimeout(
+            ()=>sincronizarDatosCuenta(),
+            250
+        );
+
+}
+
+
+async function cargarDatosCuenta(){
+
+    if(!userUid || !userToken){
+        return;
+    }
+
+    /*
+       Primero cargamos los datos de la cuenta desde la nube.
+       Si todavía no existen, usamos los datos locales de esa
+       cuenta y los subimos para crear su copia inicial.
+    */
+
+    const url=
+        obtenerUrlDatosCuenta();
+
+    if(!url){
+        return;
+    }
+
+    try{
+
+        const response=
+            await fetch(url);
+
+        if(response.ok){
+
+            const remoto=
+                await response.json();
+
+            if(remoto && typeof remoto==="object"){
+
+                localStorage.setItem(
+                    claveLocalCuenta(STORAGE.progress),
+                    JSON.stringify(remoto.progress || {})
+                );
+
+                localStorage.setItem(
+                    claveLocalCuenta(STORAGE.history),
+                    JSON.stringify(remoto.history || [])
+                );
+
+                localStorage.setItem(
+                    claveLocalCuenta(STORAGE.achievements),
+                    JSON.stringify(remoto.achievements || [])
+                );
+
+                sincronizacionLista=true;
+
+                return;
+
+            }
+
+        }
+
+        if(response.status===404){
+
+            await sincronizarDatosCuenta();
+
+        }
+
+    }
+
+    catch{
+
+        sincronizacionLista=false;
+
+    }
+
+}
+
+
+/* =========================================================
+   PROGRESO
+========================================================= */
+
+function claveLocalCuenta(base){
+
+    return userUid
+        ? `${base}_${userUid}`
+        : base;
+
+}
 
 
 function leerProgreso(){
@@ -5799,7 +6162,7 @@ function leerProgreso(){
 
         return JSON.parse(
             localStorage.getItem(
-                STORAGE.progress
+                claveLocalCuenta(STORAGE.progress)
             )
         ) || {};
 
@@ -5817,9 +6180,11 @@ function leerProgreso(){
 function guardarProgreso(data){
 
     localStorage.setItem(
-        STORAGE.progress,
+        claveLocalCuenta(STORAGE.progress),
         JSON.stringify(data)
     );
+
+    programarSincronizacion();
 
 }
 
@@ -5977,7 +6342,9 @@ function registrarIntentoFallido(){
 }
 
 
-
+/* =========================================================
+   SELECTOR DE MODO
+========================================================= */
 
 function seleccionarModo(
     modo
@@ -6056,7 +6423,9 @@ function seleccionarModo(
 }
 
 
-
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
 
 function contarCompletados(
     categoria
@@ -6353,6 +6722,9 @@ function renderNiveles(
 }
 
 
+/* =========================================================
+   INICIAR NIVEL
+========================================================= */
 
 function iniciarNivel(
     categoria,
@@ -6436,7 +6808,9 @@ function iniciarNivel(
 }
 
 
-
+/* =========================================================
+   CONTRARRELOJ
+========================================================= */
 
 function dificultadPalabra(
     palabra,
@@ -6565,7 +6939,10 @@ function crearPalabrasContrarreloj(){
 
     const seleccion=[];
 
-
+    /*
+        Primero buscamos una distribución
+        aproximada de 20 palabras por dificultad.
+    */
 
     for(
         const grupo of grupos
@@ -6580,7 +6957,10 @@ function crearPalabrasContrarreloj(){
 
     }
 
-
+    /*
+        Si falta alguna porque un grupo
+        tiene menos de 20, completamos.
+    */
 
     if(
         seleccion.length<
@@ -6619,7 +6999,10 @@ function crearPalabrasContrarreloj(){
 
     }
 
-
+    /*
+        Orden progresivo por dificultad.
+        Después se mezcla cada bloque.
+    */
 
     seleccion.sort(
         (a,b)=>
@@ -6705,15 +7088,16 @@ function iniciarContrarreloj(){
 
     contrarrelojNivel=1;
 
-    ultimoBonoContrarreloj=0;
+    tiempo=TIEMPO_INICIAL_CONTRARRELOJ;
 
-    tiempo=30;
-
-    tiempoMaximo=30;
+    tiempoMaximo=TIEMPO_INICIAL_CONTRARRELOJ;
 
     bloqueado=true;
 
-
+    /*
+        Cada nueva partida vuelve a crear
+        y mezclar las 100 palabras.
+    */
 
     palabras=
         crearPalabrasContrarreloj();
@@ -6811,7 +7195,9 @@ function cancelarCountdown(){
 }
 
 
-
+/* =========================================================
+   MOSTRAR PALABRA
+========================================================= */
 
 function mostrarPalabra(){
 
@@ -7035,7 +7421,9 @@ function mostrarPalabra(){
 }
 
 
-
+/* =========================================================
+   CRONÓMETRO
+========================================================= */
 
 function iniciarCronometro(){
 
@@ -7082,7 +7470,10 @@ function iniciarCronometroContrarreloj(){
 
     detenerCronometro();
 
-
+    /*
+        Contrarreloj comienza con 100 segundos.
+        El círculo representa siempre el máximo de 100.
+    */
 
     tiempoMaximo=30;
 
@@ -7141,7 +7532,10 @@ function actualizarCronometro(){
             tiempo
         );
 
-
+    /*
+        En Contrarreloj nunca hacemos
+        que el círculo tenga más de 100%.
+    */
 
     const porcentaje=
         juegoContrarreloj
@@ -7217,6 +7611,9 @@ function detenerCronometro(){
 }
 
 
+/* =========================================================
+   VIDAS
+========================================================= */
 
 function renderVidas(){
 
@@ -7272,7 +7669,9 @@ function renderVidas(){
 }
 
 
-
+/* =========================================================
+   TIEMPO AGOTADO
+========================================================= */
 
 function tiempoAgotado(){
 
@@ -7336,6 +7735,9 @@ function tiempoAgotado(){
 }
 
 
+/* =========================================================
+   VERIFICAR
+========================================================= */
 
 function verificar(){
 
@@ -7405,7 +7807,7 @@ function verificar(){
         resultado.textContent=
             juegoContrarreloj
             ?
-            "✓ ¡Correcto! +7 segundos"
+            "✓ ¡Correcto!"
             :
             "✓ ¡Respuesta correcta!";
 
@@ -7416,15 +7818,16 @@ function verificar(){
 
             contrarrelojAciertos++;
 
-
-            const ahora=
-                performance.now();
-
+            /*
+                Bono de emergencia:
+                solamente cuando quedan menos de 10 segundos.
+                Cada acierto en esa zona devuelve +5 segundos,
+                sin superar los 100 segundos.
+            */
             let bonoAplicado=0;
 
             if(
-                ahora-ultimoBonoContrarreloj >=
-                INTERVALO_BONO_CONTRARRELOJ
+                tiempo<UMBRAL_BONO_CONTRARRELOJ
             ){
 
                 const tiempoAntes=tiempo;
@@ -7437,8 +7840,6 @@ function verificar(){
 
                 bonoAplicado=
                     tiempo-tiempoAntes;
-
-                ultimoBonoContrarreloj=ahora;
 
             }
 
@@ -7497,10 +7898,16 @@ function verificar(){
 
         errores++;
 
-
+        /*
+            Feedback visual del fallo:
+            vibración corta + rojo suave.
+        */
         mostrarEfectoError();
 
-        
+        /*
+            Esta comparación conserva
+            la obligación de utilizar tilde.
+        */
 
         if(
             !juegoContrarreloj &&
@@ -7560,6 +7967,9 @@ function verificar(){
 }
 
 
+/* =========================================================
+   SIGUIENTE
+========================================================= */
 
 function siguientePalabra(){
 
@@ -7624,7 +8034,9 @@ function siguientePalabra(){
 }
 
 
-
+/* =========================================================
+   ESTADÍSTICAS
+========================================================= */
 
 function actualizarEstadisticas(){
 
@@ -7661,7 +8073,9 @@ function actualizarEstadisticas(){
 }
 
 
-
+/* =========================================================
+   ESTRELLA
+========================================================= */
 
 function mostrarPremio(){
 
@@ -7695,7 +8109,10 @@ function mostrarPremio(){
 
     estrella.classList.add("visible","estrella-animar");
 
-
+    /*
+       Web Animations API: no depende de @media(prefers-reduced-motion).
+       La estrella permanece en el centro y hace exactamente 720°.
+    */
     if(contenido){
         contenido.animate([
             {opacity:0, transform:"scale(.45)"},
@@ -7785,7 +8202,9 @@ function ocultarPremio(){
 }
 
 
-
+/* =========================================================
+   EFECTO DE ERROR
+========================================================= */
 
 function mostrarEfectoError(){
     const efecto=document.getElementById("efecto-error");
@@ -7801,7 +8220,7 @@ function mostrarEfectoError(){
         void efecto.offsetWidth;
         efecto.classList.add("error-activo");
 
-
+        /* Flash rojo con Web Animations API, sin depender de CSS. */
         efecto.animate([
             {opacity:0},
             {opacity:.9, offset:.18},
@@ -7820,7 +8239,11 @@ function mostrarEfectoError(){
             game._errorShakeAnimation.cancel();
         }
 
-
+        /*
+           Temblor real con transform. Antes se usaba `left`, pero un
+           elemento estático puede ignorarlo; transform sí funciona en PC
+           y móvil y no necesita cambiar el layout.
+        */
         game._errorShakeAnimation=game.animate([
             {transform:"translate3d(0,0,0)"},
             {transform:"translate3d(-8px,0,0)", offset:.12},
@@ -7846,7 +8269,9 @@ function mostrarEfectoError(){
 
 
 
-
+/* =========================================================
+   PERDER NIVEL
+========================================================= */
 
 function perderNivel(){
 
@@ -7922,7 +8347,9 @@ function perderNivel(){
 }
 
 
-
+/* =========================================================
+   FINALIZAR NIVEL
+========================================================= */
 
 function finalizarNivel(){
 
@@ -8001,7 +8428,9 @@ function finalizarNivel(){
 }
 
 
-
+/* =========================================================
+   SIGUIENTE NIVEL
+========================================================= */
 
 function siguienteNivel(){
 
@@ -8078,7 +8507,9 @@ function volverLobby(){
 }
 
 
-
+/* =========================================================
+   CONTRARRELOJ — HISTORIAL
+========================================================= */
 
 function leerHistorial(){
 
@@ -8086,7 +8517,7 @@ function leerHistorial(){
 
         return JSON.parse(
             localStorage.getItem(
-                STORAGE.history
+                claveLocalCuenta(STORAGE.history)
             )
         ) || [];
 
@@ -8151,11 +8582,13 @@ function guardarHistorial(
     });
 
     localStorage.setItem(
-        STORAGE.history,
+        claveLocalCuenta(STORAGE.history),
         JSON.stringify(
             historial
         )
     );
+
+    programarSincronizacion();
 
 }
 
@@ -8270,6 +8703,9 @@ function finalizarContrarreloj(
 }
 
 
+/* =========================================================
+   HISTORIAL UI
+========================================================= */
 
 function renderHistorial(){
 
@@ -8366,8 +8802,10 @@ function borrarHistorial(){
     }
 
     localStorage.removeItem(
-        STORAGE.history
+        claveLocalCuenta(STORAGE.history)
     );
+
+    programarSincronizacion();
 
     renderHistorial();
 
@@ -8378,7 +8816,9 @@ function borrarHistorial(){
 }
 
 
-
+/* =========================================================
+   MI PROGRESO
+========================================================= */
 
 function obtenerEstadisticasGlobales(){
 
@@ -8909,7 +9349,9 @@ function volverCategoriasProgreso(){
 }
 
 
-
+/* =========================================================
+   LOGROS
+========================================================= */
 
 const LOGROS=[
 
@@ -8970,7 +9412,7 @@ function leerLogros(){
 
         return JSON.parse(
             localStorage.getItem(
-                STORAGE.achievements
+                claveLocalCuenta(STORAGE.achievements)
             )
         ) || [];
 
@@ -8990,9 +9432,11 @@ function guardarLogros(
 ){
 
     localStorage.setItem(
-        STORAGE.achievements,
+        claveLocalCuenta(STORAGE.achievements),
         JSON.stringify(datos)
     );
+
+    programarSincronizacion();
 
 }
 
@@ -9202,7 +9646,9 @@ function mostrarLogros(){
 }
 
 
-
+/* =========================================================
+   TOAST
+========================================================= */
 
 let toastTimeout=null;
 
@@ -9244,6 +9690,9 @@ function mostrarToast(
 }
 
 
+/* =========================================================
+   BUSCADOR
+========================================================= */
 
 document
     .getElementById(
@@ -9255,7 +9704,9 @@ document
     );
 
 
-
+/* =========================================================
+   ENTER EN RESPUESTA
+========================================================= */
 
 const respuestaInput=
     document.getElementById(
@@ -9280,7 +9731,9 @@ respuestaInput.addEventListener(
 );
 
 
-
+/* =========================================================
+   TECLADO MÓVIL
+========================================================= */
 
 function actualizarEstadoTeclado(){
 
@@ -9368,7 +9821,9 @@ respuestaInput.addEventListener(
 );
 
 
-
+/* =========================================================
+   FUNCIONES GLOBALES
+========================================================= */
 
 window.irBienvenida=
     irBienvenida;
@@ -9434,7 +9889,9 @@ window.borrarHistorial=
     borrarHistorial;
 
 
-
+/* =========================================================
+   INICIALIZACIÓN
+========================================================= */
 
 window.addEventListener(
     "load",
@@ -9462,6 +9919,10 @@ window.addEventListener(
 
         ocultarPremio();
 
+        /*
+            Ejecutamos una vez para comprobar
+            logros antiguos sin mostrar nada.
+        */
 
         comprobarLogros();
 
